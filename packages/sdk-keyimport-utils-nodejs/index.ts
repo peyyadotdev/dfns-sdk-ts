@@ -47,7 +47,6 @@ export const splitPrivateKeyForSigners = ({
   // We set this as constant do not expose it, because Dfns API will only accept minSigners = 3 for now.
   const minSigners = 3
 
-
   const secretScalar = getSecretScalar(privateKey, keyCurve)
 
   const result = buildKeyImportRequest(

@@ -11,7 +11,9 @@
   "dependencies": {
     "@aws-sdk/client-kms": "^3.485.0",
     "@dfns/dfns-key-export-nodejs": "0.2.1",
+    "@dfns/dfns-key-export-bundler": "0.2.1",
     "@dfns/dfns-key-import-nodejs": "0.2.1",
+    "@dfns/dfns-key-import-bundler": "0.2.1",
     "@dfns/kaspa-wasm": "0.14.1",
     "@ethersproject/abstract-provider": "5.7.0",
     "@ethersproject/abstract-signer": "5.7.0",
