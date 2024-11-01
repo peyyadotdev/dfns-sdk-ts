@@ -1,10 +1,10 @@
 export type GetFeesQuery = {
-    network: ("Bitcoin" | "BitcoinTestnet3" | "Litecoin" | "LitecoinTestnet") | ("ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bsc" | "BscTestnet" | "Celo" | "CeloAlfajores" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "FantomOpera" | "FantomTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Race" | "RaceSepolia") | ("Solana" | "SolanaDevnet");
+    network: ("Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "Litecoin" | "LitecoinTestnet") | ("ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bsc" | "BscTestnet" | "Celo" | "CeloAlfajores" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "FantomOpera" | "FantomTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Race" | "RaceSepolia") | ("Solana" | "SolanaDevnet");
 };
 
 export type GetFeesResponse = {
     kind: "Bitcoin";
-    network: "Bitcoin" | "BitcoinTestnet3" | "Litecoin" | "LitecoinTestnet";
+    network: "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "Litecoin" | "LitecoinTestnet";
     blockNumber: number;
     slow: {
         feeRate: string;

@@ -281,7 +281,7 @@ export class DelegatedWalletsClient {
   async getWalletAssets(request: T.GetWalletAssetsRequest): Promise<T.GetWalletAssetsResponse> {
     const path = buildPathAndQuery('/wallets/:walletId/assets', {
       path: request ?? {},
-      query: {},
+      query: request.query ?? {},
     })
 
     const response = await simpleFetch(path, {
