@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.5.9 (2024-11-01)
+
+- Updated `DfnsApiClient` to match the latest API changes
+
 ## 0.5.8 (2024-10-23)
 
 - Added SDK integration with Cosmos ecosystem, see `@dfns/lib-cosmjs`
