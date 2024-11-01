@@ -670,7 +670,7 @@ export class AuthClient {
     })
 
     const response = await simpleFetch(path, {
-      method: 'POST',
+      method: 'PUT',
       apiOptions: this.apiOptions,
     })
 
