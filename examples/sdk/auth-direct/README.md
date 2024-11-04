@@ -31,7 +31,7 @@ _you can find the organization ID under `Dfns Dashboard` > `Settings` > `My Acco
 `useAuth` hook handles the authentication using an instance of `DfnsAuthenticator` with a `WebAuthn` signer.
 
 ```typescript
-import { WebAuthn } from '@dfns/sdk-webauthn'
+import { WebAuthn } from '@dfns/sdk-browser'
 import { DfnsAuthenticator } from '@dfns/sdk/dfnsAuthenticator'
 
 export const authApi = (): DfnsAuthenticator => {
@@ -66,7 +66,7 @@ authApi()
 To sign user actions, use a `DfnsApiClient` with a `WebAuthn` signer and the `authToken` obtained from the login.
 
 ```typescript
-import { WebAuthn } from '@dfns/sdk-webauthn'
+import { WebAuthn } from '@dfns/sdk-browser'
 import { DfnsApiClient } from '@dfns/sdk'
 
 export const dfnsApi = (): DfnsApiClient => {

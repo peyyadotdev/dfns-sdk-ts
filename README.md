@@ -171,7 +171,7 @@ In a client-side app, if you want a Dfns User to be able to login with Dfns (and
 
 ```ts
 import { DfnsAuthenticator } from '@dfns/sdk'
-import { WebAuthn } from '@dfns/sdk-webauthn'
+import { WebAuthn } from '@dfns/sdk-browser'
 
 const dfnsAuth = new DfnsAuthenticator({
   appId,
