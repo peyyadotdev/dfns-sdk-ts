@@ -9,7 +9,7 @@ module.exports = {
     {
       plugin: require('craco-babel-loader'),
       options: {
-        includes: [resolveApp('../../../packages/sdk'), resolveApp('../../../packages/sdk-webauthn-signer')],
+        includes: [resolveApp('../../../packages/sdk'), resolveApp('../../../packages/sdk-browser')],
       },
     },
   ],
