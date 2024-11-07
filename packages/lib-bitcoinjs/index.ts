@@ -1,13 +1,14 @@
 import { DfnsApiClient, DfnsError } from '@dfns/sdk'
 import { GetWalletResponse, GenerateSignatureResponse } from '@dfns/sdk/types/wallets'
 import { Network, Psbt, SignerAsync } from 'bitcoinjs-lib'
+import { tweakKey } from 'bitcoinjs-lib/src/payments/bip341'
 
 export type DfnsWalletOptions = {
   walletId: string
   dfnsClient: DfnsApiClient
 }
 
-const compatibleNetworks = ['Bitcoin', 'BitcoinTestnet3', 'Litecoin', 'LitecoinTestnet']
+const compatibleNetworks = ['Bitcoin', 'BitcoinSignet', 'BitcoinTestnet3', 'Litecoin', 'LitecoinTestnet']
 
 type WalletMetadata = GetWalletResponse
 
@@ -23,13 +24,31 @@ const assertSigned = (res: GenerateSignatureResponse) => {
   }
 }
 
+const xOnlyPubkey = (publicKey: Buffer) => {
+  return publicKey.subarray(1, 33)
+}
+
+const getTweakedPublicKey = (publicKey: Buffer, taprootMerkleRoot?: Buffer) => {
+  const xOnlyPublicKey = xOnlyPubkey(publicKey)
+  const tweakedKey = tweakKey(xOnlyPublicKey, taprootMerkleRoot)
+  return Buffer.concat([Uint8Array.from([tweakedKey!.parity + 2]), tweakedKey!.x])
+}
+
 export class DfnsWallet implements SignerAsync {
   private readonly dfnsClient: DfnsApiClient
+  public readonly scheme: GetWalletResponse['signingKey']['scheme']
   public readonly publicKey: Buffer
+  public readonly internalPubkey?: Buffer
 
   private constructor(private readonly metadata: WalletMetadata, options: DfnsWalletOptions) {
     this.dfnsClient = options.dfnsClient
+    this.scheme = metadata.signingKey.scheme
     this.publicKey = Buffer.from(metadata.signingKey.publicKey, 'hex')
+
+    if (this.scheme === 'Schnorr') {
+      this.internalPubkey = this.publicKey
+      this.publicKey = getTweakedPublicKey(this.internalPubkey, undefined)
+    }
   }
 
   public static async init(options: DfnsWalletOptions) {
@@ -52,9 +71,17 @@ export class DfnsWallet implements SignerAsync {
   }
 
   public async sign(hash: Buffer): Promise<Buffer> {
+    return this._sign(hash)
+  }
+
+  public async signSchnorr(hash: Buffer): Promise<Buffer> {
+    return this._sign(hash, Buffer.alloc(0))
+  }
+
+  private async _sign(hash: Buffer, taprootMerkleRoot?: Buffer): Promise<Buffer> {
     const res = await this.dfnsClient.wallets.generateSignature({
       walletId: this.metadata.id,
-      body: { kind: 'Hash', hash: `0x${hash.toString('hex')}` },
+      body: { kind: 'Hash', hash: `0x${hash.toString('hex')}`, taprootMerkleRoot: taprootMerkleRoot && `0x${taprootMerkleRoot.toString('hex')}` },
     })
 
     assertSigned(res)
@@ -80,6 +107,28 @@ export class DfnsWallet implements SignerAsync {
     }
 
     return Psbt.fromHex(res.signedData.replace(/^0x/, ''))
+  }
+
+  public tweakSigner(taprootMerkleRoot: Buffer): SignerAsync {
+    if (this.scheme !== 'Schnorr') {
+      throw new DfnsError(400, 'Only available for Schnorr keys')
+    }
+    const publicKey = getTweakedPublicKey(this.internalPubkey!, taprootMerkleRoot)
+    const wallet = this
+
+    return new (class implements SignerAsync {
+      get publicKey() {
+        return publicKey
+      }
+
+      async sign(_hash: Buffer): Promise<Buffer> {
+        throw new DfnsError(400, 'Expecting to only do schnorr signatures')
+      }
+
+      async signSchnorr(hash: Buffer): Promise<Buffer> {
+        return wallet._sign(hash, taprootMerkleRoot)
+      }
+    })()
   }
 }
 
