@@ -99,3 +99,37 @@ export type ListStakesResponse = {
 
 export type ListStakesRequest = { query?: ListStakesQuery }
 
+export type ListStakeTransactionsQuery = {
+    limit?: number | undefined;
+    paginationToken?: string | undefined;
+};
+
+export type ListStakeTransactionsResponse = {
+    items: {
+        id: string;
+        stakeId: string;
+        transactionId?: string | undefined;
+        kind: "Stake" | "Unbond" | "UnbondWithdrawal" | "Withdraw";
+        requester: {
+            userId: string;
+            tokenId?: string | undefined;
+            appId?: string | undefined;
+        };
+        requestBody: {
+            kind: "Native";
+            amount: string;
+            priority?: ("Slow" | "Standard" | "Fast") | undefined;
+            createDestinationAccount?: boolean | undefined;
+            externalId?: string | undefined;
+            walletId: string;
+            provider: "Figment";
+            protocol: "Babylon";
+            duration: number;
+        };
+        dateCreated: string;
+    }[];
+    nextPageToken?: string | undefined;
+};
+
+export type ListStakeTransactionsRequest = { query?: ListStakeTransactionsQuery }
+

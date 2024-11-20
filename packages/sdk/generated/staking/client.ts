@@ -35,4 +35,18 @@ export class StakingClient {
 
     return response.json()
   }
+
+  async listStakeTransactions(request?: T.ListStakeTransactionsRequest): Promise<T.ListStakeTransactionsResponse> {
+    const path = buildPathAndQuery('/staking/stakes/:stakeId/transactions', {
+      path: request ?? {},
+      query: request?.query ?? {},
+    })
+
+    const response = await simpleFetch(path, {
+      method: 'GET',
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
 }

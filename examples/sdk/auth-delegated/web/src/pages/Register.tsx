@@ -34,7 +34,12 @@ export default function Register(): JSX.Element {
 
       // Webauthn flow
       // Create the new webauthn credential using the challenge
-      const webauthn = new WebAuthnSigner()
+      const webauthn = new WebAuthnSigner({
+        relyingParty: {
+          id: process.env.REACT_APP_PASSKEY_RELYING_PARTY_ID!,
+          name: process.env.REACT_APP_PASSKEY_RELYING_PARTY_NAME!,
+        },
+      })
       const attestation = await webauthn.create(challenge)
       console.log(JSON.stringify(attestation, null, 2))
 

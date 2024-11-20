@@ -32,7 +32,12 @@ export default function Register() {
 
       // Webauthn flow
       // Create the new webauthn credential using the challenge
-      const webauthn = new WebAuthnSigner()
+      const webauthn = new WebAuthnSigner({
+        relyingParty: {
+          id: process.env.NEXT_PUBLIC_PASSKEYS_RELYING_PARTY_ID!,
+          name: process.env.NEXT_PUBLIC_PASSKEYS_RELYING_PARTY_NAME!,
+        },
+      })
       const attestation = await webauthn.create(challenge)
       console.log(JSON.stringify(attestation, null, 2))
 

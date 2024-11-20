@@ -1287,14 +1287,15 @@ export class DelegatedAuthClient {
     return response.json()
   }
 
-  async logout(): Promise<T.LogoutResponse> {
+  async logout(request?: T.LogoutRequest): Promise<T.LogoutResponse> {
     const path = buildPathAndQuery('/auth/logout', {
-      path: {},
+      path: request ?? {},
       query: {},
     })
 
     const response = await simpleFetch(path, {
       method: 'PUT',
+      body: request?.body,
       apiOptions: this.apiOptions,
     })
 

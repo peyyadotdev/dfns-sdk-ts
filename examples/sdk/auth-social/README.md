@@ -6,15 +6,6 @@ This tutorial demonstrates how to build a complete client solution integrating w
 
 ### Prerequisites
 
-To run the web application, you must have an active `Application` for the ReactJS app. To create a new `Application`, go to `Dfns Dashboard` > `Settings` > `Org Settings` > `Applications` > `New Application`, and enter the following information
-
-- Name, choose any name, for example `Dfns Tutorial Web`
-- Application Type, leave as the default `Default Application`
-- Relying Party, set to `localhost`
-- Origin, set to `http://localhost:3000`, this is the port the React JS application is configured to run on by default
-
-After the `Application` is created, copy and save the `App ID`, e.g. `ap-39abb-5nrrm-9k59k0u3jup3vivo`.
-
 For the social registration/login to work, you first need to configure your organization to accept this kind of registration flow. To do so,  go to `Dfns Dashboard` > `Settings` > `Org Settings` > `Social Login`, and enter the following information
 
 - `Allow Social Registration/Login` must be checked
@@ -26,8 +17,10 @@ For the social registration/login to work, you first need to configure your orga
 
 In the folder, copy `.env.example` to a new file `.env.local` and set the following values,
 
-- `REACT_APP_DFNS_APP_ID` = the `App ID` of the new `Application`
 - `REACT_APP_DFNS_API_URL` = `https://api.dfns.ninja`, Dfns API
+- `REACT_APP_DFNS_APP_ID` = Dfns Application ID (grab one in Dfns Dashboard: `Settings` > `Applications`)
+- `REACT_APP_PASSKEY_RELYING_PARTY_ID` = the passkey relying party id, aka, the domain where your app lives ((Read more [here](https://developer.mozilla.org/en-US/docs/Web/API/PublicKeyCredentialCreationOptions#rp))). We advise using the root domain (eg. `acme.com`, not `app.acme.com`) for more passkey flexibility (so that passkey is re-usable on subdomains). During development on localhost, you can set it to `localhost`.
+- `REACT_APP_PASSKEY_RELYING_PARTY_NAME` = A string representing the name of the relying party, aka, your company name (e.g. "Acme"). The user will be presented with that name when creating or using a passkey.
 - `REACT_APP_DFNS_GOOGLE_OAUTH_CLIENT_ID` = `185321228227-mh9v8d2i71fbhc3r9lkst9ci2n5i5rfn.apps.googleusercontent.com`
 
 Warning: the default `REACT_APP_DFNS_GOOGLE_OAUTH_CLIENT_ID` only allow `http://localhost:3000` as referrer, be sure that you access your demo using this URL, otherwise the google sign-in button won't show.

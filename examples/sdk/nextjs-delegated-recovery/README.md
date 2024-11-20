@@ -15,16 +15,7 @@ The end user will sign the action from the web-app, using his WebauthN credentia
 
 ## Prerequisites
 
-To run the example, you must have an active `Application`. To create a new `Application`, go to `Dfns Dashboard` > `Settings` > `Org Settings` > `Applications` > `New Application`, and enter the following information
-
-- Name, choose any name, for example `Dfns Tutorial Web`
-- Application Type, leave as the default `Default Application`
-- Relying Party, set to `localhost`
-- Origin, set to `http://localhost:3000`, this is the port the Next JS application is configured to run on by default
-
-After the `Application` is created, copy the `App ID`, e.g. `ap-39abb-5nrrm-9k59k0u3jup3vivo`.
-
-You also need a `Service Account`. To create a new `Service Account`, first [generate a keypair](https://docs.dfns.co/dfns-docs/advanced-topics/authentication/credentials/generate-a-key-pair), then go to `Dfns Dashboard` > `Settings` > `Org Settings` > `Service Accounts` > `New Service Account`, and enter the following information,
+You need a `Service Account`. To create a new `Service Account`, first [generate a keypair](https://docs.dfns.co/dfns-docs/advanced-topics/authentication/credentials/generate-a-key-pair), then go to `Dfns Dashboard` > `Settings` > `Org Settings` > `Service Accounts` > `New Service Account`, and enter the following information,
 
 * Name, choose any name
 * Public Key, the public key from the step 'generate a keypair'
@@ -36,10 +27,12 @@ Go back to the service accounts listing, and the new `Service Account` should be
 Copy `.env.example` to a new file `.env.local` and set the following values,
 
 * `DFNS_API_URL` = `https://api.dfns.ninja`
-* `DFNS_APP_ID` = the `App ID` from above
+* `DFNS_APP_ID` = Dfns Application ID (grab one in Dfns Dashboard: `Settings` > `Applications`)
 * `DFNS_CRED_ID` = the `Signing Key Cred ID` from above
 * `DFNS_PRIVATE_KEY` = the private key from the step 'generate a keypair', the newlines should not be a problem
 * `DFNS_AUTH_TOKEN` = the `authToken` from above, the value should start with `eyJ0...`
+* `NEXT_PUBLIC_PASSKEYS_RELYING_PARTY_ID` = the passkey relying party id, aka, the domain where your app lives ((Read more [here](https://developer.mozilla.org/en-US/docs/Web/API/PublicKeyCredentialCreationOptions#rp))). We advise using the root domain (eg. `acme.com`, not `app.acme.com`) for more passkey flexibility (so that passkey is re-usable on subdomains). During development on localhost, you can set it to `localhost`.
+* `NEXT_PUBLIC_PASSKEYS_RELYING_PARTY_NAME` = A string representing the name of the relying party, aka, your company name (e.g. "Acme"). The user will be presented with that name when creating or using a passkey.
 
 ## Next.js Configuration
 
@@ -166,7 +159,7 @@ const createWallet = () =>
     const { request, challenge } = await result.json()
 
     // 2. Then sign the returned challenge with WebAuthn credentials
-    const webauthn = new WebAuthnSigner()
+    const webauthn = new WebAuthnSigner({ relyingParty: { id: 'localhost', name: 'Demo' } })
     const assertion = await webauthn.sign(challenge)
 
     // 3. Call server-side wallet creation completion with signed challenge

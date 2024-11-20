@@ -3,8 +3,7 @@ import jwt_decode from 'jwt-decode'
 import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { authApi, dfnsApi } from '../api'
-import { WebAuthnSigner } from '@dfns/sdk-browser'
+import { authApi, dfnsApi, getWebauthnSigner } from '../api'
 import { CreateCredentialWithCodeResponse } from '@dfns/sdk/generated/auth'
 
 export interface AuthContextType {
@@ -88,7 +87,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }): React.JSX.E
         throw Error('Not a Fido2 challenge') // this check is meant for proper typescript type inferrence
       }
 
-      const attestation = await new WebAuthnSigner().create(challenge)
+      const attestation = await getWebauthnSigner().create(challenge)
 
       const credential = await dfnsApi().auth.createCredentialWithCode({
         body: {
