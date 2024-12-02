@@ -6,6 +6,7 @@ version=$1
 
 npm version --no-git-tag-version \
     --workspace @dfns/lib-algorand \
+    --workspace @dfns/lib-aptos \
     --workspace @dfns/lib-bitcoinjs \
     --workspace @dfns/lib-cosmjs \
     --workspace @dfns/lib-ethersjs5 \
