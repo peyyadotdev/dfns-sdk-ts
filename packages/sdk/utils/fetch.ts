@@ -6,6 +6,8 @@ import { DfnsBaseApiOptions } from '../types/generic'
 
 const DEFAULT_DFNS_BASE_URL = 'https://api.dfns.io'
 
+import { version } from '../package.json'
+
 export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE'
 
 export type FetchOptions<T> = {
@@ -77,19 +79,20 @@ export const dfnsAuth = <T extends DfnsBaseApiOptions>(fetch: Fetch<T>): Fetch<T
 
     const authorization: Record<string, string> = authToken
       ? {
-        authorization: `Bearer ${authToken}`,
-      }
+          authorization: `Bearer ${authToken}`,
+        }
       : {}
 
     const dfnsAppSecret: Record<string, string> = appSecret
       ? {
-        'x-dfns-appsecret': appSecret,
-      }
+          'x-dfns-appsecret': appSecret,
+        }
       : {}
 
     options.headers = {
       'x-dfns-appid': appId,
       'x-dfns-nonce': generateNonce(),
+      'x-dfns-sdk-version': version,
       ...dfnsAppSecret,
       ...authorization,
       ...(options.headers ?? {}),
