@@ -1,6 +1,6 @@
 import { fetch as _fetch } from 'cross-fetch'
 
-import { Fetch, catchPolicyPending, dfnsAuth, errorHandler, fullUrl, jsonSerializer, userAgent } from './fetch'
+import { Fetch, catchPolicyPending, dfnsAuth, errorHandler, fullUrl, jsonSerializer } from './fetch'
 import { BaseAuthApi } from '../baseAuthApi'
 import { DfnsError } from '../dfnsError'
 import { DfnsApiClientOptions } from '../types/generic'
@@ -53,5 +53,5 @@ const userAction = <T extends DfnsApiClientOptions>(fetch: Fetch<T>): Fetch<T> =
 }
 
 export const userActionFetch = fullUrl(
-  jsonSerializer(dfnsAuth(userAction(catchPolicyPending(errorHandler(userAgent(<Fetch<DfnsApiClientOptions>>_fetch))))))
+  jsonSerializer(dfnsAuth(userAction(catchPolicyPending(errorHandler(<Fetch<DfnsApiClientOptions>>_fetch)))))
 )

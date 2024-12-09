@@ -27,17 +27,6 @@ export const fullUrl = <T extends DfnsBaseApiOptions>(fetch: Fetch<T>): Fetch<T>
   }
 }
 
-export const userAgent = <T>(fetch: Fetch<T>): Fetch<T> => {
-  return async (resource, options) => {
-    options.headers = {
-      'x-dfns-sdk-version': version,
-      ...(options.headers ?? {}),
-    }
-
-    return fetch(resource, options)
-  }
-}
-
 export const jsonSerializer = <T>(fetch: Fetch<T>): Fetch<T> => {
   return async (resource, options) => {
     if (options.body) {
@@ -103,6 +92,7 @@ export const dfnsAuth = <T extends DfnsBaseApiOptions>(fetch: Fetch<T>): Fetch<T
     options.headers = {
       'x-dfns-appid': appId,
       'x-dfns-nonce': generateNonce(),
+      'x-dfns-sdk-version': version,
       ...dfnsAppSecret,
       ...authorization,
       ...(options.headers ?? {}),
@@ -113,5 +103,5 @@ export const dfnsAuth = <T extends DfnsBaseApiOptions>(fetch: Fetch<T>): Fetch<T
 }
 
 export const simpleFetch = fullUrl(
-  jsonSerializer(dfnsAuth(catchPolicyPending(errorHandler(userAgent(<Fetch<DfnsBaseApiOptions>>_fetch)))))
+  jsonSerializer(dfnsAuth(catchPolicyPending(errorHandler(<Fetch<DfnsBaseApiOptions>>_fetch))))
 )
