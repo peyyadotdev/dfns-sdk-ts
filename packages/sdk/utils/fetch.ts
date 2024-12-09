@@ -6,6 +6,8 @@ import { DfnsBaseApiOptions } from '../types/generic'
 
 const DEFAULT_DFNS_BASE_URL = 'https://api.dfns.io'
 
+import { version } from '../package.json'
+
 export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE'
 
 export type FetchOptions<T> = {
@@ -21,6 +23,17 @@ export const fullUrl = <T extends DfnsBaseApiOptions>(fetch: Fetch<T>): Fetch<T>
   return async (resource, options) => {
     const baseUrl = options.apiOptions.baseUrl || DEFAULT_DFNS_BASE_URL
     resource = new URL(resource, baseUrl)
+    return fetch(resource, options)
+  }
+}
+
+export const userAgent = <T>(fetch: Fetch<T>): Fetch<T> => {
+  return async (resource, options) => {
+    options.headers = {
+      'x-dfns-sdk-version': version,
+      ...(options.headers ?? {}),
+    }
+
     return fetch(resource, options)
   }
 }
@@ -77,14 +90,14 @@ export const dfnsAuth = <T extends DfnsBaseApiOptions>(fetch: Fetch<T>): Fetch<T
 
     const authorization: Record<string, string> = authToken
       ? {
-        authorization: `Bearer ${authToken}`,
-      }
+          authorization: `Bearer ${authToken}`,
+        }
       : {}
 
     const dfnsAppSecret: Record<string, string> = appSecret
       ? {
-        'x-dfns-appsecret': appSecret,
-      }
+          'x-dfns-appsecret': appSecret,
+        }
       : {}
 
     options.headers = {
@@ -100,5 +113,5 @@ export const dfnsAuth = <T extends DfnsBaseApiOptions>(fetch: Fetch<T>): Fetch<T
 }
 
 export const simpleFetch = fullUrl(
-  jsonSerializer(dfnsAuth(catchPolicyPending(errorHandler(<Fetch<DfnsBaseApiOptions>>_fetch))))
+  jsonSerializer(dfnsAuth(catchPolicyPending(errorHandler(userAgent(<Fetch<DfnsBaseApiOptions>>_fetch)))))
 )
