@@ -5,6 +5,7 @@ import { NetworksClient } from './generated/networks'
 import { PermissionsClient } from './generated/permissions'
 import { PoliciesClient } from './generated/policies'
 import { SignersClient } from './generated/signers'
+import { StakingClient } from './generated/staking'
 import { WalletsClient } from './generated/wallets'
 import { WebhooksClient } from './generated/webhooks'
 import { CredentialSigner } from './signer'
@@ -37,15 +38,19 @@ export class DfnsApiClient {
     return new PoliciesClient(this.apiOptions)
   }
 
+  public get staking() {
+    return new StakingClient(this.apiOptions)
+  }
+
+  public get signers() {
+    return new SignersClient(this.apiOptions)
+  }
+
   public get wallets() {
     return new WalletsClient(this.apiOptions)
   }
 
   public get webhooks() {
     return new WebhooksClient(this.apiOptions)
-  }
-
-  public get signers() {
-    return new SignersClient(this.apiOptions)
   }
 }
