@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.6.0 (2024-12-11)
+
+- Updated `WebauthnSigner`, now requires explicit relying party (read more on the [migration guide](https://docs.dfns.co/d/guides/passkey-settings-migration-guide))
+- Added staking endpoints
+- Added Dfns SDK version in requests headers
+- Add taproot wallet support and example
+- New example for import / export wallet from a React frontend app
+
 ## 0.5.9 (2024-11-01)
 
 - Updated `DfnsApiClient` to match the latest API changes
