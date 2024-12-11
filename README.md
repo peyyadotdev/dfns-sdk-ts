@@ -45,7 +45,7 @@ The SDK exposed in `@dfns/sdk-browser` implements two classes: `WebAuthnSigner` 
 ```ts
 import { WebAuthnSigner } from '@dfns/sdk-browser'
 
-const webauthn = new WebAuthnSigner()
+const webauthn = new WebAuthnSigner({ relyingParty: { id: 'acme.com', name: 'Acme' } })
 ```
 
 ##### `BrowserKeySigner`

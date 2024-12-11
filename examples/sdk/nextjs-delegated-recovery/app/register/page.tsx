@@ -21,7 +21,12 @@ export default function Register() {
       .then((result) => result.json())
       .then(async (challenge) => {
         console.log('register init challenge', challenge)
-        const webauthn = new WebAuthnSigner()
+        const webauthn = new WebAuthnSigner({
+          relyingParty: {
+            id: process.env.NEXT_PUBLIC_PASSKEYS_RELYING_PARTY_ID!,
+            name: process.env.NEXT_PUBLIC_PASSKEYS_RELYING_PARTY_NAME!,
+          },
+        })
         const attestation = await webauthn.create(challenge)
         const clientData: KeyClientData = {
           type: 'key.create',

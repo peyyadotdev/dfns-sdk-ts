@@ -67,7 +67,12 @@ export default function Wallets(): JSX.Element {
       const { requestBody, challenge } = await initRes.json()
 
       // Sign the challenge to authorize the create wallet action
-      const webauthn = new WebAuthnSigner()
+      const webauthn = new WebAuthnSigner({
+        relyingParty: {
+          id: process.env.REACT_APP_PASSKEY_RELYING_PARTY_ID!,
+          name: process.env.REACT_APP_PASSKEY_RELYING_PARTY_NAME!,
+        },
+      })
       const assertion = await webauthn.sign(challenge)
 
       const completeRes = await fetch(`${process.env.REACT_APP_EXPRESS_API_URL!}/wallets/signatures/complete`, {
@@ -101,8 +106,8 @@ export default function Wallets(): JSX.Element {
       <div className="w-full">
         <h2>End User Wallet</h2>
         <p>
-          The Ethereum testnet wallet created for the end user during registration is listed below. Listing wallets
-          only needs the readonly auth token. End users won't be prompted to use their WebAuthn credentials.
+          The Ethereum testnet wallet created for the end user during registration is listed below. Listing wallets only
+          needs the readonly auth token. End users won't be prompted to use their WebAuthn credentials.
         </p>
         {!!wallets && (
           <pre className="p-4 drop-shadow-lg mt-2 overflow-x-scroll">{JSON.stringify(wallets, null, 2)}</pre>

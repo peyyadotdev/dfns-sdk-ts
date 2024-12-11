@@ -23,7 +23,12 @@ export default function Wallets() {
     fetch('/api/wallets/create/init', { method: 'POST' })
       .then(async (result) => {
         const { request, challenge } = await result.json()
-        const webauthn = new WebAuthnSigner()
+        const webauthn = new WebAuthnSigner({
+          relyingParty: {
+            id: process.env.NEXT_PUBLIC_PASSKEYS_RELYING_PARTY_ID!,
+            name: process.env.NEXT_PUBLIC_PASSKEYS_RELYING_PARTY_NAME!,
+          },
+        })
         const assertion = await webauthn.sign(challenge)
         return fetch('/api/wallets/create/complete', {
           method: 'POST',

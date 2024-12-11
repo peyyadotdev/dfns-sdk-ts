@@ -19,10 +19,7 @@ export type SupportedCredential = {
 
 export type UserActionChallenge = {
   supportedCredentialKinds: SupportedCredential[]
-  rp: {
-    id: string
-    name: string
-  }
+  rp?: { id: string; name: string }
   challenge: string
   challengeIdentifier: string
   externalAuthenticationUrl: string

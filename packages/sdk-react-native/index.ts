@@ -22,22 +22,39 @@ const b64UrlSafeToStandard = (urlSafe: string): string => {
   return (urlSafe + '==='.slice((urlSafe.length + 3) % 4)).replace(/-/g, '+').replace(/_/g, '/')
 }
 
-export type PasskeysOptions = {
+interface PasskeysSignerConf {
+  /**
+   * The relying party identifies your application to users, when users create/use passkeys. (Read more [here](https://www.w3.org/TR/webauthn-2/#relying-party)).
+   * - id: The relying party identifier is a valid domain string identifying the WebAuthn Relying Party.
+   * In other words, its the domain your application is running on, which will be tied to the passkeys that users create.
+   * We advise to use the root domain, not the full domain (eg `acme.com`, not `app.acme.com` nor `foo.app.acme.com`), that way, passkeys created
+   * by your users can be re-used on other subdomains (eg. on `foo.acme.com` and `bar.acme.com`) in the future. Read more [here](https://developer.mozilla.org/en-US/docs/Web/API/PublicKeyCredentialCreationOptions#rp).
+   * - name: A string representing the name of the relying party (e.g. "Acme"). This is the name the user will be presented with when creating or validating a WebAuthn operation.
+   */
+  relyingParty: { id: string; name: string }
+  /**
+   * Timeout to use for navigotor.credentials calls. That's the time after which if user did not successfully
+   * select and use his passkey, an error will be thrown by webauthn client. Read more [here](https://developer.mozilla.org/en-US/docs/Web/API/PublicKeyCredentialCreationOptions#timeout).
+   * */
   timeout?: number
 }
 
 // react-native-passkey is incorrect encoding the credId with standard base64 for
 // some reason. we have to undo that.
 class AndroidPasskeys implements CredentialSigner<Fido2Assertion>, CredentialStore<Fido2Attestation> {
-  constructor(private options?: PasskeysOptions) {}
+  constructor(private conf: PasskeysSignerConf) {
+    if (!this.conf?.relyingParty?.id || !this.conf?.relyingParty?.name) {
+      throw new DfnsError(-1, `Relying party ID and name must be specified in the WebauthnSigner initializer`)
+    }
+  }
 
   async sign(challenge: UserActionChallenge): Promise<Fido2Assertion> {
     const request: PasskeyAuthenticationRequest = {
       challenge: challenge.challenge,
       allowCredentials: challenge.allowCredentials.webauthn,
-      rpId: challenge.rp.id,
+      rpId: this.conf.relyingParty.id,
       userVerification: challenge.userVerification,
-      timeout: this.options?.timeout ?? DEFAULT_WAIT_TIMEOUT,
+      timeout: this.conf.timeout ?? DEFAULT_WAIT_TIMEOUT,
     }
 
     const credential: PasskeyAuthenticationResult = await Passkey.authenticate(request)
@@ -58,7 +75,7 @@ class AndroidPasskeys implements CredentialSigner<Fido2Assertion>, CredentialSto
     const request: PasskeyRegistrationRequest = {
       challenge: challenge.challenge,
       pubKeyCredParams: challenge.pubKeyCredParams,
-      rp: challenge.rp,
+      rp: this.conf.relyingParty,
       user: {
         displayName: challenge.user.displayName,
         id: toBase64Url(challenge.user.id),
@@ -70,7 +87,7 @@ class AndroidPasskeys implements CredentialSigner<Fido2Assertion>, CredentialSto
         type: v.type,
       })),
       authenticatorSelection: challenge.authenticatorSelection,
-      timeout: this.options?.timeout ?? DEFAULT_WAIT_TIMEOUT,
+      timeout: this.conf.timeout ?? DEFAULT_WAIT_TIMEOUT,
     }
 
     const result = await Passkey.register(request)
@@ -90,7 +107,11 @@ class AndroidPasskeys implements CredentialSigner<Fido2Assertion>, CredentialSto
 // are standard base64 encoded instead of base64url encoded. we have to convert the
 // encoding in both directions.
 class iOSPasskeys implements CredentialSigner<Fido2Assertion>, CredentialStore<Fido2Attestation> {
-  constructor(private options?: PasskeysOptions) {}
+  constructor(private conf: PasskeysSignerConf) {
+    if (!this.conf?.relyingParty?.id || !this.conf?.relyingParty?.name) {
+      throw new DfnsError(-1, `Relying party ID and name must be specified in the WebauthnSigner initializer`)
+    }
+  }
 
   async sign(challenge: UserActionChallenge): Promise<Fido2Assertion> {
     const request: PasskeyAuthenticationRequest = {
@@ -99,9 +120,9 @@ class iOSPasskeys implements CredentialSigner<Fido2Assertion>, CredentialStore<F
         id: b64UrlSafeToStandard(id),
         type,
       })),
-      rpId: challenge.rp.id,
+      rpId: this.conf.relyingParty.id,
       userVerification: 'preferred',
-      timeout: this.options?.timeout ?? DEFAULT_WAIT_TIMEOUT,
+      timeout: this.conf.timeout ?? DEFAULT_WAIT_TIMEOUT,
     }
 
     const credential: PasskeyAuthenticationResult = await Passkey.authenticate(request)
@@ -122,7 +143,7 @@ class iOSPasskeys implements CredentialSigner<Fido2Assertion>, CredentialStore<F
     const request: PasskeyRegistrationRequest = {
       challenge: b64UrlSafeToStandard(challenge.challenge),
       pubKeyCredParams: challenge.pubKeyCredParams,
-      rp: challenge.rp,
+      rp: this.conf.relyingParty,
       user: {
         displayName: challenge.user.displayName,
         id: toBase64Url(challenge.user.id),
@@ -134,7 +155,7 @@ class iOSPasskeys implements CredentialSigner<Fido2Assertion>, CredentialStore<F
         type,
       })),
       authenticatorSelection: challenge.authenticatorSelection,
-      timeout: this.options?.timeout ?? DEFAULT_WAIT_TIMEOUT,
+      timeout: this.conf.timeout ?? DEFAULT_WAIT_TIMEOUT,
     }
 
     const result = await Passkey.register(request)
@@ -153,13 +174,13 @@ class iOSPasskeys implements CredentialSigner<Fido2Assertion>, CredentialStore<F
 export class PasskeysSigner implements CredentialSigner<Fido2Assertion>, CredentialStore<Fido2Attestation> {
   private platform: CredentialSigner<Fido2Assertion> & CredentialStore<Fido2Attestation>
 
-  constructor(options?: PasskeysOptions) {
+  constructor(conf: PasskeysSignerConf) {
     switch (Platform.OS) {
       case 'android':
-        this.platform = new AndroidPasskeys(options)
+        this.platform = new AndroidPasskeys(conf)
         break
       case 'ios':
-        this.platform = new iOSPasskeys(options)
+        this.platform = new iOSPasskeys(conf)
         break
       default:
         throw new DfnsError(-1, `${Platform.OS} is not supported`)

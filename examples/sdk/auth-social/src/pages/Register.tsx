@@ -2,12 +2,12 @@ import { WebAuthnSigner } from '@dfns/sdk-browser'
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import { CredentialResponse, GoogleLogin } from '@react-oauth/google';
+import { CredentialResponse, GoogleLogin } from '@react-oauth/google'
 
 import '../globals.css'
-import { dfnsApi } from '../api'
-import { useAppContext } from '../hooks/useAppContext';
-import { DfnsError, UserRegistrationChallenge } from '@dfns/sdk';
+import { dfnsApi, getWebauthnSigner } from '../api'
+import { useAppContext } from '../hooks/useAppContext'
+import { DfnsError, UserRegistrationChallenge } from '@dfns/sdk'
 
 export default function Register() {
   const [loading, setLoading] = React.useState(false)
@@ -18,8 +18,8 @@ export default function Register() {
   const initRegistration = async (idToken: string) => {
     const challenge = await dfnsApi(undefined).auth.createSocialRegistrationChallenge({
       body: {
-        socialLoginProviderKind: "Oidc",
-        idToken
+        socialLoginProviderKind: 'Oidc',
+        idToken,
       },
     })
 
@@ -29,7 +29,7 @@ export default function Register() {
   const finishRegistration = async (challenge: UserRegistrationChallenge) => {
     // Webauthn flow
     // Create the new webauthn credential using the challenge
-    const webauthn = new WebAuthnSigner()
+    const webauthn = getWebauthnSigner()
     const attestation = await webauthn.create(challenge)
 
     // We set the temporary authentication token to complete the registration
@@ -47,14 +47,14 @@ export default function Register() {
     try {
       const result = await dfnsApi(undefined).auth.socialLogin({
         body: {
-          socialLoginProviderKind: "Oidc",
-          idToken
+          socialLoginProviderKind: 'Oidc',
+          idToken,
         },
       })
       return [result, result.token]
     } catch (error: any) {
       if (error instanceof DfnsError && error.httpStatus === 401) {
-        console.log("User does not exist, using the registering route...")
+        console.log('User does not exist, using the registering route...')
         return undefined
       }
       throw error
@@ -89,30 +89,26 @@ export default function Register() {
     setLoading(false)
   }
 
-
   const googleLoginSuccessful = (response: CredentialResponse) => {
     if (response.credential !== undefined) {
       registerUser(response.credential)
     }
-  };
+  }
 
   return (
     <div className="w-full">
       <h2>Social Registration/Login</h2>
       <p>
-        After clicking on the "Continue with Google" button, the browser will receive a JWT from Google. We will first try to login the user with it.
-        If it is unsuccesful, we will trigger the registration of the user.
+        After clicking on the "Continue with Google" button, the browser will receive a JWT from Google. We will first
+        try to login the user with it. If it is unsuccesful, we will trigger the registration of the user.
       </p>
       <p>
         After registration, the new end user will have an Ethereum testnet wallet and assigned the system permission,
-        `DfnsDefaultEndUserAccess`, that grants the end user full access to their wallets. Below will appear the return payload
-        from the server containing the wallet information.
+        `DfnsDefaultEndUserAccess`, that grants the end user full access to their wallets. Below will appear the return
+        payload from the server containing the wallet information.
       </p>
-      <p>
-        If the user was already registered we will just return the authentication token.
-      </p>
+      <p>If the user was already registered we will just return the authentication token.</p>
       <GoogleLogin shape="circle" size="medium" text="continue_with" onSuccess={googleLoginSuccessful} />
-
 
       {!!loading && <span>registering ...</span>}
 

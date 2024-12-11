@@ -3,7 +3,12 @@
 import { WebAuthnSigner } from '@dfns/sdk-browser'
 import { FormEvent, useState } from 'react'
 
-import { createRecoveryCredential, KeyClientData, signRecoveryCredentials, validateRecoveryKey } from '@/common/recoveryKey'
+import {
+  createRecoveryCredential,
+  KeyClientData,
+  signRecoveryCredentials,
+  validateRecoveryKey,
+} from '@/common/recoveryKey'
 import { base64url } from '@/common/base64url'
 
 export default function Recover() {
@@ -44,7 +49,12 @@ export default function Recover() {
         const newRecoveryKey = await createRecoveryCredential(clientData, username)
         console.log('New recovery key created', newRecoveryKey.credential.credentialInfo.credId)
 
-        const webauthn = new WebAuthnSigner()
+        const webauthn = new WebAuthnSigner({
+          relyingParty: {
+            id: process.env.NEXT_PUBLIC_PASSKEYS_RELYING_PARTY_ID!,
+            name: process.env.NEXT_PUBLIC_PASSKEYS_RELYING_PARTY_NAME!,
+          },
+        })
         const attestation = await webauthn.create(challenge)
         const newCredentials = {
           firstFactorCredential: attestation,
@@ -96,8 +106,8 @@ export default function Recover() {
           done some checks to validate the user is who they claim to be (email based code for example).
         </p>
         <p>
-          Here, this will instruct the server to start the delegated recovery process for the user with the email
-          you pass in.
+          Here, this will instruct the server to start the delegated recovery process for the user with the email you
+          pass in.
         </p>
         <div className="flex items-center gap-2">
           <input type="email" name="username" placeholder="email" className="input" />

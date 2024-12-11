@@ -65,7 +65,12 @@ export default function Wallets() {
       const { requestBody, challenge } = await initRes.json()
 
       // Sign the challenge to authorize the create wallet action
-      const webauthn = new WebAuthnSigner()
+      const webauthn = new WebAuthnSigner({
+        relyingParty: {
+          id: process.env.NEXT_PUBLIC_PASSKEYS_RELYING_PARTY_ID!,
+          name: process.env.NEXT_PUBLIC_PASSKEYS_RELYING_PARTY_NAME!,
+        },
+      })
       const assertion = await webauthn.sign(challenge)
 
       const completeRes = await fetch('/api/wallets/signatures/complete', {

@@ -12,12 +12,29 @@ import { Buffer } from 'buffer'
 
 export const DEFAULT_WAIT_TIMEOUT = 60000
 
+interface WebAuthnSignerConf {
+  /**
+   * The relying party identifies your application to users, when users create/use passkeys. (Read more [here](https://www.w3.org/TR/webauthn-2/#relying-party)).
+   * - id: The relying party identifier is a valid domain string identifying the WebAuthn Relying Party.
+   * In other words, its the domain your application is running on, which will be tied to the passkeys that users create.
+   * We advise to use the root domain, not the full domain (eg `acme.com`, not `app.acme.com` nor `foo.app.acme.com`), that way, passkeys created
+   * by your users can be re-used on other subdomains (eg. on `foo.acme.com` and `bar.acme.com`) in the future. Read more [here](https://developer.mozilla.org/en-US/docs/Web/API/PublicKeyCredentialCreationOptions#rp).
+   * - name: A string representing the name of the relying party (e.g. "Acme"). This is the name the user will be presented with when creating or validating a WebAuthn operation.
+   */
+  relyingParty: { id: string; name: string }
+  /**
+   * Timeout to use for navigotor.credentials calls. That's the time after which if user did not successfully
+   * select and use his passkey, an error will be thrown by webauthn client. Read more [here](https://developer.mozilla.org/en-US/docs/Web/API/PublicKeyCredentialCreationOptions#timeout).
+   * */
+  timeout?: number
+}
+
 export class WebAuthnSigner implements CredentialSigner<Fido2Assertion>, CredentialStore<Fido2Attestation> {
-  constructor(
-    private options?: {
-      timeout?: number
+  constructor(private conf: WebAuthnSignerConf) {
+    if (!this.conf?.relyingParty?.id || !this.conf?.relyingParty?.name) {
+      throw new DfnsError(-1, `Relying party ID and name must be specified in the WebauthnSigner initializer`)
     }
-  ) {}
+  }
 
   async sign(challenge: UserActionChallenge): Promise<Fido2Assertion> {
     const response = await navigator.credentials.get({
@@ -27,9 +44,9 @@ export class WebAuthnSigner implements CredentialSigner<Fido2Assertion>, Credent
           id: fromBase64Url(id),
           type,
         })),
-        rpId: challenge.rp.id,
+        rpId: this.conf.relyingParty.id,
         userVerification: challenge.userVerification,
-        timeout: this.options?.timeout ?? DEFAULT_WAIT_TIMEOUT,
+        timeout: this.conf.timeout ?? DEFAULT_WAIT_TIMEOUT,
       },
     })
 
@@ -59,7 +76,7 @@ export class WebAuthnSigner implements CredentialSigner<Fido2Assertion>, Credent
       publicKey: {
         challenge: Buffer.from(challenge.challenge),
         pubKeyCredParams: challenge.pubKeyCredParams,
-        rp: challenge.rp,
+        rp: this.conf.relyingParty,
         user: {
           displayName: challenge.user.displayName,
           id: Buffer.from(challenge.user.id),
@@ -71,7 +88,7 @@ export class WebAuthnSigner implements CredentialSigner<Fido2Assertion>, Credent
           type,
         })),
         authenticatorSelection: challenge.authenticatorSelection,
-        timeout: this.options?.timeout ?? DEFAULT_WAIT_TIMEOUT,
+        timeout: this.conf.timeout ?? DEFAULT_WAIT_TIMEOUT,
       },
     }
 

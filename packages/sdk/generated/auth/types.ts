@@ -6,10 +6,10 @@ export type ActivateApplicationResponse = {
     appId: string;
     kind: "ServerSideApplication" | "ClientSideApplication";
     orgId: string;
-    expectedRpId: string;
+    expectedRpId?: string | undefined;
     name: string;
     isActive: boolean;
-    expectedOrigin: string;
+    expectedOrigin?: string | undefined;
     permissionAssignments: {
         permissionName: string;
         permissionId: string;
@@ -21,7 +21,7 @@ export type ActivateApplicationResponse = {
         dateCreated: string;
         credId: string;
         isActive: boolean;
-        kind: "ServiceAccount" | "Pat" | "Application";
+        kind: "ServiceAccount" | "Pat" | "Application" | "Token" | "Code" | "Recovery" | "Temp";
         linkedUserId: string;
         linkedAppId: string;
         name: string;
@@ -58,7 +58,7 @@ export type ActivatePersonalAccessTokenResponse = {
     dateCreated: string;
     credId: string;
     isActive: boolean;
-    kind: "ServiceAccount" | "Pat" | "Application";
+    kind: "ServiceAccount" | "Pat" | "Application" | "Token" | "Code" | "Recovery" | "Temp";
     linkedUserId: string;
     linkedAppId: string;
     name: string;
@@ -103,7 +103,7 @@ export type ActivateServiceAccountResponse = {
         dateCreated: string;
         credId: string;
         isActive: boolean;
-        kind: "ServiceAccount" | "Pat" | "Application";
+        kind: "ServiceAccount" | "Pat" | "Application" | "Token" | "Code" | "Recovery" | "Temp";
         linkedUserId: string;
         linkedAppId: string;
         name: string;
@@ -154,10 +154,10 @@ export type ArchiveApplicationResponse = {
     appId: string;
     kind: "ServerSideApplication" | "ClientSideApplication";
     orgId: string;
-    expectedRpId: string;
+    expectedRpId?: string | undefined;
     name: string;
     isActive: boolean;
-    expectedOrigin: string;
+    expectedOrigin?: string | undefined;
     permissionAssignments: {
         permissionName: string;
         permissionId: string;
@@ -169,7 +169,7 @@ export type ArchiveApplicationResponse = {
         dateCreated: string;
         credId: string;
         isActive: boolean;
-        kind: "ServiceAccount" | "Pat" | "Application";
+        kind: "ServiceAccount" | "Pat" | "Application" | "Token" | "Code" | "Recovery" | "Temp";
         linkedUserId: string;
         linkedAppId: string;
         name: string;
@@ -196,7 +196,7 @@ export type ArchivePersonalAccessTokenResponse = {
     dateCreated: string;
     credId: string;
     isActive: boolean;
-    kind: "ServiceAccount" | "Pat" | "Application";
+    kind: "ServiceAccount" | "Pat" | "Application" | "Token" | "Code" | "Recovery" | "Temp";
     linkedUserId: string;
     linkedAppId: string;
     name: string;
@@ -241,7 +241,7 @@ export type ArchiveServiceAccountResponse = {
         dateCreated: string;
         credId: string;
         isActive: boolean;
-        kind: "ServiceAccount" | "Pat" | "Application";
+        kind: "ServiceAccount" | "Pat" | "Application" | "Token" | "Code" | "Recovery" | "Temp";
         linkedUserId: string;
         linkedAppId: string;
         name: string;
@@ -286,15 +286,15 @@ export type ArchiveUserRequest = ArchiveUserParams
 
 export type CreateApplicationBody = {
     name: string;
-    relyingPartyId: string;
-    origin: string;
+    relyingPartyId?: string | undefined;
+    origin?: string | undefined;
     permissionId?: string | undefined;
     externalId?: string | undefined;
     kind: "ClientSideApplication";
 } | {
     name: string;
-    relyingPartyId: string;
-    origin: string;
+    relyingPartyId?: string | undefined;
+    origin?: string | undefined;
     permissionId?: string | undefined;
     externalId?: string | undefined;
     kind: "ServerSideApplication";
@@ -306,10 +306,10 @@ export type CreateApplicationResponse = {
     appId: string;
     kind: "ServerSideApplication" | "ClientSideApplication";
     orgId: string;
-    expectedRpId: string;
+    expectedRpId?: string | undefined;
     name: string;
     isActive: boolean;
-    expectedOrigin: string;
+    expectedOrigin?: string | undefined;
     permissionAssignments: {
         permissionName: string;
         permissionId: string;
@@ -321,7 +321,7 @@ export type CreateApplicationResponse = {
         dateCreated: string;
         credId: string;
         isActive: boolean;
-        kind: "ServiceAccount" | "Pat" | "Application";
+        kind: "ServiceAccount" | "Pat" | "Application" | "Token" | "Code" | "Recovery" | "Temp";
         linkedUserId: string;
         linkedAppId: string;
         name: string;
@@ -419,10 +419,10 @@ export type CreateCredentialChallengeResponse = {
         name: string;
     };
     challengeIdentifier: string;
-    rp: {
+    rp?: {
         id: string;
         name: string;
-    };
+    } | undefined;
     /** @deprecated use challengeIdentifier instead */
     temporaryAuthenticationToken: string;
 } | {
@@ -433,10 +433,10 @@ export type CreateCredentialChallengeResponse = {
         name: string;
     };
     challengeIdentifier: string;
-    rp: {
+    rp?: {
         id: string;
         name: string;
-    };
+    } | undefined;
     otpUrl: string;
     /** @deprecated use challengeIdentifier instead */
     temporaryAuthenticationToken: string;
@@ -449,10 +449,10 @@ export type CreateCredentialChallengeResponse = {
     };
     challengeIdentifier: string;
     challenge: string;
-    rp: {
+    rp?: {
         id: string;
         name: string;
-    };
+    } | undefined;
     authenticatorSelection: {
         authenticatorAttachment?: ("platform" | "cross-platform") | undefined;
         residentKey: "required" | "preferred" | "discouraged";
@@ -467,7 +467,6 @@ export type CreateCredentialChallengeResponse = {
     excludeCredentials: {
         type: "public-key";
         id: string;
-        transports?: ("usb" | "nfc" | "ble" | "smart-card" | "hybrid" | "internal") | undefined;
     }[];
     /** @deprecated use challengeIdentifier instead */
     temporaryAuthenticationToken: string;
@@ -480,10 +479,10 @@ export type CreateCredentialChallengeResponse = {
     };
     challengeIdentifier: string;
     challenge: string;
-    rp: {
+    rp?: {
         id: string;
         name: string;
-    };
+    } | undefined;
     attestation: "none" | "indirect" | "direct" | "enterprise";
     pubKeyCredParams: {
         type: "public-key";
@@ -500,10 +499,10 @@ export type CreateCredentialChallengeResponse = {
     };
     challengeIdentifier: string;
     challenge: string;
-    rp: {
+    rp?: {
         id: string;
         name: string;
-    };
+    } | undefined;
     attestation: "none" | "indirect" | "direct" | "enterprise";
     pubKeyCredParams: {
         type: "public-key";
@@ -520,10 +519,10 @@ export type CreateCredentialChallengeResponse = {
     };
     challengeIdentifier: string;
     challenge: string;
-    rp: {
+    rp?: {
         id: string;
         name: string;
-    };
+    } | undefined;
     attestation: "none" | "indirect" | "direct" | "enterprise";
     pubKeyCredParams: {
         type: "public-key";
@@ -548,10 +547,10 @@ export type CreateCredentialChallengeWithCodeResponse = {
         name: string;
     };
     challengeIdentifier: string;
-    rp: {
+    rp?: {
         id: string;
         name: string;
-    };
+    } | undefined;
     /** @deprecated use challengeIdentifier instead */
     temporaryAuthenticationToken: string;
 } | {
@@ -562,10 +561,10 @@ export type CreateCredentialChallengeWithCodeResponse = {
         name: string;
     };
     challengeIdentifier: string;
-    rp: {
+    rp?: {
         id: string;
         name: string;
-    };
+    } | undefined;
     otpUrl: string;
     /** @deprecated use challengeIdentifier instead */
     temporaryAuthenticationToken: string;
@@ -578,10 +577,10 @@ export type CreateCredentialChallengeWithCodeResponse = {
     };
     challengeIdentifier: string;
     challenge: string;
-    rp: {
+    rp?: {
         id: string;
         name: string;
-    };
+    } | undefined;
     authenticatorSelection: {
         authenticatorAttachment?: ("platform" | "cross-platform") | undefined;
         residentKey: "required" | "preferred" | "discouraged";
@@ -596,7 +595,6 @@ export type CreateCredentialChallengeWithCodeResponse = {
     excludeCredentials: {
         type: "public-key";
         id: string;
-        transports?: ("usb" | "nfc" | "ble" | "smart-card" | "hybrid" | "internal") | undefined;
     }[];
     /** @deprecated use challengeIdentifier instead */
     temporaryAuthenticationToken: string;
@@ -609,10 +607,10 @@ export type CreateCredentialChallengeWithCodeResponse = {
     };
     challengeIdentifier: string;
     challenge: string;
-    rp: {
+    rp?: {
         id: string;
         name: string;
-    };
+    } | undefined;
     attestation: "none" | "indirect" | "direct" | "enterprise";
     pubKeyCredParams: {
         type: "public-key";
@@ -629,10 +627,10 @@ export type CreateCredentialChallengeWithCodeResponse = {
     };
     challengeIdentifier: string;
     challenge: string;
-    rp: {
+    rp?: {
         id: string;
         name: string;
-    };
+    } | undefined;
     attestation: "none" | "indirect" | "direct" | "enterprise";
     pubKeyCredParams: {
         type: "public-key";
@@ -649,10 +647,10 @@ export type CreateCredentialChallengeWithCodeResponse = {
     };
     challengeIdentifier: string;
     challenge: string;
-    rp: {
+    rp?: {
         id: string;
         name: string;
-    };
+    } | undefined;
     attestation: "none" | "indirect" | "direct" | "enterprise";
     pubKeyCredParams: {
         type: "public-key";
@@ -757,10 +755,10 @@ export type CreateDelegatedRecoveryChallengeResponse = {
     };
     temporaryAuthenticationToken: string;
     challenge: string;
-    rp: {
+    rp?: {
         id: string;
         name: string;
-    };
+    } | undefined;
     supportedCredentialKinds: {
         firstFactor: ("Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey" | "PasswordProtectedKey")[];
         secondFactor: ("Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey" | "PasswordProtectedKey")[];
@@ -779,7 +777,6 @@ export type CreateDelegatedRecoveryChallengeResponse = {
     excludeCredentials: {
         type: "public-key";
         id: string;
-        transports?: ("usb" | "nfc" | "ble" | "smart-card" | "hybrid" | "internal") | undefined;
     }[];
     otpUrl: string;
     allowedRecoveryCredentials: {
@@ -804,10 +801,10 @@ export type CreateDelegatedRegistrationChallengeResponse = {
     };
     temporaryAuthenticationToken: string;
     challenge: string;
-    rp: {
+    rp?: {
         id: string;
         name: string;
-    };
+    } | undefined;
     supportedCredentialKinds: {
         firstFactor: ("Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey" | "PasswordProtectedKey")[];
         secondFactor: ("Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey" | "PasswordProtectedKey")[];
@@ -826,7 +823,6 @@ export type CreateDelegatedRegistrationChallengeResponse = {
     excludeCredentials: {
         type: "public-key";
         id: string;
-        transports?: ("usb" | "nfc" | "ble" | "smart-card" | "hybrid" | "internal") | undefined;
     }[];
     otpUrl: string;
 };
@@ -842,10 +838,10 @@ export type CreateLoginChallengeBody = {
 export type CreateLoginChallengeResponse = {
     challenge: string;
     challengeIdentifier: string;
-    rp: {
+    rp?: {
         id: string;
         name: string;
-    };
+    } | undefined;
     supportedCredentialKinds: {
         kind: "Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey" | "PasswordProtectedKey";
         factor: "first" | "second" | "either";
@@ -857,7 +853,6 @@ export type CreateLoginChallengeResponse = {
         key: {
             type: "public-key";
             id: string;
-            transports?: ("usb" | "nfc" | "ble" | "smart-card" | "hybrid" | "internal") | undefined;
         }[];
         passwordProtectedKey?: {
             type: "public-key";
@@ -867,7 +862,6 @@ export type CreateLoginChallengeResponse = {
         webauthn: {
             type: "public-key";
             id: string;
-            transports?: ("usb" | "nfc" | "ble" | "smart-card" | "hybrid" | "internal") | undefined;
         }[];
     };
     externalAuthenticationUrl: string;
@@ -889,7 +883,7 @@ export type CreatePersonalAccessTokenResponse = {
     dateCreated: string;
     credId: string;
     isActive: boolean;
-    kind: "ServiceAccount" | "Pat" | "Application";
+    kind: "ServiceAccount" | "Pat" | "Application" | "Token" | "Code" | "Recovery" | "Temp";
     linkedUserId: string;
     linkedAppId: string;
     name: string;
@@ -921,10 +915,10 @@ export type CreateRecoveryChallengeResponse = {
     };
     temporaryAuthenticationToken: string;
     challenge: string;
-    rp: {
+    rp?: {
         id: string;
         name: string;
-    };
+    } | undefined;
     supportedCredentialKinds: {
         firstFactor: ("Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey" | "PasswordProtectedKey")[];
         secondFactor: ("Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey" | "PasswordProtectedKey")[];
@@ -943,7 +937,6 @@ export type CreateRecoveryChallengeResponse = {
     excludeCredentials: {
         type: "public-key";
         id: string;
-        transports?: ("usb" | "nfc" | "ble" | "smart-card" | "hybrid" | "internal") | undefined;
     }[];
     otpUrl: string;
     allowedRecoveryCredentials: {
@@ -968,10 +961,10 @@ export type CreateRegistrationChallengeResponse = {
     };
     temporaryAuthenticationToken: string;
     challenge: string;
-    rp: {
+    rp?: {
         id: string;
         name: string;
-    };
+    } | undefined;
     supportedCredentialKinds: {
         firstFactor: ("Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey" | "PasswordProtectedKey")[];
         secondFactor: ("Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey" | "PasswordProtectedKey")[];
@@ -990,7 +983,6 @@ export type CreateRegistrationChallengeResponse = {
     excludeCredentials: {
         type: "public-key";
         id: string;
-        transports?: ("usb" | "nfc" | "ble" | "smart-card" | "hybrid" | "internal") | undefined;
     }[];
     otpUrl: string;
 };
@@ -1029,7 +1021,7 @@ export type CreateServiceAccountResponse = {
         dateCreated: string;
         credId: string;
         isActive: boolean;
-        kind: "ServiceAccount" | "Pat" | "Application";
+        kind: "ServiceAccount" | "Pat" | "Application" | "Token" | "Code" | "Recovery" | "Temp";
         linkedUserId: string;
         linkedAppId: string;
         name: string;
@@ -1060,10 +1052,10 @@ export type CreateSocialRegistrationChallengeResponse = {
     };
     temporaryAuthenticationToken: string;
     challenge: string;
-    rp: {
+    rp?: {
         id: string;
         name: string;
-    };
+    } | undefined;
     supportedCredentialKinds: {
         firstFactor: ("Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey" | "PasswordProtectedKey")[];
         secondFactor: ("Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey" | "PasswordProtectedKey")[];
@@ -1082,7 +1074,6 @@ export type CreateSocialRegistrationChallengeResponse = {
     excludeCredentials: {
         type: "public-key";
         id: string;
-        transports?: ("usb" | "nfc" | "ble" | "smart-card" | "hybrid" | "internal") | undefined;
     }[];
     otpUrl: string;
 };
@@ -1127,10 +1118,10 @@ export type CreateUserActionChallengeBody = {
 export type CreateUserActionChallengeResponse = {
     challenge: string;
     challengeIdentifier: string;
-    rp: {
+    rp?: {
         id: string;
         name: string;
-    };
+    } | undefined;
     supportedCredentialKinds: {
         kind: "Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey" | "PasswordProtectedKey";
         factor: "first" | "second" | "either";
@@ -1142,7 +1133,6 @@ export type CreateUserActionChallengeResponse = {
         key: {
             type: "public-key";
             id: string;
-            transports?: ("usb" | "nfc" | "ble" | "smart-card" | "hybrid" | "internal") | undefined;
         }[];
         passwordProtectedKey?: {
             type: "public-key";
@@ -1152,7 +1142,6 @@ export type CreateUserActionChallengeResponse = {
         webauthn: {
             type: "public-key";
             id: string;
-            transports?: ("usb" | "nfc" | "ble" | "smart-card" | "hybrid" | "internal") | undefined;
         }[];
     };
     externalAuthenticationUrl: string;
@@ -1238,10 +1227,10 @@ export type DeactivateApplicationResponse = {
     appId: string;
     kind: "ServerSideApplication" | "ClientSideApplication";
     orgId: string;
-    expectedRpId: string;
+    expectedRpId?: string | undefined;
     name: string;
     isActive: boolean;
-    expectedOrigin: string;
+    expectedOrigin?: string | undefined;
     permissionAssignments: {
         permissionName: string;
         permissionId: string;
@@ -1253,7 +1242,7 @@ export type DeactivateApplicationResponse = {
         dateCreated: string;
         credId: string;
         isActive: boolean;
-        kind: "ServiceAccount" | "Pat" | "Application";
+        kind: "ServiceAccount" | "Pat" | "Application" | "Token" | "Code" | "Recovery" | "Temp";
         linkedUserId: string;
         linkedAppId: string;
         name: string;
@@ -1290,7 +1279,7 @@ export type DeactivatePersonalAccessTokenResponse = {
     dateCreated: string;
     credId: string;
     isActive: boolean;
-    kind: "ServiceAccount" | "Pat" | "Application";
+    kind: "ServiceAccount" | "Pat" | "Application" | "Token" | "Code" | "Recovery" | "Temp";
     linkedUserId: string;
     linkedAppId: string;
     name: string;
@@ -1335,7 +1324,7 @@ export type DeactivateServiceAccountResponse = {
         dateCreated: string;
         credId: string;
         isActive: boolean;
-        kind: "ServiceAccount" | "Pat" | "Application";
+        kind: "ServiceAccount" | "Pat" | "Application" | "Token" | "Code" | "Recovery" | "Temp";
         linkedUserId: string;
         linkedAppId: string;
         name: string;
@@ -1396,10 +1385,10 @@ export type GetApplicationResponse = {
     appId: string;
     kind: "ServerSideApplication" | "ClientSideApplication";
     orgId: string;
-    expectedRpId: string;
+    expectedRpId?: string | undefined;
     name: string;
     isActive: boolean;
-    expectedOrigin: string;
+    expectedOrigin?: string | undefined;
     permissionAssignments: {
         permissionName: string;
         permissionId: string;
@@ -1411,7 +1400,7 @@ export type GetApplicationResponse = {
         dateCreated: string;
         credId: string;
         isActive: boolean;
-        kind: "ServiceAccount" | "Pat" | "Application";
+        kind: "ServiceAccount" | "Pat" | "Application" | "Token" | "Code" | "Recovery" | "Temp";
         linkedUserId: string;
         linkedAppId: string;
         name: string;
@@ -1438,7 +1427,7 @@ export type GetPersonalAccessTokenResponse = {
     dateCreated: string;
     credId: string;
     isActive: boolean;
-    kind: "ServiceAccount" | "Pat" | "Application";
+    kind: "ServiceAccount" | "Pat" | "Application" | "Token" | "Code" | "Recovery" | "Temp";
     linkedUserId: string;
     linkedAppId: string;
     name: string;
@@ -1483,7 +1472,7 @@ export type GetServiceAccountResponse = {
         dateCreated: string;
         credId: string;
         isActive: boolean;
-        kind: "ServiceAccount" | "Pat" | "Application";
+        kind: "ServiceAccount" | "Pat" | "Application" | "Token" | "Code" | "Recovery" | "Temp";
         linkedUserId: string;
         linkedAppId: string;
         name: string;
@@ -1531,10 +1520,10 @@ export type ListApplicationsResponse = {
         appId: string;
         kind: "ServerSideApplication" | "ClientSideApplication";
         orgId: string;
-        expectedRpId: string;
+        expectedRpId?: string | undefined;
         name: string;
         isActive: boolean;
-        expectedOrigin: string;
+        expectedOrigin?: string | undefined;
         permissionAssignments: {
             permissionName: string;
             permissionId: string;
@@ -1546,7 +1535,7 @@ export type ListApplicationsResponse = {
             dateCreated: string;
             credId: string;
             isActive: boolean;
-            kind: "ServiceAccount" | "Pat" | "Application";
+            kind: "ServiceAccount" | "Pat" | "Application" | "Token" | "Code" | "Recovery" | "Temp";
             linkedUserId: string;
             linkedAppId: string;
             name: string;
@@ -1583,7 +1572,7 @@ export type ListPersonalAccessTokensResponse = {
         dateCreated: string;
         credId: string;
         isActive: boolean;
-        kind: "ServiceAccount" | "Pat" | "Application";
+        kind: "ServiceAccount" | "Pat" | "Application" | "Token" | "Code" | "Recovery" | "Temp";
         linkedUserId: string;
         linkedAppId: string;
         name: string;
@@ -1624,7 +1613,7 @@ export type ListServiceAccountsResponse = {
             dateCreated: string;
             credId: string;
             isActive: boolean;
-            kind: "ServiceAccount" | "Pat" | "Application";
+            kind: "ServiceAccount" | "Pat" | "Application" | "Token" | "Code" | "Recovery" | "Temp";
             linkedUserId: string;
             linkedAppId: string;
             name: string;
@@ -1741,9 +1730,15 @@ export type LoginResponse = {
 
 export type LoginRequest = { body: LoginBody }
 
+export type LogoutBody = {
+    allSessions?: boolean | undefined;
+} | undefined;
+
 export type LogoutResponse = {
     message: string;
 };
+
+export type LogoutRequest = { body: LogoutBody }
 
 export type RecoverBody = {
     recovery: {
@@ -1862,10 +1857,10 @@ export type RecreateDelegatedRegistrationChallengeResponse = {
     };
     temporaryAuthenticationToken: string;
     challenge: string;
-    rp: {
+    rp?: {
         id: string;
         name: string;
-    };
+    } | undefined;
     supportedCredentialKinds: {
         firstFactor: ("Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey" | "PasswordProtectedKey")[];
         secondFactor: ("Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey" | "PasswordProtectedKey")[];
@@ -1884,7 +1879,6 @@ export type RecreateDelegatedRegistrationChallengeResponse = {
     excludeCredentials: {
         type: "public-key";
         id: string;
-        transports?: ("usb" | "nfc" | "ble" | "smart-card" | "hybrid" | "internal") | undefined;
     }[];
     otpUrl: string;
 };
@@ -2158,10 +2152,10 @@ export type UpdateApplicationResponse = {
     appId: string;
     kind: "ServerSideApplication" | "ClientSideApplication";
     orgId: string;
-    expectedRpId: string;
+    expectedRpId?: string | undefined;
     name: string;
     isActive: boolean;
-    expectedOrigin: string;
+    expectedOrigin?: string | undefined;
     permissionAssignments: {
         permissionName: string;
         permissionId: string;
@@ -2173,7 +2167,7 @@ export type UpdateApplicationResponse = {
         dateCreated: string;
         credId: string;
         isActive: boolean;
-        kind: "ServiceAccount" | "Pat" | "Application";
+        kind: "ServiceAccount" | "Pat" | "Application" | "Token" | "Code" | "Recovery" | "Temp";
         linkedUserId: string;
         linkedAppId: string;
         name: string;
@@ -2205,7 +2199,7 @@ export type UpdatePersonalAccessTokenResponse = {
     dateCreated: string;
     credId: string;
     isActive: boolean;
-    kind: "ServiceAccount" | "Pat" | "Application";
+    kind: "ServiceAccount" | "Pat" | "Application" | "Token" | "Code" | "Recovery" | "Temp";
     linkedUserId: string;
     linkedAppId: string;
     name: string;
@@ -2255,7 +2249,7 @@ export type UpdateServiceAccountResponse = {
         dateCreated: string;
         credId: string;
         isActive: boolean;
-        kind: "ServiceAccount" | "Pat" | "Application";
+        kind: "ServiceAccount" | "Pat" | "Application" | "Token" | "Code" | "Recovery" | "Temp";
         linkedUserId: string;
         linkedAppId: string;
         name: string;
