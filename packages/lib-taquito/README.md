@@ -15,7 +15,6 @@ import { RpcClient} from '@taquito/rpc'
 const signer = new AsymmetricKeySigner({
   privateKey: process.env.DFNS_PRIVATE_KEY!,
   credId: process.env.DFNS_CRED_ID!,
-  appOrigin: process.env.DFNS_APP_ORIGIN!,
 })
 
 const dfnsClient = new DfnsApiClient({
