@@ -203,6 +203,7 @@ BaseAuthApi.createUserRegistration()
 Integrations with other blockchain platforms to make Dapp development frictionless. More to come...
 
 - [Algorand](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-algorand) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/libs/algorand)
+- [Aptos](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-aptos) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/libs/aptos)
 - [BitcoinJS](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-bitcoinjs/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/libs/bitcoinjs/)
 - [Cardano Mesh](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-meshsdk/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/libs/meshsdk/)
 - [ethers.js v5](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-ethersjs5/)/[v6](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/lib-ethersjs6/) and [examples](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/libs/ethersjs)
