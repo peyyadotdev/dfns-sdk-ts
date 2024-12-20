@@ -1,6 +1,7 @@
 {
   "entryPoints": [
     "packages/lib-algorand",
+    "packages/lib-aptos",
     "packages/lib-bitcoinjs",
     "packages/lib-cosmjs",
     "packages/lib-ethersjs5",
