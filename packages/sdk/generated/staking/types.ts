@@ -1,9 +1,6 @@
 export type CreateStakeBody = {
     kind: "Native";
     amount: string;
-    priority?: ("Slow" | "Standard" | "Fast") | undefined;
-    createDestinationAccount?: boolean | undefined;
-    externalId?: string | undefined;
     walletId: string;
     provider: "Figment";
     protocol: "Babylon";
@@ -17,7 +14,7 @@ export type CreateStakeResponse = {
         providerStakeId: string;
         walletId: string;
         protocol: "Babylon";
-        status: "Active";
+        status: "Active" | "Withdrawn";
         requester: {
             userId: string;
             tokenId?: string | undefined;
@@ -26,9 +23,6 @@ export type CreateStakeResponse = {
         requestBody: {
             kind: "Native";
             amount: string;
-            priority?: ("Slow" | "Standard" | "Fast") | undefined;
-            createDestinationAccount?: boolean | undefined;
-            externalId?: string | undefined;
             walletId: string;
             provider: "Figment";
             protocol: "Babylon";
@@ -36,32 +30,121 @@ export type CreateStakeResponse = {
         };
         dateCreated: string;
     };
-    stakeTransaction: {
+    stakeAction: {
         id: string;
         stakeId: string;
         transactionId?: string | undefined;
-        kind: "Stake" | "Unbond" | "UnbondWithdrawal" | "Withdraw";
+        kind: "Stake" | "Unbond" | "UnbondWithdrawal" | "StakeWithdrawal";
         requester: {
             userId: string;
             tokenId?: string | undefined;
             appId?: string | undefined;
         };
-        requestBody: {
+        requestBody: ({
             kind: "Native";
             amount: string;
-            priority?: ("Slow" | "Standard" | "Fast") | undefined;
-            createDestinationAccount?: boolean | undefined;
-            externalId?: string | undefined;
             walletId: string;
             provider: "Figment";
             protocol: "Babylon";
             duration: number;
+        }) | {
+            protocol: "Babylon";
+            kind: "StakeWithdrawal";
         };
         dateCreated: string;
     };
 };
 
 export type CreateStakeRequest = { body: CreateStakeBody }
+
+export type CreateStakeActionBody = {
+    protocol: "Babylon";
+    kind: "StakeWithdrawal";
+};
+
+export type CreateStakeActionResponse = {
+    stake: {
+        id: string;
+        provider: "Figment";
+        providerStakeId: string;
+        walletId: string;
+        protocol: "Babylon";
+        status: "Active" | "Withdrawn";
+        requester: {
+            userId: string;
+            tokenId?: string | undefined;
+            appId?: string | undefined;
+        };
+        requestBody: {
+            kind: "Native";
+            amount: string;
+            walletId: string;
+            provider: "Figment";
+            protocol: "Babylon";
+            duration: number;
+        };
+        dateCreated: string;
+    };
+    stakeAction: {
+        id: string;
+        stakeId: string;
+        transactionId?: string | undefined;
+        kind: "Stake" | "Unbond" | "UnbondWithdrawal" | "StakeWithdrawal";
+        requester: {
+            userId: string;
+            tokenId?: string | undefined;
+            appId?: string | undefined;
+        };
+        requestBody: ({
+            kind: "Native";
+            amount: string;
+            walletId: string;
+            provider: "Figment";
+            protocol: "Babylon";
+            duration: number;
+        }) | {
+            protocol: "Babylon";
+            kind: "StakeWithdrawal";
+        };
+        dateCreated: string;
+    };
+};
+
+export type CreateStakeActionRequest = { body: CreateStakeActionBody }
+
+export type ListStakeActionsQuery = {
+    limit?: number | undefined;
+    paginationToken?: string | undefined;
+};
+
+export type ListStakeActionsResponse = {
+    items: {
+        id: string;
+        stakeId: string;
+        transactionId?: string | undefined;
+        kind: "Stake" | "Unbond" | "UnbondWithdrawal" | "StakeWithdrawal";
+        requester: {
+            userId: string;
+            tokenId?: string | undefined;
+            appId?: string | undefined;
+        };
+        requestBody: ({
+            kind: "Native";
+            amount: string;
+            walletId: string;
+            provider: "Figment";
+            protocol: "Babylon";
+            duration: number;
+        }) | {
+            protocol: "Babylon";
+            kind: "StakeWithdrawal";
+        };
+        dateCreated: string;
+    }[];
+    nextPageToken?: string | undefined;
+};
+
+export type ListStakeActionsRequest = { query?: ListStakeActionsQuery }
 
 export type ListStakesQuery = {
     limit?: number | undefined;
@@ -75,7 +158,7 @@ export type ListStakesResponse = {
         providerStakeId: string;
         walletId: string;
         protocol: "Babylon";
-        status: "Active";
+        status: "Active" | "Withdrawn";
         requester: {
             userId: string;
             tokenId?: string | undefined;
@@ -84,9 +167,6 @@ export type ListStakesResponse = {
         requestBody: {
             kind: "Native";
             amount: string;
-            priority?: ("Slow" | "Standard" | "Fast") | undefined;
-            createDestinationAccount?: boolean | undefined;
-            externalId?: string | undefined;
             walletId: string;
             provider: "Figment";
             protocol: "Babylon";
@@ -98,38 +178,4 @@ export type ListStakesResponse = {
 };
 
 export type ListStakesRequest = { query?: ListStakesQuery }
-
-export type ListStakeTransactionsQuery = {
-    limit?: number | undefined;
-    paginationToken?: string | undefined;
-};
-
-export type ListStakeTransactionsResponse = {
-    items: {
-        id: string;
-        stakeId: string;
-        transactionId?: string | undefined;
-        kind: "Stake" | "Unbond" | "UnbondWithdrawal" | "Withdraw";
-        requester: {
-            userId: string;
-            tokenId?: string | undefined;
-            appId?: string | undefined;
-        };
-        requestBody: {
-            kind: "Native";
-            amount: string;
-            priority?: ("Slow" | "Standard" | "Fast") | undefined;
-            createDestinationAccount?: boolean | undefined;
-            externalId?: string | undefined;
-            walletId: string;
-            provider: "Figment";
-            protocol: "Babylon";
-            duration: number;
-        };
-        dateCreated: string;
-    }[];
-    nextPageToken?: string | undefined;
-};
-
-export type ListStakeTransactionsRequest = { query?: ListStakeTransactionsQuery }
 

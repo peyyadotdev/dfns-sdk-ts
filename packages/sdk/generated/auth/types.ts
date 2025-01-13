@@ -21,7 +21,7 @@ export type ActivateApplicationResponse = {
         dateCreated: string;
         credId: string;
         isActive: boolean;
-        kind: "ServiceAccount" | "Pat" | "Application" | "Token" | "Code" | "Recovery" | "Temp";
+        kind: "Pat" | "ServiceAccount" | "Token" | "Code" | "Recovery" | "Temp" | "Application";
         linkedUserId: string;
         linkedAppId: string;
         name: string;
@@ -58,7 +58,7 @@ export type ActivatePersonalAccessTokenResponse = {
     dateCreated: string;
     credId: string;
     isActive: boolean;
-    kind: "ServiceAccount" | "Pat" | "Application" | "Token" | "Code" | "Recovery" | "Temp";
+    kind: "Pat" | "ServiceAccount" | "Token" | "Code" | "Recovery" | "Temp" | "Application";
     linkedUserId: string;
     linkedAppId: string;
     name: string;
@@ -84,7 +84,7 @@ export type ActivateServiceAccountResponse = {
         username: string;
         name: string;
         userId: string;
-        kind: "EndUser" | "CustomerEmployee" | "DfnsStaff";
+        kind: "CustomerEmployee" | "DfnsStaff" | "EndUser";
         credentialUuid: string;
         orgId: string;
         permissions?: string[] | undefined;
@@ -103,7 +103,7 @@ export type ActivateServiceAccountResponse = {
         dateCreated: string;
         credId: string;
         isActive: boolean;
-        kind: "ServiceAccount" | "Pat" | "Application" | "Token" | "Code" | "Recovery" | "Temp";
+        kind: "Pat" | "ServiceAccount" | "Token" | "Code" | "Recovery" | "Temp" | "Application";
         linkedUserId: string;
         linkedAppId: string;
         name: string;
@@ -129,7 +129,7 @@ export type ActivateUserResponse = {
     username: string;
     name: string;
     userId: string;
-    kind: "EndUser" | "CustomerEmployee" | "DfnsStaff";
+    kind: "CustomerEmployee" | "DfnsStaff" | "EndUser";
     credentialUuid: string;
     orgId: string;
     permissions?: string[] | undefined;
@@ -169,7 +169,7 @@ export type ArchiveApplicationResponse = {
         dateCreated: string;
         credId: string;
         isActive: boolean;
-        kind: "ServiceAccount" | "Pat" | "Application" | "Token" | "Code" | "Recovery" | "Temp";
+        kind: "Pat" | "ServiceAccount" | "Token" | "Code" | "Recovery" | "Temp" | "Application";
         linkedUserId: string;
         linkedAppId: string;
         name: string;
@@ -196,7 +196,7 @@ export type ArchivePersonalAccessTokenResponse = {
     dateCreated: string;
     credId: string;
     isActive: boolean;
-    kind: "ServiceAccount" | "Pat" | "Application" | "Token" | "Code" | "Recovery" | "Temp";
+    kind: "Pat" | "ServiceAccount" | "Token" | "Code" | "Recovery" | "Temp" | "Application";
     linkedUserId: string;
     linkedAppId: string;
     name: string;
@@ -222,7 +222,7 @@ export type ArchiveServiceAccountResponse = {
         username: string;
         name: string;
         userId: string;
-        kind: "EndUser" | "CustomerEmployee" | "DfnsStaff";
+        kind: "CustomerEmployee" | "DfnsStaff" | "EndUser";
         credentialUuid: string;
         orgId: string;
         permissions?: string[] | undefined;
@@ -241,7 +241,7 @@ export type ArchiveServiceAccountResponse = {
         dateCreated: string;
         credId: string;
         isActive: boolean;
-        kind: "ServiceAccount" | "Pat" | "Application" | "Token" | "Code" | "Recovery" | "Temp";
+        kind: "Pat" | "ServiceAccount" | "Token" | "Code" | "Recovery" | "Temp" | "Application";
         linkedUserId: string;
         linkedAppId: string;
         name: string;
@@ -267,7 +267,7 @@ export type ArchiveUserResponse = {
     username: string;
     name: string;
     userId: string;
-    kind: "EndUser" | "CustomerEmployee" | "DfnsStaff";
+    kind: "CustomerEmployee" | "DfnsStaff" | "EndUser";
     credentialUuid: string;
     orgId: string;
     permissions?: string[] | undefined;
@@ -321,7 +321,7 @@ export type CreateApplicationResponse = {
         dateCreated: string;
         credId: string;
         isActive: boolean;
-        kind: "ServiceAccount" | "Pat" | "Application" | "Token" | "Code" | "Recovery" | "Temp";
+        kind: "Pat" | "ServiceAccount" | "Token" | "Code" | "Recovery" | "Temp" | "Application";
         linkedUserId: string;
         linkedAppId: string;
         name: string;
@@ -789,7 +789,7 @@ export type CreateDelegatedRecoveryChallengeRequest = { body: CreateDelegatedRec
 
 export type CreateDelegatedRegistrationChallengeBody = {
     email: string;
-    kind: "EndUser" | "CustomerEmployee" | "DfnsStaff";
+    kind: "CustomerEmployee" | "DfnsStaff" | "EndUser";
     externalId?: string | undefined;
 };
 
@@ -883,7 +883,7 @@ export type CreatePersonalAccessTokenResponse = {
     dateCreated: string;
     credId: string;
     isActive: boolean;
-    kind: "ServiceAccount" | "Pat" | "Application" | "Token" | "Code" | "Recovery" | "Temp";
+    kind: "Pat" | "ServiceAccount" | "Token" | "Code" | "Recovery" | "Temp" | "Application";
     linkedUserId: string;
     linkedAppId: string;
     name: string;
@@ -1002,7 +1002,7 @@ export type CreateServiceAccountResponse = {
         username: string;
         name: string;
         userId: string;
-        kind: "EndUser" | "CustomerEmployee" | "DfnsStaff";
+        kind: "CustomerEmployee" | "DfnsStaff" | "EndUser";
         credentialUuid: string;
         orgId: string;
         permissions?: string[] | undefined;
@@ -1021,7 +1021,7 @@ export type CreateServiceAccountResponse = {
         dateCreated: string;
         credId: string;
         isActive: boolean;
-        kind: "ServiceAccount" | "Pat" | "Application" | "Token" | "Code" | "Recovery" | "Temp";
+        kind: "Pat" | "ServiceAccount" | "Token" | "Code" | "Recovery" | "Temp" | "Application";
         linkedUserId: string;
         linkedAppId: string;
         name: string;
@@ -1091,7 +1091,7 @@ export type CreateUserResponse = {
     username: string;
     name: string;
     userId: string;
-    kind: "EndUser" | "CustomerEmployee" | "DfnsStaff";
+    kind: "CustomerEmployee" | "DfnsStaff" | "EndUser";
     credentialUuid: string;
     orgId: string;
     permissions?: string[] | undefined;
@@ -1242,7 +1242,7 @@ export type DeactivateApplicationResponse = {
         dateCreated: string;
         credId: string;
         isActive: boolean;
-        kind: "ServiceAccount" | "Pat" | "Application" | "Token" | "Code" | "Recovery" | "Temp";
+        kind: "Pat" | "ServiceAccount" | "Token" | "Code" | "Recovery" | "Temp" | "Application";
         linkedUserId: string;
         linkedAppId: string;
         name: string;
@@ -1279,7 +1279,7 @@ export type DeactivatePersonalAccessTokenResponse = {
     dateCreated: string;
     credId: string;
     isActive: boolean;
-    kind: "ServiceAccount" | "Pat" | "Application" | "Token" | "Code" | "Recovery" | "Temp";
+    kind: "Pat" | "ServiceAccount" | "Token" | "Code" | "Recovery" | "Temp" | "Application";
     linkedUserId: string;
     linkedAppId: string;
     name: string;
@@ -1305,7 +1305,7 @@ export type DeactivateServiceAccountResponse = {
         username: string;
         name: string;
         userId: string;
-        kind: "EndUser" | "CustomerEmployee" | "DfnsStaff";
+        kind: "CustomerEmployee" | "DfnsStaff" | "EndUser";
         credentialUuid: string;
         orgId: string;
         permissions?: string[] | undefined;
@@ -1324,7 +1324,7 @@ export type DeactivateServiceAccountResponse = {
         dateCreated: string;
         credId: string;
         isActive: boolean;
-        kind: "ServiceAccount" | "Pat" | "Application" | "Token" | "Code" | "Recovery" | "Temp";
+        kind: "Pat" | "ServiceAccount" | "Token" | "Code" | "Recovery" | "Temp" | "Application";
         linkedUserId: string;
         linkedAppId: string;
         name: string;
@@ -1350,7 +1350,7 @@ export type DeactivateUserResponse = {
     username: string;
     name: string;
     userId: string;
-    kind: "EndUser" | "CustomerEmployee" | "DfnsStaff";
+    kind: "CustomerEmployee" | "DfnsStaff" | "EndUser";
     credentialUuid: string;
     orgId: string;
     permissions?: string[] | undefined;
@@ -1400,7 +1400,7 @@ export type GetApplicationResponse = {
         dateCreated: string;
         credId: string;
         isActive: boolean;
-        kind: "ServiceAccount" | "Pat" | "Application" | "Token" | "Code" | "Recovery" | "Temp";
+        kind: "Pat" | "ServiceAccount" | "Token" | "Code" | "Recovery" | "Temp" | "Application";
         linkedUserId: string;
         linkedAppId: string;
         name: string;
@@ -1427,7 +1427,7 @@ export type GetPersonalAccessTokenResponse = {
     dateCreated: string;
     credId: string;
     isActive: boolean;
-    kind: "ServiceAccount" | "Pat" | "Application" | "Token" | "Code" | "Recovery" | "Temp";
+    kind: "Pat" | "ServiceAccount" | "Token" | "Code" | "Recovery" | "Temp" | "Application";
     linkedUserId: string;
     linkedAppId: string;
     name: string;
@@ -1453,7 +1453,7 @@ export type GetServiceAccountResponse = {
         username: string;
         name: string;
         userId: string;
-        kind: "EndUser" | "CustomerEmployee" | "DfnsStaff";
+        kind: "CustomerEmployee" | "DfnsStaff" | "EndUser";
         credentialUuid: string;
         orgId: string;
         permissions?: string[] | undefined;
@@ -1472,7 +1472,7 @@ export type GetServiceAccountResponse = {
         dateCreated: string;
         credId: string;
         isActive: boolean;
-        kind: "ServiceAccount" | "Pat" | "Application" | "Token" | "Code" | "Recovery" | "Temp";
+        kind: "Pat" | "ServiceAccount" | "Token" | "Code" | "Recovery" | "Temp" | "Application";
         linkedUserId: string;
         linkedAppId: string;
         name: string;
@@ -1498,7 +1498,7 @@ export type GetUserResponse = {
     username: string;
     name: string;
     userId: string;
-    kind: "EndUser" | "CustomerEmployee" | "DfnsStaff";
+    kind: "CustomerEmployee" | "DfnsStaff" | "EndUser";
     credentialUuid: string;
     orgId: string;
     permissions?: string[] | undefined;
@@ -1535,7 +1535,7 @@ export type ListApplicationsResponse = {
             dateCreated: string;
             credId: string;
             isActive: boolean;
-            kind: "ServiceAccount" | "Pat" | "Application" | "Token" | "Code" | "Recovery" | "Temp";
+            kind: "Pat" | "ServiceAccount" | "Token" | "Code" | "Recovery" | "Temp" | "Application";
             linkedUserId: string;
             linkedAppId: string;
             name: string;
@@ -1572,7 +1572,7 @@ export type ListPersonalAccessTokensResponse = {
         dateCreated: string;
         credId: string;
         isActive: boolean;
-        kind: "ServiceAccount" | "Pat" | "Application" | "Token" | "Code" | "Recovery" | "Temp";
+        kind: "Pat" | "ServiceAccount" | "Token" | "Code" | "Recovery" | "Temp" | "Application";
         linkedUserId: string;
         linkedAppId: string;
         name: string;
@@ -1594,7 +1594,7 @@ export type ListServiceAccountsResponse = {
             username: string;
             name: string;
             userId: string;
-            kind: "EndUser" | "CustomerEmployee" | "DfnsStaff";
+            kind: "CustomerEmployee" | "DfnsStaff" | "EndUser";
             credentialUuid: string;
             orgId: string;
             permissions?: string[] | undefined;
@@ -1613,7 +1613,7 @@ export type ListServiceAccountsResponse = {
             dateCreated: string;
             credId: string;
             isActive: boolean;
-            kind: "ServiceAccount" | "Pat" | "Application" | "Token" | "Code" | "Recovery" | "Temp";
+            kind: "Pat" | "ServiceAccount" | "Token" | "Code" | "Recovery" | "Temp" | "Application";
             linkedUserId: string;
             linkedAppId: string;
             name: string;
@@ -1641,7 +1641,7 @@ export type ListUsersResponse = {
         username: string;
         name: string;
         userId: string;
-        kind: "EndUser" | "CustomerEmployee" | "DfnsStaff";
+        kind: "CustomerEmployee" | "DfnsStaff" | "EndUser";
         credentialUuid: string;
         orgId: string;
         permissions?: string[] | undefined;
@@ -1845,7 +1845,7 @@ export type RecoverRequest = { body: RecoverBody }
 
 export type RecreateDelegatedRegistrationChallengeBody = {
     email: string;
-    kind: "EndUser" | "CustomerEmployee" | "DfnsStaff";
+    kind: "CustomerEmployee" | "DfnsStaff" | "EndUser";
     externalId?: string | undefined;
 };
 
@@ -2167,7 +2167,7 @@ export type UpdateApplicationResponse = {
         dateCreated: string;
         credId: string;
         isActive: boolean;
-        kind: "ServiceAccount" | "Pat" | "Application" | "Token" | "Code" | "Recovery" | "Temp";
+        kind: "Pat" | "ServiceAccount" | "Token" | "Code" | "Recovery" | "Temp" | "Application";
         linkedUserId: string;
         linkedAppId: string;
         name: string;
@@ -2199,7 +2199,7 @@ export type UpdatePersonalAccessTokenResponse = {
     dateCreated: string;
     credId: string;
     isActive: boolean;
-    kind: "ServiceAccount" | "Pat" | "Application" | "Token" | "Code" | "Recovery" | "Temp";
+    kind: "Pat" | "ServiceAccount" | "Token" | "Code" | "Recovery" | "Temp" | "Application";
     linkedUserId: string;
     linkedAppId: string;
     name: string;
@@ -2230,7 +2230,7 @@ export type UpdateServiceAccountResponse = {
         username: string;
         name: string;
         userId: string;
-        kind: "EndUser" | "CustomerEmployee" | "DfnsStaff";
+        kind: "CustomerEmployee" | "DfnsStaff" | "EndUser";
         credentialUuid: string;
         orgId: string;
         permissions?: string[] | undefined;
@@ -2249,7 +2249,7 @@ export type UpdateServiceAccountResponse = {
         dateCreated: string;
         credId: string;
         isActive: boolean;
-        kind: "ServiceAccount" | "Pat" | "Application" | "Token" | "Code" | "Recovery" | "Temp";
+        kind: "Pat" | "ServiceAccount" | "Token" | "Code" | "Recovery" | "Temp" | "Application";
         linkedUserId: string;
         linkedAppId: string;
         name: string;
