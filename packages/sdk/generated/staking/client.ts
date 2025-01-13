@@ -22,8 +22,23 @@ export class StakingClient {
     return response.json()
   }
 
-  async listStakes(request?: T.ListStakesRequest): Promise<T.ListStakesResponse> {
-    const path = buildPathAndQuery('/staking/stakes', {
+  async createStakeAction(request: T.CreateStakeActionRequest): Promise<T.CreateStakeActionResponse> {
+    const path = buildPathAndQuery('/staking/stakes/:stakeId/actions', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await userActionFetch(path, {
+      method: 'POST',
+      body: request.body,
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  async listStakeActions(request?: T.ListStakeActionsRequest): Promise<T.ListStakeActionsResponse> {
+    const path = buildPathAndQuery('/staking/stakes/:stakeId/actions', {
       path: request ?? {},
       query: request?.query ?? {},
     })
@@ -36,8 +51,8 @@ export class StakingClient {
     return response.json()
   }
 
-  async listStakeTransactions(request?: T.ListStakeTransactionsRequest): Promise<T.ListStakeTransactionsResponse> {
-    const path = buildPathAndQuery('/staking/stakes/:stakeId/transactions', {
+  async listStakes(request?: T.ListStakesRequest): Promise<T.ListStakesResponse> {
+    const path = buildPathAndQuery('/staking/stakes', {
       path: request ?? {},
       query: request?.query ?? {},
     })

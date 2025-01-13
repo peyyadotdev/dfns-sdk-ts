@@ -146,7 +146,7 @@ export type CreateDepositRequest = CreateDepositParams & { body: CreateDepositBo
 
 export type CreateExchangeBody = {
     name?: string | undefined;
-    kind: "Binance" | "Kraken" | "CoinbaseApp";
+    kind: "Binance" | "Kraken" | "CoinbaseApp" | "CoinbasePrime";
     readConfiguration: {
         publicApiKey: string;
         privateApiKey: string;
@@ -164,7 +164,7 @@ export type CreateExchangeBody = {
 export type CreateExchangeResponse = {
     id: string;
     name?: string | undefined;
-    kind: "Binance" | "Kraken" | "CoinbaseApp";
+    kind: "Binance" | "Kraken" | "CoinbaseApp" | "CoinbasePrime";
     dateCreated: string;
 };
 
@@ -333,7 +333,7 @@ export type GetExchangeParams = {
 export type GetExchangeResponse = {
     id: string;
     name?: string | undefined;
-    kind: "Binance" | "Kraken" | "CoinbaseApp";
+    kind: "Binance" | "Kraken" | "CoinbaseApp" | "CoinbasePrime";
     dateCreated: string;
 };
 
@@ -426,7 +426,7 @@ export type ListExchangesResponse = {
     items: {
         id: string;
         name?: string | undefined;
-        kind: "Binance" | "Kraken" | "CoinbaseApp";
+        kind: "Binance" | "Kraken" | "CoinbaseApp" | "CoinbasePrime";
         dateCreated: string;
     }[];
     nextPageToken?: string | undefined;

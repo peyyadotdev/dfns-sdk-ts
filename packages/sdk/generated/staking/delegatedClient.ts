@@ -50,8 +50,51 @@ export class DelegatedStakingClient {
     return response.json()
   }
 
-  async listStakes(request?: T.ListStakesRequest): Promise<T.ListStakesResponse> {
-    const path = buildPathAndQuery('/staking/stakes', {
+  async createStakeActionInit(request: T.CreateStakeActionRequest): Promise<UserActionChallengeResponse> {
+    const path = buildPathAndQuery('/staking/stakes/:stakeId/actions', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const challenge = await BaseAuthApi.createUserActionChallenge(
+      {
+        userActionHttpMethod: 'POST',
+        userActionHttpPath: path,
+        userActionPayload: JSON.stringify(request.body),
+        userActionServerKind: 'Api',
+      },
+      this.apiOptions
+    )
+
+    return challenge
+  }
+
+  async createStakeActionComplete(
+    request: T.CreateStakeActionRequest,
+    signedChallenge: SignUserActionChallengeRequest
+  ): Promise<T.CreateStakeActionResponse> {
+    const path = buildPathAndQuery('/staking/stakes/:stakeId/actions', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const { userAction } = await BaseAuthApi.signUserActionChallenge(
+      signedChallenge,
+      this.apiOptions
+    )
+
+    const response = await simpleFetch(path, {
+      method: 'POST',
+      body: request.body,
+      headers: { 'x-dfns-useraction': userAction },
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  async listStakeActions(request?: T.ListStakeActionsRequest): Promise<T.ListStakeActionsResponse> {
+    const path = buildPathAndQuery('/staking/stakes/:stakeId/actions', {
       path: request ?? {},
       query: request?.query ?? {},
     })
@@ -64,8 +107,8 @@ export class DelegatedStakingClient {
     return response.json()
   }
 
-  async listStakeTransactions(request?: T.ListStakeTransactionsRequest): Promise<T.ListStakeTransactionsResponse> {
-    const path = buildPathAndQuery('/staking/stakes/:stakeId/transactions', {
+  async listStakes(request?: T.ListStakesRequest): Promise<T.ListStakesResponse> {
+    const path = buildPathAndQuery('/staking/stakes', {
       path: request ?? {},
       query: request?.query ?? {},
     })
