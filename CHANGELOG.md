@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.6.2 ()
+
+- Updated react-native-passkey to latest version, see `@dfns/sdk-react-native`
+
 ## 0.6.1 (2024-12-20)
 
 - Added SDK integration with Aptos, see `@dfns/lib-aptos`
