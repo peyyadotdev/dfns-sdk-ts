@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.6.2 (2024-01-29)
+
+- Updated `DfnsApiClient` to match the latest API changes
+
 ## 0.6.1 (2024-12-20)
 
 - Added SDK integration with Aptos, see `@dfns/lib-aptos`
