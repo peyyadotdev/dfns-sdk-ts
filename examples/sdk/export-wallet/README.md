@@ -9,7 +9,7 @@ This simple example demonstrates how to import a wallet into Dfns, from a privat
 # inside repo root
 npm install
 
-cd examples/sdk/import-wallet
+cd examples/sdk/export-wallet
 npm install
 npm run exec
 ```
