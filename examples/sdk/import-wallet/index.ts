@@ -34,6 +34,7 @@ const main = async () => {
     privateKey: walletPrivateKey,
     signers: clusters[0].signers, // You should have only 1 signing cluster in the returned clusters.
     keyCurve: 'secp256k1',
+    // keyScheme: 'Schnorr' // Add this field to import bitcoin taproot wallets
   })
 
   // 4. This makes a call to Dfns API to import encrypted key shares into signers, and create new Dfns wallet.
