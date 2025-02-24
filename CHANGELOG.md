@@ -1,8 +1,8 @@
 # Changelog
 
-## 0.6.2 ()
+## 0.6.2 (2024-01-29)
 
-- Updated react-native-passkey to latest version, see `@dfns/sdk-react-native`
+- Updated `DfnsApiClient` to match the latest API changes
 
 ## 0.6.1 (2024-12-20)
 
