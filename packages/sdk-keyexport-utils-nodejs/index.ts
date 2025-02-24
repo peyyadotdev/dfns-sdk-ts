@@ -7,6 +7,7 @@ export const newWalletExportContext = () => {
 
   const getConf = (): WalletExportConfig => {
     const req = ctx.buildKeyExportRequest()
+
     return {
       encryptionKey: req.encryptionKey,
       supportedSchemes: req.supportedSchemes,

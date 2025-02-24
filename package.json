@@ -1,6 +1,6 @@
 {
   "name": "package-based",
-  "version": "0.6.4",
+  "version": "0.6.3",
   "license": "MIT",
   "scripts": {
     "cb:all": "rimraf dist && nx run-many -t=cb",
@@ -11,10 +11,10 @@
   "dependencies": {
     "@aptos-labs/ts-sdk": "1.33.0",
     "@aws-sdk/client-kms": "^3.485.0",
-    "@dfns/dfns-key-export-nodejs": "0.2.1",
-    "@dfns/dfns-key-export-bundler": "0.2.1",
-    "@dfns/dfns-key-import-nodejs": "0.2.1",
-    "@dfns/dfns-key-import-bundler": "0.2.1",
+    "@dfns/dfns-key-export-nodejs": "0.2.4",
+    "@dfns/dfns-key-export-bundler": "0.2.4",
+    "@dfns/dfns-key-import-nodejs": "0.2.3",
+    "@dfns/dfns-key-import-bundler": "0.2.3",
     "@dfns/kaspa-wasm": "0.14.1",
     "@ethersproject/abstract-provider": "5.7.0",
     "@ethersproject/abstract-signer": "5.7.0",

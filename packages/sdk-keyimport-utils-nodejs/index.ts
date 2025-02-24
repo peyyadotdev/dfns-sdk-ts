@@ -12,10 +12,16 @@ import { ListSignersResponse } from '@dfns/sdk/types/signers'
 type Signer = ListSignersResponse['clusters'][number]['signers'][number]
 type KeyCurve = GetWalletResponse['signingKey']['curve']
 
-const getCurveAndProtocol = (keyCurve: KeyCurve): { curve: KeyCurveInternal; protocol: KeyProtocol } => {
+const secp256k1KeySchemes = ['Schnorr', 'ECDSA']
+type KeyScheme = typeof secp256k1KeySchemes[number]
+
+const getCurveAndProtocol = (keyCurve: KeyCurve, keyScheme?: KeyScheme): { curve: KeyCurveInternal; protocol: KeyProtocol } => {
+  if (keyScheme && (keyCurve !== 'secp256k1' || !secp256k1KeySchemes.includes(keyScheme))) {
+    Error(`Unsupported key scheme for import: "${keyCurve}, ${keyScheme}"`)
+  }
   switch (keyCurve) {
     case 'secp256k1':
-      return { curve: KeyCurveInternal.Secp256k1, protocol: KeyProtocol.Cggmp21 }
+      return { curve: KeyCurveInternal.Secp256k1, protocol: keyScheme === 'Schnorr' ? KeyProtocol.FrostBitcoin : KeyProtocol.Cggmp21 }
     case 'stark':
       return { curve: KeyCurveInternal.Stark, protocol: KeyProtocol.Cggmp21 }
     case 'ed25519':
@@ -37,12 +43,14 @@ export const splitPrivateKeyForSigners = ({
   signers,
   privateKey,
   keyCurve,
+  keyScheme
 }: {
   signers: Signer[]
   privateKey: Uint8Array | Buffer
-  keyCurve: KeyCurve
+  keyCurve: KeyCurve,
+  keyScheme?: KeyScheme
 }): Pick<ImportWalletBody, 'protocol' | 'curve' | 'minSigners' | 'encryptedKeyShares'> => {
-  const { curve, protocol } = getCurveAndProtocol(keyCurve)
+  const { curve, protocol } = getCurveAndProtocol(keyCurve, keyScheme)
 
   // We set this as constant do not expose it, because Dfns API will only accept minSigners = 3 for now.
   const minSigners = 3

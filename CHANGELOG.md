@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.6.3 (2024-02-20)
+
+- Added import and export support for Schnorr signature scheme
+- Updated `DfnsApiClient` to match the latest API changes
+
 ## 0.6.2 (2024-01-29)
 
 - Updated `DfnsApiClient` to match the latest API changes
