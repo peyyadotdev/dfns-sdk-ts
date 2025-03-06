@@ -34,7 +34,7 @@ export type GetFeesResponse = {
         maxPriorityFeePerGas: string;
         maxFeePerGas: string;
     };
-    estimatedBaseFee: number;
+    baseFeePerGas: string;
 };
 
 export type GetFeesRequest = { query?: GetFeesQuery }
