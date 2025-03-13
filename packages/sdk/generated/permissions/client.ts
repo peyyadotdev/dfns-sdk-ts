@@ -1,3 +1,5 @@
+/* eslint @typescript-eslint/no-unused-vars: 0 */
+
 import { DfnsApiClientOptions } from '../../types/generic'
 import { simpleFetch } from '../../utils/fetch'
 import { userActionFetch } from '../../utils/userActionFetch'
@@ -64,7 +66,7 @@ export class PermissionsClient {
       apiOptions: this.apiOptions,
     })
 
-    return response.json()
+    
   }
 
   async getPermission(request: T.GetPermissionRequest): Promise<T.GetPermissionResponse> {
