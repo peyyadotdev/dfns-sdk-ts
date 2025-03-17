@@ -11,6 +11,7 @@ npm version --no-git-tag-version \
     --workspace @dfns/lib-cosmjs \
     --workspace @dfns/lib-ethersjs5 \
     --workspace @dfns/lib-ethersjs6 \
+    --workspace @dfns/lib-iota \
     --workspace @dfns/lib-kaspa \
     --workspace @dfns/lib-meshsdk \
     --workspace @dfns/lib-polkadot \
