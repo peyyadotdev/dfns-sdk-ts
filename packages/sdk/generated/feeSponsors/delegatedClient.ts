@@ -4,11 +4,11 @@ import { simpleFetch } from '../../utils/fetch'
 import { buildPathAndQuery } from '../../utils/url'
 import * as T from './types'
 
-export class DelegatedPermissionsClient {
+export class DelegatedFeeSponsorsClient {
   constructor(private apiOptions: DfnsDelegatedApiClientOptions) {}
 
-  async archivePermissionInit(request: T.ArchivePermissionRequest): Promise<UserActionChallengeResponse> {
-    const path = buildPathAndQuery('/permissions/:permissionId/archive', {
+  async activateFeeSponsorInit(request: T.ActivateFeeSponsorRequest): Promise<UserActionChallengeResponse> {
+    const path = buildPathAndQuery('/fee-sponsors/:feeSponsorId/activate', {
       path: request ?? {},
       query: {},
     })
@@ -17,7 +17,7 @@ export class DelegatedPermissionsClient {
       {
         userActionHttpMethod: 'PUT',
         userActionHttpPath: path,
-        userActionPayload: JSON.stringify(request.body),
+        userActionPayload: JSON.stringify({}),
         userActionServerKind: 'Api',
       },
       this.apiOptions
@@ -26,11 +26,11 @@ export class DelegatedPermissionsClient {
     return challenge
   }
 
-  async archivePermissionComplete(
-    request: T.ArchivePermissionRequest,
+  async activateFeeSponsorComplete(
+    request: T.ActivateFeeSponsorRequest,
     signedChallenge: SignUserActionChallengeRequest
-  ): Promise<T.ArchivePermissionResponse> {
-    const path = buildPathAndQuery('/permissions/:permissionId/archive', {
+  ): Promise<T.ActivateFeeSponsorResponse> {
+    const path = buildPathAndQuery('/fee-sponsors/:feeSponsorId/activate', {
       path: request ?? {},
       query: {},
     })
@@ -42,7 +42,7 @@ export class DelegatedPermissionsClient {
 
     const response = await simpleFetch(path, {
       method: 'PUT',
-      body: request.body,
+      body: {},
       headers: { 'x-dfns-useraction': userAction },
       apiOptions: this.apiOptions,
     })
@@ -50,8 +50,8 @@ export class DelegatedPermissionsClient {
     return response.json()
   }
 
-  async createAssignmentInit(request: T.CreateAssignmentRequest): Promise<UserActionChallengeResponse> {
-    const path = buildPathAndQuery('/permissions/:permissionId/assignments', {
+  async createFeeSponsorInit(request: T.CreateFeeSponsorRequest): Promise<UserActionChallengeResponse> {
+    const path = buildPathAndQuery('/fee-sponsors', {
       path: request ?? {},
       query: {},
     })
@@ -69,11 +69,11 @@ export class DelegatedPermissionsClient {
     return challenge
   }
 
-  async createAssignmentComplete(
-    request: T.CreateAssignmentRequest,
+  async createFeeSponsorComplete(
+    request: T.CreateFeeSponsorRequest,
     signedChallenge: SignUserActionChallengeRequest
-  ): Promise<T.CreateAssignmentResponse> {
-    const path = buildPathAndQuery('/permissions/:permissionId/assignments', {
+  ): Promise<T.CreateFeeSponsorResponse> {
+    const path = buildPathAndQuery('/fee-sponsors', {
       path: request ?? {},
       query: {},
     })
@@ -93,17 +93,17 @@ export class DelegatedPermissionsClient {
     return response.json()
   }
 
-  async createPermissionInit(request: T.CreatePermissionRequest): Promise<UserActionChallengeResponse> {
-    const path = buildPathAndQuery('/permissions', {
+  async deactivateFeeSponsorInit(request: T.DeactivateFeeSponsorRequest): Promise<UserActionChallengeResponse> {
+    const path = buildPathAndQuery('/fee-sponsors/:feeSponsorId/deactivate', {
       path: request ?? {},
       query: {},
     })
 
     const challenge = await BaseAuthApi.createUserActionChallenge(
       {
-        userActionHttpMethod: 'POST',
+        userActionHttpMethod: 'PUT',
         userActionHttpPath: path,
-        userActionPayload: JSON.stringify(request.body),
+        userActionPayload: JSON.stringify({}),
         userActionServerKind: 'Api',
       },
       this.apiOptions
@@ -112,11 +112,11 @@ export class DelegatedPermissionsClient {
     return challenge
   }
 
-  async createPermissionComplete(
-    request: T.CreatePermissionRequest,
+  async deactivateFeeSponsorComplete(
+    request: T.DeactivateFeeSponsorRequest,
     signedChallenge: SignUserActionChallengeRequest
-  ): Promise<T.CreatePermissionResponse> {
-    const path = buildPathAndQuery('/permissions', {
+  ): Promise<T.DeactivateFeeSponsorResponse> {
+    const path = buildPathAndQuery('/fee-sponsors/:feeSponsorId/deactivate', {
       path: request ?? {},
       query: {},
     })
@@ -127,8 +127,8 @@ export class DelegatedPermissionsClient {
     )
 
     const response = await simpleFetch(path, {
-      method: 'POST',
-      body: request.body,
+      method: 'PUT',
+      body: {},
       headers: { 'x-dfns-useraction': userAction },
       apiOptions: this.apiOptions,
     })
@@ -136,8 +136,8 @@ export class DelegatedPermissionsClient {
     return response.json()
   }
 
-  async deleteAssignmentInit(request: T.DeleteAssignmentRequest): Promise<UserActionChallengeResponse> {
-    const path = buildPathAndQuery('/permissions/:permissionId/assignments/:assignmentId', {
+  async deleteFeeSponsorInit(request: T.DeleteFeeSponsorRequest): Promise<UserActionChallengeResponse> {
+    const path = buildPathAndQuery('/fee-sponsors/:feeSponsorId', {
       path: request ?? {},
       query: {},
     })
@@ -155,11 +155,11 @@ export class DelegatedPermissionsClient {
     return challenge
   }
 
-  async deleteAssignmentComplete(
-    request: T.DeleteAssignmentRequest,
+  async deleteFeeSponsorComplete(
+    request: T.DeleteFeeSponsorRequest,
     signedChallenge: SignUserActionChallengeRequest
-  ): Promise<T.DeleteAssignmentResponse> {
-    const path = buildPathAndQuery('/permissions/:permissionId/assignments/:assignmentId', {
+  ): Promise<T.DeleteFeeSponsorResponse> {
+    const path = buildPathAndQuery('/fee-sponsors/:feeSponsorId', {
       path: request ?? {},
       query: {},
     })
@@ -176,11 +176,11 @@ export class DelegatedPermissionsClient {
       apiOptions: this.apiOptions,
     })
 
-    
+    return response.json()
   }
 
-  async getPermission(request: T.GetPermissionRequest): Promise<T.GetPermissionResponse> {
-    const path = buildPathAndQuery('/permissions/:permissionId', {
+  async getFeeSponsor(request: T.GetFeeSponsorRequest): Promise<T.GetFeeSponsorResponse> {
+    const path = buildPathAndQuery('/fee-sponsors/:feeSponsorId', {
       path: request ?? {},
       query: {},
     })
@@ -193,71 +193,14 @@ export class DelegatedPermissionsClient {
     return response.json()
   }
 
-  async listAssignments(request: T.ListAssignmentsRequest): Promise<T.ListAssignmentsResponse> {
-    const path = buildPathAndQuery('/permissions/:permissionId/assignments', {
-      path: request ?? {},
-      query: {},
-    })
-
-    const response = await simpleFetch(path, {
-      method: 'GET',
-      apiOptions: this.apiOptions,
-    })
-
-    return response.json()
-  }
-
-  async listPermissions(request?: T.ListPermissionsRequest): Promise<T.ListPermissionsResponse> {
-    const path = buildPathAndQuery('/permissions', {
+  async listFeeSponsors(request?: T.ListFeeSponsorsRequest): Promise<T.ListFeeSponsorsResponse> {
+    const path = buildPathAndQuery('/fee-sponsors', {
       path: request ?? {},
       query: request?.query ?? {},
     })
 
     const response = await simpleFetch(path, {
       method: 'GET',
-      apiOptions: this.apiOptions,
-    })
-
-    return response.json()
-  }
-
-  async updatePermissionInit(request: T.UpdatePermissionRequest): Promise<UserActionChallengeResponse> {
-    const path = buildPathAndQuery('/permissions/:permissionId', {
-      path: request ?? {},
-      query: {},
-    })
-
-    const challenge = await BaseAuthApi.createUserActionChallenge(
-      {
-        userActionHttpMethod: 'PUT',
-        userActionHttpPath: path,
-        userActionPayload: JSON.stringify(request.body),
-        userActionServerKind: 'Api',
-      },
-      this.apiOptions
-    )
-
-    return challenge
-  }
-
-  async updatePermissionComplete(
-    request: T.UpdatePermissionRequest,
-    signedChallenge: SignUserActionChallengeRequest
-  ): Promise<T.UpdatePermissionResponse> {
-    const path = buildPathAndQuery('/permissions/:permissionId', {
-      path: request ?? {},
-      query: {},
-    })
-
-    const { userAction } = await BaseAuthApi.signUserActionChallenge(
-      signedChallenge,
-      this.apiOptions
-    )
-
-    const response = await simpleFetch(path, {
-      method: 'PUT',
-      body: request.body,
-      headers: { 'x-dfns-useraction': userAction },
       apiOptions: this.apiOptions,
     })
 
