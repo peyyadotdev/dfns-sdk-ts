@@ -250,18 +250,24 @@ export type CreateApprovalDecisionResponse = {
                 priority?: ("Slow" | "Standard" | "Fast") | undefined;
                 createDestinationAccount?: boolean | undefined;
                 externalId?: string | undefined;
+                /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
+                feeSponsorId?: string | undefined;
             } | {
                 kind: "Asa";
                 assetId: string;
                 to: string;
                 amount: string;
                 externalId?: string | undefined;
+                /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
+                feeSponsorId?: string | undefined;
             } | {
                 kind: "Aip21";
                 metadata: string;
                 to: string;
                 amount: string;
                 externalId?: string | undefined;
+                /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
+                feeSponsorId?: string | undefined;
             } | {
                 kind: "Erc20";
                 contract: string;
@@ -269,6 +275,8 @@ export type CreateApprovalDecisionResponse = {
                 amount: string;
                 priority?: ("Slow" | "Standard" | "Fast") | undefined;
                 externalId?: string | undefined;
+                /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
+                feeSponsorId?: string | undefined;
             } | {
                 kind: "Erc721";
                 contract: string;
@@ -276,6 +284,8 @@ export type CreateApprovalDecisionResponse = {
                 tokenId: string;
                 priority?: ("Slow" | "Standard" | "Fast") | undefined;
                 externalId?: string | undefined;
+                /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
+                feeSponsorId?: string | undefined;
             } | {
                 kind: "Sep41";
                 issuer: string;
@@ -284,6 +294,8 @@ export type CreateApprovalDecisionResponse = {
                 amount: string;
                 memo?: string | undefined;
                 externalId?: string | undefined;
+                /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
+                feeSponsorId?: string | undefined;
             } | {
                 kind: "Spl" | "Spl2022";
                 to: string;
@@ -291,6 +303,8 @@ export type CreateApprovalDecisionResponse = {
                 mint: string;
                 createDestinationAccount?: boolean | undefined;
                 externalId?: string | undefined;
+                /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
+                feeSponsorId?: string | undefined;
             } | {
                 kind: "Tep74";
                 to: string;
@@ -298,24 +312,32 @@ export type CreateApprovalDecisionResponse = {
                 amount: string;
                 memo?: string | undefined;
                 externalId?: string | undefined;
+                /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
+                feeSponsorId?: string | undefined;
             } | {
                 kind: "Trc10";
                 tokenId: string;
                 to: string;
                 amount: string;
                 externalId?: string | undefined;
+                /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
+                feeSponsorId?: string | undefined;
             } | {
                 kind: "Trc20";
                 contract: string;
                 to: string;
                 amount: string;
                 externalId?: string | undefined;
+                /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
+                feeSponsorId?: string | undefined;
             } | {
                 kind: "Trc721";
                 contract: string;
                 to: string;
                 tokenId: string;
                 externalId?: string | undefined;
+                /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
+                feeSponsorId?: string | undefined;
             };
             metadata: {
                 asset: {
@@ -337,6 +359,7 @@ export type CreateApprovalDecisionResponse = {
             dateConfirmed?: string | undefined;
             approvalId?: string | undefined;
             externalId?: string | undefined;
+            feeSponsorId?: string | undefined;
         } | undefined;
         transactionRequest?: {
             id: string;
@@ -1706,18 +1729,24 @@ export type GetApprovalResponse = {
                 priority?: ("Slow" | "Standard" | "Fast") | undefined;
                 createDestinationAccount?: boolean | undefined;
                 externalId?: string | undefined;
+                /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
+                feeSponsorId?: string | undefined;
             } | {
                 kind: "Asa";
                 assetId: string;
                 to: string;
                 amount: string;
                 externalId?: string | undefined;
+                /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
+                feeSponsorId?: string | undefined;
             } | {
                 kind: "Aip21";
                 metadata: string;
                 to: string;
                 amount: string;
                 externalId?: string | undefined;
+                /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
+                feeSponsorId?: string | undefined;
             } | {
                 kind: "Erc20";
                 contract: string;
@@ -1725,6 +1754,8 @@ export type GetApprovalResponse = {
                 amount: string;
                 priority?: ("Slow" | "Standard" | "Fast") | undefined;
                 externalId?: string | undefined;
+                /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
+                feeSponsorId?: string | undefined;
             } | {
                 kind: "Erc721";
                 contract: string;
@@ -1732,6 +1763,8 @@ export type GetApprovalResponse = {
                 tokenId: string;
                 priority?: ("Slow" | "Standard" | "Fast") | undefined;
                 externalId?: string | undefined;
+                /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
+                feeSponsorId?: string | undefined;
             } | {
                 kind: "Sep41";
                 issuer: string;
@@ -1740,6 +1773,8 @@ export type GetApprovalResponse = {
                 amount: string;
                 memo?: string | undefined;
                 externalId?: string | undefined;
+                /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
+                feeSponsorId?: string | undefined;
             } | {
                 kind: "Spl" | "Spl2022";
                 to: string;
@@ -1747,6 +1782,8 @@ export type GetApprovalResponse = {
                 mint: string;
                 createDestinationAccount?: boolean | undefined;
                 externalId?: string | undefined;
+                /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
+                feeSponsorId?: string | undefined;
             } | {
                 kind: "Tep74";
                 to: string;
@@ -1754,24 +1791,32 @@ export type GetApprovalResponse = {
                 amount: string;
                 memo?: string | undefined;
                 externalId?: string | undefined;
+                /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
+                feeSponsorId?: string | undefined;
             } | {
                 kind: "Trc10";
                 tokenId: string;
                 to: string;
                 amount: string;
                 externalId?: string | undefined;
+                /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
+                feeSponsorId?: string | undefined;
             } | {
                 kind: "Trc20";
                 contract: string;
                 to: string;
                 amount: string;
                 externalId?: string | undefined;
+                /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
+                feeSponsorId?: string | undefined;
             } | {
                 kind: "Trc721";
                 contract: string;
                 to: string;
                 tokenId: string;
                 externalId?: string | undefined;
+                /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
+                feeSponsorId?: string | undefined;
             };
             metadata: {
                 asset: {
@@ -1793,6 +1838,7 @@ export type GetApprovalResponse = {
             dateConfirmed?: string | undefined;
             approvalId?: string | undefined;
             externalId?: string | undefined;
+            feeSponsorId?: string | undefined;
         } | undefined;
         transactionRequest?: {
             id: string;
@@ -3206,18 +3252,24 @@ export type ListApprovalsResponse = {
                     priority?: ("Slow" | "Standard" | "Fast") | undefined;
                     createDestinationAccount?: boolean | undefined;
                     externalId?: string | undefined;
+                    /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
+                    feeSponsorId?: string | undefined;
                 } | {
                     kind: "Asa";
                     assetId: string;
                     to: string;
                     amount: string;
                     externalId?: string | undefined;
+                    /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
+                    feeSponsorId?: string | undefined;
                 } | {
                     kind: "Aip21";
                     metadata: string;
                     to: string;
                     amount: string;
                     externalId?: string | undefined;
+                    /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
+                    feeSponsorId?: string | undefined;
                 } | {
                     kind: "Erc20";
                     contract: string;
@@ -3225,6 +3277,8 @@ export type ListApprovalsResponse = {
                     amount: string;
                     priority?: ("Slow" | "Standard" | "Fast") | undefined;
                     externalId?: string | undefined;
+                    /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
+                    feeSponsorId?: string | undefined;
                 } | {
                     kind: "Erc721";
                     contract: string;
@@ -3232,6 +3286,8 @@ export type ListApprovalsResponse = {
                     tokenId: string;
                     priority?: ("Slow" | "Standard" | "Fast") | undefined;
                     externalId?: string | undefined;
+                    /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
+                    feeSponsorId?: string | undefined;
                 } | {
                     kind: "Sep41";
                     issuer: string;
@@ -3240,6 +3296,8 @@ export type ListApprovalsResponse = {
                     amount: string;
                     memo?: string | undefined;
                     externalId?: string | undefined;
+                    /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
+                    feeSponsorId?: string | undefined;
                 } | {
                     kind: "Spl" | "Spl2022";
                     to: string;
@@ -3247,6 +3305,8 @@ export type ListApprovalsResponse = {
                     mint: string;
                     createDestinationAccount?: boolean | undefined;
                     externalId?: string | undefined;
+                    /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
+                    feeSponsorId?: string | undefined;
                 } | {
                     kind: "Tep74";
                     to: string;
@@ -3254,24 +3314,32 @@ export type ListApprovalsResponse = {
                     amount: string;
                     memo?: string | undefined;
                     externalId?: string | undefined;
+                    /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
+                    feeSponsorId?: string | undefined;
                 } | {
                     kind: "Trc10";
                     tokenId: string;
                     to: string;
                     amount: string;
                     externalId?: string | undefined;
+                    /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
+                    feeSponsorId?: string | undefined;
                 } | {
                     kind: "Trc20";
                     contract: string;
                     to: string;
                     amount: string;
                     externalId?: string | undefined;
+                    /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
+                    feeSponsorId?: string | undefined;
                 } | {
                     kind: "Trc721";
                     contract: string;
                     to: string;
                     tokenId: string;
                     externalId?: string | undefined;
+                    /** Id of the fee sponsor that will be used to pay for your transfer fee, it might not be available for all blockchains */
+                    feeSponsorId?: string | undefined;
                 };
                 metadata: {
                     asset: {
@@ -3293,6 +3361,7 @@ export type ListApprovalsResponse = {
                 dateConfirmed?: string | undefined;
                 approvalId?: string | undefined;
                 externalId?: string | undefined;
+                feeSponsorId?: string | undefined;
             } | undefined;
             transactionRequest?: {
                 id: string;

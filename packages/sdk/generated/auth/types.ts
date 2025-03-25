@@ -2087,9 +2087,6 @@ export type RegisterEndUserResponse = {
         dateCreated: string;
         name?: string | undefined;
         custodial: boolean;
-        imported?: boolean | undefined;
-        exported?: boolean | undefined;
-        dateExported?: string | undefined;
         externalId?: string | undefined;
         tags: string[];
     }[];
