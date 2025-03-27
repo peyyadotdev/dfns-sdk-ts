@@ -206,4 +206,18 @@ export class DelegatedFeeSponsorsClient {
 
     return response.json()
   }
+
+  async listSponsoredFees(request: T.ListSponsoredFeesRequest): Promise<T.ListSponsoredFeesResponse> {
+    const path = buildPathAndQuery('/fee-sponsors/:feeSponsorId/fees', {
+      path: request ?? {},
+      query: request.query ?? {},
+    })
+
+    const response = await simpleFetch(path, {
+      method: 'GET',
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
 }
