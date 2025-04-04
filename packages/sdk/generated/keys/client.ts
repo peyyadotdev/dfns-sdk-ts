@@ -127,7 +127,7 @@ export class KeysClient {
   }
 
   async listSignatures(request: T.ListSignaturesRequest): Promise<T.ListSignaturesResponse> {
-    const path = buildPathAndQuery('/wallets/:keyId/signatures', {
+    const path = buildPathAndQuery('/keys/:keyId/signatures', {
       path: request ?? {},
       query: request.query ?? {},
     })
