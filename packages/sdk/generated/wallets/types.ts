@@ -154,6 +154,7 @@ export type ExportWalletBody = {
         protocol: "CGGMP21" | "FROST" | "FROST_BITCOIN" | "KU23";
         curve: "ed25519" | "secp256k1" | "stark";
     }[];
+    delete?: boolean | undefined;
 };
 
 export type ExportWalletParams = {
