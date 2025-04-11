@@ -26,6 +26,7 @@
     "@ethersproject/properties": "5.7.0",
     "@ethersproject/strings": "5.7.0",
     "@ethersproject/transactions": "5.7.0",
+    "@iota/iota-sdk": "0.4.1",
     "@solana/spl-token": "0.4.12",
     "@stablelib/blake2b": "1.0.1",
     "@tronweb3/tronwallet-abstract-adapter": "1.1.6",
