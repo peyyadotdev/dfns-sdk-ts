@@ -1,7 +1,12 @@
 # Changelog
 
+## 0.6.10 (2024-05-08)
+
+- Updated `DfnsApiClient` to match the latest API changes
+
 ## 0.6.9 (2024-05-01)
 
+- Added SDK integration with Iota Rebased, see `@dfns/lib-iota`
 - Updated `DfnsApiClient` to match the latest API changes
 
 ## 0.6.8 (2024-04-09)

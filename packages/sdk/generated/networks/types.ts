@@ -1,5 +1,35 @@
+export type CreateCantonValidatorBody = {
+    name?: string | undefined;
+    kind: "Shared";
+} | {
+    name?: string | undefined;
+    kind: "Custom";
+    url: string;
+    oauth2: {
+        domain: string;
+        clientId: string;
+        clientSecret: string;
+        audience: string;
+    };
+};
+
+export type CreateCantonValidatorParams = {
+    network: "canton" | "canton-devnet" | "canton-testnet";
+};
+
+export type CreateCantonValidatorResponse = {
+    id: string;
+    network: "Canton" | "CantonDevnet" | "CantonTestnet";
+    name?: string | undefined;
+    kind: "Shared" | "Custom";
+    dateCreated: string;
+    partyHint: string;
+};
+
+export type CreateCantonValidatorRequest = CreateCantonValidatorParams & { body: CreateCantonValidatorBody }
+
 export type GetFeesQuery = {
-    network: "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bsc" | "BscTestnet" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Celo" | "CeloAlfajores" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "FantomOpera" | "FantomTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Race" | "RaceSepolia";
+    network: "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "FantomOpera" | "FantomTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Plume" | "PlumeSepolia" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Race" | "RaceSepolia";
 };
 
 export type GetFeesResponse = {
@@ -20,7 +50,7 @@ export type GetFeesResponse = {
     };
 } | {
     kind: "Eip1559";
-    network: "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bsc" | "BscTestnet" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Celo" | "CeloAlfajores" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "FantomOpera" | "FantomTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Race" | "RaceSepolia";
+    network: "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "FantomOpera" | "FantomTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Plume" | "PlumeSepolia" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Race" | "RaceSepolia";
     blockNumber: number;
     slow: {
         maxPriorityFeePerGas: string;
@@ -39,9 +69,32 @@ export type GetFeesResponse = {
 
 export type GetFeesRequest = { query?: GetFeesQuery }
 
+export type ListCantonValidatorsParams = {
+    network: "canton" | "canton-devnet" | "canton-testnet";
+};
+
+export type ListCantonValidatorsQuery = {
+    limit?: number | undefined;
+    paginationToken?: string | undefined;
+};
+
+export type ListCantonValidatorsResponse = {
+    items: {
+        id: string;
+        network: "Canton" | "CantonDevnet" | "CantonTestnet";
+        name?: string | undefined;
+        kind: "Shared" | "Custom";
+        dateCreated: string;
+        partyHint: string;
+    }[];
+    nextPageToken?: string | undefined;
+};
+
+export type ListCantonValidatorsRequest = ListCantonValidatorsParams & { query?: ListCantonValidatorsQuery }
+
 export type ReadContractBody = {
     kind: "Evm";
-    network: "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bsc" | "BscTestnet" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Celo" | "CeloAlfajores" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "FantomOpera" | "FantomTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Race" | "RaceSepolia";
+    network: "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "FantomOpera" | "FantomTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Plume" | "PlumeSepolia" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Race" | "RaceSepolia";
     contract: string;
     data: string;
 };

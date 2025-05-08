@@ -9,10 +9,39 @@ import * as T from './types'
 export class NetworksClient {
   constructor(private apiOptions: DfnsApiClientOptions) {}
 
+  async createCantonValidator(request: T.CreateCantonValidatorRequest): Promise<T.CreateCantonValidatorResponse> {
+    const path = buildPathAndQuery('/networks/:network/validators', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await userActionFetch(path, {
+      method: 'POST',
+      body: request.body,
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async getFees(request?: T.GetFeesRequest): Promise<T.GetFeesResponse> {
     const path = buildPathAndQuery('/networks/fees', {
       path: request ?? {},
       query: request?.query ?? {},
+    })
+
+    const response = await simpleFetch(path, {
+      method: 'GET',
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  async listCantonValidators(request: T.ListCantonValidatorsRequest): Promise<T.ListCantonValidatorsResponse> {
+    const path = buildPathAndQuery('/networks/:network/validators', {
+      path: request ?? {},
+      query: request.query ?? {},
     })
 
     const response = await simpleFetch(path, {

@@ -39,6 +39,21 @@ export class KeysClient {
     return response.json()
   }
 
+  async deleteKey(request: T.DeleteKeyRequest): Promise<T.DeleteKeyResponse> {
+    const path = buildPathAndQuery('/keys/:keyId', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await userActionFetch(path, {
+      method: 'DELETE',
+      body: {},
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async exportKey(request: T.ExportKeyRequest): Promise<T.ExportKeyResponse> {
     const path = buildPathAndQuery('/keys/:keyId/export', {
       path: request ?? {},
