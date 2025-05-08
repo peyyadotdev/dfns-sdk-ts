@@ -107,10 +107,24 @@ export class DelegatedStakingClient {
     return response.json()
   }
 
-  async listStakeActions(request?: T.ListStakeActionsRequest): Promise<T.ListStakeActionsResponse> {
+  async getStakes(request: T.GetStakesRequest): Promise<T.GetStakesResponse> {
+    const path = buildPathAndQuery('/staking/stakes/:stakeId', {
+      path: request ?? {},
+      query: request.query ?? {},
+    })
+
+    const response = await simpleFetch(path, {
+      method: 'GET',
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  async listStakeActions(request: T.ListStakeActionsRequest): Promise<T.ListStakeActionsResponse> {
     const path = buildPathAndQuery('/staking/stakes/:stakeId/actions', {
       path: request ?? {},
-      query: request?.query ?? {},
+      query: request.query ?? {},
     })
 
     const response = await simpleFetch(path, {

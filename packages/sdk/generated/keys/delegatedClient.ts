@@ -93,6 +93,49 @@ export class DelegatedKeysClient {
     return response.json()
   }
 
+  async deleteKeyInit(request: T.DeleteKeyRequest): Promise<UserActionChallengeResponse> {
+    const path = buildPathAndQuery('/keys/:keyId', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const challenge = await BaseAuthApi.createUserActionChallenge(
+      {
+        userActionHttpMethod: 'DELETE',
+        userActionHttpPath: path,
+        userActionPayload: JSON.stringify({}),
+        userActionServerKind: 'Api',
+      },
+      this.apiOptions
+    )
+
+    return challenge
+  }
+
+  async deleteKeyComplete(
+    request: T.DeleteKeyRequest,
+    signedChallenge: SignUserActionChallengeRequest
+  ): Promise<T.DeleteKeyResponse> {
+    const path = buildPathAndQuery('/keys/:keyId', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const { userAction } = await BaseAuthApi.signUserActionChallenge(
+      signedChallenge,
+      this.apiOptions
+    )
+
+    const response = await simpleFetch(path, {
+      method: 'DELETE',
+      body: {},
+      headers: { 'x-dfns-useraction': userAction },
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async exportKeyInit(request: T.ExportKeyRequest): Promise<UserActionChallengeResponse> {
     const path = buildPathAndQuery('/keys/:keyId/export', {
       path: request ?? {},
