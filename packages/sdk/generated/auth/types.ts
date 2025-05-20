@@ -2078,7 +2078,7 @@ export type RegisterEndUserResponse = {
         address?: string | undefined;
         signingKey: {
             id: string;
-            scheme: "ECDSA" | "EdDSA" | "Schnorr";
+            scheme: "DH" | "ECDSA" | "EdDSA" | "Schnorr";
             curve: "ed25519" | "secp256k1" | "stark";
             publicKey: string;
             delegatedTo?: string | undefined;

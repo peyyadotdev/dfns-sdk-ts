@@ -10,6 +10,7 @@ export type CreateCantonValidatorBody = {
         clientId: string;
         clientSecret: string;
         audience: string;
+        tokenPath?: string | undefined;
     };
 };
 

@@ -54,6 +54,21 @@ export class KeysClient {
     return response.json()
   }
 
+  async deriveKey(request: T.DeriveKeyRequest): Promise<T.DeriveKeyResponse> {
+    const path = buildPathAndQuery('/keys/:keyId/derive', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await userActionFetch(path, {
+      method: 'POST',
+      body: request.body,
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async exportKey(request: T.ExportKeyRequest): Promise<T.ExportKeyResponse> {
     const path = buildPathAndQuery('/keys/:keyId/export', {
       path: request ?? {},

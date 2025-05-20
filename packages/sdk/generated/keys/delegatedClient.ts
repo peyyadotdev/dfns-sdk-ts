@@ -136,6 +136,49 @@ export class DelegatedKeysClient {
     return response.json()
   }
 
+  async deriveKeyInit(request: T.DeriveKeyRequest): Promise<UserActionChallengeResponse> {
+    const path = buildPathAndQuery('/keys/:keyId/derive', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const challenge = await BaseAuthApi.createUserActionChallenge(
+      {
+        userActionHttpMethod: 'POST',
+        userActionHttpPath: path,
+        userActionPayload: JSON.stringify(request.body),
+        userActionServerKind: 'Api',
+      },
+      this.apiOptions
+    )
+
+    return challenge
+  }
+
+  async deriveKeyComplete(
+    request: T.DeriveKeyRequest,
+    signedChallenge: SignUserActionChallengeRequest
+  ): Promise<T.DeriveKeyResponse> {
+    const path = buildPathAndQuery('/keys/:keyId/derive', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const { userAction } = await BaseAuthApi.signUserActionChallenge(
+      signedChallenge,
+      this.apiOptions
+    )
+
+    const response = await simpleFetch(path, {
+      method: 'POST',
+      body: request.body,
+      headers: { 'x-dfns-useraction': userAction },
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async exportKeyInit(request: T.ExportKeyRequest): Promise<UserActionChallengeResponse> {
     const path = buildPathAndQuery('/keys/:keyId/export', {
       path: request ?? {},
