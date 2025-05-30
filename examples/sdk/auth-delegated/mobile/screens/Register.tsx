@@ -34,7 +34,12 @@ export function Register(): React.JSX.Element {
       console.log(JSON.stringify(challenge, null, 2))
 
       // Create the new passkey using the challenge
-      const passkeys = new PasskeysSigner()
+      const passkeys = new PasskeysSigner({
+        relyingParty: {
+          id: Config.PASSKEY_RELYING_PARTY_ID,
+          name: Config.PASSKEY_RELYING_PARTY_NAME,
+        },
+      })
       const attestation = await passkeys.create(challenge)
       console.log(JSON.stringify(attestation, null, 2))
 
