@@ -99,6 +99,8 @@ In the `./mobile/` folder, copy `.env.example` to a new file `.env.ios` and set 
 
 - `DFNS_APP_ID` = the `App ID` of the new `Application`
 - `EXPRESS_API_URL` = either `http://localhost:8000` or if using ngrok, the public url `https://panda-new-kit.ngrok-free.app`
+- `PASSKEY_RELYING_PARTY_ID` = the passkey relying party id, aka, the domain where your app lives ((Read more [here](https://developer.mozilla.org/en-US/docs/Web/API/PublicKeyCredentialCreationOptions#rp))). We advise using the root domain (eg. `acme.com`, not `app.acme.com`) for more passkey flexibility (so that passkey is re-usable on subdomains). During development on localhost, you can set it to `localhost`.
+- `PASSKEY_RELYING_PARTY_NAME` = A string representing the name of the relying party (e.g. "Acme"). This is the name the user will be presented with when creating or using a passkey.
 
 **NOTE**
 
@@ -163,6 +165,8 @@ In the `./mobile/` folder, copy `.env.example` to a new file `.env.android` and 
 
 - `DFNS_APP_ID` = the `App ID` of the new `Application`
 - `EXPRESS_API_URL` = either `http://localhost:8000` or if using ngrok, the public url `https://panda-new-kit.ngrok-free.app`
+- `PASSKEY_RELYING_PARTY_ID` = the passkey relying party id, aka, the domain where your app lives ((Read more [here](https://developer.mozilla.org/en-US/docs/Web/API/PublicKeyCredentialCreationOptions#rp))). We advise using the root domain (eg. `acme.com`, not `app.acme.com`) for more passkey flexibility (so that passkey is re-usable on subdomains). During development on localhost, you can set it to `localhost`.
+- `PASSKEY_RELYING_PARTY_NAME` = A string representing the name of the relying party (e.g. "Acme"). This is the name the user will be presented with when creating or using a passkey.
 
 #### Enable Passkeys
 
