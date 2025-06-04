@@ -61,7 +61,7 @@ npm i
 
 Then go into this example and install as well:
 ```bash
-cd packages/examples/nextjs-delegated
+cd examples/sdk/nextjs-delegated
 npm i
 ```
 
