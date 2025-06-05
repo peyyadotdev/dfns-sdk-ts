@@ -13,7 +13,7 @@ export type CreateStakeBody = {
     protocol: "Iota";
     walletId: string;
     validator: string;
-    amount?: string | undefined;
+    amount: string;
     lockedIotas?: string[] | undefined;
 };
 
@@ -21,7 +21,7 @@ export type CreateStakeResponse = ({
     id: string;
     provider?: ("Figment") | undefined;
     walletId: string;
-    status: "Active" | "Creating" | "Failed" | "Unbonding" | "Unbond" | "Withdrawing" | "Withdrawn";
+    status: "Active" | "Failed" | "Staking" | "Unbonding" | "Unbond" | "Withdrawing" | "Withdrawn";
     requester: {
         userId: string;
         tokenId?: string | undefined;
@@ -42,7 +42,7 @@ export type CreateStakeResponse = ({
         protocol: "Iota";
         walletId: string;
         validator: string;
-        amount?: string | undefined;
+        amount: string;
         lockedIotas?: string[] | undefined;
     };
     dateCreated: string;
@@ -59,7 +59,7 @@ export type CreateStakeResponse = ({
     id: string;
     provider?: ("Figment") | undefined;
     walletId: string;
-    status: "Active" | "Creating" | "Failed" | "Unbonding" | "Unbond" | "Withdrawing" | "Withdrawn";
+    status: "Active" | "Failed" | "Staking" | "Unbonding" | "Unbond" | "Withdrawing" | "Withdrawn";
     requester: {
         userId: string;
         tokenId?: string | undefined;
@@ -80,14 +80,18 @@ export type CreateStakeResponse = ({
         protocol: "Iota";
         walletId: string;
         validator: string;
-        amount?: string | undefined;
+        amount: string;
         lockedIotas?: string[] | undefined;
     };
     dateCreated: string;
     protocol: "Iota";
     data: {
-        stakedObjectId?: string | undefined;
-        expirationDate?: string | undefined;
+        kind: "Iota" | "LockedIota";
+        stakedObjects?: {
+            id: string;
+            amount: string;
+            expirationDate?: string | undefined;
+        }[] | undefined;
         amount: string;
         validator: string;
     };
@@ -95,7 +99,7 @@ export type CreateStakeResponse = ({
     id: string;
     provider?: ("Figment") | undefined;
     walletId: string;
-    status: "Active" | "Creating" | "Failed" | "Unbonding" | "Unbond" | "Withdrawing" | "Withdrawn";
+    status: "Active" | "Failed" | "Staking" | "Unbonding" | "Unbond" | "Withdrawing" | "Withdrawn";
     requester: {
         userId: string;
         tokenId?: string | undefined;
@@ -116,7 +120,7 @@ export type CreateStakeResponse = ({
         protocol: "Iota";
         walletId: string;
         validator: string;
-        amount?: string | undefined;
+        amount: string;
         lockedIotas?: string[] | undefined;
     };
     dateCreated: string;
@@ -134,7 +138,7 @@ export type CreateStakeResponse = ({
         transactionId?: string | undefined;
         signatureId?: string | undefined;
         transactionHash?: string | undefined;
-        kind: "Stake" | "Unbond" | "Withdraw";
+        kind: "Stake" | "Unbond" | "Deposit" | "Withdraw";
         requester: {
             userId: string;
             tokenId?: string | undefined;
@@ -155,15 +159,24 @@ export type CreateStakeResponse = ({
             protocol: "Iota";
             walletId: string;
             validator: string;
-            amount?: string | undefined;
+            amount: string;
             lockedIotas?: string[] | undefined;
-        }) | ({
+        }) | (({
             protocol: "Iota";
             kind: "Withdraw";
+            amount: string;
+        } | {
+            protocol: "Iota";
+            kind: "Deposit";
+            amount: string;
+            lockedIotas?: string[] | undefined;
+        }) | ({
+            protocol: "Babylon";
+            kind: "Unbond";
         } | {
             protocol: "Babylon";
-            kind: "Unbond" | "Withdraw";
-        } | {
+            kind: "Withdraw";
+        }) | {
             protocol: "Ethereum";
             kind: "Withdraw";
         });
@@ -173,13 +186,22 @@ export type CreateStakeResponse = ({
 
 export type CreateStakeRequest = { body: CreateStakeBody }
 
-export type CreateStakeActionBody = {
+export type CreateStakeActionBody = ({
     protocol: "Iota";
     kind: "Withdraw";
+    amount: string;
+} | {
+    protocol: "Iota";
+    kind: "Deposit";
+    amount: string;
+    lockedIotas?: string[] | undefined;
+}) | ({
+    protocol: "Babylon";
+    kind: "Unbond";
 } | {
     protocol: "Babylon";
-    kind: "Unbond" | "Withdraw";
-} | {
+    kind: "Withdraw";
+}) | {
     protocol: "Ethereum";
     kind: "Withdraw";
 };
@@ -188,125 +210,128 @@ export type CreateStakeActionParams = {
     stakeId: string;
 };
 
-export type CreateStakeActionResponse = {
-    stake: {
-        id: string;
-        provider?: ("Figment") | undefined;
-        walletId: string;
-        status: "Active" | "Creating" | "Failed" | "Unbonding" | "Unbond" | "Withdrawing" | "Withdrawn";
-        requester: {
-            userId: string;
-            tokenId?: string | undefined;
-            appId?: string | undefined;
-        };
-        requestBody: {
-            protocol: "Babylon";
-            walletId: string;
-            provider: "Figment";
-            amount: string;
-            duration: number;
-        } | {
-            protocol: "Ethereum";
-            walletId: string;
-            provider: "Figment";
-            amount: string;
-        } | {
-            protocol: "Iota";
-            walletId: string;
-            validator: string;
-            amount?: string | undefined;
-            lockedIotas?: string[] | undefined;
-        };
-        dateCreated: string;
-        protocol: "Babylon";
-        data: {
-            finalityProviders: string[];
-            covenantPubkeys: string[];
-            magicBytes: string;
-            covenantThreshold: number;
-            minUnbondingTime: number;
-            lockHeight: number;
-        };
-    } | {
-        id: string;
-        provider?: ("Figment") | undefined;
-        walletId: string;
-        status: "Active" | "Creating" | "Failed" | "Unbonding" | "Unbond" | "Withdrawing" | "Withdrawn";
-        requester: {
-            userId: string;
-            tokenId?: string | undefined;
-            appId?: string | undefined;
-        };
-        requestBody: {
-            protocol: "Babylon";
-            walletId: string;
-            provider: "Figment";
-            amount: string;
-            duration: number;
-        } | {
-            protocol: "Ethereum";
-            walletId: string;
-            provider: "Figment";
-            amount: string;
-        } | {
-            protocol: "Iota";
-            walletId: string;
-            validator: string;
-            amount?: string | undefined;
-            lockedIotas?: string[] | undefined;
-        };
-        dateCreated: string;
-        protocol: "Iota";
-        data: {
-            stakedObjectId?: string | undefined;
-            expirationDate?: string | undefined;
-            amount: string;
-            validator: string;
-        };
-    } | {
-        id: string;
-        provider?: ("Figment") | undefined;
-        walletId: string;
-        status: "Active" | "Creating" | "Failed" | "Unbonding" | "Unbond" | "Withdrawing" | "Withdrawn";
-        requester: {
-            userId: string;
-            tokenId?: string | undefined;
-            appId?: string | undefined;
-        };
-        requestBody: {
-            protocol: "Babylon";
-            walletId: string;
-            provider: "Figment";
-            amount: string;
-            duration: number;
-        } | {
-            protocol: "Ethereum";
-            walletId: string;
-            provider: "Figment";
-            amount: string;
-        } | {
-            protocol: "Iota";
-            walletId: string;
-            validator: string;
-            amount?: string | undefined;
-            lockedIotas?: string[] | undefined;
-        };
-        dateCreated: string;
-        protocol: "Ethereum";
-        data: {
-            validators: {
-                pubkey: string;
-                withdrawalAddress: string;
-            }[];
-        };
+export type CreateStakeActionResponse = ({
+    id: string;
+    provider?: ("Figment") | undefined;
+    walletId: string;
+    status: "Active" | "Failed" | "Staking" | "Unbonding" | "Unbond" | "Withdrawing" | "Withdrawn";
+    requester: {
+        userId: string;
+        tokenId?: string | undefined;
+        appId?: string | undefined;
     };
-    stakeAction: {
+    requestBody: {
+        protocol: "Babylon";
+        walletId: string;
+        provider: "Figment";
+        amount: string;
+        duration: number;
+    } | {
+        protocol: "Ethereum";
+        walletId: string;
+        provider: "Figment";
+        amount: string;
+    } | {
+        protocol: "Iota";
+        walletId: string;
+        validator: string;
+        amount: string;
+        lockedIotas?: string[] | undefined;
+    };
+    dateCreated: string;
+    protocol: "Babylon";
+    data: {
+        finalityProviders: string[];
+        covenantPubkeys: string[];
+        magicBytes: string;
+        covenantThreshold: number;
+        minUnbondingTime: number;
+        lockHeight: number;
+    };
+} | {
+    id: string;
+    provider?: ("Figment") | undefined;
+    walletId: string;
+    status: "Active" | "Failed" | "Staking" | "Unbonding" | "Unbond" | "Withdrawing" | "Withdrawn";
+    requester: {
+        userId: string;
+        tokenId?: string | undefined;
+        appId?: string | undefined;
+    };
+    requestBody: {
+        protocol: "Babylon";
+        walletId: string;
+        provider: "Figment";
+        amount: string;
+        duration: number;
+    } | {
+        protocol: "Ethereum";
+        walletId: string;
+        provider: "Figment";
+        amount: string;
+    } | {
+        protocol: "Iota";
+        walletId: string;
+        validator: string;
+        amount: string;
+        lockedIotas?: string[] | undefined;
+    };
+    dateCreated: string;
+    protocol: "Iota";
+    data: {
+        kind: "Iota" | "LockedIota";
+        stakedObjects?: {
+            id: string;
+            amount: string;
+            expirationDate?: string | undefined;
+        }[] | undefined;
+        amount: string;
+        validator: string;
+    };
+} | {
+    id: string;
+    provider?: ("Figment") | undefined;
+    walletId: string;
+    status: "Active" | "Failed" | "Staking" | "Unbonding" | "Unbond" | "Withdrawing" | "Withdrawn";
+    requester: {
+        userId: string;
+        tokenId?: string | undefined;
+        appId?: string | undefined;
+    };
+    requestBody: {
+        protocol: "Babylon";
+        walletId: string;
+        provider: "Figment";
+        amount: string;
+        duration: number;
+    } | {
+        protocol: "Ethereum";
+        walletId: string;
+        provider: "Figment";
+        amount: string;
+    } | {
+        protocol: "Iota";
+        walletId: string;
+        validator: string;
+        amount: string;
+        lockedIotas?: string[] | undefined;
+    };
+    dateCreated: string;
+    protocol: "Ethereum";
+    data: {
+        validators: {
+            pubkey: string;
+            withdrawalAddress: string;
+        }[];
+    };
+}) & {
+    actions: {
         id: string;
         stakeId: string;
         transactionId?: string | undefined;
         signatureId?: string | undefined;
         transactionHash?: string | undefined;
-        kind: "Stake" | "Unbond" | "Withdraw";
+        kind: "Stake" | "Unbond" | "Deposit" | "Withdraw";
         requester: {
             userId: string;
             tokenId?: string | undefined;
@@ -327,20 +352,29 @@ export type CreateStakeActionResponse = {
             protocol: "Iota";
             walletId: string;
             validator: string;
-            amount?: string | undefined;
+            amount: string;
             lockedIotas?: string[] | undefined;
-        }) | ({
+        }) | (({
             protocol: "Iota";
             kind: "Withdraw";
+            amount: string;
+        } | {
+            protocol: "Iota";
+            kind: "Deposit";
+            amount: string;
+            lockedIotas?: string[] | undefined;
+        }) | ({
+            protocol: "Babylon";
+            kind: "Unbond";
         } | {
             protocol: "Babylon";
-            kind: "Unbond" | "Withdraw";
-        } | {
+            kind: "Withdraw";
+        }) | {
             protocol: "Ethereum";
             kind: "Withdraw";
         });
         dateCreated: string;
-    };
+    }[];
 };
 
 export type CreateStakeActionRequest = CreateStakeActionParams & { body: CreateStakeActionBody }
@@ -365,11 +399,11 @@ export type GetStakesQuery = {
     paginationToken?: string | undefined;
 };
 
-export type GetStakesResponse = {
+export type GetStakesResponse = ({
     id: string;
     provider?: ("Figment") | undefined;
     walletId: string;
-    status: "Active" | "Creating" | "Failed" | "Unbonding" | "Unbond" | "Withdrawing" | "Withdrawn";
+    status: "Active" | "Failed" | "Staking" | "Unbonding" | "Unbond" | "Withdrawing" | "Withdrawn";
     requester: {
         userId: string;
         tokenId?: string | undefined;
@@ -390,7 +424,7 @@ export type GetStakesResponse = {
         protocol: "Iota";
         walletId: string;
         validator: string;
-        amount?: string | undefined;
+        amount: string;
         lockedIotas?: string[] | undefined;
     };
     dateCreated: string;
@@ -407,7 +441,7 @@ export type GetStakesResponse = {
     id: string;
     provider?: ("Figment") | undefined;
     walletId: string;
-    status: "Active" | "Creating" | "Failed" | "Unbonding" | "Unbond" | "Withdrawing" | "Withdrawn";
+    status: "Active" | "Failed" | "Staking" | "Unbonding" | "Unbond" | "Withdrawing" | "Withdrawn";
     requester: {
         userId: string;
         tokenId?: string | undefined;
@@ -428,14 +462,18 @@ export type GetStakesResponse = {
         protocol: "Iota";
         walletId: string;
         validator: string;
-        amount?: string | undefined;
+        amount: string;
         lockedIotas?: string[] | undefined;
     };
     dateCreated: string;
     protocol: "Iota";
     data: {
-        stakedObjectId?: string | undefined;
-        expirationDate?: string | undefined;
+        kind: "Iota" | "LockedIota";
+        stakedObjects?: {
+            id: string;
+            amount: string;
+            expirationDate?: string | undefined;
+        }[] | undefined;
         amount: string;
         validator: string;
     };
@@ -443,7 +481,7 @@ export type GetStakesResponse = {
     id: string;
     provider?: ("Figment") | undefined;
     walletId: string;
-    status: "Active" | "Creating" | "Failed" | "Unbonding" | "Unbond" | "Withdrawing" | "Withdrawn";
+    status: "Active" | "Failed" | "Staking" | "Unbonding" | "Unbond" | "Withdrawing" | "Withdrawn";
     requester: {
         userId: string;
         tokenId?: string | undefined;
@@ -464,7 +502,7 @@ export type GetStakesResponse = {
         protocol: "Iota";
         walletId: string;
         validator: string;
-        amount?: string | undefined;
+        amount: string;
         lockedIotas?: string[] | undefined;
     };
     dateCreated: string;
@@ -475,27 +513,14 @@ export type GetStakesResponse = {
             withdrawalAddress: string;
         }[];
     };
-};
-
-export type GetStakesRequest = GetStakesParams & { query?: GetStakesQuery }
-
-export type ListStakeActionsParams = {
-    stakeId: string;
-};
-
-export type ListStakeActionsQuery = {
-    limit?: number | undefined;
-    paginationToken?: string | undefined;
-};
-
-export type ListStakeActionsResponse = {
-    items: {
+}) & {
+    actions: {
         id: string;
         stakeId: string;
         transactionId?: string | undefined;
         signatureId?: string | undefined;
         transactionHash?: string | undefined;
-        kind: "Stake" | "Unbond" | "Withdraw";
+        kind: "Stake" | "Unbond" | "Deposit" | "Withdraw";
         requester: {
             userId: string;
             tokenId?: string | undefined;
@@ -516,15 +541,88 @@ export type ListStakeActionsResponse = {
             protocol: "Iota";
             walletId: string;
             validator: string;
-            amount?: string | undefined;
+            amount: string;
             lockedIotas?: string[] | undefined;
-        }) | ({
+        }) | (({
             protocol: "Iota";
             kind: "Withdraw";
+            amount: string;
+        } | {
+            protocol: "Iota";
+            kind: "Deposit";
+            amount: string;
+            lockedIotas?: string[] | undefined;
+        }) | ({
+            protocol: "Babylon";
+            kind: "Unbond";
         } | {
             protocol: "Babylon";
-            kind: "Unbond" | "Withdraw";
+            kind: "Withdraw";
+        }) | {
+            protocol: "Ethereum";
+            kind: "Withdraw";
+        });
+        dateCreated: string;
+    }[];
+};
+
+export type GetStakesRequest = GetStakesParams & { query?: GetStakesQuery }
+
+export type ListStakeActionsParams = {
+    stakeId: string;
+};
+
+export type ListStakeActionsQuery = {
+    limit?: number | undefined;
+    paginationToken?: string | undefined;
+};
+
+export type ListStakeActionsResponse = {
+    items: {
+        id: string;
+        stakeId: string;
+        transactionId?: string | undefined;
+        signatureId?: string | undefined;
+        transactionHash?: string | undefined;
+        kind: "Stake" | "Unbond" | "Deposit" | "Withdraw";
+        requester: {
+            userId: string;
+            tokenId?: string | undefined;
+            appId?: string | undefined;
+        };
+        requestBody: ({
+            protocol: "Babylon";
+            walletId: string;
+            provider: "Figment";
+            amount: string;
+            duration: number;
         } | {
+            protocol: "Ethereum";
+            walletId: string;
+            provider: "Figment";
+            amount: string;
+        } | {
+            protocol: "Iota";
+            walletId: string;
+            validator: string;
+            amount: string;
+            lockedIotas?: string[] | undefined;
+        }) | (({
+            protocol: "Iota";
+            kind: "Withdraw";
+            amount: string;
+        } | {
+            protocol: "Iota";
+            kind: "Deposit";
+            amount: string;
+            lockedIotas?: string[] | undefined;
+        }) | ({
+            protocol: "Babylon";
+            kind: "Unbond";
+        } | {
+            protocol: "Babylon";
+            kind: "Withdraw";
+        }) | {
             protocol: "Ethereum";
             kind: "Withdraw";
         });
@@ -545,7 +643,7 @@ export type ListStakesResponse = {
         id: string;
         provider?: ("Figment") | undefined;
         walletId: string;
-        status: "Active" | "Creating" | "Failed" | "Unbonding" | "Unbond" | "Withdrawing" | "Withdrawn";
+        status: "Active" | "Failed" | "Staking" | "Unbonding" | "Unbond" | "Withdrawing" | "Withdrawn";
         requester: {
             userId: string;
             tokenId?: string | undefined;
@@ -566,7 +664,7 @@ export type ListStakesResponse = {
             protocol: "Iota";
             walletId: string;
             validator: string;
-            amount?: string | undefined;
+            amount: string;
             lockedIotas?: string[] | undefined;
         };
         dateCreated: string;
@@ -583,7 +681,7 @@ export type ListStakesResponse = {
         id: string;
         provider?: ("Figment") | undefined;
         walletId: string;
-        status: "Active" | "Creating" | "Failed" | "Unbonding" | "Unbond" | "Withdrawing" | "Withdrawn";
+        status: "Active" | "Failed" | "Staking" | "Unbonding" | "Unbond" | "Withdrawing" | "Withdrawn";
         requester: {
             userId: string;
             tokenId?: string | undefined;
@@ -604,14 +702,18 @@ export type ListStakesResponse = {
             protocol: "Iota";
             walletId: string;
             validator: string;
-            amount?: string | undefined;
+            amount: string;
             lockedIotas?: string[] | undefined;
         };
         dateCreated: string;
         protocol: "Iota";
         data: {
-            stakedObjectId?: string | undefined;
-            expirationDate?: string | undefined;
+            kind: "Iota" | "LockedIota";
+            stakedObjects?: {
+                id: string;
+                amount: string;
+                expirationDate?: string | undefined;
+            }[] | undefined;
             amount: string;
             validator: string;
         };
@@ -619,7 +721,7 @@ export type ListStakesResponse = {
         id: string;
         provider?: ("Figment") | undefined;
         walletId: string;
-        status: "Active" | "Creating" | "Failed" | "Unbonding" | "Unbond" | "Withdrawing" | "Withdrawn";
+        status: "Active" | "Failed" | "Staking" | "Unbonding" | "Unbond" | "Withdrawing" | "Withdrawn";
         requester: {
             userId: string;
             tokenId?: string | undefined;
@@ -640,7 +742,7 @@ export type ListStakesResponse = {
             protocol: "Iota";
             walletId: string;
             validator: string;
-            amount?: string | undefined;
+            amount: string;
             lockedIotas?: string[] | undefined;
         };
         dateCreated: string;
