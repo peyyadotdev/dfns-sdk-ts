@@ -27,7 +27,7 @@ Go back to the service accounts listing, and the new `Service Account` should be
 Copy `.env.example` to a new file `.env.local` and set the following values,
 
 * `DFNS_API_URL` = `https://api.dfns.ninja`
-* `DFNS_APP_ID` = Dfns Application ID (grab one in Dfns Dashboard: `Settings` > `Applications`)
+- `DFNS_ORG_ID` = your Organisation ID (found in Dashboard > Profile)
 * `DFNS_CRED_ID` = the `Signing Key Cred ID` from above
 * `DFNS_PRIVATE_KEY` = the private key from the step 'generate a keypair', the newlines should not be a problem
 * `DFNS_AUTH_TOKEN` = the `authToken` from above, the value should start with `eyJ0...`
@@ -89,7 +89,7 @@ const signer = new AsymmetricKeySigner({
 
 // instanciate a dfns api client
 const dfns = new DfnsApiClient({
-  appId: process.env.DFNS_APP_ID!,
+  orgId: process.env.DFNS_ORG_ID!,
   baseUrl: process.env.DFNS_API_URL!,
   authToken: process.env.DFNS_AUTH_TOKEN!,
   signer,
@@ -110,7 +110,7 @@ Wallet creation initiation (wallet owned by end user):
 ```ts
 // instanciate a "delegated" Dfns client
 const dfnsDelegated = new DfnsDelegatedApiClient({
-    appId: process.env.DFNS_APP_ID!,
+    orgId: process.env.DFNS_ORG_ID!,
     baseUrl: process.env.DFNS_API_URL!,
     authToken: endUserAuthToken,
   })

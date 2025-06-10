@@ -9,8 +9,7 @@ This example demonstrates a SPA interacting directly with the Dfns API through t
 Copy `.env.example` to a new file `.env.local` and set the following values,
 
 * `REACT_APP_DFNS_API_URL` = `https://api.dfns.ninja`
-* `REACT_APP_DFNS_ORG_ID` = Dfns organization ID (grab it in Dfns Dashboard: `Your Name` > `Organisation ID`)
-* `REACT_APP_DFNS_APP_ID` = Dfns Application ID (grab one in Dfns Dashboard: `Settings` > `Applications`)
+* `REACT_APP_DFNS_ORG_ID` = your Dfns Organisation ID (found in Dashboard > Profile)
 * `REACT_APP_PASSKEY_RELYING_PARTY_ID` = the passkey relying party id, aka, the domain where your app lives ((Read more [here](https://developer.mozilla.org/en-US/docs/Web/API/PublicKeyCredentialCreationOptions#rp))). We advise using the root domain (eg. `acme.com`, not `app.acme.com`) for more passkey flexibility (so that passkey is re-usable on subdomains). During development on localhost, you can set it to `localhost`.
 * `REACT_APP_PASSKEY_RELYING_PARTY_NAME` = A string representing the name of the relying party, aka, your company name (e.g. "Acme"). The user will be presented with that name when creating or using a passkey.
 
@@ -29,7 +28,7 @@ import { DfnsAuthenticator } from '@dfns/sdk/dfnsAuthenticator'
 export const authApi = (): DfnsAuthenticator => {
   const signer = new WebAuthn({ rpId: process.env.REACT_APP_DFNS_WEBAUTHN_RPID! })
   return new DfnsAuthenticator({
-    appId: process.env.REACT_APP_DFNS_APP_ID!,
+    orgId: process.env.REACT_APP_DFNS_ORG_ID!,
     baseUrl: process.env.REACT_APP_DFNS_API_URL!,
     signer,
   })
@@ -64,7 +63,7 @@ import { DfnsApiClient } from '@dfns/sdk'
 export const dfnsApi = (): DfnsApiClient => {
   const signer = new WebAuthn({ rpId: process.env.REACT_APP_DFNS_WEBAUTHN_RPID! })
   return new DfnsApiClient({
-    appId: process.env.REACT_APP_DFNS_APP_ID!,
+    orgId: process.env.REACT_APP_DFNS_ORG_ID!,
     authToken: localStorage.getItem('DFNS_AUTH_TOKEN') ?? undefined,
     baseUrl: process.env.REACT_APP_DFNS_API_URL!,
     signer,

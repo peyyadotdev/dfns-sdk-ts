@@ -16,7 +16,7 @@ Go back to the service accounts listing, and the new `Service Account` should be
 Copy `.env.example` to a new file `.env` and set the following values,
 
 - `DFNS_API_URL` = `https://api.dfns.ninja`
-- `DFNS_APP_ID` = Dfns Application ID (grab one in Dfns Dashboard: `Settings` > `Applications`)
+- `DFNS_ORG_ID` = Dfns Organisation ID (grab it in Dfns Dashboard: `Profile` > `Account`)
 - `DFNS_CRED_ID` = the `Signing Key Cred ID` from above
 - `DFNS_PRIVATE_KEY` = the private key from the step 'generate a keypair', the newlines should not be a problem
 - `DFNS_AUTH_TOKEN` = the `authToken` from above, the value should start with `eyJ0...`
@@ -50,7 +50,7 @@ Create an API client
 import { DfnsApiClient } from '@dfns/sdk'
 
 const dfnsApi = new DfnsApiClient({
-  appId: process.env.DFNS_APP_ID!,
+  orgId: process.env.DFNS_ORG_ID!,
   authToken: process.env.DFNS_AUTH_TOKEN!,
   baseUrl: process.env.DFNS_API_URL!,
   signer,

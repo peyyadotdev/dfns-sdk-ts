@@ -50,7 +50,6 @@ export type BroadcastTransactionResponse = {
     requester: {
         userId: string;
         tokenId?: string | undefined;
-        appId?: string | undefined;
     };
     requestBody: {
         kind: "Transaction";
@@ -274,7 +273,6 @@ export type GenerateSignatureResponse = {
     requester: {
         userId: string;
         tokenId?: string | undefined;
-        appId?: string | undefined;
     };
     requestBody: {
         kind: "Hash";
@@ -390,7 +388,6 @@ export type GetSignatureResponse = {
     requester: {
         userId: string;
         tokenId?: string | undefined;
-        appId?: string | undefined;
     };
     requestBody: {
         kind: "Hash";
@@ -506,7 +503,6 @@ export type GetTransactionResponse = {
     requester: {
         userId: string;
         tokenId?: string | undefined;
-        appId?: string | undefined;
     };
     requestBody: {
         kind: "Transaction";
@@ -574,7 +570,6 @@ export type GetTransferResponse = {
     requester: {
         userId: string;
         tokenId?: string | undefined;
-        appId?: string | undefined;
     };
     requestBody: {
         kind: "Native";
@@ -702,6 +697,194 @@ export type GetTransferResponse = {
     approvalId?: string | undefined;
     externalId?: string | undefined;
     feeSponsorId?: string | undefined;
+    travelRule?: ({
+        kind: "Notabene";
+        beneficiaryVASPdid?: string | undefined;
+        beneficiaryProof?: ({
+            type: string;
+            proof: string;
+            attestation: string;
+            address?: string | undefined;
+            status?: string | undefined;
+        } | {
+            type: "screenshot";
+            url: string;
+        } | {
+            type: "self-declaration";
+            did?: string | undefined;
+            address?: string | undefined;
+            attestation: string;
+            confirmed?: boolean | undefined;
+            status?: string | undefined;
+        } | {
+            type: "microtransfer";
+            did?: string | undefined;
+            address?: string | undefined;
+            proof: string;
+            chain?: string | undefined;
+            destination?: string | undefined;
+            amountSubunits?: string | undefined;
+            status?: string | undefined;
+        } | {
+            type: string;
+        }) | undefined;
+        originator: {
+            originatorPersons: {
+                naturalPerson?: {
+                    name: {
+                        nameIdentifier: {
+                            primaryIdentifier: string;
+                            secondaryIdentifier: string;
+                        }[];
+                    };
+                    geographicAddress?: {
+                        addressType?: string | undefined;
+                        department?: string | undefined;
+                        subDepartment?: string | undefined;
+                        streetName?: string | undefined;
+                        buildingNumber?: string | undefined;
+                        buildingName?: string | undefined;
+                        floor?: string | undefined;
+                        postBox?: string | undefined;
+                        room?: string | undefined;
+                        postCode?: string | undefined;
+                        townName?: string | undefined;
+                        townLocationName?: string | undefined;
+                        districtName?: string | undefined;
+                        countrySubDivision?: string | undefined;
+                        addressLine?: string[] | undefined;
+                        country?: string | undefined;
+                    }[] | undefined;
+                    customerIdentification?: string | undefined;
+                    nationalIdentification?: {
+                        nationalIdentifier: string;
+                        nationalIdentifierType: string;
+                        countryOfIssue?: string | undefined;
+                        registrationAuthority?: string | undefined;
+                    } | undefined;
+                    dateAndPlaceOfBirth?: {
+                        dateOfBirth: string;
+                        placeOfBirth: string;
+                    } | undefined;
+                    countryOfResidence?: string | undefined;
+                } | undefined;
+                legalPerson?: {
+                    name: {
+                        nameIdentifier: {
+                            legalPersonName: string;
+                            legalPersonNameIdentifierType: string;
+                        }[];
+                    };
+                    geographicAddress?: {
+                        addressType?: string | undefined;
+                        department?: string | undefined;
+                        subDepartment?: string | undefined;
+                        streetName?: string | undefined;
+                        buildingNumber?: string | undefined;
+                        buildingName?: string | undefined;
+                        floor?: string | undefined;
+                        postBox?: string | undefined;
+                        room?: string | undefined;
+                        postCode?: string | undefined;
+                        townName?: string | undefined;
+                        townLocationName?: string | undefined;
+                        districtName?: string | undefined;
+                        countrySubDivision?: string | undefined;
+                        addressLine?: string[] | undefined;
+                        country?: string | undefined;
+                    }[] | undefined;
+                    customerNumber?: string | undefined;
+                    nationalIdentification?: {
+                        nationalIdentifier: string;
+                        nationalIdentifierType: string;
+                        countryOfIssue?: string | undefined;
+                        registrationAuthority?: string | undefined;
+                    } | undefined;
+                    dateOfRegistration?: string | undefined;
+                    countryOfRegistration?: string | undefined;
+                } | undefined;
+            }[];
+            accountNumber?: string[] | undefined;
+        };
+        beneficiary: {
+            beneficiaryPersons: {
+                naturalPerson?: {
+                    name: {
+                        nameIdentifier: {
+                            primaryIdentifier: string;
+                            secondaryIdentifier: string;
+                        }[];
+                    };
+                    geographicAddress?: {
+                        addressType?: string | undefined;
+                        department?: string | undefined;
+                        subDepartment?: string | undefined;
+                        streetName?: string | undefined;
+                        buildingNumber?: string | undefined;
+                        buildingName?: string | undefined;
+                        floor?: string | undefined;
+                        postBox?: string | undefined;
+                        room?: string | undefined;
+                        postCode?: string | undefined;
+                        townName?: string | undefined;
+                        townLocationName?: string | undefined;
+                        districtName?: string | undefined;
+                        countrySubDivision?: string | undefined;
+                        addressLine?: string[] | undefined;
+                        country?: string | undefined;
+                    }[] | undefined;
+                    customerIdentification?: string | undefined;
+                    nationalIdentification?: {
+                        nationalIdentifier: string;
+                        nationalIdentifierType: string;
+                        countryOfIssue?: string | undefined;
+                        registrationAuthority?: string | undefined;
+                    } | undefined;
+                    dateAndPlaceOfBirth?: {
+                        dateOfBirth: string;
+                        placeOfBirth: string;
+                    } | undefined;
+                    countryOfResidence?: string | undefined;
+                } | undefined;
+                legalPerson?: {
+                    name: {
+                        nameIdentifier: {
+                            legalPersonName: string;
+                            legalPersonNameIdentifierType: string;
+                        }[];
+                    };
+                    geographicAddress?: {
+                        addressType?: string | undefined;
+                        department?: string | undefined;
+                        subDepartment?: string | undefined;
+                        streetName?: string | undefined;
+                        buildingNumber?: string | undefined;
+                        buildingName?: string | undefined;
+                        floor?: string | undefined;
+                        postBox?: string | undefined;
+                        room?: string | undefined;
+                        postCode?: string | undefined;
+                        townName?: string | undefined;
+                        townLocationName?: string | undefined;
+                        districtName?: string | undefined;
+                        countrySubDivision?: string | undefined;
+                        addressLine?: string[] | undefined;
+                        country?: string | undefined;
+                    }[] | undefined;
+                    customerNumber?: string | undefined;
+                    nationalIdentification?: {
+                        nationalIdentifier: string;
+                        nationalIdentifierType: string;
+                        countryOfIssue?: string | undefined;
+                        registrationAuthority?: string | undefined;
+                    } | undefined;
+                    dateOfRegistration?: string | undefined;
+                    countryOfRegistration?: string | undefined;
+                } | undefined;
+            }[];
+            accountNumber?: string[] | undefined;
+        };
+    }) | undefined;
 };
 
 export type GetTransferRequest = GetTransferParams
@@ -1358,7 +1541,6 @@ export type ListSignaturesResponse = {
         requester: {
             userId: string;
             tokenId?: string | undefined;
-            appId?: string | undefined;
         };
         requestBody: {
             kind: "Hash";
@@ -1482,7 +1664,6 @@ export type ListTransactionsResponse = {
         requester: {
             userId: string;
             tokenId?: string | undefined;
-            appId?: string | undefined;
         };
         requestBody: {
             kind: "Transaction";
@@ -1558,7 +1739,6 @@ export type ListTransfersResponse = {
         requester: {
             userId: string;
             tokenId?: string | undefined;
-            appId?: string | undefined;
         };
         requestBody: {
             kind: "Native";
@@ -1686,6 +1866,194 @@ export type ListTransfersResponse = {
         approvalId?: string | undefined;
         externalId?: string | undefined;
         feeSponsorId?: string | undefined;
+        travelRule?: ({
+            kind: "Notabene";
+            beneficiaryVASPdid?: string | undefined;
+            beneficiaryProof?: ({
+                type: string;
+                proof: string;
+                attestation: string;
+                address?: string | undefined;
+                status?: string | undefined;
+            } | {
+                type: "screenshot";
+                url: string;
+            } | {
+                type: "self-declaration";
+                did?: string | undefined;
+                address?: string | undefined;
+                attestation: string;
+                confirmed?: boolean | undefined;
+                status?: string | undefined;
+            } | {
+                type: "microtransfer";
+                did?: string | undefined;
+                address?: string | undefined;
+                proof: string;
+                chain?: string | undefined;
+                destination?: string | undefined;
+                amountSubunits?: string | undefined;
+                status?: string | undefined;
+            } | {
+                type: string;
+            }) | undefined;
+            originator: {
+                originatorPersons: {
+                    naturalPerson?: {
+                        name: {
+                            nameIdentifier: {
+                                primaryIdentifier: string;
+                                secondaryIdentifier: string;
+                            }[];
+                        };
+                        geographicAddress?: {
+                            addressType?: string | undefined;
+                            department?: string | undefined;
+                            subDepartment?: string | undefined;
+                            streetName?: string | undefined;
+                            buildingNumber?: string | undefined;
+                            buildingName?: string | undefined;
+                            floor?: string | undefined;
+                            postBox?: string | undefined;
+                            room?: string | undefined;
+                            postCode?: string | undefined;
+                            townName?: string | undefined;
+                            townLocationName?: string | undefined;
+                            districtName?: string | undefined;
+                            countrySubDivision?: string | undefined;
+                            addressLine?: string[] | undefined;
+                            country?: string | undefined;
+                        }[] | undefined;
+                        customerIdentification?: string | undefined;
+                        nationalIdentification?: {
+                            nationalIdentifier: string;
+                            nationalIdentifierType: string;
+                            countryOfIssue?: string | undefined;
+                            registrationAuthority?: string | undefined;
+                        } | undefined;
+                        dateAndPlaceOfBirth?: {
+                            dateOfBirth: string;
+                            placeOfBirth: string;
+                        } | undefined;
+                        countryOfResidence?: string | undefined;
+                    } | undefined;
+                    legalPerson?: {
+                        name: {
+                            nameIdentifier: {
+                                legalPersonName: string;
+                                legalPersonNameIdentifierType: string;
+                            }[];
+                        };
+                        geographicAddress?: {
+                            addressType?: string | undefined;
+                            department?: string | undefined;
+                            subDepartment?: string | undefined;
+                            streetName?: string | undefined;
+                            buildingNumber?: string | undefined;
+                            buildingName?: string | undefined;
+                            floor?: string | undefined;
+                            postBox?: string | undefined;
+                            room?: string | undefined;
+                            postCode?: string | undefined;
+                            townName?: string | undefined;
+                            townLocationName?: string | undefined;
+                            districtName?: string | undefined;
+                            countrySubDivision?: string | undefined;
+                            addressLine?: string[] | undefined;
+                            country?: string | undefined;
+                        }[] | undefined;
+                        customerNumber?: string | undefined;
+                        nationalIdentification?: {
+                            nationalIdentifier: string;
+                            nationalIdentifierType: string;
+                            countryOfIssue?: string | undefined;
+                            registrationAuthority?: string | undefined;
+                        } | undefined;
+                        dateOfRegistration?: string | undefined;
+                        countryOfRegistration?: string | undefined;
+                    } | undefined;
+                }[];
+                accountNumber?: string[] | undefined;
+            };
+            beneficiary: {
+                beneficiaryPersons: {
+                    naturalPerson?: {
+                        name: {
+                            nameIdentifier: {
+                                primaryIdentifier: string;
+                                secondaryIdentifier: string;
+                            }[];
+                        };
+                        geographicAddress?: {
+                            addressType?: string | undefined;
+                            department?: string | undefined;
+                            subDepartment?: string | undefined;
+                            streetName?: string | undefined;
+                            buildingNumber?: string | undefined;
+                            buildingName?: string | undefined;
+                            floor?: string | undefined;
+                            postBox?: string | undefined;
+                            room?: string | undefined;
+                            postCode?: string | undefined;
+                            townName?: string | undefined;
+                            townLocationName?: string | undefined;
+                            districtName?: string | undefined;
+                            countrySubDivision?: string | undefined;
+                            addressLine?: string[] | undefined;
+                            country?: string | undefined;
+                        }[] | undefined;
+                        customerIdentification?: string | undefined;
+                        nationalIdentification?: {
+                            nationalIdentifier: string;
+                            nationalIdentifierType: string;
+                            countryOfIssue?: string | undefined;
+                            registrationAuthority?: string | undefined;
+                        } | undefined;
+                        dateAndPlaceOfBirth?: {
+                            dateOfBirth: string;
+                            placeOfBirth: string;
+                        } | undefined;
+                        countryOfResidence?: string | undefined;
+                    } | undefined;
+                    legalPerson?: {
+                        name: {
+                            nameIdentifier: {
+                                legalPersonName: string;
+                                legalPersonNameIdentifierType: string;
+                            }[];
+                        };
+                        geographicAddress?: {
+                            addressType?: string | undefined;
+                            department?: string | undefined;
+                            subDepartment?: string | undefined;
+                            streetName?: string | undefined;
+                            buildingNumber?: string | undefined;
+                            buildingName?: string | undefined;
+                            floor?: string | undefined;
+                            postBox?: string | undefined;
+                            room?: string | undefined;
+                            postCode?: string | undefined;
+                            townName?: string | undefined;
+                            townLocationName?: string | undefined;
+                            districtName?: string | undefined;
+                            countrySubDivision?: string | undefined;
+                            addressLine?: string[] | undefined;
+                            country?: string | undefined;
+                        }[] | undefined;
+                        customerNumber?: string | undefined;
+                        nationalIdentification?: {
+                            nationalIdentifier: string;
+                            nationalIdentifierType: string;
+                            countryOfIssue?: string | undefined;
+                            registrationAuthority?: string | undefined;
+                        } | undefined;
+                        dateOfRegistration?: string | undefined;
+                        countryOfRegistration?: string | undefined;
+                    } | undefined;
+                }[];
+                accountNumber?: string[] | undefined;
+            };
+        }) | undefined;
     }[];
     nextPageToken?: string | undefined;
 };
@@ -1857,7 +2225,6 @@ export type TransferAssetResponse = {
     requester: {
         userId: string;
         tokenId?: string | undefined;
-        appId?: string | undefined;
     };
     requestBody: {
         kind: "Native";
@@ -1985,6 +2352,194 @@ export type TransferAssetResponse = {
     approvalId?: string | undefined;
     externalId?: string | undefined;
     feeSponsorId?: string | undefined;
+    travelRule?: ({
+        kind: "Notabene";
+        beneficiaryVASPdid?: string | undefined;
+        beneficiaryProof?: ({
+            type: string;
+            proof: string;
+            attestation: string;
+            address?: string | undefined;
+            status?: string | undefined;
+        } | {
+            type: "screenshot";
+            url: string;
+        } | {
+            type: "self-declaration";
+            did?: string | undefined;
+            address?: string | undefined;
+            attestation: string;
+            confirmed?: boolean | undefined;
+            status?: string | undefined;
+        } | {
+            type: "microtransfer";
+            did?: string | undefined;
+            address?: string | undefined;
+            proof: string;
+            chain?: string | undefined;
+            destination?: string | undefined;
+            amountSubunits?: string | undefined;
+            status?: string | undefined;
+        } | {
+            type: string;
+        }) | undefined;
+        originator: {
+            originatorPersons: {
+                naturalPerson?: {
+                    name: {
+                        nameIdentifier: {
+                            primaryIdentifier: string;
+                            secondaryIdentifier: string;
+                        }[];
+                    };
+                    geographicAddress?: {
+                        addressType?: string | undefined;
+                        department?: string | undefined;
+                        subDepartment?: string | undefined;
+                        streetName?: string | undefined;
+                        buildingNumber?: string | undefined;
+                        buildingName?: string | undefined;
+                        floor?: string | undefined;
+                        postBox?: string | undefined;
+                        room?: string | undefined;
+                        postCode?: string | undefined;
+                        townName?: string | undefined;
+                        townLocationName?: string | undefined;
+                        districtName?: string | undefined;
+                        countrySubDivision?: string | undefined;
+                        addressLine?: string[] | undefined;
+                        country?: string | undefined;
+                    }[] | undefined;
+                    customerIdentification?: string | undefined;
+                    nationalIdentification?: {
+                        nationalIdentifier: string;
+                        nationalIdentifierType: string;
+                        countryOfIssue?: string | undefined;
+                        registrationAuthority?: string | undefined;
+                    } | undefined;
+                    dateAndPlaceOfBirth?: {
+                        dateOfBirth: string;
+                        placeOfBirth: string;
+                    } | undefined;
+                    countryOfResidence?: string | undefined;
+                } | undefined;
+                legalPerson?: {
+                    name: {
+                        nameIdentifier: {
+                            legalPersonName: string;
+                            legalPersonNameIdentifierType: string;
+                        }[];
+                    };
+                    geographicAddress?: {
+                        addressType?: string | undefined;
+                        department?: string | undefined;
+                        subDepartment?: string | undefined;
+                        streetName?: string | undefined;
+                        buildingNumber?: string | undefined;
+                        buildingName?: string | undefined;
+                        floor?: string | undefined;
+                        postBox?: string | undefined;
+                        room?: string | undefined;
+                        postCode?: string | undefined;
+                        townName?: string | undefined;
+                        townLocationName?: string | undefined;
+                        districtName?: string | undefined;
+                        countrySubDivision?: string | undefined;
+                        addressLine?: string[] | undefined;
+                        country?: string | undefined;
+                    }[] | undefined;
+                    customerNumber?: string | undefined;
+                    nationalIdentification?: {
+                        nationalIdentifier: string;
+                        nationalIdentifierType: string;
+                        countryOfIssue?: string | undefined;
+                        registrationAuthority?: string | undefined;
+                    } | undefined;
+                    dateOfRegistration?: string | undefined;
+                    countryOfRegistration?: string | undefined;
+                } | undefined;
+            }[];
+            accountNumber?: string[] | undefined;
+        };
+        beneficiary: {
+            beneficiaryPersons: {
+                naturalPerson?: {
+                    name: {
+                        nameIdentifier: {
+                            primaryIdentifier: string;
+                            secondaryIdentifier: string;
+                        }[];
+                    };
+                    geographicAddress?: {
+                        addressType?: string | undefined;
+                        department?: string | undefined;
+                        subDepartment?: string | undefined;
+                        streetName?: string | undefined;
+                        buildingNumber?: string | undefined;
+                        buildingName?: string | undefined;
+                        floor?: string | undefined;
+                        postBox?: string | undefined;
+                        room?: string | undefined;
+                        postCode?: string | undefined;
+                        townName?: string | undefined;
+                        townLocationName?: string | undefined;
+                        districtName?: string | undefined;
+                        countrySubDivision?: string | undefined;
+                        addressLine?: string[] | undefined;
+                        country?: string | undefined;
+                    }[] | undefined;
+                    customerIdentification?: string | undefined;
+                    nationalIdentification?: {
+                        nationalIdentifier: string;
+                        nationalIdentifierType: string;
+                        countryOfIssue?: string | undefined;
+                        registrationAuthority?: string | undefined;
+                    } | undefined;
+                    dateAndPlaceOfBirth?: {
+                        dateOfBirth: string;
+                        placeOfBirth: string;
+                    } | undefined;
+                    countryOfResidence?: string | undefined;
+                } | undefined;
+                legalPerson?: {
+                    name: {
+                        nameIdentifier: {
+                            legalPersonName: string;
+                            legalPersonNameIdentifierType: string;
+                        }[];
+                    };
+                    geographicAddress?: {
+                        addressType?: string | undefined;
+                        department?: string | undefined;
+                        subDepartment?: string | undefined;
+                        streetName?: string | undefined;
+                        buildingNumber?: string | undefined;
+                        buildingName?: string | undefined;
+                        floor?: string | undefined;
+                        postBox?: string | undefined;
+                        room?: string | undefined;
+                        postCode?: string | undefined;
+                        townName?: string | undefined;
+                        townLocationName?: string | undefined;
+                        districtName?: string | undefined;
+                        countrySubDivision?: string | undefined;
+                        addressLine?: string[] | undefined;
+                        country?: string | undefined;
+                    }[] | undefined;
+                    customerNumber?: string | undefined;
+                    nationalIdentification?: {
+                        nationalIdentifier: string;
+                        nationalIdentifierType: string;
+                        countryOfIssue?: string | undefined;
+                        registrationAuthority?: string | undefined;
+                    } | undefined;
+                    dateOfRegistration?: string | undefined;
+                    countryOfRegistration?: string | undefined;
+                } | undefined;
+            }[];
+            accountNumber?: string[] | undefined;
+        };
+    }) | undefined;
 };
 
 export type TransferAssetRequest = TransferAssetParams & { body: TransferAssetBody }

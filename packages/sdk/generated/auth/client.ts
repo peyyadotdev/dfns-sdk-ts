@@ -9,21 +9,6 @@ import * as T from './types'
 export class AuthClient {
   constructor(private apiOptions: DfnsApiClientOptions) {}
 
-  async activateApplication(request: T.ActivateApplicationRequest): Promise<T.ActivateApplicationResponse> {
-    const path = buildPathAndQuery('/auth/apps/:appId/activate', {
-      path: request ?? {},
-      query: {},
-    })
-
-    const response = await userActionFetch(path, {
-      method: 'PUT',
-      body: {},
-      apiOptions: this.apiOptions,
-    })
-
-    return response.json()
-  }
-
   async activateCredential(request: T.ActivateCredentialRequest): Promise<T.ActivateCredentialResponse> {
     const path = buildPathAndQuery('/auth/credentials/activate', {
       path: request ?? {},
@@ -84,21 +69,6 @@ export class AuthClient {
     return response.json()
   }
 
-  async archiveApplication(request: T.ArchiveApplicationRequest): Promise<T.ArchiveApplicationResponse> {
-    const path = buildPathAndQuery('/auth/apps/:appId', {
-      path: request ?? {},
-      query: {},
-    })
-
-    const response = await userActionFetch(path, {
-      method: 'DELETE',
-      body: {},
-      apiOptions: this.apiOptions,
-    })
-
-    return response.json()
-  }
-
   async archivePersonalAccessToken(request: T.ArchivePersonalAccessTokenRequest): Promise<T.ArchivePersonalAccessTokenResponse> {
     const path = buildPathAndQuery('/auth/pats/:tokenId', {
       path: request ?? {},
@@ -138,21 +108,6 @@ export class AuthClient {
     const response = await userActionFetch(path, {
       method: 'DELETE',
       body: {},
-      apiOptions: this.apiOptions,
-    })
-
-    return response.json()
-  }
-
-  async createApplication(request: T.CreateApplicationRequest): Promise<T.CreateApplicationResponse> {
-    const path = buildPathAndQuery('/auth/apps', {
-      path: request ?? {},
-      query: {},
-    })
-
-    const response = await userActionFetch(path, {
-      method: 'POST',
-      body: request.body,
       apiOptions: this.apiOptions,
     })
 
@@ -418,21 +373,6 @@ export class AuthClient {
     const response = await simpleFetch(path, {
       method: 'POST',
       body: request.body,
-      apiOptions: this.apiOptions,
-    })
-
-    return response.json()
-  }
-
-  async deactivateApplication(request: T.DeactivateApplicationRequest): Promise<T.DeactivateApplicationResponse> {
-    const path = buildPathAndQuery('/auth/apps/:appId/deactivate', {
-      path: request ?? {},
-      query: {},
-    })
-
-    const response = await userActionFetch(path, {
-      method: 'PUT',
-      body: {},
       apiOptions: this.apiOptions,
     })
 
@@ -807,21 +747,6 @@ export class AuthClient {
     })
 
     const response = await simpleFetch(path, {
-      method: 'POST',
-      body: request.body,
-      apiOptions: this.apiOptions,
-    })
-
-    return response.json()
-  }
-
-  async updateApplication(request: T.UpdateApplicationRequest): Promise<T.UpdateApplicationResponse> {
-    const path = buildPathAndQuery('/auth/apps/:appId', {
-      path: request ?? {},
-      query: {},
-    })
-
-    const response = await userActionFetch(path, {
       method: 'POST',
       body: request.body,
       apiOptions: this.apiOptions,

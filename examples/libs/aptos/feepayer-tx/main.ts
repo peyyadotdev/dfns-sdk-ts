@@ -1,4 +1,13 @@
-import { AccountAddress, Aptos, APTOS_COIN, AptosConfig, MimeType, Network, PendingTransactionResponse, postAptosFullNode} from '@aptos-labs/ts-sdk'
+import {
+  AccountAddress,
+  Aptos,
+  APTOS_COIN,
+  AptosConfig,
+  MimeType,
+  Network,
+  PendingTransactionResponse,
+  postAptosFullNode,
+} from '@aptos-labs/ts-sdk'
 import { DfnsWallet, hexToBuffer } from '@dfns/lib-aptos'
 import { DfnsApiClient } from '@dfns/sdk'
 import { AsymmetricKeySigner } from '@dfns/sdk-keysigner'
@@ -14,7 +23,7 @@ const initDfnsWallet = async (walletId: string) => {
   })
 
   const dfnsClient = new DfnsApiClient({
-    appId: process.env.DFNS_APP_ID!,
+    orgId: process.env.DFNS_ORG_ID!,
     authToken: process.env.DFNS_AUTH_TOKEN!,
     baseUrl: process.env.DFNS_API_URL!,
     signer,
@@ -40,10 +49,10 @@ async function main() {
   console.log('feepayer address: ', feePayer.address)
 
   const [balance, feePayerBalance] = await Promise.all([
-    client.account.getAccountAPTAmount({accountAddress: sender.address}),
-    client.account.getAccountAPTAmount({accountAddress: feePayer.address}),
+    client.account.getAccountAPTAmount({ accountAddress: sender.address }),
+    client.account.getAccountAPTAmount({ accountAddress: feePayer.address }),
   ])
-  console.log(`initial sender balance: ${balance}, feepayer balance: ${feePayerBalance}`, )
+  console.log(`initial sender balance: ${balance}, feepayer balance: ${feePayerBalance}`)
 
   const tx = await client.transaction.build.simple({
     sender: sender.address,
@@ -51,11 +60,11 @@ async function main() {
       function: '0x1::coin::transfer',
       typeArguments: [APTOS_COIN],
       // receiver + amount
-      functionArguments: ["0x5bdc24cb9033286ffe19f436145b9e2267dd03b0fd0d422459d381a6431d39ba", '1'],
+      functionArguments: ['0x5bdc24cb9033286ffe19f436145b9e2267dd03b0fd0d422459d381a6431d39ba', '1'],
     },
     withFeePayer: true,
   })
-  
+
   tx.feePayerAddress = new AccountAddress(hexToBuffer(feePayer.address))
 
   // sender sign
@@ -75,16 +84,16 @@ async function main() {
   })
 
   // Wait for the transaction to be included
-  await client.waitForTransaction({transactionHash: data.hash})
+  await client.waitForTransaction({ transactionHash: data.hash })
 
   console.log(`transaction broadcasted: ${data.hash}`)
 
   const [finalBalance, finalFeePayerBalance] = await Promise.all([
-    client.account.getAccountAPTAmount({accountAddress: sender.address}),
-    client.account.getAccountAPTAmount({accountAddress: feePayer.address}),
+    client.account.getAccountAPTAmount({ accountAddress: sender.address }),
+    client.account.getAccountAPTAmount({ accountAddress: feePayer.address }),
   ])
 
-  console.log(`final sender balance: ${finalBalance}, feepayer balance: ${finalFeePayerBalance}`, )
+  console.log(`final sender balance: ${finalBalance}, feepayer balance: ${finalFeePayerBalance}`)
 }
 
 main()

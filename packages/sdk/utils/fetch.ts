@@ -1,12 +1,12 @@
 import { fetch as _fetch } from 'cross-fetch'
 
-import { generateNonce } from './nonce'
 import { DfnsError, PolicyPendingError } from '../dfnsError'
 import { DfnsBaseApiOptions } from '../types/generic'
 
 const DEFAULT_DFNS_BASE_URL = 'https://api.dfns.io'
 
 import { version } from '../package.json'
+import { assertAuthTokenIsSameOrg } from './authToken'
 
 export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE'
 
@@ -75,7 +75,11 @@ export const catchPolicyPending = <T>(fetch: Fetch<T>): Fetch<T> => {
 
 export const dfnsAuth = <T extends DfnsBaseApiOptions>(fetch: Fetch<T>): Fetch<T> => {
   return async (resource, options) => {
-    const { appId, appSecret, authToken } = options.apiOptions
+    const { orgId, authToken } = options.apiOptions
+
+    if (authToken && orgId) {
+      assertAuthTokenIsSameOrg({ orgId, authToken })
+    }
 
     const authorization: Record<string, string> = authToken
       ? {
@@ -83,17 +87,8 @@ export const dfnsAuth = <T extends DfnsBaseApiOptions>(fetch: Fetch<T>): Fetch<T
         }
       : {}
 
-    const dfnsAppSecret: Record<string, string> = appSecret
-      ? {
-          'x-dfns-appsecret': appSecret,
-        }
-      : {}
-
     options.headers = {
-      'x-dfns-appid': appId,
-      'x-dfns-nonce': generateNonce(),
       'x-dfns-sdk-version': version,
-      ...dfnsAppSecret,
       ...authorization,
       ...(options.headers ?? {}),
     }

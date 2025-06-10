@@ -1,4 +1,4 @@
-import React, { FormEvent } from 'react'
+import { FormEvent } from 'react'
 
 import '../globals.css'
 import useAuth from '../hooks/useAuth'
@@ -30,9 +30,8 @@ export default function Login(): JSX.Element {
         {!!error && <div className="text-red-700">{error.message}</div>}
 
         <p>
-          You can login if your Dfns user already has a WebauthN Credential registered on this Application (this
-          domain). If you don't, you first need to <a href="/credential">create a new Credential</a> for this
-          Application.
+          You can login if your Dfns user already has a Passkey Credential registered on this domain. If you don't, you
+          first need to <a href="/credential">create a new Credential</a>.
         </p>
       </div>
     </form>

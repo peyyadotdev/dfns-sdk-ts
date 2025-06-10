@@ -17,18 +17,13 @@ export function Register(): React.JSX.Element {
       setLoading(true)
       event.preventDefault()
 
-      // Start delegated registration flow. Server needs to obtain the challenge with the appId
-      // and appOrigin of the mobile application. For simplicity, they are included as part of
-      // the request body. Alternatively, they can be sent as headers or with other approaches.
+      // Start delegated registration flow.
       const initRes = await fetch(`${Config.EXPRESS_API_URL!}/register/init`, {
         method: 'POST',
         headers: {
           'content-type': 'application/json',
         },
-        body: JSON.stringify({
-          appId: Config.DFNS_APP_ID!,
-          username,
-        }),
+        body: JSON.stringify({ username }),
       })
       const challenge = await initRes.json()
       console.log(JSON.stringify(challenge, null, 2))
@@ -50,7 +45,6 @@ export function Register(): React.JSX.Element {
           'content-type': 'application/json',
         },
         body: JSON.stringify({
-          appId: Config.DFNS_APP_ID!,
           signedChallenge: { firstFactorCredential: attestation },
           temporaryAuthenticationToken: challenge.temporaryAuthenticationToken,
         }),

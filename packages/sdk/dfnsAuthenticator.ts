@@ -4,10 +4,10 @@ import {
   BaseAuthApi,
   CreateUserLoginChallengeRequest,
   CreateUserRegistrationChallengeRequest,
-  DfnsBaseApiOptions,
   UserLoginResponse,
   UserRegistrationResponse,
 } from './baseAuthApi'
+import { DfnsBaseApiOptions } from './types/generic'
 
 export type LoginRequest = CreateUserLoginChallengeRequest
 
@@ -22,8 +22,6 @@ export type DfnsAuthenticatorOptions = Omit<DfnsBaseApiOptions, 'authToken'> & {
 }
 
 export class DfnsAuthenticator {
-  private api: BaseAuthApi
-
   constructor(private apiOptions: DfnsAuthenticatorOptions) {}
 
   async login(request: LoginRequest): Promise<LoginResponse> {

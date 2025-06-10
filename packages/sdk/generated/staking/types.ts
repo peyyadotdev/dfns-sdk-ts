@@ -25,7 +25,6 @@ export type CreateStakeResponse = ({
     requester: {
         userId: string;
         tokenId?: string | undefined;
-        appId?: string | undefined;
     };
     requestBody: {
         protocol: "Babylon";
@@ -63,7 +62,6 @@ export type CreateStakeResponse = ({
     requester: {
         userId: string;
         tokenId?: string | undefined;
-        appId?: string | undefined;
     };
     requestBody: {
         protocol: "Babylon";
@@ -103,7 +101,6 @@ export type CreateStakeResponse = ({
     requester: {
         userId: string;
         tokenId?: string | undefined;
-        appId?: string | undefined;
     };
     requestBody: {
         protocol: "Babylon";
@@ -142,7 +139,6 @@ export type CreateStakeResponse = ({
         requester: {
             userId: string;
             tokenId?: string | undefined;
-            appId?: string | undefined;
         };
         requestBody: ({
             protocol: "Babylon";
@@ -218,7 +214,6 @@ export type CreateStakeActionResponse = ({
     requester: {
         userId: string;
         tokenId?: string | undefined;
-        appId?: string | undefined;
     };
     requestBody: {
         protocol: "Babylon";
@@ -256,7 +251,6 @@ export type CreateStakeActionResponse = ({
     requester: {
         userId: string;
         tokenId?: string | undefined;
-        appId?: string | undefined;
     };
     requestBody: {
         protocol: "Babylon";
@@ -296,7 +290,6 @@ export type CreateStakeActionResponse = ({
     requester: {
         userId: string;
         tokenId?: string | undefined;
-        appId?: string | undefined;
     };
     requestBody: {
         protocol: "Babylon";
@@ -335,7 +328,6 @@ export type CreateStakeActionResponse = ({
         requester: {
             userId: string;
             tokenId?: string | undefined;
-            appId?: string | undefined;
         };
         requestBody: ({
             protocol: "Babylon";
@@ -407,7 +399,6 @@ export type GetStakesResponse = ({
     requester: {
         userId: string;
         tokenId?: string | undefined;
-        appId?: string | undefined;
     };
     requestBody: {
         protocol: "Babylon";
@@ -445,7 +436,6 @@ export type GetStakesResponse = ({
     requester: {
         userId: string;
         tokenId?: string | undefined;
-        appId?: string | undefined;
     };
     requestBody: {
         protocol: "Babylon";
@@ -485,7 +475,6 @@ export type GetStakesResponse = ({
     requester: {
         userId: string;
         tokenId?: string | undefined;
-        appId?: string | undefined;
     };
     requestBody: {
         protocol: "Babylon";
@@ -524,7 +513,6 @@ export type GetStakesResponse = ({
         requester: {
             userId: string;
             tokenId?: string | undefined;
-            appId?: string | undefined;
         };
         requestBody: ({
             protocol: "Babylon";
@@ -588,7 +576,6 @@ export type ListStakeActionsResponse = {
         requester: {
             userId: string;
             tokenId?: string | undefined;
-            appId?: string | undefined;
         };
         requestBody: ({
             protocol: "Babylon";
@@ -647,7 +634,6 @@ export type ListStakesResponse = {
         requester: {
             userId: string;
             tokenId?: string | undefined;
-            appId?: string | undefined;
         };
         requestBody: {
             protocol: "Babylon";
@@ -685,7 +671,6 @@ export type ListStakesResponse = {
         requester: {
             userId: string;
             tokenId?: string | undefined;
-            appId?: string | undefined;
         };
         requestBody: {
             protocol: "Babylon";
@@ -725,7 +710,6 @@ export type ListStakesResponse = {
         requester: {
             userId: string;
             tokenId?: string | undefined;
-            appId?: string | undefined;
         };
         requestBody: {
             protocol: "Babylon";

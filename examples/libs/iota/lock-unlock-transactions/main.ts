@@ -15,7 +15,7 @@ const initDfnsWallet = async (walletId: string) => {
   })
 
   const dfnsClient = new DfnsApiClient({
-    appId: process.env.DFNS_APP_ID!,
+    orgId: process.env.DFNS_ORG_ID!,
     authToken: process.env.DFNS_AUTH_TOKEN!,
     baseUrl: process.env.DFNS_API_URL!,
     signer,
@@ -42,7 +42,7 @@ const prepareLockingTransaction = (tx: Transaction, recipient: string, amount: n
 }
 
 const prepareUnlockingTransaction = (tx: Transaction, lockedObjects: string[], recipient: string): void => {
-  const coins = lockedObjects.map(objectId => {
+  const coins = lockedObjects.map((objectId) => {
     const [unlock] = tx.moveCall({
       target: '0x2::timelock::unlock',
       typeArguments: ['0x2::balance::Balance<0x2::iota::IOTA>'],
@@ -60,7 +60,7 @@ const prepareUnlockingTransaction = (tx: Transaction, lockedObjects: string[], r
 const main = async (): Promise<void> => {
   const wallet = await initDfnsWallet(process.env.IOTA_WALLET_ID!)
   console.log(`Iota wallet address: ${wallet.address}`)
-  const client = new IotaClient({ url: process.env.IOTA_RPC_URL!})
+  const client = new IotaClient({ url: process.env.IOTA_RPC_URL! })
   const amount = 1
   const recipient = wallet.address
   const expirationMs = Date.now() - 10 * 24 * 60 * 60 * 1000
@@ -71,13 +71,14 @@ const main = async (): Promise<void> => {
   let txRes = await client.signAndExecuteTransaction({
     transaction: tx,
     signer: wallet,
-    options: {showObjectChanges: true}})
+    options: { showObjectChanges: true },
+  })
   console.log(`Transaction broadcasted: hash = ${txRes.digest}`)
 
   if (!txRes.objectChanges) throw new Error('Failed to retrieve objectChanges')
 
-  // To be sure the locked object will appear when callin getOwnedObjects  
-  await client.waitForTransaction({digest: txRes.digest})
+  // To be sure the locked object will appear when callin getOwnedObjects
+  await client.waitForTransaction({ digest: txRes.digest })
 
   console.log('\n\nTimelocked objects after locking transaction:\n')
 
@@ -85,21 +86,20 @@ const main = async (): Promise<void> => {
 
   const lockedObjects = txRes.objectChanges
     .filter((o: IotaObjectChange) => o.type === 'created' && o.objectType.includes('TimeLock'))
-    .map(o => (o as { objectId: string }).objectId)
+    .map((o) => (o as { objectId: string }).objectId)
 
   if (!lockedObjects.length) throw new Error('No locked objects found')
-
 
   console.log(`\n\nUnlocking previous locked objects: ${lockedObjects}`)
 
   // We need to be sure that the object made it on chain. Unfortunately,
   // signAndExecuteTransaction can return before the tx makes it onchain.
   // The execution is made localy
-  await client.waitForTransaction({digest: txRes.digest})
+  await client.waitForTransaction({ digest: txRes.digest })
 
   tx = new Transaction()
   prepareUnlockingTransaction(tx, lockedObjects, recipient)
-  txRes = await client.signAndExecuteTransaction({transaction: tx, signer: wallet})
+  txRes = await client.signAndExecuteTransaction({ transaction: tx, signer: wallet })
   console.log(`Transaction broadcasted: hash = ${txRes.digest}`)
 }
 
@@ -111,8 +111,13 @@ const getOwnedObjects = async (client: IotaClient, owner: string, objectType: st
   const objects: MoveObjectWithId[] = []
 
   while (hasNextPage) {
-    const ownedObjects = await client.getOwnedObjects({ owner, filter: { StructType: objectType }, options: { showType: true, showContent: true }, cursor: nextCursor })
-    ownedObjects.data.forEach(o => {
+    const ownedObjects = await client.getOwnedObjects({
+      owner,
+      filter: { StructType: objectType },
+      options: { showType: true, showContent: true },
+      cursor: nextCursor,
+    })
+    ownedObjects.data.forEach((o) => {
       if (o.data?.content?.dataType === 'moveObject') {
         objects.push({ ...o.data.content, objectId: o.data?.objectId || 'unknown' })
       }
@@ -124,16 +129,22 @@ const getOwnedObjects = async (client: IotaClient, owner: string, objectType: st
 }
 
 const displayTimelockedObjects = async (client: IotaClient, recipient: string): Promise<void> => {
-  const timelockedObjects = await getOwnedObjects(client, recipient, '0x2::timelock::TimeLock<0x2::balance::Balance<0x2::iota::IOTA>>')
+  const timelockedObjects = await getOwnedObjects(
+    client,
+    recipient,
+    '0x2::timelock::TimeLock<0x2::balance::Balance<0x2::iota::IOTA>>'
+  )
   console.log('ObjectId | Amount | Expiration')
-  timelockedObjects.forEach(t => {
+  timelockedObjects.forEach((t) => {
     const value = getMoveFields(t)['locked']?.toString() ?? '0'
     const expiration = getMoveFields(t)['expiration_timestamp_ms']?.toString() ?? '0'
     console.log(`${t.objectId} | ${value} | ${expiration}`)
   })
 }
 
-const getMoveFields = (object: MoveStruct): { [key: string]: MoveValue } => (isMoveStructWithFields(object) ? object.fields : {})
-const isMoveStructWithFields = (data: any): data is { fields: { [key: string]: MoveValue }; type: string } => data && typeof data === 'object' && 'fields' in data
+const getMoveFields = (object: MoveStruct): { [key: string]: MoveValue } =>
+  isMoveStructWithFields(object) ? object.fields : {}
+const isMoveStructWithFields = (data: any): data is { fields: { [key: string]: MoveValue }; type: string } =>
+  data && typeof data === 'object' && 'fields' in data
 
 main()

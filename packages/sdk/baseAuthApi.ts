@@ -12,15 +12,7 @@ import {
   UserActionChallenge,
 } from './signer'
 import { HttpMethod, simpleFetch } from './utils/fetch'
-
-export type DfnsBaseApiOptions = {
-  appId: string
-  /** Needs to be specified to use any endpoint that requires authentication */
-  authToken?: string
-  /** Only needs to be specified when using another API environment */
-  baseUrl?: string
-  appSecret?: string
-}
+import { DfnsBaseApiOptions } from './types/generic'
 
 export type CreateUserActionChallengeRequest = {
   userActionPayload: string

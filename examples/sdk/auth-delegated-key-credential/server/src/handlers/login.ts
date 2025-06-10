@@ -5,7 +5,7 @@ import { apiClient } from '../clients'
 export const loginInit = async (req: Request, res: Response) => {
   const { username, orgId } = req.body
 
-  const client = apiClient(process.env.DFNS_APP_ID!)
+  const client = apiClient(process.env.DFNS_ORG_ID!)
   const challenge = await client.auth.createLoginChallenge({ body: { username, orgId } })
 
   console.debug(challenge)
@@ -16,7 +16,7 @@ export const loginInit = async (req: Request, res: Response) => {
 export const loginComplete = async (req: Request, res: Response) => {
   const { signedChallenge } = req.body
 
-  const client = apiClient(process.env.DFNS_APP_ID!)
+  const client = apiClient(process.env.DFNS_ORG_ID!)
   const login = await client.auth.login({ body: signedChallenge })
 
   console.debug(login)

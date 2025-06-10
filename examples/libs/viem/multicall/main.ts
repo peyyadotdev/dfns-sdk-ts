@@ -22,7 +22,7 @@ const initDfnsWallet = (walletId: string) => {
   })
 
   const dfnsClient = new DfnsApiClient({
-    appId: process.env.DFNS_APP_ID!,
+    orgId: process.env.DFNS_ORG_ID!,
     authToken: process.env.DFNS_AUTH_TOKEN!,
     baseUrl: process.env.DFNS_API_URL!,
     signer,
@@ -33,7 +33,7 @@ const initDfnsWallet = (walletId: string) => {
 
 const main = async () => {
   // The sponsor wallet will pay for the gas
-  const ethereumWallet = await initDfnsWallet(process.env.ETHEREUM_WALLET_ID!);
+  const ethereumWallet = await initDfnsWallet(process.env.ETHEREUM_WALLET_ID!)
 
   const ethereumWalletClient = createWalletClient({
     account: toAccount(ethereumWallet),
@@ -45,13 +45,15 @@ const main = async () => {
     data: encodeFunctionData({
       abi: multicallAbi,
       functionName: 'aggregate3Value',
-      args: [[
-        { target: address1, value: parseEther('0.00001'), allowFailure: false, callData: "" },
-        { target: address2, value: parseEther('0.00001'), allowFailure: false, callData: "" }
-      ]]
+      args: [
+        [
+          { target: address1, value: parseEther('0.00001'), allowFailure: false, callData: '' },
+          { target: address2, value: parseEther('0.00001'), allowFailure: false, callData: '' },
+        ],
+      ],
     }),
     to: multiCallAddress,
-    value: parseEther('0.00002')
+    value: parseEther('0.00002'),
   })
 
   console.log(hash)

@@ -22,10 +22,7 @@ export default function Wallets(): JSX.Element {
         headers: {
           'content-type': 'application/json',
         },
-        body: JSON.stringify({
-          appId: process.env.REACT_APP_DFNS_APP_ID!,
-          authToken,
-        }),
+        body: JSON.stringify({ authToken }),
       })
 
       setWallets(await res.json())
@@ -57,7 +54,6 @@ export default function Wallets(): JSX.Element {
           'content-type': 'application/json',
         },
         body: JSON.stringify({
-          appId: process.env.REACT_APP_DFNS_APP_ID!,
           authToken,
           walletId,
           message: formData.get('message') as string,
@@ -81,7 +77,6 @@ export default function Wallets(): JSX.Element {
           'content-type': 'application/json',
         },
         body: JSON.stringify({
-          appId: process.env.REACT_APP_DFNS_APP_ID!,
           authToken,
           walletId,
           requestBody,

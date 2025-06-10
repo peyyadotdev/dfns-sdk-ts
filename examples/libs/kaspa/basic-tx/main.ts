@@ -14,7 +14,7 @@ const initDfnsWallet = async (walletId: string) => {
   })
 
   const dfnsClient = new DfnsApiClient({
-    appId: process.env.DFNS_APP_ID!,
+    orgId: process.env.DFNS_ORG_ID!,
     authToken: process.env.DFNS_AUTH_TOKEN!,
     baseUrl: process.env.DFNS_API_URL!,
     signer,
@@ -24,17 +24,12 @@ const initDfnsWallet = async (walletId: string) => {
 }
 
 const getUtxos = async (address: string): Promise<any[]> => {
-  return (
-    await axios.get(process.env.KASPA_API_URL!+`/addresses/${encodeURIComponent(address)}/utxos`)
-  ).data
+  return (await axios.get(process.env.KASPA_API_URL! + `/addresses/${encodeURIComponent(address)}/utxos`)).data
 }
 
 const submitTransaction = async (req: any): Promise<string> => {
-  return (
-    await axios.post(process.env.KASPA_API_URL!+`/transactions`, req)
-  ).data.transactionId
+  return (await axios.post(process.env.KASPA_API_URL! + `/transactions`, req)).data.transactionId
 }
-
 
 const main = async () => {
   const wallet = await initDfnsWallet(process.env.KASPA_WALLET_ID!)
@@ -42,7 +37,7 @@ const main = async () => {
   if (!wallet.address) throw Error(`cannot retrieve address from wallet`)
   console.log(`Wallet address: ${wallet.address}`)
 
-  const to = "kaspa:qztxkam9atxjukjwwjvnr0nr2nwgr4gweyjre84hnqsh22xr4cgtsathvrf6q"
+  const to = 'kaspa:qztxkam9atxjukjwwjvnr0nr2nwgr4gweyjre84hnqsh22xr4cgtsathvrf6q'
 
   const amount = BigInt(199990000)
 
@@ -58,15 +53,11 @@ const main = async () => {
   console.log(`Unspent balance: ${sumAmounts} sompi`)
 
   const tx = buildTransaction(utxos, wallet.address, to, amount, KASPA_AVERAGE_SOMPI_FEE_PER_INPUT)
-  console.log(`Transaction built ${
-    JSON.stringify(
-      tx, 
-      (key, value) => typeof value === 'bigint' ? value.toString(): value,
-      2)
-    }`
+  console.log(
+    `Transaction built ${JSON.stringify(tx, (key, value) => (typeof value === 'bigint' ? value.toString() : value), 2)}`
   )
 
-  const signed = (await wallet.sign(tx))
+  const signed = await wallet.sign(tx)
 
   const txId = await submitTransaction(transactionToSubmitRequest(signed))
   console.log(`Transaction Id: ${txId}`)
@@ -74,8 +65,8 @@ const main = async () => {
 
 const buildTransaction = (utxos: any[], from: string, to: string, amount: bigint, feePerUtxo: bigint): Transaction => {
   const selectedUtxosRes = selectUtxos(utxos, amount, feePerUtxo)
-  if(!selectedUtxosRes.enoughFund){
-    throw new Error("not enough funds to cover amount + fees")
+  if (!selectedUtxosRes.enoughFund) {
+    throw new Error('not enough funds to cover amount + fees')
   }
 
   const outputs = [new PaymentOutput(new Address(to), BigInt(amount))]
@@ -88,10 +79,13 @@ const buildTransaction = (utxos: any[], from: string, to: string, amount: bigint
   const utxoEntries = new UtxoEntries(selectedUtxosRes.utxos)
 
   return createTransaction(utxoEntries.items, outputs, from, 0n, 0, 1, 1)
-
 }
 
-const selectUtxos = (utxos: any, amount: bigint, feePerUtxo: bigint): { enoughFund: boolean, utxos: any[], totalAmountIncludingFees: bigint } => {
+const selectUtxos = (
+  utxos: any,
+  amount: bigint,
+  feePerUtxo: bigint
+): { enoughFund: boolean; utxos: any[]; totalAmountIncludingFees: bigint } => {
   // sort utxo by amount
   const sortedUtxos = utxos.sort((a: any, b: any) => Number(b.utxoEntry.amount) - Number(a.utxoEntry.amount))
 

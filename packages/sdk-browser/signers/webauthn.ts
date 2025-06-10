@@ -14,7 +14,7 @@ export const DEFAULT_WAIT_TIMEOUT = 60000
 
 interface WebAuthnSignerConf {
   /**
-   * The relying party identifies your application to users, when users create/use passkeys. (Read more [here](https://www.w3.org/TR/webauthn-2/#relying-party)).
+   * The "relying party" identifies your application to users, when users create/use passkeys. (Read more [here](https://www.w3.org/TR/webauthn-2/#relying-party)).
    * - id: The relying party identifier is a valid domain string identifying the WebAuthn Relying Party.
    * In other words, its the domain your application is running on, which will be tied to the passkeys that users create.
    * We advise to use the root domain, not the full domain (eg `acme.com`, not `app.acme.com` nor `foo.app.acme.com`), that way, passkeys created
