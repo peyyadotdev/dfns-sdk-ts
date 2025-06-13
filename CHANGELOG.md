@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.7.0 (2025-06-13)
+
+- Remove requirement for passing `x-dfns-appid` header, since Applications are deprecated (Read more [here](https://docs.dfns.co/d/guides/applications-depreaction))
+
 ## 0.6.12 (2024-06-05)
 
 - Updated `DfnsApiClient` to match the latest API changes
