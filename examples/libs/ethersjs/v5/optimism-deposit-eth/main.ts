@@ -17,7 +17,7 @@ const initDfnsWallet = (walletId: string) => {
   })
 
   const dfnsClient = new DfnsApiClient({
-    appId: process.env.DFNS_APP_ID!,
+    orgId: process.env.DFNS_ORG_ID!,
     authToken: process.env.DFNS_AUTH_TOKEN!,
     baseUrl: process.env.DFNS_API_URL!,
     signer,

@@ -7,7 +7,7 @@ export const signer = new AsymmetricKeySigner({
 })
 
 export const dfns = new DfnsApiClient({
-  appId: process.env.DFNS_APP_ID!,
+  orgId: process.env.DFNS_ORG_ID!,
   baseUrl: process.env.DFNS_API_URL!,
   authToken: process.env.DFNS_AUTH_TOKEN!,
   signer,
@@ -15,7 +15,7 @@ export const dfns = new DfnsApiClient({
 
 export const getDfnsDelegatedClient = (endUserAuthToken: string) =>
   new DfnsDelegatedApiClient({
-    appId: process.env.DFNS_APP_ID!,
+    orgId: process.env.DFNS_ORG_ID!,
     baseUrl: process.env.DFNS_API_URL!,
     authToken: endUserAuthToken,
   })

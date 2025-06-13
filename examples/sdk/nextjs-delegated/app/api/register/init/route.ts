@@ -7,9 +7,6 @@ export const POST = async (req: Request) => {
   // Dfns delegated registration.
   const { username } = await req.json()
 
-  // Registration must use the appId and appOrigin of the client application,
-  // otherwise the challenge returned does not have the appropriate relying
-  // party and origin to create the WebAuthn or Passkeys credential
   const client = apiClient()
   const challenge = await client.auth.createDelegatedRegistrationChallenge({
     body: { kind: 'EndUser', email: username },

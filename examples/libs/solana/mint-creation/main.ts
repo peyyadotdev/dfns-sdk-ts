@@ -10,7 +10,7 @@ import {
   createInitializeMintCloseAuthorityInstruction,
   createInitializeMintInstruction,
   getMintLen,
-} from "@solana/spl-token"
+} from '@solana/spl-token'
 
 import dotenv from 'dotenv'
 
@@ -23,7 +23,7 @@ const initDfnsWallet = async (walletId: string) => {
   })
 
   const dfnsClient = new DfnsApiClient({
-    appId: process.env.DFNS_APP_ID!,
+    orgId: process.env.DFNS_ORG_ID!,
     authToken: process.env.DFNS_AUTH_TOKEN!,
     baseUrl: process.env.DFNS_API_URL!,
     signer,
@@ -45,7 +45,7 @@ const main = async () => {
 
   const decimals = 2
 
-  const mintLen = getMintLen([ExtensionType.MintCloseAuthority]);
+  const mintLen = getMintLen([ExtensionType.MintCloseAuthority])
   const lamports = await connection.getMinimumBalanceForRentExemption(mintLen)
 
   const createAccountInstruction = SystemProgram.createAccount({
@@ -56,12 +56,11 @@ const main = async () => {
     programId: TOKEN_2022_PROGRAM_ID,
   })
 
-  const initializeMintCloseAuthorityInstruction =
-    createInitializeMintCloseAuthorityInstruction(
-      mint.publicKey,
-      authority.publicKey, // Designated Close Authority
-      TOKEN_2022_PROGRAM_ID, // Token Extension Program ID
-    )
+  const initializeMintCloseAuthorityInstruction = createInitializeMintCloseAuthorityInstruction(
+    mint.publicKey,
+    authority.publicKey, // Designated Close Authority
+    TOKEN_2022_PROGRAM_ID // Token Extension Program ID
+  )
 
   const initializeMintInstruction = createInitializeMintInstruction(
     mint.publicKey,
@@ -74,13 +73,13 @@ const main = async () => {
   const mintInitTx = new Transaction().add(
     createAccountInstruction,
     initializeMintCloseAuthorityInstruction,
-    initializeMintInstruction,
+    initializeMintInstruction
   )
 
   mintInitTx.feePayer = authority.publicKey
   mintInitTx.recentBlockhash = latestBlockhash.blockhash
   mintInitTx.lastValidBlockHeight = latestBlockhash.lastValidBlockHeight
-  
+
   const feePayerSigned = await authority.signTransaction(mintInitTx)
   const mintInitTxSigned = await mint.signTransaction(feePayerSigned)
 
@@ -95,7 +94,7 @@ const main = async () => {
       authority.publicKey,
       authority.publicKey, // Authority
       [],
-      TOKEN_2022_PROGRAM_ID,
+      TOKEN_2022_PROGRAM_ID
     )
   )
 

@@ -18,14 +18,7 @@ This demo app demonstrates how to use Dfns SDK in this configuration:
 const prerequisites = `
 ## Prerequisites
 
-For this demo to work, you need to complete a few prerequisites:
-
-- On Dfns Dashboard, create a new Dfns Application:
-  - type: Client Side
-  - Relying Party: localhost
-  - Origin: http://localhost:3000
-- On Dfns Dashboard, create a new Service Account (check [Dfns docs](https://app.gitbook.com/o/puStYG2QYnebEAexXqmt/s/oMvt8zMQg1BzesvBRNB4/advanced-topics/authentication/credentials/access-token-credentials) to see how to generate a public/private keypair)
-- Copy/paste the .env.example into a .env.local, and replace all your env variable values
+For this demo to work, you must first whitelist the domain associated of this app. To do that, go to Dfns Dashboard > Settings > Passkey Domains.
 `
 
 const step1 = `

@@ -8,7 +8,7 @@ export const apiClient = (authToken?: string) => {
   })
 
   return new DfnsApiClient({
-    appId: process.env.DFNS_APP_ID!,
+    orgId: process.env.DFNS_ORG_ID!,
     authToken: authToken ?? process.env.DFNS_AUTH_TOKEN!,
     baseUrl: process.env.DFNS_API_URL!,
     signer,
@@ -17,7 +17,7 @@ export const apiClient = (authToken?: string) => {
 
 export const delegatedClient = (authToken: string) => {
   return new DfnsDelegatedApiClient({
-    appId: process.env.DFNS_APP_ID!,
+    orgId: process.env.DFNS_ORG_ID!,
     authToken,
     baseUrl: process.env.DFNS_API_URL!,
   })

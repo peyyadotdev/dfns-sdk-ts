@@ -7,49 +7,6 @@ import * as T from './types'
 export class DelegatedAuthClient {
   constructor(private apiOptions: DfnsDelegatedApiClientOptions) {}
 
-  async activateApplicationInit(request: T.ActivateApplicationRequest): Promise<UserActionChallengeResponse> {
-    const path = buildPathAndQuery('/auth/apps/:appId/activate', {
-      path: request ?? {},
-      query: {},
-    })
-
-    const challenge = await BaseAuthApi.createUserActionChallenge(
-      {
-        userActionHttpMethod: 'PUT',
-        userActionHttpPath: path,
-        userActionPayload: JSON.stringify({}),
-        userActionServerKind: 'Api',
-      },
-      this.apiOptions
-    )
-
-    return challenge
-  }
-
-  async activateApplicationComplete(
-    request: T.ActivateApplicationRequest,
-    signedChallenge: SignUserActionChallengeRequest
-  ): Promise<T.ActivateApplicationResponse> {
-    const path = buildPathAndQuery('/auth/apps/:appId/activate', {
-      path: request ?? {},
-      query: {},
-    })
-
-    const { userAction } = await BaseAuthApi.signUserActionChallenge(
-      signedChallenge,
-      this.apiOptions
-    )
-
-    const response = await simpleFetch(path, {
-      method: 'PUT',
-      body: {},
-      headers: { 'x-dfns-useraction': userAction },
-      apiOptions: this.apiOptions,
-    })
-
-    return response.json()
-  }
-
   async activateCredentialInit(request: T.ActivateCredentialRequest): Promise<UserActionChallengeResponse> {
     const path = buildPathAndQuery('/auth/credentials/activate', {
       path: request ?? {},
@@ -222,49 +179,6 @@ export class DelegatedAuthClient {
     return response.json()
   }
 
-  async archiveApplicationInit(request: T.ArchiveApplicationRequest): Promise<UserActionChallengeResponse> {
-    const path = buildPathAndQuery('/auth/apps/:appId', {
-      path: request ?? {},
-      query: {},
-    })
-
-    const challenge = await BaseAuthApi.createUserActionChallenge(
-      {
-        userActionHttpMethod: 'DELETE',
-        userActionHttpPath: path,
-        userActionPayload: JSON.stringify({}),
-        userActionServerKind: 'Api',
-      },
-      this.apiOptions
-    )
-
-    return challenge
-  }
-
-  async archiveApplicationComplete(
-    request: T.ArchiveApplicationRequest,
-    signedChallenge: SignUserActionChallengeRequest
-  ): Promise<T.ArchiveApplicationResponse> {
-    const path = buildPathAndQuery('/auth/apps/:appId', {
-      path: request ?? {},
-      query: {},
-    })
-
-    const { userAction } = await BaseAuthApi.signUserActionChallenge(
-      signedChallenge,
-      this.apiOptions
-    )
-
-    const response = await simpleFetch(path, {
-      method: 'DELETE',
-      body: {},
-      headers: { 'x-dfns-useraction': userAction },
-      apiOptions: this.apiOptions,
-    })
-
-    return response.json()
-  }
-
   async archivePersonalAccessTokenInit(request: T.ArchivePersonalAccessTokenRequest): Promise<UserActionChallengeResponse> {
     const path = buildPathAndQuery('/auth/pats/:tokenId', {
       path: request ?? {},
@@ -387,49 +301,6 @@ export class DelegatedAuthClient {
     const response = await simpleFetch(path, {
       method: 'DELETE',
       body: {},
-      headers: { 'x-dfns-useraction': userAction },
-      apiOptions: this.apiOptions,
-    })
-
-    return response.json()
-  }
-
-  async createApplicationInit(request: T.CreateApplicationRequest): Promise<UserActionChallengeResponse> {
-    const path = buildPathAndQuery('/auth/apps', {
-      path: request ?? {},
-      query: {},
-    })
-
-    const challenge = await BaseAuthApi.createUserActionChallenge(
-      {
-        userActionHttpMethod: 'POST',
-        userActionHttpPath: path,
-        userActionPayload: JSON.stringify(request.body),
-        userActionServerKind: 'Api',
-      },
-      this.apiOptions
-    )
-
-    return challenge
-  }
-
-  async createApplicationComplete(
-    request: T.CreateApplicationRequest,
-    signedChallenge: SignUserActionChallengeRequest
-  ): Promise<T.CreateApplicationResponse> {
-    const path = buildPathAndQuery('/auth/apps', {
-      path: request ?? {},
-      query: {},
-    })
-
-    const { userAction } = await BaseAuthApi.signUserActionChallenge(
-      signedChallenge,
-      this.apiOptions
-    )
-
-    const response = await simpleFetch(path, {
-      method: 'POST',
-      body: request.body,
       headers: { 'x-dfns-useraction': userAction },
       apiOptions: this.apiOptions,
     })
@@ -877,49 +748,6 @@ export class DelegatedAuthClient {
     const response = await simpleFetch(path, {
       method: 'POST',
       body: request.body,
-      apiOptions: this.apiOptions,
-    })
-
-    return response.json()
-  }
-
-  async deactivateApplicationInit(request: T.DeactivateApplicationRequest): Promise<UserActionChallengeResponse> {
-    const path = buildPathAndQuery('/auth/apps/:appId/deactivate', {
-      path: request ?? {},
-      query: {},
-    })
-
-    const challenge = await BaseAuthApi.createUserActionChallenge(
-      {
-        userActionHttpMethod: 'PUT',
-        userActionHttpPath: path,
-        userActionPayload: JSON.stringify({}),
-        userActionServerKind: 'Api',
-      },
-      this.apiOptions
-    )
-
-    return challenge
-  }
-
-  async deactivateApplicationComplete(
-    request: T.DeactivateApplicationRequest,
-    signedChallenge: SignUserActionChallengeRequest
-  ): Promise<T.DeactivateApplicationResponse> {
-    const path = buildPathAndQuery('/auth/apps/:appId/deactivate', {
-      path: request ?? {},
-      query: {},
-    })
-
-    const { userAction } = await BaseAuthApi.signUserActionChallenge(
-      signedChallenge,
-      this.apiOptions
-    )
-
-    const response = await simpleFetch(path, {
-      method: 'PUT',
-      body: {},
-      headers: { 'x-dfns-useraction': userAction },
       apiOptions: this.apiOptions,
     })
 
@@ -1454,49 +1282,6 @@ export class DelegatedAuthClient {
     const response = await simpleFetch(path, {
       method: 'POST',
       body: request.body,
-      apiOptions: this.apiOptions,
-    })
-
-    return response.json()
-  }
-
-  async updateApplicationInit(request: T.UpdateApplicationRequest): Promise<UserActionChallengeResponse> {
-    const path = buildPathAndQuery('/auth/apps/:appId', {
-      path: request ?? {},
-      query: {},
-    })
-
-    const challenge = await BaseAuthApi.createUserActionChallenge(
-      {
-        userActionHttpMethod: 'POST',
-        userActionHttpPath: path,
-        userActionPayload: JSON.stringify(request.body),
-        userActionServerKind: 'Api',
-      },
-      this.apiOptions
-    )
-
-    return challenge
-  }
-
-  async updateApplicationComplete(
-    request: T.UpdateApplicationRequest,
-    signedChallenge: SignUserActionChallengeRequest
-  ): Promise<T.UpdateApplicationResponse> {
-    const path = buildPathAndQuery('/auth/apps/:appId', {
-      path: request ?? {},
-      query: {},
-    })
-
-    const { userAction } = await BaseAuthApi.signUserActionChallenge(
-      signedChallenge,
-      this.apiOptions
-    )
-
-    const response = await simpleFetch(path, {
-      method: 'POST',
-      body: request.body,
-      headers: { 'x-dfns-useraction': userAction },
       apiOptions: this.apiOptions,
     })
 

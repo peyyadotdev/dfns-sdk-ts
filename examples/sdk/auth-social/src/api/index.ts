@@ -12,7 +12,7 @@ export const getWebauthnSigner = () => {
 
 export const dfnsApi = (authToken: string | undefined): DfnsApiClient => {
   return new DfnsApiClient({
-    appId: process.env.REACT_APP_DFNS_APP_ID!,
+    orgId: process.env.REACT_APP_DFNS_ORG_ID!,
     authToken: authToken,
     baseUrl: process.env.REACT_APP_DFNS_API_URL!,
     signer: getWebauthnSigner(),

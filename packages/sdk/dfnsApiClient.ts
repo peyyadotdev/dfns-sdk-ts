@@ -1,4 +1,4 @@
-import { DfnsBaseApiOptions } from './baseAuthApi'
+import { DfnsBaseApiOptions } from './types/generic'
 import { AuthClient } from './generated/auth'
 import { ExchangesClient } from './generated/exchanges'
 import { FeeSponsorsClient } from './generated/feeSponsors'

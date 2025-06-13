@@ -186,7 +186,6 @@ export type GenerateSignatureResponse = {
     requester: {
         userId: string;
         tokenId?: string | undefined;
-        appId?: string | undefined;
     };
     requestBody: {
         kind: "Hash";
@@ -325,7 +324,6 @@ export type GetSignatureResponse = {
     requester: {
         userId: string;
         tokenId?: string | undefined;
-        appId?: string | undefined;
     };
     requestBody: {
         kind: "Hash";
@@ -498,7 +496,6 @@ export type ListSignaturesResponse = {
         requester: {
             userId: string;
             tokenId?: string | undefined;
-            appId?: string | undefined;
         };
         requestBody: {
             kind: "Hash";

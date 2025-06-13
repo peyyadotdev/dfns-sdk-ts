@@ -11,7 +11,7 @@ export async function POST(request: NextRequest) {
 
   // Complete end-user registration
   const result = await BaseAuthApi.createUserRegistration(body.signedChallenge, {
-    appId: process.env.DFNS_APP_ID!,
+    orgId: process.env.DFNS_ORG_ID!,
     baseUrl: process.env.DFNS_API_URL!,
     authToken: body.tempAuthToken,
   })

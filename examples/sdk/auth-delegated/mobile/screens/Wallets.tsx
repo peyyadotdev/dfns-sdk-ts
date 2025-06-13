@@ -25,10 +25,7 @@ export function Wallets(): React.JSX.Element {
         headers: {
           'content-type': 'application/json',
         },
-        body: JSON.stringify({
-          appId: Config.DFNS_APP_ID!,
-          authToken,
-        }),
+        body: JSON.stringify({ authToken }),
       })
 
       setWallets(await res.json())
@@ -59,7 +56,6 @@ export function Wallets(): React.JSX.Element {
           'content-type': 'application/json',
         },
         body: JSON.stringify({
-          appId: Config.DFNS_APP_ID!,
           authToken,
           walletId,
           message,
@@ -85,7 +81,6 @@ export function Wallets(): React.JSX.Element {
           'content-type': 'application/json',
         },
         body: JSON.stringify({
-          appId: Config.DFNS_APP_ID!,
           authToken,
           walletId,
           requestBody,

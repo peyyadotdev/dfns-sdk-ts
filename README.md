@@ -111,7 +111,7 @@ const signer = ... // a Credential Signer (webauthN or key signer from section a
 
 const apiClient = new DfnsApiClient({
   baseUrl: 'https://api.dfns.io', // base Url of DFNS API
-  appId: 'ap-2ng9jv-80cfc-983pop0iauf2sv8r', // ID of the Application registered with DFNS
+  orgId: 'or-2ng9jv-80cfc-983pop0iauf2sv8r', // ID of the Dfns Organisation
   authToken: '...', // an auth token
   signer,
 })
@@ -152,7 +152,7 @@ import { DfnsDelegatedApiClient } from '@dfns/sdk'
 
 const dfnsDelegated = new DfnsDelegatedApiClient({
   baseUrl: 'https://api.dfns.io', // base Url of DFNS API
-  appId: 'ap-2ng9jv-80cfc-983pop0iauf2sv8r', // ID of the Application registered with DFNS
+  orgId: 'org-2ng9jv-80cfc-983pop0iauf2sv8r', // ID of the Dfns Organisation
   authToken: userAuthToken, // Auth token of the User
 })
 
@@ -174,7 +174,7 @@ import { DfnsAuthenticator } from '@dfns/sdk'
 import { WebAuthn } from '@dfns/sdk-browser'
 
 const dfnsAuth = new DfnsAuthenticator({
-  appId,
+  orgId,
   baseUrl: apiUrl,
   signer: new WebAuthn({ rpId }),
 })

@@ -7,7 +7,7 @@ export const login = async (req: Request, res: Response) => {
   // to Dfns with delegated login. Delegated login does not need the
   // end user to use WebAuthn or Passkeys to login.
   const { username } = req.body
-  const client = apiClient(process.env.DFNS_APP_ID!)
+  const client = apiClient(process.env.DFNS_ORG_ID!)
   const login = await client.auth.delegatedLogin({ body: { username } })
 
   // The auth token returned by delegated login should be cached securely for the

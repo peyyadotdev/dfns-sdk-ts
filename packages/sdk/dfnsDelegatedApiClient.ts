@@ -1,4 +1,4 @@
-import { DfnsBaseApiOptions } from './baseAuthApi'
+import { DfnsBaseApiOptions } from './types/generic'
 import { DelegatedAuthClient } from './generated/auth'
 import { DelegatedExchangesClient } from './generated/exchanges'
 import { DelegatedFeeSponsorsClient } from './generated/feeSponsors'

@@ -1,4 +1,15 @@
-import { AccountAddress, Aptos, APTOS_COIN, AptosConfig, MimeType, Network, parseTypeTag, PendingTransactionResponse, postAptosFullNode, U64} from '@aptos-labs/ts-sdk'
+import {
+  AccountAddress,
+  Aptos,
+  APTOS_COIN,
+  AptosConfig,
+  MimeType,
+  Network,
+  parseTypeTag,
+  PendingTransactionResponse,
+  postAptosFullNode,
+  U64,
+} from '@aptos-labs/ts-sdk'
 import { DfnsWallet, hexToBuffer } from '@dfns/lib-aptos'
 import { DfnsApiClient } from '@dfns/sdk'
 import { AsymmetricKeySigner } from '@dfns/sdk-keysigner'
@@ -14,7 +25,7 @@ const initDfnsWallet = async (walletId: string) => {
   })
 
   const dfnsClient = new DfnsApiClient({
-    appId: process.env.DFNS_APP_ID!,
+    orgId: process.env.DFNS_ORG_ID!,
     authToken: process.env.DFNS_AUTH_TOKEN!,
     baseUrl: process.env.DFNS_API_URL!,
     signer,
@@ -38,7 +49,7 @@ async function main() {
 
   console.log('sender wallet address: ', sender.address)
   console.log('receiver wallet address: ', receiver.address)
- 
+
   console.log('creating a new object owned by sender')
 
   // We first create an object owned by the receiver
@@ -54,7 +65,7 @@ async function main() {
   })
 
   // simple transaction
-  const signed = (await sender.signTransaction(createObject.rawTransaction))
+  const signed = await sender.signTransaction(createObject.rawTransaction)
 
   const { data } = await postAptosFullNode<Uint8Array, PendingTransactionResponse>({
     aptosConfig: client.config,
@@ -70,14 +81,14 @@ async function main() {
     accountAddress: sender.address,
     minimumLedgerVersion: BigInt(response.version),
   })
-  
+
   const objectAddress = objects[0].object_address
 
   console.log(`created object address: ${objectAddress}`)
 
   // Then we create the multiAgent transaction that will give the receiver the ownership of the object
   const transferObjectMultiSigScript =
-  '0xa11ceb0b060000000701000602060a031017042706052d2d075a4b08a5012000000001000201030701000101040800020503040000060602010001070408010801060902010801050207030704060c060c0503010b000108010001060c010501090003060c0503010801010b0001090003060c0b000109000504636f696e066f626a656374067369676e6572064f626a6563740a4f626a656374436f72650a616464726573735f6f66087472616e7366657211616464726573735f746f5f6f626a6563740000000000000000000000000000000000000000000000000000000000000001010000010e0a010a0011000b0338000b0238010c040b000b040b011100380202'
+    '0xa11ceb0b060000000701000602060a031017042706052d2d075a4b08a5012000000001000201030701000101040800020503040000060602010001070408010801060902010801050207030704060c060c0503010b000108010001060c010501090003060c0503010801010b0001090003060c0b000109000504636f696e066f626a656374067369676e6572064f626a6563740a4f626a656374436f72650a616464726573735f6f66087472616e7366657211616464726573735f746f5f6f626a6563740000000000000000000000000000000000000000000000000000000000000001010000010e0a010a0011000b0338000b0238010c040b000b040b011100380202'
 
   const transferTx = await client.transaction.build.multiAgent({
     sender: sender.address,
@@ -96,7 +107,9 @@ async function main() {
   const complete = await receiver.signTransaction(partial)
   console.log(`receiver signed`)
 
-  const { data: { hash } } = await postAptosFullNode<Uint8Array, PendingTransactionResponse>({
+  const {
+    data: { hash },
+  } = await postAptosFullNode<Uint8Array, PendingTransactionResponse>({
     aptosConfig: client.config,
     body: complete.bcsToBytes(),
     path: 'transactions',

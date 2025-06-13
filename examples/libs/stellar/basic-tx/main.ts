@@ -1,7 +1,16 @@
 import { DfnsWallet } from '@dfns/lib-stellar'
 import { DfnsApiClient } from '@dfns/sdk'
 import { AsymmetricKeySigner } from '@dfns/sdk-keysigner'
-import { Asset, BASE_FEE, Horizon, Memo, Networks, Operation, Transaction, TransactionBuilder } from '@stellar/stellar-sdk'
+import {
+  Asset,
+  BASE_FEE,
+  Horizon,
+  Memo,
+  Networks,
+  Operation,
+  Transaction,
+  TransactionBuilder,
+} from '@stellar/stellar-sdk'
 
 import * as dotenv from 'dotenv'
 
@@ -14,7 +23,7 @@ const initDfnsWallet = async (walletId: string) => {
   })
 
   const dfnsClient = new DfnsApiClient({
-    appId: process.env.DFNS_APP_ID!,
+    orgId: process.env.DFNS_ORG_ID!,
     authToken: process.env.DFNS_AUTH_TOKEN!,
     baseUrl: process.env.DFNS_API_URL!,
     signer,
@@ -41,7 +50,7 @@ async function main() {
       Operation.payment({
         destination: senderWallet.address,
         asset: Asset.native(),
-        amount: "0.00001",
+        amount: '0.00001',
       })
     )
     .addMemo(Memo.text('Test Transaction'))

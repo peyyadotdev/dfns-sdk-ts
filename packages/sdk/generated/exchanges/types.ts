@@ -92,7 +92,6 @@ export type CreateDepositResponse = {
     requester: {
         userId: string;
         tokenId?: string | undefined;
-        appId?: string | undefined;
     };
     requestBody: {
         kind: "Native";
@@ -296,7 +295,6 @@ export type CreateWithdrawalResponse = {
     requester: {
         userId: string;
         tokenId?: string | undefined;
-        appId?: string | undefined;
     };
     requestBody: {
         kind: "Native";

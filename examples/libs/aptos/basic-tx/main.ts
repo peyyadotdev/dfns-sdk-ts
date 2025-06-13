@@ -1,4 +1,12 @@
-import { Aptos, APTOS_COIN, AptosConfig, MimeType, Network, PendingTransactionResponse, postAptosFullNode} from '@aptos-labs/ts-sdk'
+import {
+  Aptos,
+  APTOS_COIN,
+  AptosConfig,
+  MimeType,
+  Network,
+  PendingTransactionResponse,
+  postAptosFullNode,
+} from '@aptos-labs/ts-sdk'
 import { DfnsWallet } from '@dfns/lib-aptos'
 import { DfnsApiClient } from '@dfns/sdk'
 import { AsymmetricKeySigner } from '@dfns/sdk-keysigner'
@@ -14,7 +22,7 @@ const initDfnsWallet = async (walletId: string) => {
   })
 
   const dfnsClient = new DfnsApiClient({
-    appId: process.env.DFNS_APP_ID!,
+    orgId: process.env.DFNS_ORG_ID!,
     authToken: process.env.DFNS_AUTH_TOKEN!,
     baseUrl: process.env.DFNS_API_URL!,
     signer,
@@ -36,23 +44,23 @@ async function main() {
   const client = new Aptos(aptosConfig)
 
   console.log('wallet address: ', wallet.address)
-  let balance = await client.account.getAccountAPTAmount({accountAddress: wallet.address})
+  let balance = await client.account.getAccountAPTAmount({ accountAddress: wallet.address })
   console.log('initial wallet balance: ', balance)
 
   const tx = await client.transaction.build.simple({
-      sender: wallet.address,
-      data: {
-        function: '0x1::coin::transfer',
-        typeArguments: [APTOS_COIN],
-        functionArguments: [
-          "0x5bdc24cb9033286ffe19f436145b9e2267dd03b0fd0d422459d381a6431d39ba", // Receiver
-          "1", // Amount
-        ],
-      },
-    })
+    sender: wallet.address,
+    data: {
+      function: '0x1::coin::transfer',
+      typeArguments: [APTOS_COIN],
+      functionArguments: [
+        '0x5bdc24cb9033286ffe19f436145b9e2267dd03b0fd0d422459d381a6431d39ba', // Receiver
+        '1', // Amount
+      ],
+    },
+  })
 
   // No additional signers, we can sign directly the tx
-  const signed = (await wallet.signTransaction(tx))
+  const signed = await wallet.signTransaction(tx)
 
   const { data } = await postAptosFullNode<Uint8Array, PendingTransactionResponse>({
     aptosConfig: client.config,
@@ -63,9 +71,9 @@ async function main() {
   })
 
   // Wait for the transaction to be included
-  await client.waitForTransaction({transactionHash: data.hash})
+  await client.waitForTransaction({ transactionHash: data.hash })
 
-  balance = await client.account.getAccountAPTAmount({accountAddress: wallet.address})
+  balance = await client.account.getAccountAPTAmount({ accountAddress: wallet.address })
   console.log('balance after transfer: ', balance)
 }
 

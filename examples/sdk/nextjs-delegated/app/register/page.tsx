@@ -15,9 +15,6 @@ export default function Register() {
 
       const formData = new FormData(event.currentTarget)
 
-      // Start delegated registration flow. Server needs to obtain the challenge with the appId
-      // and appOrigin of the mobile application. For simplicity, they are included as part of
-      // the request body. Alternatively, they can be sent as headers or with other approaches.
       const initRes = await fetch('/api/register/init', {
         method: 'POST',
         headers: {
@@ -30,8 +27,8 @@ export default function Register() {
       const challenge = await initRes.json()
       console.log(JSON.stringify(challenge, null, 2))
 
-      // Webauthn flow
-      // Create the new webauthn credential using the challenge
+      // Passkey flow
+      // Create the new passkey using the challenge
       const webauthn = new WebAuthnSigner({
         relyingParty: {
           id: process.env.NEXT_PUBLIC_PASSKEYS_RELYING_PARTY_ID!,

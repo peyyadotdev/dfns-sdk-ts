@@ -12,11 +12,10 @@ import { AsymmetricKeySigner } from '@dfns/sdk-keysigner'
 const signer = new AsymmetricKeySigner({
   privateKey: process.env.DFNS_PRIVATE_KEY!,
   credId: process.env.DFNS_CRED_ID!,
-  appOrigin: process.env.DFNS_APP_ORIGIN!,
 })
 
 const dfnsClient = new DfnsApiClient({
-  appId: process.env.DFNS_APP_ID!,
+  orgId: process.env.DFNS_ORG_ID!,
   authToken: process.env.DFNS_AUTH_TOKEN!,
   baseUrl: process.env.DFNS_API_URL!,
   signer,

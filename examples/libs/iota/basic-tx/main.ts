@@ -15,7 +15,7 @@ const initDfnsWallet = async (walletId: string) => {
   })
 
   const dfnsClient = new DfnsApiClient({
-    appId: process.env.DFNS_APP_ID!,
+    orgId: process.env.DFNS_ORG_ID!,
     authToken: process.env.DFNS_AUTH_TOKEN!,
     baseUrl: process.env.DFNS_API_URL!,
     signer,
@@ -44,7 +44,7 @@ async function main() {
 
   tx.transferObjects([coin], recipient)
 
-  const res = await client.signAndExecuteTransaction({transaction: tx, signer: wallet})
+  const res = await client.signAndExecuteTransaction({ transaction: tx, signer: wallet })
 
   console.log(`transaction broadcasted: hash = ${res.digest}`)
 }

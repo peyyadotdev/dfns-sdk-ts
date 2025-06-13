@@ -4,17 +4,16 @@ import { Request, Response } from 'express'
 import { delegatedClient } from '../clients'
 
 export const listWallets = async (req: Request, res: Response) => {
-  const { appId, authToken } = req.body
-  const client = delegatedClient(appId, authToken)
+  const { authToken } = req.body
+  const client = delegatedClient(process.env.DFNS_ORG_ID!, authToken)
 
   const wallets = await client.wallets.listWallets({})
   res.json(wallets)
 }
 
 export const generateSignatureInit = async (req: Request, res: Response) => {
-  // Challange signing must use the appId and appOrigin of the client application.
-  const { appId, authToken, walletId, message } = req.body
-  const client = delegatedClient(appId, authToken)
+  const { authToken, walletId, message } = req.body
+  const client = delegatedClient(process.env.DFNS_ORG_ID!, authToken)
 
   const body: GenerateSignatureBody = {
     kind: 'Message',
@@ -34,8 +33,8 @@ export const generateSignatureInit = async (req: Request, res: Response) => {
 }
 
 export const generateSignatureComplete = async (req: Request, res: Response) => {
-  const { appId, authToken, walletId, requestBody, signedChallenge } = req.body
-  const client = delegatedClient(appId, authToken)
+  const { authToken, walletId, requestBody, signedChallenge } = req.body
+  const client = delegatedClient(process.env.DFNS_ORG_ID!, authToken)
 
   // Use the original request body payload to complete the action.
   const signature = await client.wallets.generateSignatureComplete(

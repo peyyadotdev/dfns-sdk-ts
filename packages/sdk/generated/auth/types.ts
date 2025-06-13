@@ -1,44 +1,3 @@
-export type ActivateApplicationParams = {
-    appId: string;
-};
-
-export type ActivateApplicationResponse = {
-    appId: string;
-    kind: "ServerSideApplication" | "ClientSideApplication";
-    orgId: string;
-    expectedRpId?: string | undefined;
-    name: string;
-    isActive: boolean;
-    expectedOrigin?: string | undefined;
-    permissionAssignments: {
-        permissionName: string;
-        permissionId: string;
-        assignmentId: string;
-        operations?: string[] | undefined;
-    }[];
-    accessTokens: {
-        accessToken?: string | undefined;
-        dateCreated: string;
-        credId: string;
-        isActive: boolean;
-        kind: "Pat" | "ServiceAccount" | "Token" | "Code" | "Recovery" | "Temp" | "Application";
-        linkedUserId: string;
-        linkedAppId: string;
-        name: string;
-        orgId: string;
-        permissionAssignments: {
-            permissionName: string;
-            permissionId: string;
-            assignmentId: string;
-            operations?: string[] | undefined;
-        }[];
-        publicKey: string;
-        tokenId: string;
-    }[];
-};
-
-export type ActivateApplicationRequest = ActivateApplicationParams
-
 export type ActivateCredentialBody = {
     credentialUuid: string;
 };
@@ -146,47 +105,6 @@ export type ActivateUserResponse = {
 
 export type ActivateUserRequest = ActivateUserParams
 
-export type ArchiveApplicationParams = {
-    appId: string;
-};
-
-export type ArchiveApplicationResponse = {
-    appId: string;
-    kind: "ServerSideApplication" | "ClientSideApplication";
-    orgId: string;
-    expectedRpId?: string | undefined;
-    name: string;
-    isActive: boolean;
-    expectedOrigin?: string | undefined;
-    permissionAssignments: {
-        permissionName: string;
-        permissionId: string;
-        assignmentId: string;
-        operations?: string[] | undefined;
-    }[];
-    accessTokens: {
-        accessToken?: string | undefined;
-        dateCreated: string;
-        credId: string;
-        isActive: boolean;
-        kind: "Pat" | "ServiceAccount" | "Token" | "Code" | "Recovery" | "Temp" | "Application";
-        linkedUserId: string;
-        linkedAppId: string;
-        name: string;
-        orgId: string;
-        permissionAssignments: {
-            permissionName: string;
-            permissionId: string;
-            assignmentId: string;
-            operations?: string[] | undefined;
-        }[];
-        publicKey: string;
-        tokenId: string;
-    }[];
-};
-
-export type ArchiveApplicationRequest = ArchiveApplicationParams
-
 export type ArchivePersonalAccessTokenParams = {
     tokenId: string;
 };
@@ -283,61 +201,6 @@ export type ArchiveUserResponse = {
 };
 
 export type ArchiveUserRequest = ArchiveUserParams
-
-export type CreateApplicationBody = {
-    name: string;
-    relyingPartyId?: string | undefined;
-    origin?: string | undefined;
-    permissionId?: string | undefined;
-    externalId?: string | undefined;
-    kind: "ClientSideApplication";
-} | {
-    name: string;
-    relyingPartyId?: string | undefined;
-    origin?: string | undefined;
-    permissionId?: string | undefined;
-    externalId?: string | undefined;
-    kind: "ServerSideApplication";
-    publicKey: string;
-    daysValid?: number | undefined;
-};
-
-export type CreateApplicationResponse = {
-    appId: string;
-    kind: "ServerSideApplication" | "ClientSideApplication";
-    orgId: string;
-    expectedRpId?: string | undefined;
-    name: string;
-    isActive: boolean;
-    expectedOrigin?: string | undefined;
-    permissionAssignments: {
-        permissionName: string;
-        permissionId: string;
-        assignmentId: string;
-        operations?: string[] | undefined;
-    }[];
-    accessTokens: {
-        accessToken?: string | undefined;
-        dateCreated: string;
-        credId: string;
-        isActive: boolean;
-        kind: "Pat" | "ServiceAccount" | "Token" | "Code" | "Recovery" | "Temp" | "Application";
-        linkedUserId: string;
-        linkedAppId: string;
-        name: string;
-        orgId: string;
-        permissionAssignments: {
-            permissionName: string;
-            permissionId: string;
-            assignmentId: string;
-            operations?: string[] | undefined;
-        }[];
-        publicKey: string;
-        tokenId: string;
-    }[];
-};
-
-export type CreateApplicationRequest = { body: CreateApplicationBody }
 
 export type CreateCredentialBody = {
     credentialKind: "Fido2";
@@ -1040,6 +903,7 @@ export type CreateServiceAccountResponse = {
 export type CreateServiceAccountRequest = { body: CreateServiceAccountBody }
 
 export type CreateSocialRegistrationChallengeBody = {
+    orgId?: string | undefined;
     socialLoginProviderKind: "Oidc";
     idToken: string;
 };
@@ -1218,47 +1082,6 @@ export type CreateUserActionSignatureResponse = {
 };
 
 export type CreateUserActionSignatureRequest = { body: CreateUserActionSignatureBody }
-
-export type DeactivateApplicationParams = {
-    appId: string;
-};
-
-export type DeactivateApplicationResponse = {
-    appId: string;
-    kind: "ServerSideApplication" | "ClientSideApplication";
-    orgId: string;
-    expectedRpId?: string | undefined;
-    name: string;
-    isActive: boolean;
-    expectedOrigin?: string | undefined;
-    permissionAssignments: {
-        permissionName: string;
-        permissionId: string;
-        assignmentId: string;
-        operations?: string[] | undefined;
-    }[];
-    accessTokens: {
-        accessToken?: string | undefined;
-        dateCreated: string;
-        credId: string;
-        isActive: boolean;
-        kind: "Pat" | "ServiceAccount" | "Token" | "Code" | "Recovery" | "Temp" | "Application";
-        linkedUserId: string;
-        linkedAppId: string;
-        name: string;
-        orgId: string;
-        permissionAssignments: {
-            permissionName: string;
-            permissionId: string;
-            assignmentId: string;
-            operations?: string[] | undefined;
-        }[];
-        publicKey: string;
-        tokenId: string;
-    }[];
-};
-
-export type DeactivateApplicationRequest = DeactivateApplicationParams
 
 export type DeactivateCredentialBody = {
     credentialUuid: string;
@@ -2130,6 +1953,7 @@ export type SendRecoveryCodeResponse = {
 export type SendRecoveryCodeRequest = { body: SendRecoveryCodeBody }
 
 export type SocialLoginBody = {
+    orgId?: string | undefined;
     socialLoginProviderKind: "Oidc";
     idToken: string;
 };
@@ -2139,52 +1963,6 @@ export type SocialLoginResponse = {
 };
 
 export type SocialLoginRequest = { body: SocialLoginBody }
-
-export type UpdateApplicationBody = {
-    externalId?: string | undefined;
-    name?: string | undefined;
-};
-
-export type UpdateApplicationParams = {
-    appId: string;
-};
-
-export type UpdateApplicationResponse = {
-    appId: string;
-    kind: "ServerSideApplication" | "ClientSideApplication";
-    orgId: string;
-    expectedRpId?: string | undefined;
-    name: string;
-    isActive: boolean;
-    expectedOrigin?: string | undefined;
-    permissionAssignments: {
-        permissionName: string;
-        permissionId: string;
-        assignmentId: string;
-        operations?: string[] | undefined;
-    }[];
-    accessTokens: {
-        accessToken?: string | undefined;
-        dateCreated: string;
-        credId: string;
-        isActive: boolean;
-        kind: "Pat" | "ServiceAccount" | "Token" | "Code" | "Recovery" | "Temp" | "Application";
-        linkedUserId: string;
-        linkedAppId: string;
-        name: string;
-        orgId: string;
-        permissionAssignments: {
-            permissionName: string;
-            permissionId: string;
-            assignmentId: string;
-            operations?: string[] | undefined;
-        }[];
-        publicKey: string;
-        tokenId: string;
-    }[];
-};
-
-export type UpdateApplicationRequest = UpdateApplicationParams & { body: UpdateApplicationBody }
 
 export type UpdatePersonalAccessTokenBody = {
     name?: string | undefined;

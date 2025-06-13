@@ -26,7 +26,7 @@ Then go back to the service accounts listing, and the newly created `Service Acc
 In the `./server/` folder, copy `.env.example` to a new file `.env` and set the following values,
 
 - `DFNS_API_URL` = `https://api.dfns.ninja`
-- `DFNS_APP_ID` = Dfns Application ID (grab one in Dfns Dashboard: `Settings` > `Applications`)
+- `DFNS_ORG_ID` = Dfns Organisation ID (grab it in Dfns Dashboard: `Profile` > `Account`)
 - `DFNS_CRED_ID` = the `Signing Key Cred ID` of the new `Service Account`
 - `DFNS_PRIVATE_KEY` = the private key from the step 'generate a keypair', the newlines should not be a problem
 - `DFNS_AUTH_TOKEN` = the `authToken` from the new `Service Account` confirmation page, the value should start with `eyJ0...`
@@ -45,7 +45,6 @@ server %  npm run start
 
 In the `./web/` folder, copy `.env.example` to a new file `.env.local` and set the following values,
 
-- `REACT_APP_DFNS_APP_ID` = Dfns Application ID (grab one in Dfns Dashboard: `Settings` > `Applications`)
 - `REACT_APP_PASSKEY_RELYING_PARTY_ID` = the passkey relying party id, aka, the domain where your app lives ((Read more [here](https://developer.mozilla.org/en-US/docs/Web/API/PublicKeyCredentialCreationOptions#rp))). We advise using the root domain (eg. `acme.com`, not `app.acme.com`) for more passkey flexibility (so that passkey is re-usable on subdomains). During development on localhost, you can set it to `localhost`.
 - `REACT_APP_PASSKEY_RELYING_PARTY_NAME` = A string representing the name of the relying party (e.g. "Acme"). This is the name the user will be presented with when creating or using a passkey.
 - `REACT_APP_EXPRESS_API_URL` = `http://localhost:8000`, the backend server
@@ -84,20 +83,12 @@ For the rest of the guide, `panda-new-kit.ngrok-free.app` will be used as the ex
 
 #### Prerequisites
 
-To run the React Native application on an iOS device, you must have an `Application` for iOS. To create a new `Application`, go to `Dfns Dashboard` > `Settings` > `Org Settings` > `Applications` > `New Application`, and enter the following information
-
-- Name, choose any name, for example `Dfns Tutorial iOS`
-- Application Type, leave as the default `Default Application`
-- Relying Party, set to the domain you associated with the app, e.g. `panda-new-kit.ngrok-free.app`
-- Origin, set to the full url of the domain, e.g. `https://panda-new-kit.ngrok-free.app`
-
-After the `Application` is created, copy and save the `App ID`, e.g. `ap-39abb-5nrrm-9k59k0u3jup3vivo`.
+To run the React Native application on an iOS device, you must first whitelist the domain associated with the app (aka [Relying Party)](https://www.w3.org/TR/webauthn-2/#relying-party). To do that, go to Dfns Dashboard > Settings > Passkey Domains.
 
 #### Configuration
 
 In the `./mobile/` folder, copy `.env.example` to a new file `.env.ios` and set the following values,
 
-- `DFNS_APP_ID` = the `App ID` of the new `Application`
 - `EXPRESS_API_URL` = either `http://localhost:8000` or if using ngrok, the public url `https://panda-new-kit.ngrok-free.app`
 - `PASSKEY_RELYING_PARTY_ID` = the passkey relying party id, aka, the domain where your app lives ((Read more [here](https://developer.mozilla.org/en-US/docs/Web/API/PublicKeyCredentialCreationOptions#rp))). We advise using the root domain (eg. `acme.com`, not `app.acme.com`) for more passkey flexibility (so that passkey is re-usable on subdomains). During development on localhost, you can set it to `localhost`.
 - `PASSKEY_RELYING_PARTY_NAME` = A string representing the name of the relying party (e.g. "Acme"). This is the name the user will be presented with when creating or using a passkey.
@@ -150,20 +141,12 @@ mobile %  npm run ios
 
 #### Prerequisites
 
-To run the React Native application on an Android device, you must have an `Application` for Android. To create a new `Application`, go to `Dfns Dashboard` > `Settings` > `Org Settings` > `Applications` > `New Application`, and enter the following information
-
-- Name, choose any name, for example `Dfns Tutorial Android`
-- Application Type, leave as the default `Default Application`
-- Relying Party, set to the domain you associated with the app, e.g. `panda-new-kit.ngrok-free.app`
-- Origin, the Android format is `android:apk-key-hash:<sha256_hash-of-apk-signing-cert>`. For this tutorial app, the signing cert is fixed, the value is `android:apk-key-hash:-sYXRdwJA3hvue3mKpYrOZ9zSPC7b4mbgzJmdZEDO5w`. For your own application, follow [Android's guide](https://developer.android.com/training/sign-in/passkeys#verify-origin) to derive the correct origin.
-
-After the `Application` is created, copy and save the `App ID`, e.g. `ap-39abb-5nrrm-9k59k0u3jup3vivo`.
+To run the React Native application on an Android device, you must first whitelist the domain associated with the app (aka [Relying Party)](https://www.w3.org/TR/webauthn-2/#relying-party). To do that, go to Dfns Dashboard > Settings > Passkey Domains.
 
 #### Configuration
 
 In the `./mobile/` folder, copy `.env.example` to a new file `.env.android` and set the following values,
 
-- `DFNS_APP_ID` = the `App ID` of the new `Application`
 - `EXPRESS_API_URL` = either `http://localhost:8000` or if using ngrok, the public url `https://panda-new-kit.ngrok-free.app`
 - `PASSKEY_RELYING_PARTY_ID` = the passkey relying party id, aka, the domain where your app lives ((Read more [here](https://developer.mozilla.org/en-US/docs/Web/API/PublicKeyCredentialCreationOptions#rp))). We advise using the root domain (eg. `acme.com`, not `app.acme.com`) for more passkey flexibility (so that passkey is re-usable on subdomains). During development on localhost, you can set it to `localhost`.
 - `PASSKEY_RELYING_PARTY_NAME` = A string representing the name of the relying party (e.g. "Acme"). This is the name the user will be presented with when creating or using a passkey.

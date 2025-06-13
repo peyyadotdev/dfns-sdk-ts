@@ -1,8 +1,8 @@
-import React, { FormEvent, useState } from 'react'
+import { FormEvent, useState } from 'react'
 
+import { CreateCredentialWithCodeResponse } from '@dfns/sdk/generated/auth'
 import '../globals.css'
 import useAuth from '../hooks/useAuth'
-import { CreateCredentialWithCodeResponse } from '@dfns/sdk/generated/auth'
 
 export default function Credential(): JSX.Element {
   const { createCred, loading, error } = useAuth()
@@ -24,8 +24,8 @@ export default function Credential(): JSX.Element {
         <h1 className="text-2x">Create Credential with Code</h1>
 
         <p>
-          You can create a new Credential for an existing user on this Application, by using a Credential Code. Generate
-          a new code from the Dfns Dashboard (In Settings {'>'} My Credentials). Then enter it below:
+          You can create a new Credential for an existing user, by using a Credential Code. Generate a new code from the
+          Dfns Dashboard (In Settings {'>'} My Credentials). Then enter it below:
         </p>
 
         <div className="flex items-center gap-2">
