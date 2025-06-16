@@ -640,26 +640,6 @@ export class AuthClient {
     return this.recover(request)
   }
 
-  async recreateDelegatedRegistrationChallenge(request: T.RecreateDelegatedRegistrationChallengeRequest): Promise<T.RecreateDelegatedRegistrationChallengeResponse> {
-    const path = buildPathAndQuery('/auth/registration/delegated/restart', {
-      path: request ?? {},
-      query: {},
-    })
-
-    const response = await userActionFetch(path, {
-      method: 'POST',
-      body: request.body,
-      apiOptions: this.apiOptions,
-    })
-
-    return response.json()
-  }
-  
-  /** @deprecated, use recreateDelegatedRegistrationChallenge instead */
-  async restartDelegatedUserRegistration(request: T.RecreateDelegatedRegistrationChallengeRequest): Promise<T.RecreateDelegatedRegistrationChallengeResponse> {
-    return this.recreateDelegatedRegistrationChallenge(request)
-  }
-
   async register(request: T.RegisterRequest): Promise<T.RegisterResponse> {
     const path = buildPathAndQuery('/auth/registration', {
       path: request ?? {},

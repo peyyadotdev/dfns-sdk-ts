@@ -5436,26 +5436,6 @@ export type ListPoliciesResponse = {
 
 export type ListPoliciesRequest = { query?: ListPoliciesQuery }
 
-export type NotabeneNotificationsWebhookBody = {
-    message: "notification.transactionUpdated";
-    payload: {
-        transaction: {
-            id: string;
-            status: "NEW" | "WAITING_FOR_INFORMATION" | "MISSING_BENEFICIARY_DATA" | "CANCELLED" | "INCOMPLETE" | "SENT" | "ACK" | "ACCEPTED" | "DECLINED" | "REJECTED" | "NOT_READY" | "SAVED";
-            transactionRef?: (string | null) | undefined;
-            transactionType: "TRAVELRULE" | "BELOW_THRESHOLD" | "NON_CUSTODIAL" | "UNKNOWN";
-        };
-    };
-};
-
-export type NotabeneNotificationsWebhookParams = {
-    orgId: string;
-};
-
-export type NotabeneNotificationsWebhookResponse = void | undefined;
-
-export type NotabeneNotificationsWebhookRequest = NotabeneNotificationsWebhookParams & { body: NotabeneNotificationsWebhookBody }
-
 export type UpdatePolicyBody = {
     name: string;
     activityKind: "Permissions:Assign";

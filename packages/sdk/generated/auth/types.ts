@@ -652,7 +652,7 @@ export type CreateDelegatedRecoveryChallengeRequest = { body: CreateDelegatedRec
 
 export type CreateDelegatedRegistrationChallengeBody = {
     email: string;
-    kind: "CustomerEmployee" | "DfnsStaff" | "EndUser";
+    kind: "EndUser";
     externalId?: string | undefined;
 };
 
@@ -1665,48 +1665,6 @@ export type RecoverResponse = {
 };
 
 export type RecoverRequest = { body: RecoverBody }
-
-export type RecreateDelegatedRegistrationChallengeBody = {
-    email: string;
-    kind: "CustomerEmployee" | "DfnsStaff" | "EndUser";
-    externalId?: string | undefined;
-};
-
-export type RecreateDelegatedRegistrationChallengeResponse = {
-    user: {
-        id: string;
-        displayName: string;
-        name: string;
-    };
-    temporaryAuthenticationToken: string;
-    challenge: string;
-    rp?: {
-        id: string;
-        name: string;
-    } | undefined;
-    supportedCredentialKinds: {
-        firstFactor: ("Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey" | "PasswordProtectedKey")[];
-        secondFactor: ("Fido2" | "Key" | "Password" | "Totp" | "RecoveryKey" | "PasswordProtectedKey")[];
-    };
-    authenticatorSelection: {
-        authenticatorAttachment?: ("platform" | "cross-platform") | undefined;
-        residentKey: "required" | "preferred" | "discouraged";
-        requireResidentKey: boolean;
-        userVerification: "required" | "preferred" | "discouraged";
-    };
-    attestation: "none" | "indirect" | "direct" | "enterprise";
-    pubKeyCredParams: {
-        type: "public-key";
-        alg: number;
-    }[];
-    excludeCredentials: {
-        type: "public-key";
-        id: string;
-    }[];
-    otpUrl: string;
-};
-
-export type RecreateDelegatedRegistrationChallengeRequest = { body: RecreateDelegatedRegistrationChallengeBody }
 
 export type RegisterBody = {
     firstFactorCredential: {
