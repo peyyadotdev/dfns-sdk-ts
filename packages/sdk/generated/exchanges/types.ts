@@ -6,7 +6,7 @@ export type CreateDepositBody = {
     externalId?: string | undefined;
     travelRule?: ({
         kind: "Notabene";
-        beneficiaryVASPdid: string;
+        beneficiaryVASPdid?: string | undefined;
         beneficiaryProof?: {
             [x: string]: any;
         } | undefined;
@@ -29,7 +29,7 @@ export type CreateDepositBody = {
     externalId?: string | undefined;
     travelRule?: ({
         kind: "Notabene";
-        beneficiaryVASPdid: string;
+        beneficiaryVASPdid?: string | undefined;
         beneficiaryProof?: {
             [x: string]: any;
         } | undefined;
@@ -51,7 +51,7 @@ export type CreateDepositBody = {
     externalId?: string | undefined;
     travelRule?: ({
         kind: "Notabene";
-        beneficiaryVASPdid: string;
+        beneficiaryVASPdid?: string | undefined;
         beneficiaryProof?: {
             [x: string]: any;
         } | undefined;
@@ -73,7 +73,7 @@ export type CreateDepositBody = {
     externalId?: string | undefined;
     travelRule?: ({
         kind: "Notabene";
-        beneficiaryVASPdid: string;
+        beneficiaryVASPdid?: string | undefined;
         beneficiaryProof?: {
             [x: string]: any;
         } | undefined;
@@ -95,7 +95,7 @@ export type CreateDepositBody = {
     externalId?: string | undefined;
     travelRule?: ({
         kind: "Notabene";
-        beneficiaryVASPdid: string;
+        beneficiaryVASPdid?: string | undefined;
         beneficiaryProof?: {
             [x: string]: any;
         } | undefined;
@@ -118,7 +118,7 @@ export type CreateDepositBody = {
     externalId?: string | undefined;
     travelRule?: ({
         kind: "Notabene";
-        beneficiaryVASPdid: string;
+        beneficiaryVASPdid?: string | undefined;
         beneficiaryProof?: {
             [x: string]: any;
         } | undefined;
@@ -141,7 +141,7 @@ export type CreateDepositBody = {
     externalId?: string | undefined;
     travelRule?: ({
         kind: "Notabene";
-        beneficiaryVASPdid: string;
+        beneficiaryVASPdid?: string | undefined;
         beneficiaryProof?: {
             [x: string]: any;
         } | undefined;
@@ -163,7 +163,7 @@ export type CreateDepositBody = {
     externalId?: string | undefined;
     travelRule?: ({
         kind: "Notabene";
-        beneficiaryVASPdid: string;
+        beneficiaryVASPdid?: string | undefined;
         beneficiaryProof?: {
             [x: string]: any;
         } | undefined;
@@ -205,7 +205,7 @@ export type CreateDepositResponse = {
         externalId?: string | undefined;
         travelRule?: ({
             kind: "Notabene";
-            beneficiaryVASPdid: string;
+            beneficiaryVASPdid?: string | undefined;
             beneficiaryProof?: {
                 [x: string]: any;
             } | undefined;
@@ -228,7 +228,7 @@ export type CreateDepositResponse = {
         externalId?: string | undefined;
         travelRule?: ({
             kind: "Notabene";
-            beneficiaryVASPdid: string;
+            beneficiaryVASPdid?: string | undefined;
             beneficiaryProof?: {
                 [x: string]: any;
             } | undefined;
@@ -250,7 +250,7 @@ export type CreateDepositResponse = {
         externalId?: string | undefined;
         travelRule?: ({
             kind: "Notabene";
-            beneficiaryVASPdid: string;
+            beneficiaryVASPdid?: string | undefined;
             beneficiaryProof?: {
                 [x: string]: any;
             } | undefined;
@@ -272,7 +272,7 @@ export type CreateDepositResponse = {
         externalId?: string | undefined;
         travelRule?: ({
             kind: "Notabene";
-            beneficiaryVASPdid: string;
+            beneficiaryVASPdid?: string | undefined;
             beneficiaryProof?: {
                 [x: string]: any;
             } | undefined;
@@ -294,7 +294,7 @@ export type CreateDepositResponse = {
         externalId?: string | undefined;
         travelRule?: ({
             kind: "Notabene";
-            beneficiaryVASPdid: string;
+            beneficiaryVASPdid?: string | undefined;
             beneficiaryProof?: {
                 [x: string]: any;
             } | undefined;
@@ -317,7 +317,7 @@ export type CreateDepositResponse = {
         externalId?: string | undefined;
         travelRule?: ({
             kind: "Notabene";
-            beneficiaryVASPdid: string;
+            beneficiaryVASPdid?: string | undefined;
             beneficiaryProof?: {
                 [x: string]: any;
             } | undefined;
@@ -340,7 +340,7 @@ export type CreateDepositResponse = {
         externalId?: string | undefined;
         travelRule?: ({
             kind: "Notabene";
-            beneficiaryVASPdid: string;
+            beneficiaryVASPdid?: string | undefined;
             beneficiaryProof?: {
                 [x: string]: any;
             } | undefined;
@@ -362,7 +362,7 @@ export type CreateDepositResponse = {
         externalId?: string | undefined;
         travelRule?: ({
             kind: "Notabene";
-            beneficiaryVASPdid: string;
+            beneficiaryVASPdid?: string | undefined;
             beneficiaryProof?: {
                 [x: string]: any;
             } | undefined;
@@ -417,7 +417,7 @@ export type CreateWithdrawalBody = {
     externalId?: string | undefined;
     travelRule?: ({
         kind: "Notabene";
-        beneficiaryVASPdid: string;
+        beneficiaryVASPdid?: string | undefined;
         beneficiaryProof?: {
             [x: string]: any;
         } | undefined;
@@ -440,7 +440,7 @@ export type CreateWithdrawalBody = {
     externalId?: string | undefined;
     travelRule?: ({
         kind: "Notabene";
-        beneficiaryVASPdid: string;
+        beneficiaryVASPdid?: string | undefined;
         beneficiaryProof?: {
             [x: string]: any;
         } | undefined;
@@ -462,7 +462,7 @@ export type CreateWithdrawalBody = {
     externalId?: string | undefined;
     travelRule?: ({
         kind: "Notabene";
-        beneficiaryVASPdid: string;
+        beneficiaryVASPdid?: string | undefined;
         beneficiaryProof?: {
             [x: string]: any;
         } | undefined;
@@ -484,7 +484,7 @@ export type CreateWithdrawalBody = {
     externalId?: string | undefined;
     travelRule?: ({
         kind: "Notabene";
-        beneficiaryVASPdid: string;
+        beneficiaryVASPdid?: string | undefined;
         beneficiaryProof?: {
             [x: string]: any;
         } | undefined;
@@ -506,7 +506,7 @@ export type CreateWithdrawalBody = {
     externalId?: string | undefined;
     travelRule?: ({
         kind: "Notabene";
-        beneficiaryVASPdid: string;
+        beneficiaryVASPdid?: string | undefined;
         beneficiaryProof?: {
             [x: string]: any;
         } | undefined;
@@ -529,7 +529,7 @@ export type CreateWithdrawalBody = {
     externalId?: string | undefined;
     travelRule?: ({
         kind: "Notabene";
-        beneficiaryVASPdid: string;
+        beneficiaryVASPdid?: string | undefined;
         beneficiaryProof?: {
             [x: string]: any;
         } | undefined;
@@ -552,7 +552,7 @@ export type CreateWithdrawalBody = {
     externalId?: string | undefined;
     travelRule?: ({
         kind: "Notabene";
-        beneficiaryVASPdid: string;
+        beneficiaryVASPdid?: string | undefined;
         beneficiaryProof?: {
             [x: string]: any;
         } | undefined;
@@ -574,7 +574,7 @@ export type CreateWithdrawalBody = {
     externalId?: string | undefined;
     travelRule?: ({
         kind: "Notabene";
-        beneficiaryVASPdid: string;
+        beneficiaryVASPdid?: string | undefined;
         beneficiaryProof?: {
             [x: string]: any;
         } | undefined;
@@ -616,7 +616,7 @@ export type CreateWithdrawalResponse = {
         externalId?: string | undefined;
         travelRule?: ({
             kind: "Notabene";
-            beneficiaryVASPdid: string;
+            beneficiaryVASPdid?: string | undefined;
             beneficiaryProof?: {
                 [x: string]: any;
             } | undefined;
@@ -639,7 +639,7 @@ export type CreateWithdrawalResponse = {
         externalId?: string | undefined;
         travelRule?: ({
             kind: "Notabene";
-            beneficiaryVASPdid: string;
+            beneficiaryVASPdid?: string | undefined;
             beneficiaryProof?: {
                 [x: string]: any;
             } | undefined;
@@ -661,7 +661,7 @@ export type CreateWithdrawalResponse = {
         externalId?: string | undefined;
         travelRule?: ({
             kind: "Notabene";
-            beneficiaryVASPdid: string;
+            beneficiaryVASPdid?: string | undefined;
             beneficiaryProof?: {
                 [x: string]: any;
             } | undefined;
@@ -683,7 +683,7 @@ export type CreateWithdrawalResponse = {
         externalId?: string | undefined;
         travelRule?: ({
             kind: "Notabene";
-            beneficiaryVASPdid: string;
+            beneficiaryVASPdid?: string | undefined;
             beneficiaryProof?: {
                 [x: string]: any;
             } | undefined;
@@ -705,7 +705,7 @@ export type CreateWithdrawalResponse = {
         externalId?: string | undefined;
         travelRule?: ({
             kind: "Notabene";
-            beneficiaryVASPdid: string;
+            beneficiaryVASPdid?: string | undefined;
             beneficiaryProof?: {
                 [x: string]: any;
             } | undefined;
@@ -728,7 +728,7 @@ export type CreateWithdrawalResponse = {
         externalId?: string | undefined;
         travelRule?: ({
             kind: "Notabene";
-            beneficiaryVASPdid: string;
+            beneficiaryVASPdid?: string | undefined;
             beneficiaryProof?: {
                 [x: string]: any;
             } | undefined;
@@ -751,7 +751,7 @@ export type CreateWithdrawalResponse = {
         externalId?: string | undefined;
         travelRule?: ({
             kind: "Notabene";
-            beneficiaryVASPdid: string;
+            beneficiaryVASPdid?: string | undefined;
             beneficiaryProof?: {
                 [x: string]: any;
             } | undefined;
@@ -773,7 +773,7 @@ export type CreateWithdrawalResponse = {
         externalId?: string | undefined;
         travelRule?: ({
             kind: "Notabene";
-            beneficiaryVASPdid: string;
+            beneficiaryVASPdid?: string | undefined;
             beneficiaryProof?: {
                 [x: string]: any;
             } | undefined;

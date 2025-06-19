@@ -258,7 +258,7 @@ export type CreateApprovalDecisionResponse = {
                 externalId?: string | undefined;
                 travelRule?: ({
                     kind: "Notabene";
-                    beneficiaryVASPdid: string;
+                    beneficiaryVASPdid?: string | undefined;
                     beneficiaryProof?: {
                         [x: string]: any;
                     } | undefined;
@@ -279,7 +279,7 @@ export type CreateApprovalDecisionResponse = {
                 externalId?: string | undefined;
                 travelRule?: ({
                     kind: "Notabene";
-                    beneficiaryVASPdid: string;
+                    beneficiaryVASPdid?: string | undefined;
                     beneficiaryProof?: {
                         [x: string]: any;
                     } | undefined;
@@ -300,7 +300,7 @@ export type CreateApprovalDecisionResponse = {
                 externalId?: string | undefined;
                 travelRule?: ({
                     kind: "Notabene";
-                    beneficiaryVASPdid: string;
+                    beneficiaryVASPdid?: string | undefined;
                     beneficiaryProof?: {
                         [x: string]: any;
                     } | undefined;
@@ -321,7 +321,7 @@ export type CreateApprovalDecisionResponse = {
                 externalId?: string | undefined;
                 travelRule?: ({
                     kind: "Notabene";
-                    beneficiaryVASPdid: string;
+                    beneficiaryVASPdid?: string | undefined;
                     beneficiaryProof?: {
                         [x: string]: any;
                     } | undefined;
@@ -343,7 +343,7 @@ export type CreateApprovalDecisionResponse = {
                 externalId?: string | undefined;
                 travelRule?: ({
                     kind: "Notabene";
-                    beneficiaryVASPdid: string;
+                    beneficiaryVASPdid?: string | undefined;
                     beneficiaryProof?: {
                         [x: string]: any;
                     } | undefined;
@@ -365,7 +365,7 @@ export type CreateApprovalDecisionResponse = {
                 externalId?: string | undefined;
                 travelRule?: ({
                     kind: "Notabene";
-                    beneficiaryVASPdid: string;
+                    beneficiaryVASPdid?: string | undefined;
                     beneficiaryProof?: {
                         [x: string]: any;
                     } | undefined;
@@ -388,7 +388,7 @@ export type CreateApprovalDecisionResponse = {
                 externalId?: string | undefined;
                 travelRule?: ({
                     kind: "Notabene";
-                    beneficiaryVASPdid: string;
+                    beneficiaryVASPdid?: string | undefined;
                     beneficiaryProof?: {
                         [x: string]: any;
                     } | undefined;
@@ -410,7 +410,7 @@ export type CreateApprovalDecisionResponse = {
                 externalId?: string | undefined;
                 travelRule?: ({
                     kind: "Notabene";
-                    beneficiaryVASPdid: string;
+                    beneficiaryVASPdid?: string | undefined;
                     beneficiaryProof?: {
                         [x: string]: any;
                     } | undefined;
@@ -432,7 +432,7 @@ export type CreateApprovalDecisionResponse = {
                 externalId?: string | undefined;
                 travelRule?: ({
                     kind: "Notabene";
-                    beneficiaryVASPdid: string;
+                    beneficiaryVASPdid?: string | undefined;
                     beneficiaryProof?: {
                         [x: string]: any;
                     } | undefined;
@@ -453,7 +453,7 @@ export type CreateApprovalDecisionResponse = {
                 externalId?: string | undefined;
                 travelRule?: ({
                     kind: "Notabene";
-                    beneficiaryVASPdid: string;
+                    beneficiaryVASPdid?: string | undefined;
                     beneficiaryProof?: {
                         [x: string]: any;
                     } | undefined;
@@ -474,7 +474,7 @@ export type CreateApprovalDecisionResponse = {
                 externalId?: string | undefined;
                 travelRule?: ({
                     kind: "Notabene";
-                    beneficiaryVASPdid: string;
+                    beneficiaryVASPdid?: string | undefined;
                     beneficiaryProof?: {
                         [x: string]: any;
                     } | undefined;
@@ -495,7 +495,7 @@ export type CreateApprovalDecisionResponse = {
                 externalId?: string | undefined;
                 travelRule?: ({
                     kind: "Notabene";
-                    beneficiaryVASPdid: string;
+                    beneficiaryVASPdid?: string | undefined;
                     beneficiaryProof?: {
                         [x: string]: any;
                     } | undefined;
@@ -1940,7 +1940,7 @@ export type GetApprovalResponse = {
                 externalId?: string | undefined;
                 travelRule?: ({
                     kind: "Notabene";
-                    beneficiaryVASPdid: string;
+                    beneficiaryVASPdid?: string | undefined;
                     beneficiaryProof?: {
                         [x: string]: any;
                     } | undefined;
@@ -1961,7 +1961,7 @@ export type GetApprovalResponse = {
                 externalId?: string | undefined;
                 travelRule?: ({
                     kind: "Notabene";
-                    beneficiaryVASPdid: string;
+                    beneficiaryVASPdid?: string | undefined;
                     beneficiaryProof?: {
                         [x: string]: any;
                     } | undefined;
@@ -1982,7 +1982,7 @@ export type GetApprovalResponse = {
                 externalId?: string | undefined;
                 travelRule?: ({
                     kind: "Notabene";
-                    beneficiaryVASPdid: string;
+                    beneficiaryVASPdid?: string | undefined;
                     beneficiaryProof?: {
                         [x: string]: any;
                     } | undefined;
@@ -2003,7 +2003,7 @@ export type GetApprovalResponse = {
                 externalId?: string | undefined;
                 travelRule?: ({
                     kind: "Notabene";
-                    beneficiaryVASPdid: string;
+                    beneficiaryVASPdid?: string | undefined;
                     beneficiaryProof?: {
                         [x: string]: any;
                     } | undefined;
@@ -2025,7 +2025,7 @@ export type GetApprovalResponse = {
                 externalId?: string | undefined;
                 travelRule?: ({
                     kind: "Notabene";
-                    beneficiaryVASPdid: string;
+                    beneficiaryVASPdid?: string | undefined;
                     beneficiaryProof?: {
                         [x: string]: any;
                     } | undefined;
@@ -2047,7 +2047,7 @@ export type GetApprovalResponse = {
                 externalId?: string | undefined;
                 travelRule?: ({
                     kind: "Notabene";
-                    beneficiaryVASPdid: string;
+                    beneficiaryVASPdid?: string | undefined;
                     beneficiaryProof?: {
                         [x: string]: any;
                     } | undefined;
@@ -2070,7 +2070,7 @@ export type GetApprovalResponse = {
                 externalId?: string | undefined;
                 travelRule?: ({
                     kind: "Notabene";
-                    beneficiaryVASPdid: string;
+                    beneficiaryVASPdid?: string | undefined;
                     beneficiaryProof?: {
                         [x: string]: any;
                     } | undefined;
@@ -2092,7 +2092,7 @@ export type GetApprovalResponse = {
                 externalId?: string | undefined;
                 travelRule?: ({
                     kind: "Notabene";
-                    beneficiaryVASPdid: string;
+                    beneficiaryVASPdid?: string | undefined;
                     beneficiaryProof?: {
                         [x: string]: any;
                     } | undefined;
@@ -2114,7 +2114,7 @@ export type GetApprovalResponse = {
                 externalId?: string | undefined;
                 travelRule?: ({
                     kind: "Notabene";
-                    beneficiaryVASPdid: string;
+                    beneficiaryVASPdid?: string | undefined;
                     beneficiaryProof?: {
                         [x: string]: any;
                     } | undefined;
@@ -2135,7 +2135,7 @@ export type GetApprovalResponse = {
                 externalId?: string | undefined;
                 travelRule?: ({
                     kind: "Notabene";
-                    beneficiaryVASPdid: string;
+                    beneficiaryVASPdid?: string | undefined;
                     beneficiaryProof?: {
                         [x: string]: any;
                     } | undefined;
@@ -2156,7 +2156,7 @@ export type GetApprovalResponse = {
                 externalId?: string | undefined;
                 travelRule?: ({
                     kind: "Notabene";
-                    beneficiaryVASPdid: string;
+                    beneficiaryVASPdid?: string | undefined;
                     beneficiaryProof?: {
                         [x: string]: any;
                     } | undefined;
@@ -2177,7 +2177,7 @@ export type GetApprovalResponse = {
                 externalId?: string | undefined;
                 travelRule?: ({
                     kind: "Notabene";
-                    beneficiaryVASPdid: string;
+                    beneficiaryVASPdid?: string | undefined;
                     beneficiaryProof?: {
                         [x: string]: any;
                     } | undefined;
@@ -3666,7 +3666,7 @@ export type ListApprovalsResponse = {
                     externalId?: string | undefined;
                     travelRule?: ({
                         kind: "Notabene";
-                        beneficiaryVASPdid: string;
+                        beneficiaryVASPdid?: string | undefined;
                         beneficiaryProof?: {
                             [x: string]: any;
                         } | undefined;
@@ -3687,7 +3687,7 @@ export type ListApprovalsResponse = {
                     externalId?: string | undefined;
                     travelRule?: ({
                         kind: "Notabene";
-                        beneficiaryVASPdid: string;
+                        beneficiaryVASPdid?: string | undefined;
                         beneficiaryProof?: {
                             [x: string]: any;
                         } | undefined;
@@ -3708,7 +3708,7 @@ export type ListApprovalsResponse = {
                     externalId?: string | undefined;
                     travelRule?: ({
                         kind: "Notabene";
-                        beneficiaryVASPdid: string;
+                        beneficiaryVASPdid?: string | undefined;
                         beneficiaryProof?: {
                             [x: string]: any;
                         } | undefined;
@@ -3729,7 +3729,7 @@ export type ListApprovalsResponse = {
                     externalId?: string | undefined;
                     travelRule?: ({
                         kind: "Notabene";
-                        beneficiaryVASPdid: string;
+                        beneficiaryVASPdid?: string | undefined;
                         beneficiaryProof?: {
                             [x: string]: any;
                         } | undefined;
@@ -3751,7 +3751,7 @@ export type ListApprovalsResponse = {
                     externalId?: string | undefined;
                     travelRule?: ({
                         kind: "Notabene";
-                        beneficiaryVASPdid: string;
+                        beneficiaryVASPdid?: string | undefined;
                         beneficiaryProof?: {
                             [x: string]: any;
                         } | undefined;
@@ -3773,7 +3773,7 @@ export type ListApprovalsResponse = {
                     externalId?: string | undefined;
                     travelRule?: ({
                         kind: "Notabene";
-                        beneficiaryVASPdid: string;
+                        beneficiaryVASPdid?: string | undefined;
                         beneficiaryProof?: {
                             [x: string]: any;
                         } | undefined;
@@ -3796,7 +3796,7 @@ export type ListApprovalsResponse = {
                     externalId?: string | undefined;
                     travelRule?: ({
                         kind: "Notabene";
-                        beneficiaryVASPdid: string;
+                        beneficiaryVASPdid?: string | undefined;
                         beneficiaryProof?: {
                             [x: string]: any;
                         } | undefined;
@@ -3818,7 +3818,7 @@ export type ListApprovalsResponse = {
                     externalId?: string | undefined;
                     travelRule?: ({
                         kind: "Notabene";
-                        beneficiaryVASPdid: string;
+                        beneficiaryVASPdid?: string | undefined;
                         beneficiaryProof?: {
                             [x: string]: any;
                         } | undefined;
@@ -3840,7 +3840,7 @@ export type ListApprovalsResponse = {
                     externalId?: string | undefined;
                     travelRule?: ({
                         kind: "Notabene";
-                        beneficiaryVASPdid: string;
+                        beneficiaryVASPdid?: string | undefined;
                         beneficiaryProof?: {
                             [x: string]: any;
                         } | undefined;
@@ -3861,7 +3861,7 @@ export type ListApprovalsResponse = {
                     externalId?: string | undefined;
                     travelRule?: ({
                         kind: "Notabene";
-                        beneficiaryVASPdid: string;
+                        beneficiaryVASPdid?: string | undefined;
                         beneficiaryProof?: {
                             [x: string]: any;
                         } | undefined;
@@ -3882,7 +3882,7 @@ export type ListApprovalsResponse = {
                     externalId?: string | undefined;
                     travelRule?: ({
                         kind: "Notabene";
-                        beneficiaryVASPdid: string;
+                        beneficiaryVASPdid?: string | undefined;
                         beneficiaryProof?: {
                             [x: string]: any;
                         } | undefined;
@@ -3903,7 +3903,7 @@ export type ListApprovalsResponse = {
                     externalId?: string | undefined;
                     travelRule?: ({
                         kind: "Notabene";
-                        beneficiaryVASPdid: string;
+                        beneficiaryVASPdid?: string | undefined;
                         beneficiaryProof?: {
                             [x: string]: any;
                         } | undefined;
