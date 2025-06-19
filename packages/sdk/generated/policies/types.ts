@@ -578,6 +578,15 @@ export type CreateApprovalDecisionResponse = {
                 kind: "Json";
                 transaction: {};
                 externalId?: string | undefined;
+            } | {
+                kind: "UserOperations";
+                userOperations: {
+                    to: string;
+                    value?: string | undefined;
+                    data?: string | undefined;
+                }[];
+                feeSponsorId: string;
+                externalId?: string | undefined;
             };
             status: "Pending" | "Executing" | "Broadcasted" | "Confirmed" | "Failed" | "Rejected";
             reason?: string | undefined;
@@ -2250,6 +2259,15 @@ export type GetApprovalResponse = {
             } | {
                 kind: "Json";
                 transaction: {};
+                externalId?: string | undefined;
+            } | {
+                kind: "UserOperations";
+                userOperations: {
+                    to: string;
+                    value?: string | undefined;
+                    data?: string | undefined;
+                }[];
+                feeSponsorId: string;
                 externalId?: string | undefined;
             };
             status: "Pending" | "Executing" | "Broadcasted" | "Confirmed" | "Failed" | "Rejected";
@@ -3967,6 +3985,15 @@ export type ListApprovalsResponse = {
                 } | {
                     kind: "Json";
                     transaction: {};
+                    externalId?: string | undefined;
+                } | {
+                    kind: "UserOperations";
+                    userOperations: {
+                        to: string;
+                        value?: string | undefined;
+                        data?: string | undefined;
+                    }[];
+                    feeSponsorId: string;
                     externalId?: string | undefined;
                 };
                 status: "Pending" | "Executing" | "Broadcasted" | "Confirmed" | "Failed" | "Rejected";
