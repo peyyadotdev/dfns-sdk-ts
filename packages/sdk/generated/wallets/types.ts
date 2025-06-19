@@ -37,6 +37,15 @@ export type BroadcastTransactionBody = {
     kind: "Json";
     transaction: {};
     externalId?: string | undefined;
+} | {
+    kind: "UserOperations";
+    userOperations: {
+        to: string;
+        value?: string | undefined;
+        data?: string | undefined;
+    }[];
+    feeSponsorId: string;
+    externalId?: string | undefined;
 };
 
 export type BroadcastTransactionParams = {
@@ -89,6 +98,15 @@ export type BroadcastTransactionResponse = {
     } | {
         kind: "Json";
         transaction: {};
+        externalId?: string | undefined;
+    } | {
+        kind: "UserOperations";
+        userOperations: {
+            to: string;
+            value?: string | undefined;
+            data?: string | undefined;
+        }[];
+        feeSponsorId: string;
         externalId?: string | undefined;
     };
     status: "Pending" | "Executing" | "Broadcasted" | "Confirmed" | "Failed" | "Rejected";
@@ -542,6 +560,15 @@ export type GetTransactionResponse = {
     } | {
         kind: "Json";
         transaction: {};
+        externalId?: string | undefined;
+    } | {
+        kind: "UserOperations";
+        userOperations: {
+            to: string;
+            value?: string | undefined;
+            data?: string | undefined;
+        }[];
+        feeSponsorId: string;
         externalId?: string | undefined;
     };
     status: "Pending" | "Executing" | "Broadcasted" | "Confirmed" | "Failed" | "Rejected";
@@ -1671,6 +1698,15 @@ export type ListTransactionsResponse = {
         } | {
             kind: "Json";
             transaction: {};
+            externalId?: string | undefined;
+        } | {
+            kind: "UserOperations";
+            userOperations: {
+                to: string;
+                value?: string | undefined;
+                data?: string | undefined;
+            }[];
+            feeSponsorId: string;
             externalId?: string | undefined;
         };
         status: "Pending" | "Executing" | "Broadcasted" | "Confirmed" | "Failed" | "Rejected";
