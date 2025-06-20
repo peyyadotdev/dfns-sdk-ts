@@ -10,6 +10,10 @@ import {
 } from '@polymeshassociation/signing-manager-types'
 import { Registry } from '@polkadot/types/types'
 
+const Ss58PrefixMap: Record<string, number> = {
+  ['Polymesh']: 12,
+  ['PolymeshTestnet']: 42,
+}
 
 export type DfnsWalletOptions = {
   walletId: string
@@ -33,10 +37,11 @@ const assertSignResponseSuccessful = (response: GenerateSignatureResponse) => {
 
 export class DfnsSigningManager implements SigningManager {
   private externalSigner: DfnsWallet
-  private _ss58Format?: number
+  private _ss58Format: number
 
   constructor(dfnsSigner: DfnsWallet) {
     this.externalSigner = dfnsSigner
+    this._ss58Format = Ss58PrefixMap[dfnsSigner.network]
   }
 
   /**
@@ -47,18 +52,9 @@ export class DfnsSigningManager implements SigningManager {
   }
 
   public get ss58Format(): number {
-    if (!this._ss58Format) {
-      throw new DfnsError( -1,
-        'DfnsSigningManager ss58Format was not set. The Polymesh SDK should set the format upon its initialization'
-      )
-    }
-
     return this._ss58Format
   }
 
-  /**
-   * Return the addresses of all derived keys in Fireblocks
-   */
   public async getAccounts(): Promise<string[]> {
     return [this.externalSigner.address]
   }
@@ -77,12 +73,14 @@ export class DfnsWallet implements PolkadotSigner {
 
   private readonly dfnsClient: DfnsApiClient
   private readonly walletId: string
-  private readonly registry: Registry
 
-  private constructor(public address: string, options: DfnsWalletOptions) {
+  private constructor(
+    public address: string,
+    public network: string,
+    options: DfnsWalletOptions,
+  ) {
     this.dfnsClient = options.dfnsClient
     this.walletId = options.walletId
-    this.registry = options.registry
   }
 
   public static async init(options: DfnsWalletOptions) {
@@ -100,7 +98,7 @@ export class DfnsWallet implements PolkadotSigner {
       })
     }
 
-    return new DfnsWallet(res.address!, options)
+    return new DfnsWallet(res.address!, res.network, options)
   }
 
   public async signRaw(raw: SignerPayloadRaw): Promise<SignerResult> {
