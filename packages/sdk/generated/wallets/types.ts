@@ -608,7 +608,7 @@ export type GetTransferResponse = {
         externalId?: string | undefined;
         travelRule?: ({
             kind: "Notabene";
-            beneficiaryVASPdid: string;
+            beneficiaryVASPdid?: string | undefined;
             beneficiaryProof?: {
                 [x: string]: any;
             } | undefined;
@@ -629,7 +629,7 @@ export type GetTransferResponse = {
         externalId?: string | undefined;
         travelRule?: ({
             kind: "Notabene";
-            beneficiaryVASPdid: string;
+            beneficiaryVASPdid?: string | undefined;
             beneficiaryProof?: {
                 [x: string]: any;
             } | undefined;
@@ -650,7 +650,7 @@ export type GetTransferResponse = {
         externalId?: string | undefined;
         travelRule?: ({
             kind: "Notabene";
-            beneficiaryVASPdid: string;
+            beneficiaryVASPdid?: string | undefined;
             beneficiaryProof?: {
                 [x: string]: any;
             } | undefined;
@@ -671,7 +671,7 @@ export type GetTransferResponse = {
         externalId?: string | undefined;
         travelRule?: ({
             kind: "Notabene";
-            beneficiaryVASPdid: string;
+            beneficiaryVASPdid?: string | undefined;
             beneficiaryProof?: {
                 [x: string]: any;
             } | undefined;
@@ -693,7 +693,7 @@ export type GetTransferResponse = {
         externalId?: string | undefined;
         travelRule?: ({
             kind: "Notabene";
-            beneficiaryVASPdid: string;
+            beneficiaryVASPdid?: string | undefined;
             beneficiaryProof?: {
                 [x: string]: any;
             } | undefined;
@@ -715,7 +715,7 @@ export type GetTransferResponse = {
         externalId?: string | undefined;
         travelRule?: ({
             kind: "Notabene";
-            beneficiaryVASPdid: string;
+            beneficiaryVASPdid?: string | undefined;
             beneficiaryProof?: {
                 [x: string]: any;
             } | undefined;
@@ -738,7 +738,7 @@ export type GetTransferResponse = {
         externalId?: string | undefined;
         travelRule?: ({
             kind: "Notabene";
-            beneficiaryVASPdid: string;
+            beneficiaryVASPdid?: string | undefined;
             beneficiaryProof?: {
                 [x: string]: any;
             } | undefined;
@@ -760,7 +760,7 @@ export type GetTransferResponse = {
         externalId?: string | undefined;
         travelRule?: ({
             kind: "Notabene";
-            beneficiaryVASPdid: string;
+            beneficiaryVASPdid?: string | undefined;
             beneficiaryProof?: {
                 [x: string]: any;
             } | undefined;
@@ -782,7 +782,7 @@ export type GetTransferResponse = {
         externalId?: string | undefined;
         travelRule?: ({
             kind: "Notabene";
-            beneficiaryVASPdid: string;
+            beneficiaryVASPdid?: string | undefined;
             beneficiaryProof?: {
                 [x: string]: any;
             } | undefined;
@@ -803,7 +803,7 @@ export type GetTransferResponse = {
         externalId?: string | undefined;
         travelRule?: ({
             kind: "Notabene";
-            beneficiaryVASPdid: string;
+            beneficiaryVASPdid?: string | undefined;
             beneficiaryProof?: {
                 [x: string]: any;
             } | undefined;
@@ -824,7 +824,7 @@ export type GetTransferResponse = {
         externalId?: string | undefined;
         travelRule?: ({
             kind: "Notabene";
-            beneficiaryVASPdid: string;
+            beneficiaryVASPdid?: string | undefined;
             beneficiaryProof?: {
                 [x: string]: any;
             } | undefined;
@@ -845,7 +845,7 @@ export type GetTransferResponse = {
         externalId?: string | undefined;
         travelRule?: ({
             kind: "Notabene";
-            beneficiaryVASPdid: string;
+            beneficiaryVASPdid?: string | undefined;
             beneficiaryProof?: {
                 [x: string]: any;
             } | undefined;
@@ -1754,7 +1754,7 @@ export type ListTransfersResponse = {
             externalId?: string | undefined;
             travelRule?: ({
                 kind: "Notabene";
-                beneficiaryVASPdid: string;
+                beneficiaryVASPdid?: string | undefined;
                 beneficiaryProof?: {
                     [x: string]: any;
                 } | undefined;
@@ -1775,7 +1775,7 @@ export type ListTransfersResponse = {
             externalId?: string | undefined;
             travelRule?: ({
                 kind: "Notabene";
-                beneficiaryVASPdid: string;
+                beneficiaryVASPdid?: string | undefined;
                 beneficiaryProof?: {
                     [x: string]: any;
                 } | undefined;
@@ -1796,7 +1796,7 @@ export type ListTransfersResponse = {
             externalId?: string | undefined;
             travelRule?: ({
                 kind: "Notabene";
-                beneficiaryVASPdid: string;
+                beneficiaryVASPdid?: string | undefined;
                 beneficiaryProof?: {
                     [x: string]: any;
                 } | undefined;
@@ -1817,7 +1817,7 @@ export type ListTransfersResponse = {
             externalId?: string | undefined;
             travelRule?: ({
                 kind: "Notabene";
-                beneficiaryVASPdid: string;
+                beneficiaryVASPdid?: string | undefined;
                 beneficiaryProof?: {
                     [x: string]: any;
                 } | undefined;
@@ -1839,7 +1839,7 @@ export type ListTransfersResponse = {
             externalId?: string | undefined;
             travelRule?: ({
                 kind: "Notabene";
-                beneficiaryVASPdid: string;
+                beneficiaryVASPdid?: string | undefined;
                 beneficiaryProof?: {
                     [x: string]: any;
                 } | undefined;
@@ -1861,7 +1861,7 @@ export type ListTransfersResponse = {
             externalId?: string | undefined;
             travelRule?: ({
                 kind: "Notabene";
-                beneficiaryVASPdid: string;
+                beneficiaryVASPdid?: string | undefined;
                 beneficiaryProof?: {
                     [x: string]: any;
                 } | undefined;
@@ -1884,7 +1884,7 @@ export type ListTransfersResponse = {
             externalId?: string | undefined;
             travelRule?: ({
                 kind: "Notabene";
-                beneficiaryVASPdid: string;
+                beneficiaryVASPdid?: string | undefined;
                 beneficiaryProof?: {
                     [x: string]: any;
                 } | undefined;
@@ -1906,7 +1906,7 @@ export type ListTransfersResponse = {
             externalId?: string | undefined;
             travelRule?: ({
                 kind: "Notabene";
-                beneficiaryVASPdid: string;
+                beneficiaryVASPdid?: string | undefined;
                 beneficiaryProof?: {
                     [x: string]: any;
                 } | undefined;
@@ -1928,7 +1928,7 @@ export type ListTransfersResponse = {
             externalId?: string | undefined;
             travelRule?: ({
                 kind: "Notabene";
-                beneficiaryVASPdid: string;
+                beneficiaryVASPdid?: string | undefined;
                 beneficiaryProof?: {
                     [x: string]: any;
                 } | undefined;
@@ -1949,7 +1949,7 @@ export type ListTransfersResponse = {
             externalId?: string | undefined;
             travelRule?: ({
                 kind: "Notabene";
-                beneficiaryVASPdid: string;
+                beneficiaryVASPdid?: string | undefined;
                 beneficiaryProof?: {
                     [x: string]: any;
                 } | undefined;
@@ -1970,7 +1970,7 @@ export type ListTransfersResponse = {
             externalId?: string | undefined;
             travelRule?: ({
                 kind: "Notabene";
-                beneficiaryVASPdid: string;
+                beneficiaryVASPdid?: string | undefined;
                 beneficiaryProof?: {
                     [x: string]: any;
                 } | undefined;
@@ -1991,7 +1991,7 @@ export type ListTransfersResponse = {
             externalId?: string | undefined;
             travelRule?: ({
                 kind: "Notabene";
-                beneficiaryVASPdid: string;
+                beneficiaryVASPdid?: string | undefined;
                 beneficiaryProof?: {
                     [x: string]: any;
                 } | undefined;
@@ -2090,7 +2090,7 @@ export type TransferAssetBody = {
     externalId?: string | undefined;
     travelRule?: ({
         kind: "Notabene";
-        beneficiaryVASPdid: string;
+        beneficiaryVASPdid?: string | undefined;
         beneficiaryProof?: {
             [x: string]: any;
         } | undefined;
@@ -2111,7 +2111,7 @@ export type TransferAssetBody = {
     externalId?: string | undefined;
     travelRule?: ({
         kind: "Notabene";
-        beneficiaryVASPdid: string;
+        beneficiaryVASPdid?: string | undefined;
         beneficiaryProof?: {
             [x: string]: any;
         } | undefined;
@@ -2132,7 +2132,7 @@ export type TransferAssetBody = {
     externalId?: string | undefined;
     travelRule?: ({
         kind: "Notabene";
-        beneficiaryVASPdid: string;
+        beneficiaryVASPdid?: string | undefined;
         beneficiaryProof?: {
             [x: string]: any;
         } | undefined;
@@ -2153,7 +2153,7 @@ export type TransferAssetBody = {
     externalId?: string | undefined;
     travelRule?: ({
         kind: "Notabene";
-        beneficiaryVASPdid: string;
+        beneficiaryVASPdid?: string | undefined;
         beneficiaryProof?: {
             [x: string]: any;
         } | undefined;
@@ -2175,7 +2175,7 @@ export type TransferAssetBody = {
     externalId?: string | undefined;
     travelRule?: ({
         kind: "Notabene";
-        beneficiaryVASPdid: string;
+        beneficiaryVASPdid?: string | undefined;
         beneficiaryProof?: {
             [x: string]: any;
         } | undefined;
@@ -2197,7 +2197,7 @@ export type TransferAssetBody = {
     externalId?: string | undefined;
     travelRule?: ({
         kind: "Notabene";
-        beneficiaryVASPdid: string;
+        beneficiaryVASPdid?: string | undefined;
         beneficiaryProof?: {
             [x: string]: any;
         } | undefined;
@@ -2220,7 +2220,7 @@ export type TransferAssetBody = {
     externalId?: string | undefined;
     travelRule?: ({
         kind: "Notabene";
-        beneficiaryVASPdid: string;
+        beneficiaryVASPdid?: string | undefined;
         beneficiaryProof?: {
             [x: string]: any;
         } | undefined;
@@ -2242,7 +2242,7 @@ export type TransferAssetBody = {
     externalId?: string | undefined;
     travelRule?: ({
         kind: "Notabene";
-        beneficiaryVASPdid: string;
+        beneficiaryVASPdid?: string | undefined;
         beneficiaryProof?: {
             [x: string]: any;
         } | undefined;
@@ -2264,7 +2264,7 @@ export type TransferAssetBody = {
     externalId?: string | undefined;
     travelRule?: ({
         kind: "Notabene";
-        beneficiaryVASPdid: string;
+        beneficiaryVASPdid?: string | undefined;
         beneficiaryProof?: {
             [x: string]: any;
         } | undefined;
@@ -2285,7 +2285,7 @@ export type TransferAssetBody = {
     externalId?: string | undefined;
     travelRule?: ({
         kind: "Notabene";
-        beneficiaryVASPdid: string;
+        beneficiaryVASPdid?: string | undefined;
         beneficiaryProof?: {
             [x: string]: any;
         } | undefined;
@@ -2306,7 +2306,7 @@ export type TransferAssetBody = {
     externalId?: string | undefined;
     travelRule?: ({
         kind: "Notabene";
-        beneficiaryVASPdid: string;
+        beneficiaryVASPdid?: string | undefined;
         beneficiaryProof?: {
             [x: string]: any;
         } | undefined;
@@ -2327,7 +2327,7 @@ export type TransferAssetBody = {
     externalId?: string | undefined;
     travelRule?: ({
         kind: "Notabene";
-        beneficiaryVASPdid: string;
+        beneficiaryVASPdid?: string | undefined;
         beneficiaryProof?: {
             [x: string]: any;
         } | undefined;
@@ -2364,7 +2364,7 @@ export type TransferAssetResponse = {
         externalId?: string | undefined;
         travelRule?: ({
             kind: "Notabene";
-            beneficiaryVASPdid: string;
+            beneficiaryVASPdid?: string | undefined;
             beneficiaryProof?: {
                 [x: string]: any;
             } | undefined;
@@ -2385,7 +2385,7 @@ export type TransferAssetResponse = {
         externalId?: string | undefined;
         travelRule?: ({
             kind: "Notabene";
-            beneficiaryVASPdid: string;
+            beneficiaryVASPdid?: string | undefined;
             beneficiaryProof?: {
                 [x: string]: any;
             } | undefined;
@@ -2406,7 +2406,7 @@ export type TransferAssetResponse = {
         externalId?: string | undefined;
         travelRule?: ({
             kind: "Notabene";
-            beneficiaryVASPdid: string;
+            beneficiaryVASPdid?: string | undefined;
             beneficiaryProof?: {
                 [x: string]: any;
             } | undefined;
@@ -2427,7 +2427,7 @@ export type TransferAssetResponse = {
         externalId?: string | undefined;
         travelRule?: ({
             kind: "Notabene";
-            beneficiaryVASPdid: string;
+            beneficiaryVASPdid?: string | undefined;
             beneficiaryProof?: {
                 [x: string]: any;
             } | undefined;
@@ -2449,7 +2449,7 @@ export type TransferAssetResponse = {
         externalId?: string | undefined;
         travelRule?: ({
             kind: "Notabene";
-            beneficiaryVASPdid: string;
+            beneficiaryVASPdid?: string | undefined;
             beneficiaryProof?: {
                 [x: string]: any;
             } | undefined;
@@ -2471,7 +2471,7 @@ export type TransferAssetResponse = {
         externalId?: string | undefined;
         travelRule?: ({
             kind: "Notabene";
-            beneficiaryVASPdid: string;
+            beneficiaryVASPdid?: string | undefined;
             beneficiaryProof?: {
                 [x: string]: any;
             } | undefined;
@@ -2494,7 +2494,7 @@ export type TransferAssetResponse = {
         externalId?: string | undefined;
         travelRule?: ({
             kind: "Notabene";
-            beneficiaryVASPdid: string;
+            beneficiaryVASPdid?: string | undefined;
             beneficiaryProof?: {
                 [x: string]: any;
             } | undefined;
@@ -2516,7 +2516,7 @@ export type TransferAssetResponse = {
         externalId?: string | undefined;
         travelRule?: ({
             kind: "Notabene";
-            beneficiaryVASPdid: string;
+            beneficiaryVASPdid?: string | undefined;
             beneficiaryProof?: {
                 [x: string]: any;
             } | undefined;
@@ -2538,7 +2538,7 @@ export type TransferAssetResponse = {
         externalId?: string | undefined;
         travelRule?: ({
             kind: "Notabene";
-            beneficiaryVASPdid: string;
+            beneficiaryVASPdid?: string | undefined;
             beneficiaryProof?: {
                 [x: string]: any;
             } | undefined;
@@ -2559,7 +2559,7 @@ export type TransferAssetResponse = {
         externalId?: string | undefined;
         travelRule?: ({
             kind: "Notabene";
-            beneficiaryVASPdid: string;
+            beneficiaryVASPdid?: string | undefined;
             beneficiaryProof?: {
                 [x: string]: any;
             } | undefined;
@@ -2580,7 +2580,7 @@ export type TransferAssetResponse = {
         externalId?: string | undefined;
         travelRule?: ({
             kind: "Notabene";
-            beneficiaryVASPdid: string;
+            beneficiaryVASPdid?: string | undefined;
             beneficiaryProof?: {
                 [x: string]: any;
             } | undefined;
@@ -2601,7 +2601,7 @@ export type TransferAssetResponse = {
         externalId?: string | undefined;
         travelRule?: ({
             kind: "Notabene";
-            beneficiaryVASPdid: string;
+            beneficiaryVASPdid?: string | undefined;
             beneficiaryProof?: {
                 [x: string]: any;
             } | undefined;
