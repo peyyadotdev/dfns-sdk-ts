@@ -6,8 +6,6 @@ import { ErrorResponse, formatJsonRpcError, formatJsonRpcResult } from '@walletc
 import * as dotenv from 'dotenv'
 import { SignerPayloadJSON, SignerPayloadRaw } from '@polymeshassociation/signing-manager-types'
 import { AsymmetricKeySigner } from '@dfns/sdk-keysigner'
-import { Polymesh } from '@polymeshassociation/polymesh-sdk'
-import { Registry } from '@polkadot/types/types'
 
 dotenv.config()
 interface SignerResponse {
@@ -58,7 +56,7 @@ const promptUserForApproval = async (message: string): Promise<boolean> => {
   return userInput.toLowerCase() === 'y'
 }
 
-const initDfnsWallet = async (walletId: string, registry: Registry) => {
+const initDfnsWallet = async (walletId: string) => {
   const signer = new AsymmetricKeySigner({
     credId: process.env.DFNS_CRED_ID!,
     privateKey: process.env.DFNS_PRIVATE_KEY!,
@@ -73,7 +71,6 @@ const initDfnsWallet = async (walletId: string, registry: Registry) => {
   return DfnsWallet.init({
     walletId,
     dfnsClient,
-    registry
   })
 }
 interface SessionRequest {
@@ -83,14 +80,8 @@ interface SessionRequest {
 }
 
 (async () => {
-  const client = await Polymesh.connect({
-    nodeUrl: process.env.POLYMESH_NODE_URL!,
-    polkadot: { noInitWarn: true },
-  })
-
   const dfnsWallet = await initDfnsWallet(
     process.env.POLYMESH_WALLET_ID!,
-    client._polkadotApi.registry
   )
 
   const signClient = await SignClient.init({

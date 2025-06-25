@@ -8,13 +8,12 @@ import * as dotenv from 'dotenv'
 import { CreateAssetWithTickerParams, FungibleAsset, FungibleLeg, KnownAssetType, VenueType } from '@polymeshassociation/polymesh-sdk/types'
 import assert from 'assert'
 import { DefaultPortfolio } from '@polymeshassociation/polymesh-sdk/internal'
-import { Registry } from '@polkadot/types/types'
 
 dotenv.config()
 
 const POLYMESH_ASSET_DECIMALS = 6
 
-const initDfnsWallet = async (walletId: string, registry: Registry) => {
+const initDfnsWallet = async (walletId: string) => {
   const signer = new AsymmetricKeySigner({
     credId: process.env.DFNS_CRED_ID!,
     privateKey: process.env.DFNS_PRIVATE_KEY!,
@@ -29,7 +28,6 @@ const initDfnsWallet = async (walletId: string, registry: Registry) => {
   return DfnsWallet.init({
     walletId: walletId,
     dfnsClient,
-    registry
   })
 }
 
@@ -39,7 +37,7 @@ const createPolymeshClient = async (walletId: string): Promise<Polymesh> => {
     polkadot: { noInitWarn: true },
   })
 
-  const wallet = await initDfnsWallet(walletId, client._polkadotApi.registry)
+  const wallet = await initDfnsWallet(walletId)
 
   console.log(`Polymesh wallet address for ${walletId}: ${wallet.address}`)
   const signingManager = new DfnsSigningManager(wallet)
