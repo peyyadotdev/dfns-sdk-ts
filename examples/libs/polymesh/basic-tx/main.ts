@@ -3,14 +3,13 @@ import { AsymmetricKeySigner } from '@dfns/sdk-keysigner'
 import { DfnsWallet, DfnsSigningManager } from '@dfns/lib-polymesh'
 import { BigNumber, Polymesh } from '@polymeshassociation/polymesh-sdk'
 import { MAX_DECIMALS } from '@polymeshassociation/polymesh-sdk/utils/constants'
-import { Registry } from '@polkadot/types/types'
 
 
 import * as dotenv from 'dotenv'
 
 dotenv.config()
 
-const initDfnsWallet = async (walletId: string, registry: Registry) => {
+const initDfnsWallet = async (walletId: string) => {
   const signer = new AsymmetricKeySigner({
     credId: process.env.DFNS_CRED_ID!,
     privateKey: process.env.DFNS_PRIVATE_KEY!,
@@ -25,7 +24,6 @@ const initDfnsWallet = async (walletId: string, registry: Registry) => {
   return DfnsWallet.init({
     walletId: walletId,
     dfnsClient,
-    registry
   })
 }
 
@@ -37,8 +35,7 @@ async function main() {
   })
 
   const senderWallet = await initDfnsWallet(
-    polymeshWalletId,
-    client._polkadotApi.registry
+    polymeshWalletId
   )
   console.log('Polymesh wallet address: %s', senderWallet.address)
 

@@ -8,8 +8,6 @@ import {
   SignerResult,
   SigningManager,
 } from '@polymeshassociation/signing-manager-types'
-import { Registry } from '@polkadot/types/types'
-import { GenericSignerPayload } from '@polkadot/types'
 
 const Ss58PrefixMap: Record<string, number> = {
   ['Polymesh']: 12,
@@ -19,7 +17,6 @@ const Ss58PrefixMap: Record<string, number> = {
 export type DfnsWalletOptions = {
   walletId: string
   dfnsClient: DfnsApiClient,
-  registry: Registry,
 }
 
 const assertSignResponseSuccessful = (response: GenerateSignatureResponse) => {
@@ -74,7 +71,6 @@ export class DfnsWallet implements PolkadotSigner {
 
   private readonly dfnsClient: DfnsApiClient
   private readonly walletId: string
-  private readonly registry: Registry
 
   private constructor(
     public address: string,
@@ -83,7 +79,6 @@ export class DfnsWallet implements PolkadotSigner {
   ) {
     this.dfnsClient = options.dfnsClient
     this.walletId = options.walletId
-    this.registry = options.registry
   }
 
   public static async init(options: DfnsWalletOptions) {
@@ -110,19 +105,14 @@ export class DfnsWallet implements PolkadotSigner {
   }
 
   public async signPayload(signerPayload: SignerPayloadJSON): Promise<SignerResult> {
-    this.validateAddress(signerPayload.address)   
-    
-    const { transactionVersion, specVersion, ...rest } = signerPayload
-    const genericPayload = new GenericSignerPayload(this.registry, {
-      ...rest,
-      runtimeVersion: { specVersion, transactionVersion },
-    })
+    this.validateAddress(signerPayload.address)    
 
     const response = await this.dfnsClient.wallets.generateSignature({
       walletId: this.walletId,
       body: { 
         kind: 'SignerPayload',
-        payload: genericPayload.toHex()
+        // remove null values from the payload to avoid issues with the DFNS API
+        payload: sanitizePayload(signerPayload)
       }
     })
 
@@ -157,5 +147,17 @@ export class DfnsWallet implements PolkadotSigner {
       })
     }
   }
+}
+
+const sanitizePayload = <T extends Record<string, any>>(payload: T): T => {
+  const result = { ...payload }
+  
+  for (const key in result) {
+    if (result[key] === null) {
+      result[key] = undefined as any
+    }
+  }
+  
+  return result
 }
 
