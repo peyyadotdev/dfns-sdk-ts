@@ -13,6 +13,7 @@ declare -a packages=(
     "@dfns/lib-kaspa"
     "@dfns/lib-meshsdk"
     "@dfns/lib-polkadot"
+    "@dfns/lib-polymesh"
     "@dfns/lib-solana"
     "@dfns/lib-stellar"
     "@dfns/lib-taquito"

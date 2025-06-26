@@ -1,8 +1,13 @@
 # Changelog
 
+## 0.7.2 (2025-06-26)
+
+- Added SDK integration with Polymesh, see `@dfns/lib-polymesh`
+- Updated `DfnsApiClient` to match the latest API changes
+
 ## 0.7.1 (2025-06-18)
 
-- Updated `DfnsApiClient` to match the latest API changes: auth permisions name changes
+- Updated `DfnsApiClient` to match the latest API changes
 
 ## 0.7.0 (2025-06-13)
 
