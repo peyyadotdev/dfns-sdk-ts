@@ -879,6 +879,9 @@ export type ListAssetWithdrawalNetworksResponse = (({
     kind: "Coin" | "LockedCoin";
     coin: string;
 } | {
+    kind: "Asset";
+    assetId: string;
+} | {
     kind: "Sep41";
     issuer: string;
     assetCode: string;
