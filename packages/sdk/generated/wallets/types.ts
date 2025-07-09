@@ -645,7 +645,7 @@ export type GetTransferResponse = {
     };
     requestBody: {
         kind: "Native";
-        to: string | string | string | string | string | string | string | string | string | string | string | string | string | string | string | string | string;
+        to: string | string | string | string | string | string | string | string | string | string | string | string | string | string | string | string | string | string | string;
         amount: string;
         memo?: string | undefined;
         priority?: ("Slow" | "Standard" | "Fast") | undefined;
@@ -1841,7 +1841,7 @@ export type ListTransfersResponse = {
         };
         requestBody: {
             kind: "Native";
-            to: string | string | string | string | string | string | string | string | string | string | string | string | string | string | string | string | string;
+            to: string | string | string | string | string | string | string | string | string | string | string | string | string | string | string | string | string | string | string;
             amount: string;
             memo?: string | undefined;
             priority?: ("Slow" | "Standard" | "Fast") | undefined;
@@ -2177,7 +2177,7 @@ export type TagWalletRequest = TagWalletParams & { body: TagWalletBody }
 
 export type TransferAssetBody = {
     kind: "Native";
-    to: string | string | string | string | string | string | string | string | string | string | string | string | string | string | string | string | string;
+    to: string | string | string | string | string | string | string | string | string | string | string | string | string | string | string | string | string | string | string;
     amount: string;
     memo?: string | undefined;
     priority?: ("Slow" | "Standard" | "Fast") | undefined;
@@ -2451,7 +2451,7 @@ export type TransferAssetResponse = {
     };
     requestBody: {
         kind: "Native";
-        to: string | string | string | string | string | string | string | string | string | string | string | string | string | string | string | string | string;
+        to: string | string | string | string | string | string | string | string | string | string | string | string | string | string | string | string | string | string | string;
         amount: string;
         memo?: string | undefined;
         priority?: ("Slow" | "Standard" | "Fast") | undefined;

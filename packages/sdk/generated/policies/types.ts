@@ -250,7 +250,7 @@ export type CreateApprovalDecisionResponse = {
             };
             requestBody: {
                 kind: "Native";
-                to: string | string | string | string | string | string | string | string | string | string | string | string | string | string | string | string | string;
+                to: string | string | string | string | string | string | string | string | string | string | string | string | string | string | string | string | string | string | string;
                 amount: string;
                 memo?: string | undefined;
                 priority?: ("Slow" | "Standard" | "Fast") | undefined;
@@ -1979,7 +1979,7 @@ export type GetApprovalResponse = {
             };
             requestBody: {
                 kind: "Native";
-                to: string | string | string | string | string | string | string | string | string | string | string | string | string | string | string | string | string;
+                to: string | string | string | string | string | string | string | string | string | string | string | string | string | string | string | string | string | string | string;
                 amount: string;
                 memo?: string | undefined;
                 priority?: ("Slow" | "Standard" | "Fast") | undefined;
@@ -3752,7 +3752,7 @@ export type ListApprovalsResponse = {
                 };
                 requestBody: {
                     kind: "Native";
-                    to: string | string | string | string | string | string | string | string | string | string | string | string | string | string | string | string | string;
+                    to: string | string | string | string | string | string | string | string | string | string | string | string | string | string | string | string | string | string | string;
                     amount: string;
                     memo?: string | undefined;
                     priority?: ("Slow" | "Standard" | "Fast") | undefined;

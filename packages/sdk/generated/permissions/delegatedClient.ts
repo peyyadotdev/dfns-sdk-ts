@@ -139,7 +139,7 @@ export class DelegatedPermissionsClient {
   async deleteAssignmentInit(request: T.DeleteAssignmentRequest): Promise<UserActionChallengeResponse> {
     const path = buildPathAndQuery('/permissions/:permissionId/assignments/:assignmentId', {
       path: request ?? {},
-      query: {},
+      query: request.query ?? {},
     })
 
     const challenge = await BaseAuthApi.createUserActionChallenge(
@@ -161,7 +161,7 @@ export class DelegatedPermissionsClient {
   ): Promise<T.DeleteAssignmentResponse> {
     const path = buildPathAndQuery('/permissions/:permissionId/assignments/:assignmentId', {
       path: request ?? {},
-      query: {},
+      query: request.query ?? {},
     })
 
     const { userAction } = await BaseAuthApi.signUserActionChallenge(

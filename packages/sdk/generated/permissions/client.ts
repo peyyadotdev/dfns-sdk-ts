@@ -57,7 +57,7 @@ export class PermissionsClient {
   async deleteAssignment(request: T.DeleteAssignmentRequest): Promise<T.DeleteAssignmentResponse> {
     const path = buildPathAndQuery('/permissions/:permissionId/assignments/:assignmentId', {
       path: request ?? {},
-      query: {},
+      query: request.query ?? {},
     })
 
     const response = await userActionFetch(path, {
