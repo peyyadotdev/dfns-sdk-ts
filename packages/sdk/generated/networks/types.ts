@@ -29,6 +29,22 @@ export type CreateCantonValidatorResponse = {
 
 export type CreateCantonValidatorRequest = CreateCantonValidatorParams & { body: CreateCantonValidatorBody }
 
+export type DeleteCantonValidatorParams = {
+    network: "canton" | "canton-devnet" | "canton-testnet";
+    validatorId: string;
+};
+
+export type DeleteCantonValidatorResponse = {
+    id: string;
+    network: "Canton" | "CantonDevnet" | "CantonTestnet";
+    name?: string | undefined;
+    kind: "Shared" | "Custom";
+    dateCreated: string;
+    partyHint: string;
+};
+
+export type DeleteCantonValidatorRequest = DeleteCantonValidatorParams
+
 export type GetFeesQuery = {
     network: "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Plume" | "PlumeSepolia" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Race" | "RaceSepolia";
 };
@@ -106,4 +122,32 @@ export type ReadContractResponse = {
 };
 
 export type ReadContractRequest = { body: ReadContractBody }
+
+export type UpdateCantonValidatorBody = {
+    name?: string | undefined;
+    url?: string | undefined;
+    oauth2?: {
+        domain: string;
+        clientId: string;
+        clientSecret: string;
+        audience: string;
+        tokenPath?: string | undefined;
+    } | undefined;
+};
+
+export type UpdateCantonValidatorParams = {
+    network: "canton" | "canton-devnet" | "canton-testnet";
+    validatorId: string;
+};
+
+export type UpdateCantonValidatorResponse = {
+    id: string;
+    network: "Canton" | "CantonDevnet" | "CantonTestnet";
+    name?: string | undefined;
+    kind: "Shared" | "Custom";
+    dateCreated: string;
+    partyHint: string;
+};
+
+export type UpdateCantonValidatorRequest = UpdateCantonValidatorParams & { body: UpdateCantonValidatorBody }
 

@@ -1,6 +1,6 @@
 export type BroadcastTransactionBody = {
     kind: "Transaction";
-    transaction: string;
+    transaction: string | {};
     externalId?: string | undefined;
 } | {
     kind: "Evm";
@@ -19,15 +19,6 @@ export type BroadcastTransactionBody = {
     gasLimit?: (string | string) | undefined;
     maxFeePerGas?: (string | string) | undefined;
     maxPriorityFeePerGas?: (string | string) | undefined;
-    externalId?: string | undefined;
-} | {
-    kind: "EvmLegacy";
-    to?: string | undefined;
-    value?: (string | string) | undefined;
-    data?: string | undefined;
-    nonce?: (number | string | string) | undefined;
-    gasLimit?: (string | string) | undefined;
-    gasPrice?: (string | string) | undefined;
     externalId?: string | undefined;
 } | {
     kind: "Psbt";
@@ -62,7 +53,7 @@ export type BroadcastTransactionResponse = {
     };
     requestBody: {
         kind: "Transaction";
-        transaction: string;
+        transaction: string | {};
         externalId?: string | undefined;
     } | {
         kind: "Evm";
@@ -81,15 +72,6 @@ export type BroadcastTransactionResponse = {
         gasLimit?: (string | string) | undefined;
         maxFeePerGas?: (string | string) | undefined;
         maxPriorityFeePerGas?: (string | string) | undefined;
-        externalId?: string | undefined;
-    } | {
-        kind: "EvmLegacy";
-        to?: string | undefined;
-        value?: (string | string) | undefined;
-        data?: string | undefined;
-        nonce?: (number | string | string) | undefined;
-        gasLimit?: (string | string) | undefined;
-        gasPrice?: (string | string) | undefined;
         externalId?: string | undefined;
     } | {
         kind: "Psbt";
@@ -275,22 +257,7 @@ export type GenerateSignatureBody = {
     externalId?: string | undefined;
 } | {
     kind: "SignerPayload";
-    payload: string | {
-        address: string;
-        blockHash: string;
-        blockNumber: string;
-        era: string;
-        genesisHash: string;
-        metadataHash?: string | undefined;
-        method: string;
-        mode?: number | undefined;
-        nonce: string;
-        specVersion: string;
-        tip: string;
-        transactionVersion: string;
-        signedExtensions: string[];
-        version: number;
-    };
+    payload: string | {};
     network?: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plume" | "PlumeSepolia" | "Polkadot" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "XrpLedger" | "XrpLedgerTestnet") | undefined;
     blockchainKind?: ("Algorand" | "Aptos" | "Bitcoin" | "BitcoinCash" | "Canton" | "Cardano" | "Cosmos" | "Evm" | "Icp" | "Iota" | "Kaspa" | "Polymesh" | "Solana" | "Stellar" | "Substrate" | "Sui" | "Tezos" | "Ton" | "Tron" | "Xrpl") | undefined;
     externalId?: string | undefined;
@@ -376,22 +343,7 @@ export type GenerateSignatureResponse = {
         externalId?: string | undefined;
     } | {
         kind: "SignerPayload";
-        payload: string | {
-            address: string;
-            blockHash: string;
-            blockNumber: string;
-            era: string;
-            genesisHash: string;
-            metadataHash?: string | undefined;
-            method: string;
-            mode?: number | undefined;
-            nonce: string;
-            specVersion: string;
-            tip: string;
-            transactionVersion: string;
-            signedExtensions: string[];
-            version: number;
-        };
+        payload: string | {};
         network?: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plume" | "PlumeSepolia" | "Polkadot" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "XrpLedger" | "XrpLedgerTestnet") | undefined;
         blockchainKind?: ("Algorand" | "Aptos" | "Bitcoin" | "BitcoinCash" | "Canton" | "Cardano" | "Cosmos" | "Evm" | "Icp" | "Iota" | "Kaspa" | "Polymesh" | "Solana" | "Stellar" | "Substrate" | "Sui" | "Tezos" | "Ton" | "Tron" | "Xrpl") | undefined;
         externalId?: string | undefined;
@@ -506,22 +458,7 @@ export type GetSignatureResponse = {
         externalId?: string | undefined;
     } | {
         kind: "SignerPayload";
-        payload: string | {
-            address: string;
-            blockHash: string;
-            blockNumber: string;
-            era: string;
-            genesisHash: string;
-            metadataHash?: string | undefined;
-            method: string;
-            mode?: number | undefined;
-            nonce: string;
-            specVersion: string;
-            tip: string;
-            transactionVersion: string;
-            signedExtensions: string[];
-            version: number;
-        };
+        payload: string | {};
         network?: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plume" | "PlumeSepolia" | "Polkadot" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "XrpLedger" | "XrpLedgerTestnet") | undefined;
         blockchainKind?: ("Algorand" | "Aptos" | "Bitcoin" | "BitcoinCash" | "Canton" | "Cardano" | "Cosmos" | "Evm" | "Icp" | "Iota" | "Kaspa" | "Polymesh" | "Solana" | "Stellar" | "Substrate" | "Sui" | "Tezos" | "Ton" | "Tron" | "Xrpl") | undefined;
         externalId?: string | undefined;
@@ -569,7 +506,7 @@ export type GetTransactionResponse = {
     };
     requestBody: {
         kind: "Transaction";
-        transaction: string;
+        transaction: string | {};
         externalId?: string | undefined;
     } | {
         kind: "Evm";
@@ -588,15 +525,6 @@ export type GetTransactionResponse = {
         gasLimit?: (string | string) | undefined;
         maxFeePerGas?: (string | string) | undefined;
         maxPriorityFeePerGas?: (string | string) | undefined;
-        externalId?: string | undefined;
-    } | {
-        kind: "EvmLegacy";
-        to?: string | undefined;
-        value?: (string | string) | undefined;
-        data?: string | undefined;
-        nonce?: (number | string | string) | undefined;
-        gasLimit?: (string | string) | undefined;
-        gasPrice?: (string | string) | undefined;
         externalId?: string | undefined;
     } | {
         kind: "Psbt";
@@ -645,7 +573,7 @@ export type GetTransferResponse = {
     };
     requestBody: {
         kind: "Native";
-        to: string | string | string | string | string | string | string | string | string | string | string | string | string | string | string | string | string | string | string;
+        to: string;
         amount: string;
         memo?: string | undefined;
         priority?: ("Slow" | "Standard" | "Fast") | undefined;
@@ -1686,22 +1614,7 @@ export type ListSignaturesResponse = {
             externalId?: string | undefined;
         } | {
             kind: "SignerPayload";
-            payload: string | {
-                address: string;
-                blockHash: string;
-                blockNumber: string;
-                era: string;
-                genesisHash: string;
-                metadataHash?: string | undefined;
-                method: string;
-                mode?: number | undefined;
-                nonce: string;
-                specVersion: string;
-                tip: string;
-                transactionVersion: string;
-                signedExtensions: string[];
-                version: number;
-            };
+            payload: string | {};
             network?: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plume" | "PlumeSepolia" | "Polkadot" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "XrpLedger" | "XrpLedgerTestnet") | undefined;
             blockchainKind?: ("Algorand" | "Aptos" | "Bitcoin" | "BitcoinCash" | "Canton" | "Cardano" | "Cosmos" | "Evm" | "Icp" | "Iota" | "Kaspa" | "Polymesh" | "Solana" | "Stellar" | "Substrate" | "Sui" | "Tezos" | "Ton" | "Tron" | "Xrpl") | undefined;
             externalId?: string | undefined;
@@ -1757,7 +1670,7 @@ export type ListTransactionsResponse = {
         };
         requestBody: {
             kind: "Transaction";
-            transaction: string;
+            transaction: string | {};
             externalId?: string | undefined;
         } | {
             kind: "Evm";
@@ -1776,15 +1689,6 @@ export type ListTransactionsResponse = {
             gasLimit?: (string | string) | undefined;
             maxFeePerGas?: (string | string) | undefined;
             maxPriorityFeePerGas?: (string | string) | undefined;
-            externalId?: string | undefined;
-        } | {
-            kind: "EvmLegacy";
-            to?: string | undefined;
-            value?: (string | string) | undefined;
-            data?: string | undefined;
-            nonce?: (number | string | string) | undefined;
-            gasLimit?: (string | string) | undefined;
-            gasPrice?: (string | string) | undefined;
             externalId?: string | undefined;
         } | {
             kind: "Psbt";
@@ -1841,7 +1745,7 @@ export type ListTransfersResponse = {
         };
         requestBody: {
             kind: "Native";
-            to: string | string | string | string | string | string | string | string | string | string | string | string | string | string | string | string | string | string | string;
+            to: string;
             amount: string;
             memo?: string | undefined;
             priority?: ("Slow" | "Standard" | "Fast") | undefined;
@@ -2177,7 +2081,7 @@ export type TagWalletRequest = TagWalletParams & { body: TagWalletBody }
 
 export type TransferAssetBody = {
     kind: "Native";
-    to: string | string | string | string | string | string | string | string | string | string | string | string | string | string | string | string | string | string | string;
+    to: string;
     amount: string;
     memo?: string | undefined;
     priority?: ("Slow" | "Standard" | "Fast") | undefined;
@@ -2451,7 +2355,7 @@ export type TransferAssetResponse = {
     };
     requestBody: {
         kind: "Native";
-        to: string | string | string | string | string | string | string | string | string | string | string | string | string | string | string | string | string | string | string;
+        to: string;
         amount: string;
         memo?: string | undefined;
         priority?: ("Slow" | "Standard" | "Fast") | undefined;
