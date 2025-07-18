@@ -24,6 +24,21 @@ export class NetworksClient {
     return response.json()
   }
 
+  async deleteCantonValidator(request: T.DeleteCantonValidatorRequest): Promise<T.DeleteCantonValidatorResponse> {
+    const path = buildPathAndQuery('/networks/:network/validators/:validatorId', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await userActionFetch(path, {
+      method: 'DELETE',
+      body: {},
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async getFees(request?: T.GetFeesRequest): Promise<T.GetFeesResponse> {
     const path = buildPathAndQuery('/networks/fees', {
       path: request ?? {},
@@ -60,6 +75,21 @@ export class NetworksClient {
 
     const response = await simpleFetch(path, {
       method: 'POST',
+      body: request.body,
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  async updateCantonValidator(request: T.UpdateCantonValidatorRequest): Promise<T.UpdateCantonValidatorResponse> {
+    const path = buildPathAndQuery('/networks/:network/validators/:validatorId', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await userActionFetch(path, {
+      method: 'PUT',
       body: request.body,
       apiOptions: this.apiOptions,
     })

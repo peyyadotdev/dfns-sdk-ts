@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.7.4 (2025-07-18)
+
+- Fixed `lib-viem` returns wrong wallet address
+- Updated `DfnsApiClient` to match the latest API changes
+
 ## 0.7.3 (2025-07-09)
 
 - Updated `DfnsApiClient` to match the latest API changes

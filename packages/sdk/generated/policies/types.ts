@@ -250,7 +250,7 @@ export type CreateApprovalDecisionResponse = {
             };
             requestBody: {
                 kind: "Native";
-                to: string | string | string | string | string | string | string | string | string | string | string | string | string | string | string | string | string | string | string;
+                to: string;
                 amount: string;
                 memo?: string | undefined;
                 priority?: ("Slow" | "Standard" | "Fast") | undefined;
@@ -541,7 +541,7 @@ export type CreateApprovalDecisionResponse = {
             };
             requestBody: {
                 kind: "Transaction";
-                transaction: string;
+                transaction: string | {};
                 externalId?: string | undefined;
             } | {
                 kind: "Evm";
@@ -560,15 +560,6 @@ export type CreateApprovalDecisionResponse = {
                 gasLimit?: (string | string) | undefined;
                 maxFeePerGas?: (string | string) | undefined;
                 maxPriorityFeePerGas?: (string | string) | undefined;
-                externalId?: string | undefined;
-            } | {
-                kind: "EvmLegacy";
-                to?: string | undefined;
-                value?: (string | string) | undefined;
-                data?: string | undefined;
-                nonce?: (number | string | string) | undefined;
-                gasLimit?: (string | string) | undefined;
-                gasPrice?: (string | string) | undefined;
                 externalId?: string | undefined;
             } | {
                 kind: "Psbt";
@@ -675,22 +666,7 @@ export type CreateApprovalDecisionResponse = {
                 externalId?: string | undefined;
             } | {
                 kind: "SignerPayload";
-                payload: string | {
-                    address: string;
-                    blockHash: string;
-                    blockNumber: string;
-                    era: string;
-                    genesisHash: string;
-                    metadataHash?: string | undefined;
-                    method: string;
-                    mode?: number | undefined;
-                    nonce: string;
-                    specVersion: string;
-                    tip: string;
-                    transactionVersion: string;
-                    signedExtensions: string[];
-                    version: number;
-                };
+                payload: string | {};
                 network?: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plume" | "PlumeSepolia" | "Polkadot" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "XrpLedger" | "XrpLedgerTestnet") | undefined;
                 blockchainKind?: ("Algorand" | "Aptos" | "Bitcoin" | "BitcoinCash" | "Canton" | "Cardano" | "Cosmos" | "Evm" | "Icp" | "Iota" | "Kaspa" | "Polymesh" | "Solana" | "Stellar" | "Substrate" | "Sui" | "Tezos" | "Ton" | "Tron" | "Xrpl") | undefined;
                 externalId?: string | undefined;
@@ -719,6 +695,39 @@ export type CreateApprovalDecisionResponse = {
             dateSigned?: string | undefined;
             dateConfirmed?: string | undefined;
             externalId?: string | undefined;
+        } | undefined;
+        swapRequest?: {
+            id: string;
+            quoteId: string;
+            sourceWalletId: string;
+            targetWalletId: string;
+            status: "PendingPolicyApproval" | "InProgress" | "Completed" | "Failed";
+            quotedSourceAsset: {
+                kind: "Native";
+                amount: string;
+            } | {
+                kind: "Erc20";
+                contract: string;
+                amount: string;
+            };
+            quotedTargetAsset: {
+                kind: "Native";
+                amount: string;
+            } | {
+                kind: "Erc20";
+                contract: string;
+                amount: string;
+            };
+            slippageToleranceInBps: number;
+            dateCreated: string;
+            requestBody: {
+                sourceWalletId: string;
+                quoteId: string;
+            };
+            requester: {
+                userId: string;
+                tokenId?: string | undefined;
+            };
         } | undefined;
     } | {
         kind: "Wallets:IncomingTransaction";
@@ -1979,7 +1988,7 @@ export type GetApprovalResponse = {
             };
             requestBody: {
                 kind: "Native";
-                to: string | string | string | string | string | string | string | string | string | string | string | string | string | string | string | string | string | string | string;
+                to: string;
                 amount: string;
                 memo?: string | undefined;
                 priority?: ("Slow" | "Standard" | "Fast") | undefined;
@@ -2270,7 +2279,7 @@ export type GetApprovalResponse = {
             };
             requestBody: {
                 kind: "Transaction";
-                transaction: string;
+                transaction: string | {};
                 externalId?: string | undefined;
             } | {
                 kind: "Evm";
@@ -2289,15 +2298,6 @@ export type GetApprovalResponse = {
                 gasLimit?: (string | string) | undefined;
                 maxFeePerGas?: (string | string) | undefined;
                 maxPriorityFeePerGas?: (string | string) | undefined;
-                externalId?: string | undefined;
-            } | {
-                kind: "EvmLegacy";
-                to?: string | undefined;
-                value?: (string | string) | undefined;
-                data?: string | undefined;
-                nonce?: (number | string | string) | undefined;
-                gasLimit?: (string | string) | undefined;
-                gasPrice?: (string | string) | undefined;
                 externalId?: string | undefined;
             } | {
                 kind: "Psbt";
@@ -2404,22 +2404,7 @@ export type GetApprovalResponse = {
                 externalId?: string | undefined;
             } | {
                 kind: "SignerPayload";
-                payload: string | {
-                    address: string;
-                    blockHash: string;
-                    blockNumber: string;
-                    era: string;
-                    genesisHash: string;
-                    metadataHash?: string | undefined;
-                    method: string;
-                    mode?: number | undefined;
-                    nonce: string;
-                    specVersion: string;
-                    tip: string;
-                    transactionVersion: string;
-                    signedExtensions: string[];
-                    version: number;
-                };
+                payload: string | {};
                 network?: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plume" | "PlumeSepolia" | "Polkadot" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "XrpLedger" | "XrpLedgerTestnet") | undefined;
                 blockchainKind?: ("Algorand" | "Aptos" | "Bitcoin" | "BitcoinCash" | "Canton" | "Cardano" | "Cosmos" | "Evm" | "Icp" | "Iota" | "Kaspa" | "Polymesh" | "Solana" | "Stellar" | "Substrate" | "Sui" | "Tezos" | "Ton" | "Tron" | "Xrpl") | undefined;
                 externalId?: string | undefined;
@@ -2448,6 +2433,39 @@ export type GetApprovalResponse = {
             dateSigned?: string | undefined;
             dateConfirmed?: string | undefined;
             externalId?: string | undefined;
+        } | undefined;
+        swapRequest?: {
+            id: string;
+            quoteId: string;
+            sourceWalletId: string;
+            targetWalletId: string;
+            status: "PendingPolicyApproval" | "InProgress" | "Completed" | "Failed";
+            quotedSourceAsset: {
+                kind: "Native";
+                amount: string;
+            } | {
+                kind: "Erc20";
+                contract: string;
+                amount: string;
+            };
+            quotedTargetAsset: {
+                kind: "Native";
+                amount: string;
+            } | {
+                kind: "Erc20";
+                contract: string;
+                amount: string;
+            };
+            slippageToleranceInBps: number;
+            dateCreated: string;
+            requestBody: {
+                sourceWalletId: string;
+                quoteId: string;
+            };
+            requester: {
+                userId: string;
+                tokenId?: string | undefined;
+            };
         } | undefined;
     } | {
         kind: "Wallets:IncomingTransaction";
@@ -3752,7 +3770,7 @@ export type ListApprovalsResponse = {
                 };
                 requestBody: {
                     kind: "Native";
-                    to: string | string | string | string | string | string | string | string | string | string | string | string | string | string | string | string | string | string | string;
+                    to: string;
                     amount: string;
                     memo?: string | undefined;
                     priority?: ("Slow" | "Standard" | "Fast") | undefined;
@@ -4043,7 +4061,7 @@ export type ListApprovalsResponse = {
                 };
                 requestBody: {
                     kind: "Transaction";
-                    transaction: string;
+                    transaction: string | {};
                     externalId?: string | undefined;
                 } | {
                     kind: "Evm";
@@ -4062,15 +4080,6 @@ export type ListApprovalsResponse = {
                     gasLimit?: (string | string) | undefined;
                     maxFeePerGas?: (string | string) | undefined;
                     maxPriorityFeePerGas?: (string | string) | undefined;
-                    externalId?: string | undefined;
-                } | {
-                    kind: "EvmLegacy";
-                    to?: string | undefined;
-                    value?: (string | string) | undefined;
-                    data?: string | undefined;
-                    nonce?: (number | string | string) | undefined;
-                    gasLimit?: (string | string) | undefined;
-                    gasPrice?: (string | string) | undefined;
                     externalId?: string | undefined;
                 } | {
                     kind: "Psbt";
@@ -4177,22 +4186,7 @@ export type ListApprovalsResponse = {
                     externalId?: string | undefined;
                 } | {
                     kind: "SignerPayload";
-                    payload: string | {
-                        address: string;
-                        blockHash: string;
-                        blockNumber: string;
-                        era: string;
-                        genesisHash: string;
-                        metadataHash?: string | undefined;
-                        method: string;
-                        mode?: number | undefined;
-                        nonce: string;
-                        specVersion: string;
-                        tip: string;
-                        transactionVersion: string;
-                        signedExtensions: string[];
-                        version: number;
-                    };
+                    payload: string | {};
                     network?: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plume" | "PlumeSepolia" | "Polkadot" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "XrpLedger" | "XrpLedgerTestnet") | undefined;
                     blockchainKind?: ("Algorand" | "Aptos" | "Bitcoin" | "BitcoinCash" | "Canton" | "Cardano" | "Cosmos" | "Evm" | "Icp" | "Iota" | "Kaspa" | "Polymesh" | "Solana" | "Stellar" | "Substrate" | "Sui" | "Tezos" | "Ton" | "Tron" | "Xrpl") | undefined;
                     externalId?: string | undefined;
@@ -4221,6 +4215,39 @@ export type ListApprovalsResponse = {
                 dateSigned?: string | undefined;
                 dateConfirmed?: string | undefined;
                 externalId?: string | undefined;
+            } | undefined;
+            swapRequest?: {
+                id: string;
+                quoteId: string;
+                sourceWalletId: string;
+                targetWalletId: string;
+                status: "PendingPolicyApproval" | "InProgress" | "Completed" | "Failed";
+                quotedSourceAsset: {
+                    kind: "Native";
+                    amount: string;
+                } | {
+                    kind: "Erc20";
+                    contract: string;
+                    amount: string;
+                };
+                quotedTargetAsset: {
+                    kind: "Native";
+                    amount: string;
+                } | {
+                    kind: "Erc20";
+                    contract: string;
+                    amount: string;
+                };
+                slippageToleranceInBps: number;
+                dateCreated: string;
+                requestBody: {
+                    sourceWalletId: string;
+                    quoteId: string;
+                };
+                requester: {
+                    userId: string;
+                    tokenId?: string | undefined;
+                };
             } | undefined;
         } | {
             kind: "Wallets:IncomingTransaction";
