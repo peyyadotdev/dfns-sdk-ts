@@ -1,9 +1,11 @@
 import { DfnsApiClient, DfnsError } from '@dfns/sdk'
 import { GetWalletResponse, GenerateSignatureResponse } from '@dfns/sdk/types/wallets'
+import { secp256k1 } from '@noble/curves/secp256k1'
 import {
   Address,
   GetTransactionType,
   Hash,
+  Hex,
   SerializeTransactionFn,
   SignableMessage,
   Signature,
@@ -19,7 +21,6 @@ import {
   serializeTransaction,
   signatureToHex,
   stringToHex,
-  toHex,
 } from 'viem'
 import { IsNarrowable } from 'viem/_types/types/utils'
 import { publicKeyToAddress } from 'viem/accounts'
@@ -34,6 +35,9 @@ export type DfnsWalletOptions = {
 }
 
 type WalletMetadata = GetWalletResponse & { boundToEvmNetwork: boolean }
+
+const uncompressPublicKey = (compressed: string): Hex =>
+  `0x${Buffer.from(secp256k1.Point.fromHex(compressed).toBytes(false)).toString('hex')}` as Hex
 
 const assertSigned = (res: GenerateSignatureResponse) => {
   if (res.status === 'Failed') {
@@ -72,7 +76,7 @@ export class DfnsWallet {
   private constructor(private metadata: WalletMetadata, options: DfnsWalletOptions) {
     this.address = this.metadata.boundToEvmNetwork
       ? getAddress(this.metadata.address!)
-      : publicKeyToAddress(toHex(this.metadata.signingKey.publicKey))
+      : publicKeyToAddress(uncompressPublicKey(this.metadata.signingKey.publicKey))
 
     this.dfnsClient = options.dfnsClient
 
