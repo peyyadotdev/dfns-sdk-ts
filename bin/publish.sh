@@ -12,6 +12,7 @@ declare -a packages=(
     "@dfns/lib-iota"
     "@dfns/lib-kaspa"
     "@dfns/lib-meshsdk"
+    "@dfns/lib-near"
     "@dfns/lib-polkadot"
     "@dfns/lib-polymesh"
     "@dfns/lib-solana"
