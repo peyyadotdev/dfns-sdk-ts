@@ -27,6 +27,7 @@
     "@ethersproject/strings": "5.7.0",
     "@ethersproject/transactions": "5.7.0",
     "@iota/iota-sdk": "0.4.1",
+    "@mysten/sui": "1.37.1",
     "@noble/curves": "1.9.3",
     "@solana/spl-token": "0.4.12",
     "@stablelib/blake2b": "1.0.1",

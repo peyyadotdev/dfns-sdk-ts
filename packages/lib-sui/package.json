@@ -1,0 +1,7 @@
+{
+  "name": "@dfns/lib-sui",
+  "version": "0.7.5",
+  "peerDependencies": {
+    "@mysten/sui": "1.37.1"
+  }
+}
