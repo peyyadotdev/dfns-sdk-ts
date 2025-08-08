@@ -1,6 +1,5 @@
-import { Fido2Attestation, RecoveryKeyAttestation } from '@dfns/sdk'
+import { Fido2Attestation, RecoveryKeyAssertion, RecoveryKeyAttestation } from '@dfns/sdk'
 import { base64url } from './base64url'
-import { RecoverUserInput } from '@dfns/sdk/codegen/datamodel/Auth'
 
 export type KeyClientData = {
   type: 'key.create'
@@ -139,7 +138,7 @@ export const signRecoveryCredentials = async (
             clientData: base64url(recoveryClientData),
             signature: signature,
           }
-        } as RecoverUserInput)
+        } as RecoveryKeyAssertion)
         break
       }
       case 'error': {

@@ -1,12 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getDfnsDelegatedClient } from '../../utils'
-import { RecoverUserInput, UserRecoveryCredentials } from '@dfns/sdk/codegen/datamodel/Auth'
+import { RecoveryKeyAssertion } from '@dfns/sdk'
+import { RecoverBody } from '@dfns/sdk/generated/auth'
 
 export async function POST(request: NextRequest) {
   const body = (await request.json()) as {
     tempAuthToken: string
-    newCredentials: UserRecoveryCredentials
-    signedRecoveryPackage: RecoverUserInput
+    newCredentials: RecoverBody['newCredentials']
+    signedRecoveryPackage: RecoveryKeyAssertion
   }
 
   // Complete end-user recovery
