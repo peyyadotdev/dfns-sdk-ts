@@ -19,6 +19,7 @@ npm version --no-git-tag-version \
     --workspace @dfns/lib-polymesh \
     --workspace @dfns/lib-solana \
     --workspace @dfns/lib-stellar \
+    --workspace @dfns/lib-sui \
     --workspace @dfns/lib-taquito \
     --workspace @dfns/lib-ton \
     --workspace @dfns/lib-tron \

@@ -17,6 +17,7 @@ declare -a packages=(
     "@dfns/lib-polymesh"
     "@dfns/lib-solana"
     "@dfns/lib-stellar"
+    "@dfns/lib-sui"
     "@dfns/lib-taquito"
     "@dfns/lib-ton"
     "@dfns/lib-tron"
