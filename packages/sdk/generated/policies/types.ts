@@ -8,6 +8,33 @@ export type ArchivePolicyResponse = {
     status: "Active" | "Archived";
     dateCreated?: string | undefined;
     dateUpdated?: string | undefined;
+    activityKind: "Alias:Modify";
+    rule: {
+        kind: "AlwaysTrigger";
+        configuration?: {} | undefined;
+    };
+    action: {
+        kind: "RequestApproval";
+        approvalGroups: {
+            name?: string | undefined;
+            quorum: number;
+            approvers: {
+                userId?: {
+                    in: string[];
+                } | undefined;
+            };
+        }[];
+        autoRejectTimeout?: (number | undefined) | null;
+    } | {
+        kind: "Block";
+    };
+    filters?: {} | undefined;
+} | {
+    id: string;
+    name: string;
+    status: "Active" | "Archived";
+    dateCreated?: string | undefined;
+    dateUpdated?: string | undefined;
     activityKind: "Permissions:Assign";
     rule: {
         kind: "AlwaysTrigger";
@@ -1258,6 +1285,33 @@ export type CreateApprovalDecisionResponse = {
                 status: "Active" | "Archived";
                 dateCreated?: string | undefined;
                 dateUpdated?: string | undefined;
+                activityKind: "Alias:Modify";
+                rule: {
+                    kind: "AlwaysTrigger";
+                    configuration?: {} | undefined;
+                };
+                action: {
+                    kind: "RequestApproval";
+                    approvalGroups: {
+                        name?: string | undefined;
+                        quorum: number;
+                        approvers: {
+                            userId?: {
+                                in: string[];
+                            } | undefined;
+                        };
+                    }[];
+                    autoRejectTimeout?: (number | undefined) | null;
+                } | {
+                    kind: "Block";
+                };
+                filters?: {} | undefined;
+            } | {
+                id: string;
+                name: string;
+                status: "Active" | "Archived";
+                dateCreated?: string | undefined;
+                dateUpdated?: string | undefined;
                 activityKind: "Permissions:Assign";
                 rule: {
                     kind: "AlwaysTrigger";
@@ -1522,6 +1576,46 @@ export type CreateApprovalDecisionResponse = {
                 isImmutable: boolean;
             };
         };
+    } | {
+        kind: "Alias:Modify";
+        changeRequest: {
+            id: string;
+            kind: "Alias";
+            body: {
+                entityId: string;
+                alias: string;
+                operationKind: "Create";
+                description?: string | undefined;
+                values: {
+                    add: {
+                        network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plume" | "PlumeSepolia" | "Polkadot" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "XrpLedger" | "XrpLedgerTestnet";
+                        value: string;
+                        kind: "Eoa";
+                    }[];
+                };
+            } | {
+                entityId: string;
+                alias: string;
+                operationKind: "Update";
+                description?: ((string | undefined) | null) | undefined;
+                values: {
+                    add: {
+                        network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plume" | "PlumeSepolia" | "Polkadot" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "XrpLedger" | "XrpLedgerTestnet";
+                        value: string;
+                        kind: "Eoa";
+                    }[];
+                    remove: {
+                        network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plume" | "PlumeSepolia" | "Polkadot" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "XrpLedger" | "XrpLedgerTestnet";
+                        value: string;
+                        kind: "Eoa";
+                    }[];
+                };
+            } | {
+                entityId: string;
+                alias: string;
+                operationKind: "Delete";
+            };
+        };
     };
     status: "Pending" | "Approved" | "Denied" | "Expired";
     expirationDate?: string | undefined;
@@ -1544,6 +1638,29 @@ export type CreateApprovalDecisionResponse = {
 export type CreateApprovalDecisionRequest = CreateApprovalDecisionParams & { body: CreateApprovalDecisionBody }
 
 export type CreatePolicyBody = {
+    name: string;
+    activityKind: "Alias:Modify";
+    rule: {
+        kind: "AlwaysTrigger";
+        configuration?: {} | undefined;
+    };
+    action: {
+        kind: "RequestApproval";
+        approvalGroups: {
+            name?: string | undefined;
+            quorum: number;
+            approvers: {
+                userId?: {
+                    in: string[];
+                } | undefined;
+            };
+        }[];
+        autoRejectTimeout?: (number | undefined) | null;
+    } | {
+        kind: "Block";
+    };
+    filters?: {} | undefined;
+} | {
     name: string;
     activityKind: "Permissions:Assign";
     rule: {
@@ -1746,6 +1863,33 @@ export type CreatePolicyBody = {
 };
 
 export type CreatePolicyResponse = {
+    id: string;
+    name: string;
+    status: "Active" | "Archived";
+    dateCreated?: string | undefined;
+    dateUpdated?: string | undefined;
+    activityKind: "Alias:Modify";
+    rule: {
+        kind: "AlwaysTrigger";
+        configuration?: {} | undefined;
+    };
+    action: {
+        kind: "RequestApproval";
+        approvalGroups: {
+            name?: string | undefined;
+            quorum: number;
+            approvers: {
+                userId?: {
+                    in: string[];
+                } | undefined;
+            };
+        }[];
+        autoRejectTimeout?: (number | undefined) | null;
+    } | {
+        kind: "Block";
+    };
+    filters?: {} | undefined;
+} | {
     id: string;
     name: string;
     status: "Active" | "Archived";
@@ -2996,6 +3140,33 @@ export type GetApprovalResponse = {
                 status: "Active" | "Archived";
                 dateCreated?: string | undefined;
                 dateUpdated?: string | undefined;
+                activityKind: "Alias:Modify";
+                rule: {
+                    kind: "AlwaysTrigger";
+                    configuration?: {} | undefined;
+                };
+                action: {
+                    kind: "RequestApproval";
+                    approvalGroups: {
+                        name?: string | undefined;
+                        quorum: number;
+                        approvers: {
+                            userId?: {
+                                in: string[];
+                            } | undefined;
+                        };
+                    }[];
+                    autoRejectTimeout?: (number | undefined) | null;
+                } | {
+                    kind: "Block";
+                };
+                filters?: {} | undefined;
+            } | {
+                id: string;
+                name: string;
+                status: "Active" | "Archived";
+                dateCreated?: string | undefined;
+                dateUpdated?: string | undefined;
                 activityKind: "Permissions:Assign";
                 rule: {
                     kind: "AlwaysTrigger";
@@ -3260,6 +3431,46 @@ export type GetApprovalResponse = {
                 isImmutable: boolean;
             };
         };
+    } | {
+        kind: "Alias:Modify";
+        changeRequest: {
+            id: string;
+            kind: "Alias";
+            body: {
+                entityId: string;
+                alias: string;
+                operationKind: "Create";
+                description?: string | undefined;
+                values: {
+                    add: {
+                        network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plume" | "PlumeSepolia" | "Polkadot" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "XrpLedger" | "XrpLedgerTestnet";
+                        value: string;
+                        kind: "Eoa";
+                    }[];
+                };
+            } | {
+                entityId: string;
+                alias: string;
+                operationKind: "Update";
+                description?: ((string | undefined) | null) | undefined;
+                values: {
+                    add: {
+                        network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plume" | "PlumeSepolia" | "Polkadot" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "XrpLedger" | "XrpLedgerTestnet";
+                        value: string;
+                        kind: "Eoa";
+                    }[];
+                    remove: {
+                        network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plume" | "PlumeSepolia" | "Polkadot" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "XrpLedger" | "XrpLedgerTestnet";
+                        value: string;
+                        kind: "Eoa";
+                    }[];
+                };
+            } | {
+                entityId: string;
+                alias: string;
+                operationKind: "Delete";
+            };
+        };
     };
     status: "Pending" | "Approved" | "Denied" | "Expired";
     expirationDate?: string | undefined;
@@ -3286,6 +3497,33 @@ export type GetPolicyParams = {
 };
 
 export type GetPolicyResponse = ({
+    id: string;
+    name: string;
+    status: "Active" | "Archived";
+    dateCreated?: string | undefined;
+    dateUpdated?: string | undefined;
+    activityKind: "Alias:Modify";
+    rule: {
+        kind: "AlwaysTrigger";
+        configuration?: {} | undefined;
+    };
+    action: {
+        kind: "RequestApproval";
+        approvalGroups: {
+            name?: string | undefined;
+            quorum: number;
+            approvers: {
+                userId?: {
+                    in: string[];
+                } | undefined;
+            };
+        }[];
+        autoRejectTimeout?: (number | undefined) | null;
+    } | {
+        kind: "Block";
+    };
+    filters?: {} | undefined;
+} | {
     id: string;
     name: string;
     status: "Active" | "Archived";
@@ -3521,6 +3759,33 @@ export type GetPolicyResponse = ({
         dateResolved?: string | undefined;
         approvalId?: string | undefined;
         body: {
+            id: string;
+            name: string;
+            status: "Active" | "Archived";
+            dateCreated?: string | undefined;
+            dateUpdated?: string | undefined;
+            activityKind: "Alias:Modify";
+            rule: {
+                kind: "AlwaysTrigger";
+                configuration?: {} | undefined;
+            };
+            action: {
+                kind: "RequestApproval";
+                approvalGroups: {
+                    name?: string | undefined;
+                    quorum: number;
+                    approvers: {
+                        userId?: {
+                            in: string[];
+                        } | undefined;
+                    };
+                }[];
+                autoRejectTimeout?: (number | undefined) | null;
+            } | {
+                kind: "Block";
+            };
+            filters?: {} | undefined;
+        } | {
             id: string;
             name: string;
             status: "Active" | "Archived";
@@ -4778,6 +5043,33 @@ export type ListApprovalsResponse = {
                     status: "Active" | "Archived";
                     dateCreated?: string | undefined;
                     dateUpdated?: string | undefined;
+                    activityKind: "Alias:Modify";
+                    rule: {
+                        kind: "AlwaysTrigger";
+                        configuration?: {} | undefined;
+                    };
+                    action: {
+                        kind: "RequestApproval";
+                        approvalGroups: {
+                            name?: string | undefined;
+                            quorum: number;
+                            approvers: {
+                                userId?: {
+                                    in: string[];
+                                } | undefined;
+                            };
+                        }[];
+                        autoRejectTimeout?: (number | undefined) | null;
+                    } | {
+                        kind: "Block";
+                    };
+                    filters?: {} | undefined;
+                } | {
+                    id: string;
+                    name: string;
+                    status: "Active" | "Archived";
+                    dateCreated?: string | undefined;
+                    dateUpdated?: string | undefined;
                     activityKind: "Permissions:Assign";
                     rule: {
                         kind: "AlwaysTrigger";
@@ -5042,6 +5334,46 @@ export type ListApprovalsResponse = {
                     isImmutable: boolean;
                 };
             };
+        } | {
+            kind: "Alias:Modify";
+            changeRequest: {
+                id: string;
+                kind: "Alias";
+                body: {
+                    entityId: string;
+                    alias: string;
+                    operationKind: "Create";
+                    description?: string | undefined;
+                    values: {
+                        add: {
+                            network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plume" | "PlumeSepolia" | "Polkadot" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "XrpLedger" | "XrpLedgerTestnet";
+                            value: string;
+                            kind: "Eoa";
+                        }[];
+                    };
+                } | {
+                    entityId: string;
+                    alias: string;
+                    operationKind: "Update";
+                    description?: ((string | undefined) | null) | undefined;
+                    values: {
+                        add: {
+                            network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plume" | "PlumeSepolia" | "Polkadot" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "XrpLedger" | "XrpLedgerTestnet";
+                            value: string;
+                            kind: "Eoa";
+                        }[];
+                        remove: {
+                            network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plume" | "PlumeSepolia" | "Polkadot" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "XrpLedger" | "XrpLedgerTestnet";
+                            value: string;
+                            kind: "Eoa";
+                        }[];
+                    };
+                } | {
+                    entityId: string;
+                    alias: string;
+                    operationKind: "Delete";
+                };
+            };
         };
         status: "Pending" | "Approved" | "Denied" | "Expired";
         expirationDate?: string | undefined;
@@ -5073,6 +5405,33 @@ export type ListPoliciesQuery = {
 
 export type ListPoliciesResponse = {
     items: (({
+        id: string;
+        name: string;
+        status: "Active" | "Archived";
+        dateCreated?: string | undefined;
+        dateUpdated?: string | undefined;
+        activityKind: "Alias:Modify";
+        rule: {
+            kind: "AlwaysTrigger";
+            configuration?: {} | undefined;
+        };
+        action: {
+            kind: "RequestApproval";
+            approvalGroups: {
+                name?: string | undefined;
+                quorum: number;
+                approvers: {
+                    userId?: {
+                        in: string[];
+                    } | undefined;
+                };
+            }[];
+            autoRejectTimeout?: (number | undefined) | null;
+        } | {
+            kind: "Block";
+        };
+        filters?: {} | undefined;
+    } | {
         id: string;
         name: string;
         status: "Active" | "Archived";
@@ -5313,6 +5672,33 @@ export type ListPoliciesResponse = {
                 status: "Active" | "Archived";
                 dateCreated?: string | undefined;
                 dateUpdated?: string | undefined;
+                activityKind: "Alias:Modify";
+                rule: {
+                    kind: "AlwaysTrigger";
+                    configuration?: {} | undefined;
+                };
+                action: {
+                    kind: "RequestApproval";
+                    approvalGroups: {
+                        name?: string | undefined;
+                        quorum: number;
+                        approvers: {
+                            userId?: {
+                                in: string[];
+                            } | undefined;
+                        };
+                    }[];
+                    autoRejectTimeout?: (number | undefined) | null;
+                } | {
+                    kind: "Block";
+                };
+                filters?: {} | undefined;
+            } | {
+                id: string;
+                name: string;
+                status: "Active" | "Archived";
+                dateCreated?: string | undefined;
+                dateUpdated?: string | undefined;
                 activityKind: "Permissions:Assign";
                 rule: {
                     kind: "AlwaysTrigger";
@@ -5537,6 +5923,29 @@ export type ListPoliciesRequest = { query?: ListPoliciesQuery }
 
 export type UpdatePolicyBody = {
     name: string;
+    activityKind: "Alias:Modify";
+    rule: {
+        kind: "AlwaysTrigger";
+        configuration?: {} | undefined;
+    };
+    action: {
+        kind: "RequestApproval";
+        approvalGroups: {
+            name?: string | undefined;
+            quorum: number;
+            approvers: {
+                userId?: {
+                    in: string[];
+                } | undefined;
+            };
+        }[];
+        autoRejectTimeout?: (number | undefined) | null;
+    } | {
+        kind: "Block";
+    };
+    filters?: {} | undefined;
+} | {
+    name: string;
     activityKind: "Permissions:Assign";
     rule: {
         kind: "AlwaysTrigger";
@@ -5742,6 +6151,33 @@ export type UpdatePolicyParams = {
 };
 
 export type UpdatePolicyResponse = {
+    id: string;
+    name: string;
+    status: "Active" | "Archived";
+    dateCreated?: string | undefined;
+    dateUpdated?: string | undefined;
+    activityKind: "Alias:Modify";
+    rule: {
+        kind: "AlwaysTrigger";
+        configuration?: {} | undefined;
+    };
+    action: {
+        kind: "RequestApproval";
+        approvalGroups: {
+            name?: string | undefined;
+            quorum: number;
+            approvers: {
+                userId?: {
+                    in: string[];
+                } | undefined;
+            };
+        }[];
+        autoRejectTimeout?: (number | undefined) | null;
+    } | {
+        kind: "Block";
+    };
+    filters?: {} | undefined;
+} | {
     id: string;
     name: string;
     status: "Active" | "Archived";
