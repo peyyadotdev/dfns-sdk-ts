@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.7.6 (2025-08-08)
+
+- Added SDK integration with NEAR, see `@dfns/lib-near`
+- Added SDK integration with SUI, see `@dfns/lib-sui`
+- Updated `DfnsApiClient` to match the latest API changes
+
 ## 0.7.5 (2025-07-23)
 
 - Updated `DfnsApiClient` to match the latest API changes
