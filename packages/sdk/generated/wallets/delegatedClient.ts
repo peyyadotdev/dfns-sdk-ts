@@ -363,6 +363,20 @@ export class DelegatedWalletsClient {
     return response.json()
   }
 
+  async listOrgWalletHistory(request?: T.ListOrgWalletHistoryRequest): Promise<T.ListOrgWalletHistoryResponse> {
+    const path = buildPathAndQuery('/wallets/all/history', {
+      path: request ?? {},
+      query: request?.query ?? {},
+    })
+
+    const response = await simpleFetch(path, {
+      method: 'GET',
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async listSignatures(request: T.ListSignaturesRequest): Promise<T.ListSignaturesResponse> {
     const path = buildPathAndQuery('/wallets/:walletId/signatures', {
       path: request ?? {},
