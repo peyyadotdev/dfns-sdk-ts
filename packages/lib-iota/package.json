@@ -1,6 +1,6 @@
 {
   "name": "@dfns/lib-iota",
-  "version": "0.7.7",
+  "version": "0.7.8",
   "peerDependencies": {
     "@iota/iota-sdk": "^0.4.0"
   }
