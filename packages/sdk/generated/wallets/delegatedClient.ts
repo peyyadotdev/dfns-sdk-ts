@@ -7,6 +7,49 @@ import * as T from './types'
 export class DelegatedWalletsClient {
   constructor(private apiOptions: DfnsDelegatedApiClientOptions) {}
 
+  async acceptOfferInit(request: T.AcceptOfferRequest): Promise<UserActionChallengeResponse> {
+    const path = buildPathAndQuery('/wallets/:walletId/offers/:offerId/accept', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const challenge = await BaseAuthApi.createUserActionChallenge(
+      {
+        userActionHttpMethod: 'PUT',
+        userActionHttpPath: path,
+        userActionPayload: JSON.stringify({}),
+        userActionServerKind: 'Api',
+      },
+      this.apiOptions
+    )
+
+    return challenge
+  }
+
+  async acceptOfferComplete(
+    request: T.AcceptOfferRequest,
+    signedChallenge: SignUserActionChallengeRequest
+  ): Promise<T.AcceptOfferResponse> {
+    const path = buildPathAndQuery('/wallets/:walletId/offers/:offerId/accept', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const { userAction } = await BaseAuthApi.signUserActionChallenge(
+      signedChallenge,
+      this.apiOptions
+    )
+
+    const response = await simpleFetch(path, {
+      method: 'PUT',
+      body: {},
+      headers: { 'x-dfns-useraction': userAction },
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async broadcastTransactionInit(request: T.BroadcastTransactionRequest): Promise<UserActionChallengeResponse> {
     const path = buildPathAndQuery('/wallets/:walletId/transactions', {
       path: request ?? {},
@@ -222,6 +265,20 @@ export class DelegatedWalletsClient {
     return response.json()
   }
 
+  async getOffer(request: T.GetOfferRequest): Promise<T.GetOfferResponse> {
+    const path = buildPathAndQuery('/wallets/:walletId/offers/:offerId', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await simpleFetch(path, {
+      method: 'GET',
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async getSignature(request: T.GetSignatureRequest): Promise<T.GetSignatureResponse> {
     const path = buildPathAndQuery('/wallets/:walletId/signatures/:signatureId', {
       path: request ?? {},
@@ -363,6 +420,20 @@ export class DelegatedWalletsClient {
     return response.json()
   }
 
+  async listOffers(request: T.ListOffersRequest): Promise<T.ListOffersResponse> {
+    const path = buildPathAndQuery('/wallets/:walletId/offers', {
+      path: request ?? {},
+      query: request.query ?? {},
+    })
+
+    const response = await simpleFetch(path, {
+      method: 'GET',
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async listOrgWalletHistory(request?: T.ListOrgWalletHistoryRequest): Promise<T.ListOrgWalletHistoryResponse> {
     const path = buildPathAndQuery('/wallets/all/history', {
       path: request ?? {},
@@ -427,6 +498,49 @@ export class DelegatedWalletsClient {
 
     const response = await simpleFetch(path, {
       method: 'GET',
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  async rejectOfferInit(request: T.RejectOfferRequest): Promise<UserActionChallengeResponse> {
+    const path = buildPathAndQuery('/wallets/:walletId/offers/:offerId/reject', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const challenge = await BaseAuthApi.createUserActionChallenge(
+      {
+        userActionHttpMethod: 'PUT',
+        userActionHttpPath: path,
+        userActionPayload: JSON.stringify({}),
+        userActionServerKind: 'Api',
+      },
+      this.apiOptions
+    )
+
+    return challenge
+  }
+
+  async rejectOfferComplete(
+    request: T.RejectOfferRequest,
+    signedChallenge: SignUserActionChallengeRequest
+  ): Promise<T.RejectOfferResponse> {
+    const path = buildPathAndQuery('/wallets/:walletId/offers/:offerId/reject', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const { userAction } = await BaseAuthApi.signUserActionChallenge(
+      signedChallenge,
+      this.apiOptions
+    )
+
+    const response = await simpleFetch(path, {
+      method: 'PUT',
+      body: {},
+      headers: { 'x-dfns-useraction': userAction },
       apiOptions: this.apiOptions,
     })
 

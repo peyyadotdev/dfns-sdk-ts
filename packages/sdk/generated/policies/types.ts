@@ -282,6 +282,10 @@ export type CreateApprovalDecisionResponse = {
                 memo?: string | undefined;
                 priority?: ("Slow" | "Standard" | "Fast") | undefined;
                 createDestinationAccount?: boolean | undefined;
+                /** Optional field for Canton, if true it will create a transfer offer */
+                offer?: boolean | undefined;
+                /** Optional field for Canton, especially useful in the context of offers */
+                expiresAt?: string | undefined;
                 externalId?: string | undefined;
                 travelRule?: ({
                     kind: "Notabene";
@@ -671,6 +675,11 @@ export type CreateApprovalDecisionResponse = {
                     data?: string | undefined;
                 }[];
                 feeSponsorId: string;
+                externalId?: string | undefined;
+            } | {
+                kind: "SettleOffer";
+                txHash: string;
+                decision: "Accept" | "Reject";
                 externalId?: string | undefined;
             };
             status: "Pending" | "Executing" | "Broadcasted" | "Confirmed" | "Failed" | "Rejected";
@@ -2295,6 +2304,10 @@ export type GetApprovalResponse = {
                 memo?: string | undefined;
                 priority?: ("Slow" | "Standard" | "Fast") | undefined;
                 createDestinationAccount?: boolean | undefined;
+                /** Optional field for Canton, if true it will create a transfer offer */
+                offer?: boolean | undefined;
+                /** Optional field for Canton, especially useful in the context of offers */
+                expiresAt?: string | undefined;
                 externalId?: string | undefined;
                 travelRule?: ({
                     kind: "Notabene";
@@ -2684,6 +2697,11 @@ export type GetApprovalResponse = {
                     data?: string | undefined;
                 }[];
                 feeSponsorId: string;
+                externalId?: string | undefined;
+            } | {
+                kind: "SettleOffer";
+                txHash: string;
+                decision: "Accept" | "Reject";
                 externalId?: string | undefined;
             };
             status: "Pending" | "Executing" | "Broadcasted" | "Confirmed" | "Failed" | "Rejected";
@@ -4356,6 +4374,10 @@ export type ListApprovalsResponse = {
                     memo?: string | undefined;
                     priority?: ("Slow" | "Standard" | "Fast") | undefined;
                     createDestinationAccount?: boolean | undefined;
+                    /** Optional field for Canton, if true it will create a transfer offer */
+                    offer?: boolean | undefined;
+                    /** Optional field for Canton, especially useful in the context of offers */
+                    expiresAt?: string | undefined;
                     externalId?: string | undefined;
                     travelRule?: ({
                         kind: "Notabene";
@@ -4745,6 +4767,11 @@ export type ListApprovalsResponse = {
                         data?: string | undefined;
                     }[];
                     feeSponsorId: string;
+                    externalId?: string | undefined;
+                } | {
+                    kind: "SettleOffer";
+                    txHash: string;
+                    decision: "Accept" | "Reject";
                     externalId?: string | undefined;
                 };
                 status: "Pending" | "Executing" | "Broadcasted" | "Confirmed" | "Failed" | "Rejected";

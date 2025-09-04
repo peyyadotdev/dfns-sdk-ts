@@ -1241,6 +1241,31 @@ export type GetApplicationResponse = {
 
 export type GetApplicationRequest = GetApplicationParams
 
+export type GetAuditLogParams = {
+    id: string;
+};
+
+export type GetAuditLogResponse = {
+    id: string;
+    action: string;
+    actionToken: string;
+    userId: string | null;
+    username: string | null;
+    datePerformed: string | null;
+    firstFactorCredential: {
+        id: string;
+        kind: string;
+        publicKey: string;
+        assertion: {
+            authenticatorData: string;
+            clientData: string;
+            signature: string;
+        };
+    };
+};
+
+export type GetAuditLogRequest = GetAuditLogParams
+
 export type GetPersonalAccessTokenParams = {
     tokenId: string;
 };
@@ -1374,6 +1399,16 @@ export type ListApplicationsResponse = {
         }[];
     }[];
 };
+
+export type ListAuditLogsQuery = {
+    startTime: string;
+    endTime: string;
+    userId?: string | undefined;
+};
+
+export type ListAuditLogsResponse = string;
+
+export type ListAuditLogsRequest = { query?: ListAuditLogsQuery }
 
 export type ListCredentialsResponse = {
     items: {

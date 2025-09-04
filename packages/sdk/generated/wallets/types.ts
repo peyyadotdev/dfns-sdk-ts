@@ -1,3 +1,35 @@
+export type AcceptOfferParams = {
+    walletId: string;
+    offerId: string;
+};
+
+export type AcceptOfferResponse = {
+    id: string;
+    orgId: string;
+    walletId: string;
+    network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "Hedera" | "HederaTestnet" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plume" | "PlumeSepolia" | "Polkadot" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "XrpLedger" | "XrpLedgerTestnet";
+    kind: "Native" | "Aip21" | "Asa" | "Coin" | "Erc20" | "Erc721" | "Asset" | "Hip17" | "Hts" | "Sep41" | "Spl" | "Spl2022" | "Tep74" | "Trc10" | "Trc20" | "Trc721";
+    metadata: {
+        asset: {
+            symbol?: string | undefined;
+            decimals?: number | undefined;
+            verified?: boolean | undefined;
+            quotes?: {
+                [x: string]: number;
+            } | undefined;
+        };
+    };
+    txHash: string;
+    status: "Pending" | "Accepted" | "Rejected" | "Expired";
+    from: string;
+    to: string;
+    value: string;
+    timestamp: string;
+    expiresAt?: string | undefined;
+};
+
+export type AcceptOfferRequest = AcceptOfferParams
+
 export type BroadcastTransactionBody = {
     kind: "Transaction";
     transaction: string | {};
@@ -40,6 +72,11 @@ export type BroadcastTransactionBody = {
         data?: string | undefined;
     }[];
     feeSponsorId: string;
+    externalId?: string | undefined;
+} | {
+    kind: "SettleOffer";
+    txHash: string;
+    decision: "Accept" | "Reject";
     externalId?: string | undefined;
 };
 
@@ -97,6 +134,11 @@ export type BroadcastTransactionResponse = {
             data?: string | undefined;
         }[];
         feeSponsorId: string;
+        externalId?: string | undefined;
+    } | {
+        kind: "SettleOffer";
+        txHash: string;
+        decision: "Accept" | "Reject";
         externalId?: string | undefined;
     };
     status: "Pending" | "Executing" | "Broadcasted" | "Confirmed" | "Failed" | "Rejected";
@@ -401,6 +443,38 @@ export type GenerateSignatureResponse = {
 
 export type GenerateSignatureRequest = GenerateSignatureParams & { body: GenerateSignatureBody }
 
+export type GetOfferParams = {
+    walletId: string;
+    offerId: string;
+};
+
+export type GetOfferResponse = {
+    id: string;
+    orgId: string;
+    walletId: string;
+    network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "Hedera" | "HederaTestnet" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plume" | "PlumeSepolia" | "Polkadot" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "XrpLedger" | "XrpLedgerTestnet";
+    kind: "Native" | "Aip21" | "Asa" | "Coin" | "Erc20" | "Erc721" | "Asset" | "Hip17" | "Hts" | "Sep41" | "Spl" | "Spl2022" | "Tep74" | "Trc10" | "Trc20" | "Trc721";
+    metadata: {
+        asset: {
+            symbol?: string | undefined;
+            decimals?: number | undefined;
+            verified?: boolean | undefined;
+            quotes?: {
+                [x: string]: number;
+            } | undefined;
+        };
+    };
+    txHash: string;
+    status: "Pending" | "Accepted" | "Rejected" | "Expired";
+    from: string;
+    to: string;
+    value: string;
+    timestamp: string;
+    expiresAt?: string | undefined;
+};
+
+export type GetOfferRequest = GetOfferParams
+
 export type GetSignatureParams = {
     walletId: string;
     signatureId: string;
@@ -579,6 +653,11 @@ export type GetTransactionResponse = {
         }[];
         feeSponsorId: string;
         externalId?: string | undefined;
+    } | {
+        kind: "SettleOffer";
+        txHash: string;
+        decision: "Accept" | "Reject";
+        externalId?: string | undefined;
     };
     status: "Pending" | "Executing" | "Broadcasted" | "Confirmed" | "Failed" | "Rejected";
     reason?: string | undefined;
@@ -614,6 +693,10 @@ export type GetTransferResponse = {
         memo?: string | undefined;
         priority?: ("Slow" | "Standard" | "Fast") | undefined;
         createDestinationAccount?: boolean | undefined;
+        /** Optional field for Canton, if true it will create a transfer offer */
+        offer?: boolean | undefined;
+        /** Optional field for Canton, especially useful in the context of offers */
+        expiresAt?: string | undefined;
         externalId?: string | undefined;
         travelRule?: ({
             kind: "Notabene";
@@ -1645,11 +1728,6 @@ export type GetWalletNftsResponse = {
         symbol?: string | undefined;
         tokenUri?: string | undefined;
     } | {
-        kind: "Asset";
-        assetId: string;
-        symbol?: string | undefined;
-        tokenUri?: string | undefined;
-    } | {
         kind: "Erc721" | "Trc721";
         contract: string;
         tokenId: string;
@@ -1703,6 +1781,45 @@ export type ImportWalletResponse = {
 };
 
 export type ImportWalletRequest = { body: ImportWalletBody }
+
+export type ListOffersParams = {
+    walletId: string;
+};
+
+export type ListOffersQuery = {
+    limit?: number | undefined;
+    paginationToken?: string | undefined;
+};
+
+export type ListOffersResponse = {
+    items: {
+        id: string;
+        orgId: string;
+        walletId: string;
+        network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "Hedera" | "HederaTestnet" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plume" | "PlumeSepolia" | "Polkadot" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "XrpLedger" | "XrpLedgerTestnet";
+        kind: "Native" | "Aip21" | "Asa" | "Coin" | "Erc20" | "Erc721" | "Asset" | "Hip17" | "Hts" | "Sep41" | "Spl" | "Spl2022" | "Tep74" | "Trc10" | "Trc20" | "Trc721";
+        metadata: {
+            asset: {
+                symbol?: string | undefined;
+                decimals?: number | undefined;
+                verified?: boolean | undefined;
+                quotes?: {
+                    [x: string]: number;
+                } | undefined;
+            };
+        };
+        txHash: string;
+        status: "Pending" | "Accepted" | "Rejected" | "Expired";
+        from: string;
+        to: string;
+        value: string;
+        timestamp: string;
+        expiresAt?: string | undefined;
+    }[];
+    nextPageToken?: string | undefined;
+};
+
+export type ListOffersRequest = ListOffersParams & { query?: ListOffersQuery }
 
 export type ListOrgWalletHistoryQuery = {
     startTime: string;
@@ -1927,6 +2044,11 @@ export type ListTransactionsResponse = {
             }[];
             feeSponsorId: string;
             externalId?: string | undefined;
+        } | {
+            kind: "SettleOffer";
+            txHash: string;
+            decision: "Accept" | "Reject";
+            externalId?: string | undefined;
         };
         status: "Pending" | "Executing" | "Broadcasted" | "Confirmed" | "Failed" | "Rejected";
         reason?: string | undefined;
@@ -1970,6 +2092,10 @@ export type ListTransfersResponse = {
             memo?: string | undefined;
             priority?: ("Slow" | "Standard" | "Fast") | undefined;
             createDestinationAccount?: boolean | undefined;
+            /** Optional field for Canton, if true it will create a transfer offer */
+            offer?: boolean | undefined;
+            /** Optional field for Canton, especially useful in the context of offers */
+            expiresAt?: string | undefined;
             externalId?: string | undefined;
             travelRule?: ({
                 kind: "Notabene";
@@ -2350,6 +2476,38 @@ export type ListWalletsResponse = {
 
 export type ListWalletsRequest = { query?: ListWalletsQuery }
 
+export type RejectOfferParams = {
+    walletId: string;
+    offerId: string;
+};
+
+export type RejectOfferResponse = {
+    id: string;
+    orgId: string;
+    walletId: string;
+    network: "Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "Hedera" | "HederaTestnet" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plume" | "PlumeSepolia" | "Polkadot" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tezos" | "TezosGhostnet" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "XrpLedger" | "XrpLedgerTestnet";
+    kind: "Native" | "Aip21" | "Asa" | "Coin" | "Erc20" | "Erc721" | "Asset" | "Hip17" | "Hts" | "Sep41" | "Spl" | "Spl2022" | "Tep74" | "Trc10" | "Trc20" | "Trc721";
+    metadata: {
+        asset: {
+            symbol?: string | undefined;
+            decimals?: number | undefined;
+            verified?: boolean | undefined;
+            quotes?: {
+                [x: string]: number;
+            } | undefined;
+        };
+    };
+    txHash: string;
+    status: "Pending" | "Accepted" | "Rejected" | "Expired";
+    from: string;
+    to: string;
+    value: string;
+    timestamp: string;
+    expiresAt?: string | undefined;
+};
+
+export type RejectOfferRequest = RejectOfferParams
+
 export type TagWalletBody = {
     tags: string[];
 };
@@ -2369,6 +2527,10 @@ export type TransferAssetBody = {
     memo?: string | undefined;
     priority?: ("Slow" | "Standard" | "Fast") | undefined;
     createDestinationAccount?: boolean | undefined;
+    /** Optional field for Canton, if true it will create a transfer offer */
+    offer?: boolean | undefined;
+    /** Optional field for Canton, especially useful in the context of offers */
+    expiresAt?: string | undefined;
     externalId?: string | undefined;
     travelRule?: ({
         kind: "Notabene";
@@ -2706,6 +2868,10 @@ export type TransferAssetResponse = {
         memo?: string | undefined;
         priority?: ("Slow" | "Standard" | "Fast") | undefined;
         createDestinationAccount?: boolean | undefined;
+        /** Optional field for Canton, if true it will create a transfer offer */
+        offer?: boolean | undefined;
+        /** Optional field for Canton, especially useful in the context of offers */
+        expiresAt?: string | undefined;
         externalId?: string | undefined;
         travelRule?: ({
             kind: "Notabene";

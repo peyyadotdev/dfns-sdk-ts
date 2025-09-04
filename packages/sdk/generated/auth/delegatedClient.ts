@@ -983,6 +983,20 @@ export class DelegatedAuthClient {
     return response.json()
   }
 
+  async getAuditLog(request: T.GetAuditLogRequest): Promise<T.GetAuditLogResponse> {
+    const path = buildPathAndQuery('/auth/action/logs/:id', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await simpleFetch(path, {
+      method: 'GET',
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async getPersonalAccessToken(request: T.GetPersonalAccessTokenRequest): Promise<T.GetPersonalAccessTokenResponse> {
     const path = buildPathAndQuery('/auth/pats/:tokenId', {
       path: request ?? {},
@@ -1029,6 +1043,20 @@ export class DelegatedAuthClient {
     const path = buildPathAndQuery('/auth/apps', {
       path: {},
       query: {},
+    })
+
+    const response = await simpleFetch(path, {
+      method: 'GET',
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  async listAuditLogs(request?: T.ListAuditLogsRequest): Promise<T.ListAuditLogsResponse> {
+    const path = buildPathAndQuery('/auth/action/logs', {
+      path: request ?? {},
+      query: request?.query ?? {},
     })
 
     const response = await simpleFetch(path, {

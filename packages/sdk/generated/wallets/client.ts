@@ -9,6 +9,21 @@ import * as T from './types'
 export class WalletsClient {
   constructor(private apiOptions: DfnsApiClientOptions) {}
 
+  async acceptOffer(request: T.AcceptOfferRequest): Promise<T.AcceptOfferResponse> {
+    const path = buildPathAndQuery('/wallets/:walletId/offers/:offerId/accept', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await userActionFetch(path, {
+      method: 'PUT',
+      body: {},
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async broadcastTransaction(request: T.BroadcastTransactionRequest): Promise<T.BroadcastTransactionResponse> {
     const path = buildPathAndQuery('/wallets/:walletId/transactions', {
       path: request ?? {},
@@ -78,6 +93,20 @@ export class WalletsClient {
     const response = await userActionFetch(path, {
       method: 'POST',
       body: request.body,
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  async getOffer(request: T.GetOfferRequest): Promise<T.GetOfferResponse> {
+    const path = buildPathAndQuery('/wallets/:walletId/offers/:offerId', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await simpleFetch(path, {
+      method: 'GET',
       apiOptions: this.apiOptions,
     })
 
@@ -197,6 +226,20 @@ export class WalletsClient {
     return response.json()
   }
 
+  async listOffers(request: T.ListOffersRequest): Promise<T.ListOffersResponse> {
+    const path = buildPathAndQuery('/wallets/:walletId/offers', {
+      path: request ?? {},
+      query: request.query ?? {},
+    })
+
+    const response = await simpleFetch(path, {
+      method: 'GET',
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async listOrgWalletHistory(request?: T.ListOrgWalletHistoryRequest): Promise<T.ListOrgWalletHistoryResponse> {
     const path = buildPathAndQuery('/wallets/all/history', {
       path: request ?? {},
@@ -261,6 +304,21 @@ export class WalletsClient {
 
     const response = await simpleFetch(path, {
       method: 'GET',
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
+  async rejectOffer(request: T.RejectOfferRequest): Promise<T.RejectOfferResponse> {
+    const path = buildPathAndQuery('/wallets/:walletId/offers/:offerId/reject', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await userActionFetch(path, {
+      method: 'PUT',
+      body: {},
       apiOptions: this.apiOptions,
     })
 

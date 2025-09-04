@@ -3,6 +3,10 @@ export type CreateDepositBody = {
     amount: string;
     priority?: ("Slow" | "Standard" | "Fast") | undefined;
     createDestinationAccount?: boolean | undefined;
+    /** Optional field for Canton, if true it will create a transfer offer */
+    offer?: boolean | undefined;
+    /** Optional field for Canton, especially useful in the context of offers */
+    expiresAt?: string | undefined;
     externalId?: string | undefined;
     travelRule?: ({
         kind: "Notabene";
@@ -202,6 +206,10 @@ export type CreateDepositResponse = {
         amount: string;
         priority?: ("Slow" | "Standard" | "Fast") | undefined;
         createDestinationAccount?: boolean | undefined;
+        /** Optional field for Canton, if true it will create a transfer offer */
+        offer?: boolean | undefined;
+        /** Optional field for Canton, especially useful in the context of offers */
+        expiresAt?: string | undefined;
         externalId?: string | undefined;
         travelRule?: ({
             kind: "Notabene";
@@ -414,6 +422,10 @@ export type CreateWithdrawalBody = {
     amount: string;
     priority?: ("Slow" | "Standard" | "Fast") | undefined;
     createDestinationAccount?: boolean | undefined;
+    /** Optional field for Canton, if true it will create a transfer offer */
+    offer?: boolean | undefined;
+    /** Optional field for Canton, especially useful in the context of offers */
+    expiresAt?: string | undefined;
     externalId?: string | undefined;
     travelRule?: ({
         kind: "Notabene";
@@ -613,6 +625,10 @@ export type CreateWithdrawalResponse = {
         amount: string;
         priority?: ("Slow" | "Standard" | "Fast") | undefined;
         createDestinationAccount?: boolean | undefined;
+        /** Optional field for Canton, if true it will create a transfer offer */
+        offer?: boolean | undefined;
+        /** Optional field for Canton, especially useful in the context of offers */
+        expiresAt?: string | undefined;
         externalId?: string | undefined;
         travelRule?: ({
             kind: "Notabene";
