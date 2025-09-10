@@ -11,6 +11,8 @@ import { StakingClient } from './generated/staking'
 import { WalletsClient } from './generated/wallets'
 import { WebhooksClient } from './generated/webhooks'
 import { CredentialSigner } from './signer'
+import { SwapsClient } from './generated/swaps'
+import { AgreementsClient } from './generated/agreements'
 
 export type DfnsApiClientOptions = DfnsBaseApiOptions & {
   /** Needs to be specified to use any endpoint that required User Action Signing flow */
@@ -50,6 +52,14 @@ export class DfnsApiClient {
 
   public get staking() {
     return new StakingClient(this.apiOptions)
+  }
+
+  public get swaps() {
+    return new SwapsClient(this.apiOptions)
+  }
+
+  public get agreements() {
+    return new AgreementsClient(this.apiOptions)
   }
 
   public get signers() {
