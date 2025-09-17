@@ -41,7 +41,7 @@ export class WebAuthnSigner implements CredentialSigner<Fido2Assertion>, Credent
       publicKey: {
         challenge: Buffer.from(challenge.challenge),
         allowCredentials: challenge.allowCredentials.webauthn.map(({ id, type }) => ({
-          id: fromBase64Url(id),
+          id: fromBase64Url(id).buffer as ArrayBuffer,
           type,
         })),
         rpId: this.conf.relyingParty.id,
@@ -84,7 +84,7 @@ export class WebAuthnSigner implements CredentialSigner<Fido2Assertion>, Credent
         },
         attestation: challenge.attestation,
         excludeCredentials: challenge.excludeCredentials.map(({ id, type }) => ({
-          id: fromBase64Url(id),
+          id: fromBase64Url(id).buffer as ArrayBuffer,
           type,
         })),
         authenticatorSelection: challenge.authenticatorSelection,

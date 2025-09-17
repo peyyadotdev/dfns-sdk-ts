@@ -7,7 +7,7 @@ The `DfnsWallet` uses `generateSignature` to compute signatures using your Dfns 
 A typical setup routine looks like this,
 
 ```typescript
-import { DfnsWallet } from '@dfns/lib-cardano-csl'
+import { DfnsWallet } from '@dfns/lib-meshsdk'
 import { DfnsApiClient } from '@dfns/sdk'
 import { AsymmetricKeySigner } from '@dfns/sdk-keysigner'
 

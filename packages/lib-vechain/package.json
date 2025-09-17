@@ -2,7 +2,7 @@
   "name": "@dfns/lib-vechain",
   "version": "0.7.11",
   "peerDependencies": {
-    "@vechain/connex-driver": "2.0.12",
-    "thor-devkit": "2.0.8"
+    "@vechain/sdk-core": "^2.0.5",
+    "@vechain/sdk-network": "^2.0.5"
   }
 }
