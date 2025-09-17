@@ -39,6 +39,20 @@ export class NetworksClient {
     return response.json()
   }
 
+  async getCantonValidator(request: T.GetCantonValidatorRequest): Promise<T.GetCantonValidatorResponse> {
+    const path = buildPathAndQuery('/networks/:network/validators/:validatorId', {
+      path: request ?? {},
+      query: {},
+    })
+
+    const response = await simpleFetch(path, {
+      method: 'GET',
+      apiOptions: this.apiOptions,
+    })
+
+    return response.json()
+  }
+
   async getFees(request?: T.GetFeesRequest): Promise<T.GetFeesResponse> {
     const path = buildPathAndQuery('/networks/fees', {
       path: request ?? {},
