@@ -31,7 +31,10 @@ export type CreateCantonValidatorParams = {
 };
 
 export type CreateCantonValidatorResponse = {
+    /** e.g. 'cv-7jeof-m584r-p35ucm37ko3cqgts' */
     id: string;
+    /** e.g. 'or-30tnh-itmjs-s235s5ontr3r23h2' */
+    orgId: string;
     network: "Canton" | "CantonDevnet" | "CantonTestnet";
     name?: string | undefined;
     kind: "Shared" | "Custom";
@@ -43,11 +46,15 @@ export type CreateCantonValidatorRequest = CreateCantonValidatorParams & { body:
 
 export type DeleteCantonValidatorParams = {
     network: "canton" | "canton-devnet" | "canton-testnet";
+    /** e.g. 'cv-7jeof-m584r-p35ucm37ko3cqgts' */
     validatorId: string;
 };
 
 export type DeleteCantonValidatorResponse = {
+    /** e.g. 'cv-7jeof-m584r-p35ucm37ko3cqgts' */
     id: string;
+    /** e.g. 'or-30tnh-itmjs-s235s5ontr3r23h2' */
+    orgId: string;
     network: "Canton" | "CantonDevnet" | "CantonTestnet";
     name?: string | undefined;
     kind: "Shared" | "Custom";
@@ -57,8 +64,28 @@ export type DeleteCantonValidatorResponse = {
 
 export type DeleteCantonValidatorRequest = DeleteCantonValidatorParams
 
+export type GetCantonValidatorParams = {
+    network: "canton" | "canton-devnet" | "canton-testnet";
+    /** e.g. 'cv-7jeof-m584r-p35ucm37ko3cqgts' */
+    validatorId: string;
+};
+
+export type GetCantonValidatorResponse = {
+    /** e.g. 'cv-7jeof-m584r-p35ucm37ko3cqgts' */
+    id: string;
+    /** e.g. 'or-30tnh-itmjs-s235s5ontr3r23h2' */
+    orgId: string;
+    network: "Canton" | "CantonDevnet" | "CantonTestnet";
+    name?: string | undefined;
+    kind: "Shared" | "Custom";
+    dateCreated: string;
+    partyHint: string;
+};
+
+export type GetCantonValidatorRequest = GetCantonValidatorParams
+
 export type GetFeesQuery = {
-    network: "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "Adi" | "AdiTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "Ink" | "InkSepolia" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Plume" | "PlumeSepolia" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Race" | "RaceSepolia";
+    network: "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "Adi" | "AdiTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "Ink" | "InkSepolia" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Plume" | "PlumeSepolia" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Race" | "RaceSepolia" | "Tsc" | "TscTestnet1";
 };
 
 export type GetFeesResponse = {
@@ -79,7 +106,7 @@ export type GetFeesResponse = {
     };
 } | {
     kind: "Eip1559";
-    network: "Adi" | "AdiTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "Ink" | "InkSepolia" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Plume" | "PlumeSepolia" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Race" | "RaceSepolia";
+    network: "Adi" | "AdiTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "Ink" | "InkSepolia" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Plume" | "PlumeSepolia" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Race" | "RaceSepolia" | "Tsc" | "TscTestnet1";
     blockNumber: number;
     slow: {
         maxPriorityFeePerGas: string;
@@ -109,7 +136,10 @@ export type ListCantonValidatorsQuery = {
 
 export type ListCantonValidatorsResponse = {
     items: {
+        /** e.g. 'cv-7jeof-m584r-p35ucm37ko3cqgts' */
         id: string;
+        /** e.g. 'or-30tnh-itmjs-s235s5ontr3r23h2' */
+        orgId: string;
         network: "Canton" | "CantonDevnet" | "CantonTestnet";
         name?: string | undefined;
         kind: "Shared" | "Custom";
@@ -123,7 +153,7 @@ export type ListCantonValidatorsRequest = ListCantonValidatorsParams & { query?:
 
 export type ReadContractBody = {
     kind: "Evm";
-    network: "Adi" | "AdiTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "Ink" | "InkSepolia" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Plume" | "PlumeSepolia" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Race" | "RaceSepolia";
+    network: "Adi" | "AdiTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Base" | "BaseGoerli" | "BaseSepolia" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "Ink" | "InkSepolia" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Plume" | "PlumeSepolia" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Race" | "RaceSepolia" | "Tsc" | "TscTestnet1";
     contract: string;
     data: string;
 };
@@ -161,11 +191,15 @@ export type UpdateCantonValidatorBody = {
 
 export type UpdateCantonValidatorParams = {
     network: "canton" | "canton-devnet" | "canton-testnet";
+    /** e.g. 'cv-7jeof-m584r-p35ucm37ko3cqgts' */
     validatorId: string;
 };
 
 export type UpdateCantonValidatorResponse = {
+    /** e.g. 'cv-7jeof-m584r-p35ucm37ko3cqgts' */
     id: string;
+    /** e.g. 'or-30tnh-itmjs-s235s5ontr3r23h2' */
+    orgId: string;
     network: "Canton" | "CantonDevnet" | "CantonTestnet";
     name?: string | undefined;
     kind: "Shared" | "Custom";
