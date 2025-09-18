@@ -11,6 +11,7 @@ declare -a packages=(
     "@dfns/lib-ethersjs6"
     "@dfns/lib-hedera"
     "@dfns/lib-iota"
+    "@dfns/lib-kadena"
     "@dfns/lib-kaspa"
     "@dfns/lib-meshsdk"
     "@dfns/lib-near"
