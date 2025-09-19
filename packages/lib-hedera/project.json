@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "cb": {
+      "executor": "@nx/js:tsc",
+      "options": {
+        "outputPath": "dist/@dfns/lib-hedera",
+        "clean": true,
+        "main": "packages/lib-hedera/index.ts",
+        "tsConfig": "packages/lib-hedera/tsconfig.json",
+        "updateBuildableProjectDepsInPackageJson": true
+      }
+    }
+  }
+}
