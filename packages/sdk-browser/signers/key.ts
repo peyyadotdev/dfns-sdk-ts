@@ -55,7 +55,7 @@ export class BrowserKeySigner implements CredentialSigner<KeyAssertion>, Credent
     const signature = rawSignatureToAns1(new Uint8Array(rawSignature))
     const attestationData = JSON.stringify({
       publicKey: publicKeyPem,
-      signature: toHex(signature),
+      signature: toHex(signature.buffer as ArrayBuffer),
     })
 
     return {

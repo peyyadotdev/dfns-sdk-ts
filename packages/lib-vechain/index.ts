@@ -1,19 +1,19 @@
 import { DfnsApiClient, DfnsError } from '@dfns/sdk'
-import { GetWalletResponse, GenerateSignatureResponse } from '@dfns/sdk/types/wallets'
-import { Wallet } from '@vechain/connex-driver'
+import { GenerateSignatureResponse } from '@dfns/sdk/types/wallets'
+import {
+  type AvailableVeChainProviders,
+  RPC_METHODS,
+  type TransactionRequestInput,
+  VeChainAbstractSigner,
+} from '@vechain/sdk-network'
+
+import { Address, Hex, Transaction } from '@vechain/sdk-core';
 import { ec } from 'elliptic'
-import { address } from 'thor-devkit'
 
 export type DfnsWalletOptions = {
   walletId: string
   dfnsClient: DfnsApiClient
-  /** @deprecated transaction signing is now synchronous. polling is deprecated. */
-  maxRetries?: number
-  /** @deprecated transaction signing is now synchronous. polling is deprecated. */
-  retryInterval?: number
 }
-
-type WalletMetadata = GetWalletResponse
 
 const assertSigned = (res: GenerateSignatureResponse) => {
   if (res.status === 'Failed') {
@@ -27,18 +27,20 @@ const assertSigned = (res: GenerateSignatureResponse) => {
   }
 }
 
-export class DfnsWallet implements Wallet {
+export class DfnsWallet extends VeChainAbstractSigner {
   public readonly address
   private readonly dfnsClient
+  public readonly walletId
 
-  private constructor(private metadata: WalletMetadata, options: DfnsWalletOptions) {
-    this.dfnsClient = options.dfnsClient
-
-    const publicKey = new ec('secp256k1').keyFromPublic(metadata.signingKey.publicKey, 'hex')
-    this.address = address.fromPublicKey(Buffer.from(publicKey.getPublic(false, 'array')))
+  private constructor(private ad: string, client: DfnsApiClient, walletId: string, provider?: AvailableVeChainProviders) {
+    super(provider)
+    this.dfnsClient = client
+    this.address = ad
+    this.walletId = walletId
   }
 
-  public static async init(options: DfnsWalletOptions): Promise<DfnsWallet> {
+
+  public static async init(options: DfnsWalletOptions, provider?: AvailableVeChainProviders): Promise<DfnsWallet> {
     const { walletId, dfnsClient } = options
     const res = await dfnsClient.wallets.getWallet({ walletId })
 
@@ -54,12 +56,14 @@ export class DfnsWallet implements Wallet {
       throw new DfnsError(-1, 'key curve is not secp256k1', { walletId, curve })
     }
 
-    return new DfnsWallet(res, options)
+    const publicKey = new ec('secp256k1').keyFromPublic(res.signingKey.publicKey, 'hex')
+    const ad = Address.ofPublicKey(Buffer.from(publicKey.getPublic(false, 'array'))).toString()
+    return new DfnsWallet(ad, dfnsClient, walletId, provider)
   }
 
   private async sign(msgHash: Buffer): Promise<Buffer> {
     const res = await this.dfnsClient.wallets.generateSignature({
-      walletId: this.metadata.id,
+      walletId: this.walletId,
       body: { kind: 'Hash', hash: msgHash.toString('hex') },
     })
 
@@ -76,12 +80,40 @@ export class DfnsWallet implements Wallet {
     ])
   }
 
-  public get list(): Wallet.Key[] {
-    return [
-      {
-        address: this.address,
-        sign: (msgHash: Buffer) => this.sign(msgHash),
-      },
-    ]
+  public connect(provider: AvailableVeChainProviders): this {
+    return new DfnsWallet(this.address, this.dfnsClient, this.walletId, provider) as this
+  }
+
+  public async getAddress(): Promise<string> {
+    return Promise.resolve(this.address)
+  }
+
+  public async signTransaction(transactionToSign: TransactionRequestInput): Promise<string> {
+    const transactionBody =
+      await this.populateTransaction(transactionToSign);
+
+    // Get the transaction object
+    const transaction = Transaction.of(transactionBody);
+    const transactionHash = transaction.getTransactionHash().bytes
+    const signature = await this.sign(Buffer.from(transactionHash))
+
+    return Hex.of(signature).toString()
+  }
+
+  public async sendTransaction(transactionToSend: TransactionRequestInput): Promise<string> {
+    const signedTransaction =
+      await this.signTransaction(transactionToSend);
+
+    return this.provider?.request({
+      method: RPC_METHODS.eth_sendRawTransaction,
+      params: [Hex.of(signedTransaction).toString()],
+    }) as Promise<string>;
+  }
+
+  public async signPayload(payload: Uint8Array): Promise<string> {
+    const signature = await this.sign(Buffer.from(payload));
+    // SCP256K1 encodes the recovery flag in the last byte. EIP-191 adds 27 to it.
+    signature[signature.length - 1] += 27;
+    return Hex.of(signature).toString();
   }
 }

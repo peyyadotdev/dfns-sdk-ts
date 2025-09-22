@@ -34,8 +34,9 @@ const assertSigned = (res: GenerateSignatureResponse) => {
 }
 
 export class DfnsWallet extends Signer {
+  
   // no-lint
-  sign(bytes: Uint8Array): Promise<Uint8Array> {
+  sign(bytes: Uint8Array): Promise<Uint8Array<ArrayBuffer>> {
     throw new Error('Method not implemented.')
   }
 
