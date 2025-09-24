@@ -231,6 +231,16 @@ export type CreateCredentialBody = {
     credentialName: string;
     challengeIdentifier: string;
 } | {
+    credentialKind: "RecoveryKey";
+    credentialInfo: {
+        credId: string;
+        clientData: string;
+        attestationData: string;
+    };
+    encryptedPrivateKey?: string | undefined;
+    credentialName: string;
+    challengeIdentifier: string;
+} | {
     credentialKind: "Password";
     credentialInfo: {
         password: string;
@@ -242,16 +252,6 @@ export type CreateCredentialBody = {
     credentialInfo: {
         otpCode: string;
     };
-    credentialName: string;
-    challengeIdentifier: string;
-} | {
-    credentialKind: "RecoveryKey";
-    credentialInfo: {
-        credId: string;
-        clientData: string;
-        attestationData: string;
-    };
-    encryptedPrivateKey?: string | undefined;
     credentialName: string;
     challengeIdentifier: string;
 };
@@ -275,35 +275,6 @@ export type CreateCredentialChallengeBody = {
 };
 
 export type CreateCredentialChallengeResponse = {
-    kind: "Password";
-    user: {
-        id: string;
-        displayName: string;
-        name: string;
-    };
-    challengeIdentifier: string;
-    rp?: {
-        id: string;
-        name: string;
-    } | undefined;
-    /** @deprecated use challengeIdentifier instead */
-    temporaryAuthenticationToken: string;
-} | {
-    kind: "Totp";
-    user: {
-        id: string;
-        displayName: string;
-        name: string;
-    };
-    challengeIdentifier: string;
-    rp?: {
-        id: string;
-        name: string;
-    } | undefined;
-    otpUrl: string;
-    /** @deprecated use challengeIdentifier instead */
-    temporaryAuthenticationToken: string;
-} | {
     kind: "Fido2";
     user: {
         id: string;
@@ -391,6 +362,35 @@ export type CreateCredentialChallengeResponse = {
         type: "public-key";
         alg: number;
     }[];
+    /** @deprecated use challengeIdentifier instead */
+    temporaryAuthenticationToken: string;
+} | {
+    kind: "Password";
+    user: {
+        id: string;
+        displayName: string;
+        name: string;
+    };
+    challengeIdentifier: string;
+    rp?: {
+        id: string;
+        name: string;
+    } | undefined;
+    /** @deprecated use challengeIdentifier instead */
+    temporaryAuthenticationToken: string;
+} | {
+    kind: "Totp";
+    user: {
+        id: string;
+        displayName: string;
+        name: string;
+    };
+    challengeIdentifier: string;
+    rp?: {
+        id: string;
+        name: string;
+    } | undefined;
+    otpUrl: string;
     /** @deprecated use challengeIdentifier instead */
     temporaryAuthenticationToken: string;
 };
@@ -403,35 +403,6 @@ export type CreateCredentialChallengeWithCodeBody = {
 };
 
 export type CreateCredentialChallengeWithCodeResponse = {
-    kind: "Password";
-    user: {
-        id: string;
-        displayName: string;
-        name: string;
-    };
-    challengeIdentifier: string;
-    rp?: {
-        id: string;
-        name: string;
-    } | undefined;
-    /** @deprecated use challengeIdentifier instead */
-    temporaryAuthenticationToken: string;
-} | {
-    kind: "Totp";
-    user: {
-        id: string;
-        displayName: string;
-        name: string;
-    };
-    challengeIdentifier: string;
-    rp?: {
-        id: string;
-        name: string;
-    } | undefined;
-    otpUrl: string;
-    /** @deprecated use challengeIdentifier instead */
-    temporaryAuthenticationToken: string;
-} | {
     kind: "Fido2";
     user: {
         id: string;
@@ -519,6 +490,35 @@ export type CreateCredentialChallengeWithCodeResponse = {
         type: "public-key";
         alg: number;
     }[];
+    /** @deprecated use challengeIdentifier instead */
+    temporaryAuthenticationToken: string;
+} | {
+    kind: "Password";
+    user: {
+        id: string;
+        displayName: string;
+        name: string;
+    };
+    challengeIdentifier: string;
+    rp?: {
+        id: string;
+        name: string;
+    } | undefined;
+    /** @deprecated use challengeIdentifier instead */
+    temporaryAuthenticationToken: string;
+} | {
+    kind: "Totp";
+    user: {
+        id: string;
+        displayName: string;
+        name: string;
+    };
+    challengeIdentifier: string;
+    rp?: {
+        id: string;
+        name: string;
+    } | undefined;
+    otpUrl: string;
     /** @deprecated use challengeIdentifier instead */
     temporaryAuthenticationToken: string;
 };
@@ -566,6 +566,16 @@ export type CreateCredentialWithCodeBody = {
     credentialName: string;
     challengeIdentifier: string;
 } | {
+    credentialKind: "RecoveryKey";
+    credentialInfo: {
+        credId: string;
+        clientData: string;
+        attestationData: string;
+    };
+    encryptedPrivateKey?: string | undefined;
+    credentialName: string;
+    challengeIdentifier: string;
+} | {
     credentialKind: "Password";
     credentialInfo: {
         password: string;
@@ -577,16 +587,6 @@ export type CreateCredentialWithCodeBody = {
     credentialInfo: {
         otpCode: string;
     };
-    credentialName: string;
-    challengeIdentifier: string;
-} | {
-    credentialKind: "RecoveryKey";
-    credentialInfo: {
-        credId: string;
-        clientData: string;
-        attestationData: string;
-    };
-    encryptedPrivateKey?: string | undefined;
     credentialName: string;
     challengeIdentifier: string;
 };
@@ -945,9 +945,13 @@ export type CreateSocialRegistrationChallengeResponse = {
 export type CreateSocialRegistrationChallengeRequest = { body: CreateSocialRegistrationChallengeBody }
 
 export type CreateUserBody = {
+    /** The email address of the new user. */
     email: string;
+    /** The kind of user being created.
+          In this endpoint it can only be "`CustomerEmployee`" (creating an "`EndUser`" is done through the [Delegated Registration](https://docs.dfns.co/api-reference/auth/registration-flows#delegated-users-registration-flow) endpoint) */
     kind: "CustomerEmployee" | "DfnsStaff";
     publicKey?: string | undefined;
+    /** Value that can be used to correlate the entity with an external system. */
     externalId?: string | undefined;
 };
 
@@ -1014,7 +1018,9 @@ export type CreateUserActionChallengeResponse = {
 export type CreateUserActionChallengeRequest = { body: CreateUserActionChallengeBody }
 
 export type CreateUserActionSignatureBody = {
+    /** Temporary authentication token returned by the [Create User Action Signature Challenge](https://docs.dfns.co/api-reference/auth/create-user-action-challenge) */
     challengeIdentifier: string;
+    /** First factor credential used to sign the user action */
     firstFactor: {
         kind: "Fido2";
         credentialAssertion: {
@@ -1045,6 +1051,7 @@ export type CreateUserActionSignatureBody = {
             algorithm?: string | undefined;
         };
     };
+    /** Second factor credential used to authenticate a user */
     secondFactor?: ({
         kind: "Fido2";
         credentialAssertion: {
@@ -1519,7 +1526,9 @@ export type ListUsersResponse = {
 export type ListUsersRequest = { query?: ListUsersQuery }
 
 export type LoginBody = {
+    /** Temporary authentication token returned by the [Create User Action Signature Challenge](https://docs.dfns.co/api-reference/auth/create-user-action-challenge) */
     challengeIdentifier: string;
+    /** First factor credential used to sign the user action */
     firstFactor: {
         kind: "Fido2";
         credentialAssertion: {
@@ -1550,6 +1559,7 @@ export type LoginBody = {
             algorithm?: string | undefined;
         };
     };
+    /** Second factor credential used to authenticate a user */
     secondFactor?: ({
         kind: "Fido2";
         credentialAssertion: {
@@ -1673,6 +1683,7 @@ export type RecoverBody = {
             encryptedPrivateKey: string;
             credentialName?: string | undefined;
         }) | undefined;
+        /** Register a recovery key. See [Account Recovery](https://docs.dfns.co/api-reference/auth/account-recovery) for more details. */
         recoveryCredential?: {
             credentialKind: "RecoveryKey";
             credentialInfo: {
@@ -1766,6 +1777,7 @@ export type RegisterBody = {
         encryptedPrivateKey: string;
         credentialName?: string | undefined;
     }) | undefined;
+    /** Register a recovery key. See [Account Recovery](https://docs.dfns.co/api-reference/auth/account-recovery) for more details. */
     recoveryCredential?: {
         credentialKind: "RecoveryKey";
         credentialInfo: {
@@ -1858,6 +1870,7 @@ export type RegisterEndUserBody = {
         encryptedPrivateKey: string;
         credentialName?: string | undefined;
     }) | undefined;
+    /** Register a recovery key. See [Account Recovery](https://docs.dfns.co/api-reference/auth/account-recovery) for more details. */
     recoveryCredential?: {
         credentialKind: "RecoveryKey";
         credentialInfo: {
@@ -1869,7 +1882,7 @@ export type RegisterEndUserBody = {
         credentialName?: string | undefined;
     } | undefined;
     wallets: {
-        network: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "KadenaTestnet4" | "KadenaTestnet4:1" | "KadenaTestnet4:2" | "KadenaTestnet4:3" | "KadenaTestnet4:4" | "KadenaTestnet4:5" | "KadenaTestnet4:6" | "KadenaTestnet4:7" | "KadenaTestnet4:8" | "KadenaTestnet4:9" | "KadenaTestnet4:10" | "KadenaTestnet4:11" | "KadenaTestnet4:12" | "KadenaTestnet4:13" | "KadenaTestnet4:14" | "KadenaTestnet4:15" | "KadenaTestnet4:16" | "KadenaTestnet4:17" | "KadenaTestnet4:18" | "KadenaTestnet4:19" | "Kadena" | "Kadena:1" | "Kadena:2" | "Kadena:3" | "Kadena:4" | "Kadena:5" | "Kadena:6" | "Kadena:7" | "Kadena:8" | "Kadena:9" | "Kadena:10" | "Kadena:11" | "Kadena:12" | "Kadena:13" | "Kadena:14" | "Kadena:15" | "Kadena:16" | "Kadena:17" | "Kadena:18" | "Kadena:19" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plume" | "PlumeSepolia" | "Polkadot" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tsc" | "TscTestnet1" | "Tezos" | "TezosGhostnet" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "XrpLedger" | "XrpLedgerTestnet") | ("KeyECDSA" | "KeyEdDSA" | "KeyECDSAStark");
+        network: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "KadenaTestnet4" | "KadenaTestnet4:1" | "KadenaTestnet4:2" | "KadenaTestnet4:3" | "KadenaTestnet4:4" | "KadenaTestnet4:5" | "KadenaTestnet4:6" | "KadenaTestnet4:7" | "KadenaTestnet4:8" | "KadenaTestnet4:9" | "KadenaTestnet4:10" | "KadenaTestnet4:11" | "KadenaTestnet4:12" | "KadenaTestnet4:13" | "KadenaTestnet4:14" | "KadenaTestnet4:15" | "KadenaTestnet4:16" | "KadenaTestnet4:17" | "KadenaTestnet4:18" | "KadenaTestnet4:19" | "Kadena" | "Kadena:1" | "Kadena:2" | "Kadena:3" | "Kadena:4" | "Kadena:5" | "Kadena:6" | "Kadena:7" | "Kadena:8" | "Kadena:9" | "Kadena:10" | "Kadena:11" | "Kadena:12" | "Kadena:13" | "Kadena:14" | "Kadena:15" | "Kadena:16" | "Kadena:17" | "Kadena:18" | "Kadena:19" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plume" | "PlumeSepolia" | "Polkadot" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tsc" | "TscTestnet1" | "Tezos" | "TezosGhostnet" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "XrpLedger" | "XrpLedgerTestnet") | ("KeyECDSA" | "KeyEdDSA" | "KeyECDSAStark");
         name?: string | undefined;
     }[];
 };
@@ -1890,7 +1903,7 @@ export type RegisterEndUserResponse = {
     };
     wallets: {
         id: string;
-        network: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "KadenaTestnet4" | "KadenaTestnet4:1" | "KadenaTestnet4:2" | "KadenaTestnet4:3" | "KadenaTestnet4:4" | "KadenaTestnet4:5" | "KadenaTestnet4:6" | "KadenaTestnet4:7" | "KadenaTestnet4:8" | "KadenaTestnet4:9" | "KadenaTestnet4:10" | "KadenaTestnet4:11" | "KadenaTestnet4:12" | "KadenaTestnet4:13" | "KadenaTestnet4:14" | "KadenaTestnet4:15" | "KadenaTestnet4:16" | "KadenaTestnet4:17" | "KadenaTestnet4:18" | "KadenaTestnet4:19" | "Kadena" | "Kadena:1" | "Kadena:2" | "Kadena:3" | "Kadena:4" | "Kadena:5" | "Kadena:6" | "Kadena:7" | "Kadena:8" | "Kadena:9" | "Kadena:10" | "Kadena:11" | "Kadena:12" | "Kadena:13" | "Kadena:14" | "Kadena:15" | "Kadena:16" | "Kadena:17" | "Kadena:18" | "Kadena:19" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plume" | "PlumeSepolia" | "Polkadot" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tsc" | "TscTestnet1" | "Tezos" | "TezosGhostnet" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "XrpLedger" | "XrpLedgerTestnet") | ("KeyECDSA" | "KeyEdDSA" | "KeyECDSAStark");
+        network: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "KadenaTestnet4" | "KadenaTestnet4:1" | "KadenaTestnet4:2" | "KadenaTestnet4:3" | "KadenaTestnet4:4" | "KadenaTestnet4:5" | "KadenaTestnet4:6" | "KadenaTestnet4:7" | "KadenaTestnet4:8" | "KadenaTestnet4:9" | "KadenaTestnet4:10" | "KadenaTestnet4:11" | "KadenaTestnet4:12" | "KadenaTestnet4:13" | "KadenaTestnet4:14" | "KadenaTestnet4:15" | "KadenaTestnet4:16" | "KadenaTestnet4:17" | "KadenaTestnet4:18" | "KadenaTestnet4:19" | "Kadena" | "Kadena:1" | "Kadena:2" | "Kadena:3" | "Kadena:4" | "Kadena:5" | "Kadena:6" | "Kadena:7" | "Kadena:8" | "Kadena:9" | "Kadena:10" | "Kadena:11" | "Kadena:12" | "Kadena:13" | "Kadena:14" | "Kadena:15" | "Kadena:16" | "Kadena:17" | "Kadena:18" | "Kadena:19" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plume" | "PlumeSepolia" | "Polkadot" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tsc" | "TscTestnet1" | "Tezos" | "TezosGhostnet" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "XrpLedger" | "XrpLedgerTestnet") | ("KeyECDSA" | "KeyEdDSA" | "KeyECDSAStark");
         address?: string | undefined;
         signingKey: {
             id: string;
