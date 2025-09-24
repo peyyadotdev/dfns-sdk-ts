@@ -1,18 +1,26 @@
 export type CreateStakeBody = ({
     protocol: "Babylon";
+    /** Id of the Dfns wallet making the deposit (`wa-...`). */
     walletId: string;
+    /** Staking Provider */
     provider: "Figment";
+    /** Transaction amount denominated in min units */
     amount: string;
     duration: number;
 } | {
     protocol: "Ethereum";
+    /** Id of the Dfns wallet making the deposit (`wa-...`). */
     walletId: string;
+    /** Staking Provider */
     provider: "Figment";
+    /** Transaction amount denominated in min units */
     amount: string;
 } | {
     protocol: "Iota";
+    /** Id of the Dfns wallet making the deposit (`wa-...`). */
     walletId: string;
     validator: string;
+    /** Transaction amount denominated in min units */
     amount: string;
     lockedIotas?: string[] | undefined;
 }) & {
@@ -30,19 +38,27 @@ export type CreateStakeResponse = ({
     };
     requestBody: ({
         protocol: "Babylon";
+        /** Id of the Dfns wallet making the deposit (`wa-...`). */
         walletId: string;
+        /** Staking Provider */
         provider: "Figment";
+        /** Transaction amount denominated in min units */
         amount: string;
         duration: number;
     } | {
         protocol: "Ethereum";
+        /** Id of the Dfns wallet making the deposit (`wa-...`). */
         walletId: string;
+        /** Staking Provider */
         provider: "Figment";
+        /** Transaction amount denominated in min units */
         amount: string;
     } | {
         protocol: "Iota";
+        /** Id of the Dfns wallet making the deposit (`wa-...`). */
         walletId: string;
         validator: string;
+        /** Transaction amount denominated in min units */
         amount: string;
         lockedIotas?: string[] | undefined;
     }) & {
@@ -69,19 +85,27 @@ export type CreateStakeResponse = ({
     };
     requestBody: ({
         protocol: "Babylon";
+        /** Id of the Dfns wallet making the deposit (`wa-...`). */
         walletId: string;
+        /** Staking Provider */
         provider: "Figment";
+        /** Transaction amount denominated in min units */
         amount: string;
         duration: number;
     } | {
         protocol: "Ethereum";
+        /** Id of the Dfns wallet making the deposit (`wa-...`). */
         walletId: string;
+        /** Staking Provider */
         provider: "Figment";
+        /** Transaction amount denominated in min units */
         amount: string;
     } | {
         protocol: "Iota";
+        /** Id of the Dfns wallet making the deposit (`wa-...`). */
         walletId: string;
         validator: string;
+        /** Transaction amount denominated in min units */
         amount: string;
         lockedIotas?: string[] | undefined;
     }) & {
@@ -110,19 +134,27 @@ export type CreateStakeResponse = ({
     };
     requestBody: ({
         protocol: "Babylon";
+        /** Id of the Dfns wallet making the deposit (`wa-...`). */
         walletId: string;
+        /** Staking Provider */
         provider: "Figment";
+        /** Transaction amount denominated in min units */
         amount: string;
         duration: number;
     } | {
         protocol: "Ethereum";
+        /** Id of the Dfns wallet making the deposit (`wa-...`). */
         walletId: string;
+        /** Staking Provider */
         provider: "Figment";
+        /** Transaction amount denominated in min units */
         amount: string;
     } | {
         protocol: "Iota";
+        /** Id of the Dfns wallet making the deposit (`wa-...`). */
         walletId: string;
         validator: string;
+        /** Transaction amount denominated in min units */
         amount: string;
         lockedIotas?: string[] | undefined;
     }) & {
@@ -150,19 +182,27 @@ export type CreateStakeResponse = ({
         };
         requestBody: (({
             protocol: "Babylon";
+            /** Id of the Dfns wallet making the deposit (`wa-...`). */
             walletId: string;
+            /** Staking Provider */
             provider: "Figment";
+            /** Transaction amount denominated in min units */
             amount: string;
             duration: number;
         } | {
             protocol: "Ethereum";
+            /** Id of the Dfns wallet making the deposit (`wa-...`). */
             walletId: string;
+            /** Staking Provider */
             provider: "Figment";
+            /** Transaction amount denominated in min units */
             amount: string;
         } | {
             protocol: "Iota";
+            /** Id of the Dfns wallet making the deposit (`wa-...`). */
             walletId: string;
             validator: string;
+            /** Transaction amount denominated in min units */
             amount: string;
             lockedIotas?: string[] | undefined;
         }) & {
@@ -231,19 +271,27 @@ export type CreateStakeActionResponse = ({
     };
     requestBody: ({
         protocol: "Babylon";
+        /** Id of the Dfns wallet making the deposit (`wa-...`). */
         walletId: string;
+        /** Staking Provider */
         provider: "Figment";
+        /** Transaction amount denominated in min units */
         amount: string;
         duration: number;
     } | {
         protocol: "Ethereum";
+        /** Id of the Dfns wallet making the deposit (`wa-...`). */
         walletId: string;
+        /** Staking Provider */
         provider: "Figment";
+        /** Transaction amount denominated in min units */
         amount: string;
     } | {
         protocol: "Iota";
+        /** Id of the Dfns wallet making the deposit (`wa-...`). */
         walletId: string;
         validator: string;
+        /** Transaction amount denominated in min units */
         amount: string;
         lockedIotas?: string[] | undefined;
     }) & {
@@ -270,19 +318,27 @@ export type CreateStakeActionResponse = ({
     };
     requestBody: ({
         protocol: "Babylon";
+        /** Id of the Dfns wallet making the deposit (`wa-...`). */
         walletId: string;
+        /** Staking Provider */
         provider: "Figment";
+        /** Transaction amount denominated in min units */
         amount: string;
         duration: number;
     } | {
         protocol: "Ethereum";
+        /** Id of the Dfns wallet making the deposit (`wa-...`). */
         walletId: string;
+        /** Staking Provider */
         provider: "Figment";
+        /** Transaction amount denominated in min units */
         amount: string;
     } | {
         protocol: "Iota";
+        /** Id of the Dfns wallet making the deposit (`wa-...`). */
         walletId: string;
         validator: string;
+        /** Transaction amount denominated in min units */
         amount: string;
         lockedIotas?: string[] | undefined;
     }) & {
@@ -311,19 +367,27 @@ export type CreateStakeActionResponse = ({
     };
     requestBody: ({
         protocol: "Babylon";
+        /** Id of the Dfns wallet making the deposit (`wa-...`). */
         walletId: string;
+        /** Staking Provider */
         provider: "Figment";
+        /** Transaction amount denominated in min units */
         amount: string;
         duration: number;
     } | {
         protocol: "Ethereum";
+        /** Id of the Dfns wallet making the deposit (`wa-...`). */
         walletId: string;
+        /** Staking Provider */
         provider: "Figment";
+        /** Transaction amount denominated in min units */
         amount: string;
     } | {
         protocol: "Iota";
+        /** Id of the Dfns wallet making the deposit (`wa-...`). */
         walletId: string;
         validator: string;
+        /** Transaction amount denominated in min units */
         amount: string;
         lockedIotas?: string[] | undefined;
     }) & {
@@ -351,19 +415,27 @@ export type CreateStakeActionResponse = ({
         };
         requestBody: (({
             protocol: "Babylon";
+            /** Id of the Dfns wallet making the deposit (`wa-...`). */
             walletId: string;
+            /** Staking Provider */
             provider: "Figment";
+            /** Transaction amount denominated in min units */
             amount: string;
             duration: number;
         } | {
             protocol: "Ethereum";
+            /** Id of the Dfns wallet making the deposit (`wa-...`). */
             walletId: string;
+            /** Staking Provider */
             provider: "Figment";
+            /** Transaction amount denominated in min units */
             amount: string;
         } | {
             protocol: "Iota";
+            /** Id of the Dfns wallet making the deposit (`wa-...`). */
             walletId: string;
             validator: string;
+            /** Transaction amount denominated in min units */
             amount: string;
             lockedIotas?: string[] | undefined;
         }) & {
@@ -426,19 +498,27 @@ export type GetStakesResponse = ({
     };
     requestBody: ({
         protocol: "Babylon";
+        /** Id of the Dfns wallet making the deposit (`wa-...`). */
         walletId: string;
+        /** Staking Provider */
         provider: "Figment";
+        /** Transaction amount denominated in min units */
         amount: string;
         duration: number;
     } | {
         protocol: "Ethereum";
+        /** Id of the Dfns wallet making the deposit (`wa-...`). */
         walletId: string;
+        /** Staking Provider */
         provider: "Figment";
+        /** Transaction amount denominated in min units */
         amount: string;
     } | {
         protocol: "Iota";
+        /** Id of the Dfns wallet making the deposit (`wa-...`). */
         walletId: string;
         validator: string;
+        /** Transaction amount denominated in min units */
         amount: string;
         lockedIotas?: string[] | undefined;
     }) & {
@@ -465,19 +545,27 @@ export type GetStakesResponse = ({
     };
     requestBody: ({
         protocol: "Babylon";
+        /** Id of the Dfns wallet making the deposit (`wa-...`). */
         walletId: string;
+        /** Staking Provider */
         provider: "Figment";
+        /** Transaction amount denominated in min units */
         amount: string;
         duration: number;
     } | {
         protocol: "Ethereum";
+        /** Id of the Dfns wallet making the deposit (`wa-...`). */
         walletId: string;
+        /** Staking Provider */
         provider: "Figment";
+        /** Transaction amount denominated in min units */
         amount: string;
     } | {
         protocol: "Iota";
+        /** Id of the Dfns wallet making the deposit (`wa-...`). */
         walletId: string;
         validator: string;
+        /** Transaction amount denominated in min units */
         amount: string;
         lockedIotas?: string[] | undefined;
     }) & {
@@ -506,19 +594,27 @@ export type GetStakesResponse = ({
     };
     requestBody: ({
         protocol: "Babylon";
+        /** Id of the Dfns wallet making the deposit (`wa-...`). */
         walletId: string;
+        /** Staking Provider */
         provider: "Figment";
+        /** Transaction amount denominated in min units */
         amount: string;
         duration: number;
     } | {
         protocol: "Ethereum";
+        /** Id of the Dfns wallet making the deposit (`wa-...`). */
         walletId: string;
+        /** Staking Provider */
         provider: "Figment";
+        /** Transaction amount denominated in min units */
         amount: string;
     } | {
         protocol: "Iota";
+        /** Id of the Dfns wallet making the deposit (`wa-...`). */
         walletId: string;
         validator: string;
+        /** Transaction amount denominated in min units */
         amount: string;
         lockedIotas?: string[] | undefined;
     }) & {
@@ -546,19 +642,27 @@ export type GetStakesResponse = ({
         };
         requestBody: (({
             protocol: "Babylon";
+            /** Id of the Dfns wallet making the deposit (`wa-...`). */
             walletId: string;
+            /** Staking Provider */
             provider: "Figment";
+            /** Transaction amount denominated in min units */
             amount: string;
             duration: number;
         } | {
             protocol: "Ethereum";
+            /** Id of the Dfns wallet making the deposit (`wa-...`). */
             walletId: string;
+            /** Staking Provider */
             provider: "Figment";
+            /** Transaction amount denominated in min units */
             amount: string;
         } | {
             protocol: "Iota";
+            /** Id of the Dfns wallet making the deposit (`wa-...`). */
             walletId: string;
             validator: string;
+            /** Transaction amount denominated in min units */
             amount: string;
             lockedIotas?: string[] | undefined;
         }) & {
@@ -613,19 +717,27 @@ export type ListStakeActionsResponse = {
         };
         requestBody: (({
             protocol: "Babylon";
+            /** Id of the Dfns wallet making the deposit (`wa-...`). */
             walletId: string;
+            /** Staking Provider */
             provider: "Figment";
+            /** Transaction amount denominated in min units */
             amount: string;
             duration: number;
         } | {
             protocol: "Ethereum";
+            /** Id of the Dfns wallet making the deposit (`wa-...`). */
             walletId: string;
+            /** Staking Provider */
             provider: "Figment";
+            /** Transaction amount denominated in min units */
             amount: string;
         } | {
             protocol: "Iota";
+            /** Id of the Dfns wallet making the deposit (`wa-...`). */
             walletId: string;
             validator: string;
+            /** Transaction amount denominated in min units */
             amount: string;
             lockedIotas?: string[] | undefined;
         }) & {
@@ -675,19 +787,27 @@ export type ListStakesResponse = {
         };
         requestBody: ({
             protocol: "Babylon";
+            /** Id of the Dfns wallet making the deposit (`wa-...`). */
             walletId: string;
+            /** Staking Provider */
             provider: "Figment";
+            /** Transaction amount denominated in min units */
             amount: string;
             duration: number;
         } | {
             protocol: "Ethereum";
+            /** Id of the Dfns wallet making the deposit (`wa-...`). */
             walletId: string;
+            /** Staking Provider */
             provider: "Figment";
+            /** Transaction amount denominated in min units */
             amount: string;
         } | {
             protocol: "Iota";
+            /** Id of the Dfns wallet making the deposit (`wa-...`). */
             walletId: string;
             validator: string;
+            /** Transaction amount denominated in min units */
             amount: string;
             lockedIotas?: string[] | undefined;
         }) & {
@@ -714,19 +834,27 @@ export type ListStakesResponse = {
         };
         requestBody: ({
             protocol: "Babylon";
+            /** Id of the Dfns wallet making the deposit (`wa-...`). */
             walletId: string;
+            /** Staking Provider */
             provider: "Figment";
+            /** Transaction amount denominated in min units */
             amount: string;
             duration: number;
         } | {
             protocol: "Ethereum";
+            /** Id of the Dfns wallet making the deposit (`wa-...`). */
             walletId: string;
+            /** Staking Provider */
             provider: "Figment";
+            /** Transaction amount denominated in min units */
             amount: string;
         } | {
             protocol: "Iota";
+            /** Id of the Dfns wallet making the deposit (`wa-...`). */
             walletId: string;
             validator: string;
+            /** Transaction amount denominated in min units */
             amount: string;
             lockedIotas?: string[] | undefined;
         }) & {
@@ -755,19 +883,27 @@ export type ListStakesResponse = {
         };
         requestBody: ({
             protocol: "Babylon";
+            /** Id of the Dfns wallet making the deposit (`wa-...`). */
             walletId: string;
+            /** Staking Provider */
             provider: "Figment";
+            /** Transaction amount denominated in min units */
             amount: string;
             duration: number;
         } | {
             protocol: "Ethereum";
+            /** Id of the Dfns wallet making the deposit (`wa-...`). */
             walletId: string;
+            /** Staking Provider */
             provider: "Figment";
+            /** Transaction amount denominated in min units */
             amount: string;
         } | {
             protocol: "Iota";
+            /** Id of the Dfns wallet making the deposit (`wa-...`). */
             walletId: string;
             validator: string;
+            /** Transaction amount denominated in min units */
             amount: string;
             lockedIotas?: string[] | undefined;
         }) & {

@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.7.12 (2025-09-24)
+
+- Added SDK integration with Hedera, see `@dfns/lib-hedera`
+- Added SDK integration with Kadena, see `@dfns/lib-kadena`
+- Updated `DfnsApiClient` to match the latest API changes
+
 ## 0.7.11 (2025-09-17)
 
 - Updated `DfnsApiClient` to match the latest API changes
@@ -23,7 +29,7 @@
 ## 0.7.6 (2025-08-08)
 
 - Added SDK integration with NEAR, see `@dfns/lib-near`
-- Added SDK integration with SUI, see `@dfns/lib-sui`
+- Added SDK integration with Sui, see `@dfns/lib-sui`
 - Updated `DfnsApiClient` to match the latest API changes
 
 ## 0.7.5 (2025-07-23)
