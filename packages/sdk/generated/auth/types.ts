@@ -17,6 +17,7 @@ export type ActivatePersonalAccessTokenResponse = {
     dateCreated: string;
     credId: string;
     isActive: boolean;
+    /** Access token kind */
     kind: "Pat" | "ServiceAccount" | "Token" | "Code" | "Recovery" | "Temp" | "Application";
     linkedUserId: string;
     linkedAppId: string;
@@ -62,6 +63,7 @@ export type ActivateServiceAccountResponse = {
         dateCreated: string;
         credId: string;
         isActive: boolean;
+        /** Access token kind */
         kind: "Pat" | "ServiceAccount" | "Token" | "Code" | "Recovery" | "Temp" | "Application";
         linkedUserId: string;
         linkedAppId: string;
@@ -114,6 +116,7 @@ export type ArchivePersonalAccessTokenResponse = {
     dateCreated: string;
     credId: string;
     isActive: boolean;
+    /** Access token kind */
     kind: "Pat" | "ServiceAccount" | "Token" | "Code" | "Recovery" | "Temp" | "Application";
     linkedUserId: string;
     linkedAppId: string;
@@ -159,6 +162,7 @@ export type ArchiveServiceAccountResponse = {
         dateCreated: string;
         credId: string;
         isActive: boolean;
+        /** Access token kind */
         kind: "Pat" | "ServiceAccount" | "Token" | "Code" | "Recovery" | "Temp" | "Application";
         linkedUserId: string;
         linkedAppId: string;
@@ -884,6 +888,7 @@ export type CreateServiceAccountResponse = {
         dateCreated: string;
         credId: string;
         isActive: boolean;
+        /** Access token kind */
         kind: "Pat" | "ServiceAccount" | "Token" | "Code" | "Recovery" | "Temp" | "Application";
         linkedUserId: string;
         linkedAppId: string;
@@ -1109,6 +1114,7 @@ export type DeactivatePersonalAccessTokenResponse = {
     dateCreated: string;
     credId: string;
     isActive: boolean;
+    /** Access token kind */
     kind: "Pat" | "ServiceAccount" | "Token" | "Code" | "Recovery" | "Temp" | "Application";
     linkedUserId: string;
     linkedAppId: string;
@@ -1154,6 +1160,7 @@ export type DeactivateServiceAccountResponse = {
         dateCreated: string;
         credId: string;
         isActive: boolean;
+        /** Access token kind */
         kind: "Pat" | "ServiceAccount" | "Token" | "Code" | "Recovery" | "Temp" | "Application";
         linkedUserId: string;
         linkedAppId: string;
@@ -1230,6 +1237,7 @@ export type GetApplicationResponse = {
         dateCreated: string;
         credId: string;
         isActive: boolean;
+        /** Access token kind */
         kind: "Pat" | "ServiceAccount" | "Token" | "Code" | "Recovery" | "Temp" | "Application";
         linkedUserId: string;
         linkedAppId: string;
@@ -1282,6 +1290,7 @@ export type GetPersonalAccessTokenResponse = {
     dateCreated: string;
     credId: string;
     isActive: boolean;
+    /** Access token kind */
     kind: "Pat" | "ServiceAccount" | "Token" | "Code" | "Recovery" | "Temp" | "Application";
     linkedUserId: string;
     linkedAppId: string;
@@ -1327,6 +1336,7 @@ export type GetServiceAccountResponse = {
         dateCreated: string;
         credId: string;
         isActive: boolean;
+        /** Access token kind */
         kind: "Pat" | "ServiceAccount" | "Token" | "Code" | "Recovery" | "Temp" | "Application";
         linkedUserId: string;
         linkedAppId: string;
@@ -1390,6 +1400,7 @@ export type ListApplicationsResponse = {
             dateCreated: string;
             credId: string;
             isActive: boolean;
+            /** Access token kind */
             kind: "Pat" | "ServiceAccount" | "Token" | "Code" | "Recovery" | "Temp" | "Application";
             linkedUserId: string;
             linkedAppId: string;
@@ -1437,6 +1448,7 @@ export type ListPersonalAccessTokensResponse = {
         dateCreated: string;
         credId: string;
         isActive: boolean;
+        /** Access token kind */
         kind: "Pat" | "ServiceAccount" | "Token" | "Code" | "Recovery" | "Temp" | "Application";
         linkedUserId: string;
         linkedAppId: string;
@@ -1478,6 +1490,7 @@ export type ListServiceAccountsResponse = {
             dateCreated: string;
             credId: string;
             isActive: boolean;
+            /** Access token kind */
             kind: "Pat" | "ServiceAccount" | "Token" | "Code" | "Recovery" | "Temp" | "Application";
             linkedUserId: string;
             linkedAppId: string;
@@ -1902,21 +1915,34 @@ export type RegisterEndUserResponse = {
         token: string;
     };
     wallets: {
+        /** ID of the wallet. */
         id: string;
+        /** Network this wallet is bound to. */
         network: ("Algorand" | "AlgorandTestnet" | "Aptos" | "AptosTestnet" | "ArbitrumOne" | "ArbitrumGoerli" | "ArbitrumSepolia" | "AvalancheC" | "AvalancheCFuji" | "Adi" | "AdiTestnet" | "BabylonGenesis" | "BabylonTestnet5" | "Base" | "BaseGoerli" | "BaseSepolia" | "Berachain" | "BerachainBArtio" | "BerachainBepolia" | "Bitcoin" | "BitcoinSignet" | "BitcoinTestnet3" | "BitcoinCash" | "BitcoinCashTestnet" | "Bob" | "BobSepolia" | "Bsc" | "BscTestnet" | "Canton" | "CantonDevnet" | "CantonTestnet" | "Cardano" | "CardanoPreprod" | "Celo" | "CeloAlfajores" | "Codex" | "CodexSepolia" | "CosmosHub4" | "CosmosIcsTestnet" | "Dogecoin" | "DogecoinTestnet" | "Ethereum" | "EthereumGoerli" | "EthereumSepolia" | "EthereumHolesky" | "EthereumHoodi" | "FantomOpera" | "FantomTestnet" | "FlareC" | "FlareCCoston2" | "Hedera" | "HederaTestnet" | "Ink" | "InkSepolia" | "InternetComputer" | "Ion" | "IonTestnet" | "Iota" | "IotaTestnet" | "IotaZodianet" | "KadenaTestnet4" | "KadenaTestnet4:1" | "KadenaTestnet4:2" | "KadenaTestnet4:3" | "KadenaTestnet4:4" | "KadenaTestnet4:5" | "KadenaTestnet4:6" | "KadenaTestnet4:7" | "KadenaTestnet4:8" | "KadenaTestnet4:9" | "KadenaTestnet4:10" | "KadenaTestnet4:11" | "KadenaTestnet4:12" | "KadenaTestnet4:13" | "KadenaTestnet4:14" | "KadenaTestnet4:15" | "KadenaTestnet4:16" | "KadenaTestnet4:17" | "KadenaTestnet4:18" | "KadenaTestnet4:19" | "Kadena" | "Kadena:1" | "Kadena:2" | "Kadena:3" | "Kadena:4" | "Kadena:5" | "Kadena:6" | "Kadena:7" | "Kadena:8" | "Kadena:9" | "Kadena:10" | "Kadena:11" | "Kadena:12" | "Kadena:13" | "Kadena:14" | "Kadena:15" | "Kadena:16" | "Kadena:17" | "Kadena:18" | "Kadena:19" | "Kaspa" | "KaspaTestnet11" | "Kusama" | "Litecoin" | "LitecoinTestnet" | "Near" | "NearTestnet" | "Optimism" | "OptimismGoerli" | "OptimismSepolia" | "Origyn" | "Plume" | "PlumeSepolia" | "Polkadot" | "Polygon" | "PolygonAmoy" | "PolygonMumbai" | "Polymesh" | "PolymeshTestnet" | "Race" | "RaceSepolia" | "SeiAtlantic2" | "SeiPacific1" | "Solana" | "SolanaDevnet" | "Sonic" | "SonicTestnet" | "Stellar" | "StellarTestnet" | "Sui" | "SuiTestnet" | "Tsc" | "TscTestnet1" | "Tezos" | "TezosGhostnet" | "Ton" | "TonTestnet" | "Tron" | "TronNile" | "Westend" | "XrpLedger" | "XrpLedgerTestnet") | ("KeyECDSA" | "KeyEdDSA" | "KeyECDSAStark");
+        /** Wallet address on its corresponding network. */
         address?: string | undefined;
+        /** Details about the key underlying the wallet. */
         signingKey: {
             id: string;
+            /** Key scheme. */
             scheme: "DH" | "ECDSA" | "EdDSA" | "Schnorr";
             curve: "ed25519" | "secp256k1" | "stark";
+            /** Hex-encoded value of the public key. */
             publicKey: string;
+            /** The end user ID the key (and wallet) is delegated to. */
             delegatedTo?: string | undefined;
         };
+        /** Wallet status. */
         status: "Active" | "Archived";
+        /** [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date string when wallet was created. */
         dateCreated: string;
+        /** Wallet nickname. */
         name?: string | undefined;
+        /** Whether the wallet is owned by an end user (non-custodial), or by your organization (custodial). */
         custodial: boolean;
+        /** User-defined value that can be used to correlate the entity with an external system. */
         externalId?: string | undefined;
+        /** List of tags. */
         tags: string[];
         /** Id of the validator on which the wallet is created for Canton networks */
         validatorId?: string | undefined;
@@ -1984,6 +2010,7 @@ export type UpdatePersonalAccessTokenResponse = {
     dateCreated: string;
     credId: string;
     isActive: boolean;
+    /** Access token kind */
     kind: "Pat" | "ServiceAccount" | "Token" | "Code" | "Recovery" | "Temp" | "Application";
     linkedUserId: string;
     linkedAppId: string;
@@ -2034,6 +2061,7 @@ export type UpdateServiceAccountResponse = {
         dateCreated: string;
         credId: string;
         isActive: boolean;
+        /** Access token kind */
         kind: "Pat" | "ServiceAccount" | "Token" | "Code" | "Recovery" | "Temp" | "Application";
         linkedUserId: string;
         linkedAppId: string;

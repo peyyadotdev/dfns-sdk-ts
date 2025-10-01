@@ -163,11 +163,11 @@ export type CreateStakeResponse = ({
     dateCreated: string;
     protocol: "Ethereum";
     data: {
-        validators: {
+        validator: {
             pubkey: string;
             withdrawalAddress: string;
-        }[];
-    };
+        };
+    } | null;
 }) & {
     actions: {
         id: string;
@@ -396,11 +396,11 @@ export type CreateStakeActionResponse = ({
     dateCreated: string;
     protocol: "Ethereum";
     data: {
-        validators: {
+        validator: {
             pubkey: string;
             withdrawalAddress: string;
-        }[];
-    };
+        };
+    } | null;
 }) & {
     actions: {
         id: string;
@@ -623,11 +623,11 @@ export type GetStakesResponse = ({
     dateCreated: string;
     protocol: "Ethereum";
     data: {
-        validators: {
+        validator: {
             pubkey: string;
             withdrawalAddress: string;
-        }[];
-    };
+        };
+    } | null;
 }) & {
     actions: {
         id: string;
@@ -912,11 +912,11 @@ export type ListStakesResponse = {
         dateCreated: string;
         protocol: "Ethereum";
         data: {
-            validators: {
+            validator: {
                 pubkey: string;
                 withdrawalAddress: string;
-            }[];
-        };
+            };
+        } | null;
     })[];
     nextPageToken?: string | undefined;
 };

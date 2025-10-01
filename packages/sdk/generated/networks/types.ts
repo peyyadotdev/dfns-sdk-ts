@@ -49,9 +49,7 @@ export type CreateCantonValidatorParams = {
 };
 
 export type CreateCantonValidatorResponse = {
-    /** e.g. 'cv-7jeof-m584r-p35ucm37ko3cqgts' */
     id: string;
-    /** e.g. 'or-30tnh-itmjs-s235s5ontr3r23h2' */
     orgId: string;
     network: "Canton" | "CantonDevnet" | "CantonTestnet";
     name?: string | undefined;
@@ -64,14 +62,11 @@ export type CreateCantonValidatorRequest = CreateCantonValidatorParams & { body:
 
 export type DeleteCantonValidatorParams = {
     network: "canton" | "canton-devnet" | "canton-testnet";
-    /** e.g. 'cv-7jeof-m584r-p35ucm37ko3cqgts' */
     validatorId: string;
 };
 
 export type DeleteCantonValidatorResponse = {
-    /** e.g. 'cv-7jeof-m584r-p35ucm37ko3cqgts' */
     id: string;
-    /** e.g. 'or-30tnh-itmjs-s235s5ontr3r23h2' */
     orgId: string;
     network: "Canton" | "CantonDevnet" | "CantonTestnet";
     name?: string | undefined;
@@ -84,14 +79,11 @@ export type DeleteCantonValidatorRequest = DeleteCantonValidatorParams
 
 export type GetCantonValidatorParams = {
     network: "canton" | "canton-devnet" | "canton-testnet";
-    /** e.g. 'cv-7jeof-m584r-p35ucm37ko3cqgts' */
     validatorId: string;
 };
 
 export type GetCantonValidatorResponse = {
-    /** e.g. 'cv-7jeof-m584r-p35ucm37ko3cqgts' */
     id: string;
-    /** e.g. 'or-30tnh-itmjs-s235s5ontr3r23h2' */
     orgId: string;
     network: "Canton" | "CantonDevnet" | "CantonTestnet";
     name?: string | undefined;
@@ -154,9 +146,7 @@ export type ListCantonValidatorsQuery = {
 
 export type ListCantonValidatorsResponse = {
     items: {
-        /** e.g. 'cv-7jeof-m584r-p35ucm37ko3cqgts' */
         id: string;
-        /** e.g. 'or-30tnh-itmjs-s235s5ontr3r23h2' */
         orgId: string;
         network: "Canton" | "CantonDevnet" | "CantonTestnet";
         name?: string | undefined;
@@ -227,14 +217,11 @@ export type UpdateCantonValidatorBody = {
 
 export type UpdateCantonValidatorParams = {
     network: "canton" | "canton-devnet" | "canton-testnet";
-    /** e.g. 'cv-7jeof-m584r-p35ucm37ko3cqgts' */
     validatorId: string;
 };
 
 export type UpdateCantonValidatorResponse = {
-    /** e.g. 'cv-7jeof-m584r-p35ucm37ko3cqgts' */
     id: string;
-    /** e.g. 'or-30tnh-itmjs-s235s5ontr3r23h2' */
     orgId: string;
     network: "Canton" | "CantonDevnet" | "CantonTestnet";
     name?: string | undefined;
