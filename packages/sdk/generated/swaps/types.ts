@@ -1,35 +1,32 @@
 export type CreateSwapBody = {
     quoteId: string;
     reference?: string | undefined;
-    provider?: ("UniswapX" | "UniswapClassic") | undefined;
-    sourceWalletId?: string | undefined;
-    walletId?: string | undefined;
+    provider: "UniswapX" | "UniswapClassic";
+    walletId: string;
     targetWalletId?: string | undefined;
-    slippageToleranceInBps?: number | undefined;
-    slippageBps?: number | undefined;
-    sourceAsset?: ({
+    slippageBps: number;
+    sourceAsset: {
         kind: "Native";
         amount: string;
     } | {
         kind: "Erc20";
         contract: string;
         amount: string;
-    }) | undefined;
-    targetAsset?: ({
+    };
+    targetAsset: {
         kind: "Native";
         amount: string;
     } | {
         kind: "Erc20";
         contract: string;
         amount: string;
-    }) | undefined;
+    };
 };
 
 export type CreateSwapResponse = {
     id: string;
     quoteId: string;
     reference: string | null;
-    sourceWalletId: string;
     walletId: string;
     targetWalletId: string;
     status: "PendingPolicyApproval" | "InProgress" | "Completed" | "Failed" | "Rejected";
@@ -66,35 +63,32 @@ export type CreateSwapResponse = {
             tid?: string | undefined;
         };
     };
-    slippageToleranceInBps: number;
     slippageBps: number;
     dateCreated: string;
     requestBody: {
         quoteId: string;
         reference?: string | undefined;
-        provider?: ("UniswapX" | "UniswapClassic") | undefined;
-        sourceWalletId?: string | undefined;
-        walletId?: string | undefined;
+        provider: "UniswapX" | "UniswapClassic";
+        walletId: string;
         targetWalletId?: string | undefined;
-        slippageToleranceInBps?: number | undefined;
-        slippageBps?: number | undefined;
-        sourceAsset?: ({
+        slippageBps: number;
+        sourceAsset: {
             kind: "Native";
             amount: string;
         } | {
             kind: "Erc20";
             contract: string;
             amount: string;
-        }) | undefined;
-        targetAsset?: ({
+        };
+        targetAsset: {
             kind: "Native";
             amount: string;
         } | {
             kind: "Erc20";
             contract: string;
             amount: string;
-        }) | undefined;
-    };
+        };
+    } | {};
     requester: {
         userId: string;
         tokenId?: string | undefined;
@@ -105,9 +99,8 @@ export type CreateSwapRequest = { body: CreateSwapBody }
 
 export type CreateSwapQuoteBody = {
     provider: "UniswapX" | "UniswapClassic";
-    sourceWalletId?: string | undefined;
-    walletId?: string | undefined;
-    targetWalletId: string;
+    walletId: string;
+    targetWalletId?: string | undefined;
     sourceAsset: {
         kind: "Native";
         amount: string;
@@ -122,15 +115,14 @@ export type CreateSwapQuoteBody = {
         kind: "Erc20";
         contract: string;
     };
-    slippageToleranceInBps?: number | undefined;
-    slippageBps?: number | undefined;
+    slippageBps: number;
 };
 
 export type CreateSwapQuoteResponse = {
     id: string;
-    sourceWalletId: string;
     walletId: string;
-    targetWalletId: string;
+    /** If not provided, the walletId is used as the target wallet. If provided, this field is currently required to be the same as walletId */
+    targetWalletId?: string | undefined;
     provider: "UniswapX" | "UniswapClassic";
     sourceAsset: ({
         kind: "Native";
@@ -164,14 +156,12 @@ export type CreateSwapQuoteResponse = {
             tid?: string | undefined;
         };
     };
-    slippageToleranceInBps: number;
     slippageBps: number;
     dateCreated: string;
     requestBody: {
         provider: "UniswapX" | "UniswapClassic";
-        sourceWalletId?: string | undefined;
-        walletId?: string | undefined;
-        targetWalletId: string;
+        walletId: string;
+        targetWalletId?: string | undefined;
         sourceAsset: {
             kind: "Native";
             amount: string;
@@ -186,9 +176,8 @@ export type CreateSwapQuoteResponse = {
             kind: "Erc20";
             contract: string;
         };
-        slippageToleranceInBps?: number | undefined;
-        slippageBps?: number | undefined;
-    };
+        slippageBps: number;
+    } | {};
     requester: {
         userId: string;
         tokenId?: string | undefined;
@@ -205,7 +194,6 @@ export type GetSwapResponse = {
     id: string;
     quoteId: string;
     reference: string | null;
-    sourceWalletId: string;
     walletId: string;
     targetWalletId: string;
     status: "PendingPolicyApproval" | "InProgress" | "Completed" | "Failed" | "Rejected";
@@ -242,35 +230,32 @@ export type GetSwapResponse = {
             tid?: string | undefined;
         };
     };
-    slippageToleranceInBps: number;
     slippageBps: number;
     dateCreated: string;
     requestBody: {
         quoteId: string;
         reference?: string | undefined;
-        provider?: ("UniswapX" | "UniswapClassic") | undefined;
-        sourceWalletId?: string | undefined;
-        walletId?: string | undefined;
+        provider: "UniswapX" | "UniswapClassic";
+        walletId: string;
         targetWalletId?: string | undefined;
-        slippageToleranceInBps?: number | undefined;
-        slippageBps?: number | undefined;
-        sourceAsset?: ({
+        slippageBps: number;
+        sourceAsset: {
             kind: "Native";
             amount: string;
         } | {
             kind: "Erc20";
             contract: string;
             amount: string;
-        }) | undefined;
-        targetAsset?: ({
+        };
+        targetAsset: {
             kind: "Native";
             amount: string;
         } | {
             kind: "Erc20";
             contract: string;
             amount: string;
-        }) | undefined;
-    };
+        };
+    } | {};
     requester: {
         userId: string;
         tokenId?: string | undefined;
@@ -285,9 +270,9 @@ export type GetSwapQuoteParams = {
 
 export type GetSwapQuoteResponse = {
     id: string;
-    sourceWalletId: string;
     walletId: string;
-    targetWalletId: string;
+    /** If not provided, the walletId is used as the target wallet. If provided, this field is currently required to be the same as walletId */
+    targetWalletId?: string | undefined;
     provider: "UniswapX" | "UniswapClassic";
     sourceAsset: ({
         kind: "Native";
@@ -321,14 +306,12 @@ export type GetSwapQuoteResponse = {
             tid?: string | undefined;
         };
     };
-    slippageToleranceInBps: number;
     slippageBps: number;
     dateCreated: string;
     requestBody: {
         provider: "UniswapX" | "UniswapClassic";
-        sourceWalletId?: string | undefined;
-        walletId?: string | undefined;
-        targetWalletId: string;
+        walletId: string;
+        targetWalletId?: string | undefined;
         sourceAsset: {
             kind: "Native";
             amount: string;
@@ -343,9 +326,8 @@ export type GetSwapQuoteResponse = {
             kind: "Erc20";
             contract: string;
         };
-        slippageToleranceInBps?: number | undefined;
-        slippageBps?: number | undefined;
-    };
+        slippageBps: number;
+    } | {};
     requester: {
         userId: string;
         tokenId?: string | undefined;
@@ -364,7 +346,6 @@ export type ListSwapsResponse = {
         id: string;
         quoteId: string;
         reference: string | null;
-        sourceWalletId: string;
         walletId: string;
         targetWalletId: string;
         status: "PendingPolicyApproval" | "InProgress" | "Completed" | "Failed" | "Rejected";
@@ -401,35 +382,32 @@ export type ListSwapsResponse = {
                 tid?: string | undefined;
             };
         };
-        slippageToleranceInBps: number;
         slippageBps: number;
         dateCreated: string;
         requestBody: {
             quoteId: string;
             reference?: string | undefined;
-            provider?: ("UniswapX" | "UniswapClassic") | undefined;
-            sourceWalletId?: string | undefined;
-            walletId?: string | undefined;
+            provider: "UniswapX" | "UniswapClassic";
+            walletId: string;
             targetWalletId?: string | undefined;
-            slippageToleranceInBps?: number | undefined;
-            slippageBps?: number | undefined;
-            sourceAsset?: ({
+            slippageBps: number;
+            sourceAsset: {
                 kind: "Native";
                 amount: string;
             } | {
                 kind: "Erc20";
                 contract: string;
                 amount: string;
-            }) | undefined;
-            targetAsset?: ({
+            };
+            targetAsset: {
                 kind: "Native";
                 amount: string;
             } | {
                 kind: "Erc20";
                 contract: string;
                 amount: string;
-            }) | undefined;
-        };
+            };
+        } | {};
         requester: {
             userId: string;
             tokenId?: string | undefined;

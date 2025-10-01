@@ -1013,7 +1013,6 @@ export type CreateApprovalDecisionResponse = {
             id: string;
             quoteId: string;
             reference: string | null;
-            sourceWalletId: string;
             walletId: string;
             targetWalletId: string;
             status: "PendingPolicyApproval" | "InProgress" | "Completed" | "Failed" | "Rejected";
@@ -1050,35 +1049,32 @@ export type CreateApprovalDecisionResponse = {
                     tid?: string | undefined;
                 };
             };
-            slippageToleranceInBps: number;
             slippageBps: number;
             dateCreated: string;
             requestBody: {
                 quoteId: string;
                 reference?: string | undefined;
-                provider?: ("UniswapX" | "UniswapClassic") | undefined;
-                sourceWalletId?: string | undefined;
-                walletId?: string | undefined;
+                provider: "UniswapX" | "UniswapClassic";
+                walletId: string;
                 targetWalletId?: string | undefined;
-                slippageToleranceInBps?: number | undefined;
-                slippageBps?: number | undefined;
-                sourceAsset?: ({
+                slippageBps: number;
+                sourceAsset: {
                     kind: "Native";
                     amount: string;
                 } | {
                     kind: "Erc20";
                     contract: string;
                     amount: string;
-                }) | undefined;
-                targetAsset?: ({
+                };
+                targetAsset: {
                     kind: "Native";
                     amount: string;
                 } | {
                     kind: "Erc20";
                     contract: string;
                     amount: string;
-                }) | undefined;
-            };
+                };
+            } | {};
             requester: {
                 userId: string;
                 tokenId?: string | undefined;
@@ -3338,7 +3334,6 @@ export type GetApprovalResponse = {
             id: string;
             quoteId: string;
             reference: string | null;
-            sourceWalletId: string;
             walletId: string;
             targetWalletId: string;
             status: "PendingPolicyApproval" | "InProgress" | "Completed" | "Failed" | "Rejected";
@@ -3375,35 +3370,32 @@ export type GetApprovalResponse = {
                     tid?: string | undefined;
                 };
             };
-            slippageToleranceInBps: number;
             slippageBps: number;
             dateCreated: string;
             requestBody: {
                 quoteId: string;
                 reference?: string | undefined;
-                provider?: ("UniswapX" | "UniswapClassic") | undefined;
-                sourceWalletId?: string | undefined;
-                walletId?: string | undefined;
+                provider: "UniswapX" | "UniswapClassic";
+                walletId: string;
                 targetWalletId?: string | undefined;
-                slippageToleranceInBps?: number | undefined;
-                slippageBps?: number | undefined;
-                sourceAsset?: ({
+                slippageBps: number;
+                sourceAsset: {
                     kind: "Native";
                     amount: string;
                 } | {
                     kind: "Erc20";
                     contract: string;
                     amount: string;
-                }) | undefined;
-                targetAsset?: ({
+                };
+                targetAsset: {
                     kind: "Native";
                     amount: string;
                 } | {
                     kind: "Erc20";
                     contract: string;
                     amount: string;
-                }) | undefined;
-            };
+                };
+            } | {};
             requester: {
                 userId: string;
                 tokenId?: string | undefined;
@@ -5711,7 +5703,6 @@ export type ListApprovalsResponse = {
                 id: string;
                 quoteId: string;
                 reference: string | null;
-                sourceWalletId: string;
                 walletId: string;
                 targetWalletId: string;
                 status: "PendingPolicyApproval" | "InProgress" | "Completed" | "Failed" | "Rejected";
@@ -5748,35 +5739,32 @@ export type ListApprovalsResponse = {
                         tid?: string | undefined;
                     };
                 };
-                slippageToleranceInBps: number;
                 slippageBps: number;
                 dateCreated: string;
                 requestBody: {
                     quoteId: string;
                     reference?: string | undefined;
-                    provider?: ("UniswapX" | "UniswapClassic") | undefined;
-                    sourceWalletId?: string | undefined;
-                    walletId?: string | undefined;
+                    provider: "UniswapX" | "UniswapClassic";
+                    walletId: string;
                     targetWalletId?: string | undefined;
-                    slippageToleranceInBps?: number | undefined;
-                    slippageBps?: number | undefined;
-                    sourceAsset?: ({
+                    slippageBps: number;
+                    sourceAsset: {
                         kind: "Native";
                         amount: string;
                     } | {
                         kind: "Erc20";
                         contract: string;
                         amount: string;
-                    }) | undefined;
-                    targetAsset?: ({
+                    };
+                    targetAsset: {
                         kind: "Native";
                         amount: string;
                     } | {
                         kind: "Erc20";
                         contract: string;
                         amount: string;
-                    }) | undefined;
-                };
+                    };
+                } | {};
                 requester: {
                     userId: string;
                     tokenId?: string | undefined;
