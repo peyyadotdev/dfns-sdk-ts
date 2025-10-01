@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.7.13 (2025-10-01)
+
+- Updated `DfnsApiClient` to match the latest API changes
+
 ## 0.7.12 (2025-09-24)
 
 - Added SDK integration with Hedera, see `@dfns/lib-hedera`
